@@ -1,4 +1,4 @@
-name: release
+name: buildCheck
 
 on:
   push:
