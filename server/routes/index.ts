@@ -5,7 +5,14 @@ const indexRouter: Router = Router({
     strict: true,
 });
 
-indexRouter.get(...renderPage(''));
+const pagesToRender = [
+    '',
+    'user/cabinet',
+    'provider/cabinet',
+    'hobbies',
+];
+
+pagesToRender.forEach(path => indexRouter.get(...renderPage(path)));
 
 export default indexRouter;
 
