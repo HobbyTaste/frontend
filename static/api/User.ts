@@ -11,6 +11,7 @@ interface IUser {
     id: string;
     name: string;
     email: string;
+    avatar: any;
 }
 
 /**
@@ -87,6 +88,28 @@ class User extends BaseFetchClass {
             return response.json();
         }
         return response.statusText;
+    }
+
+    /**
+     * Загружает фото пользователя. Рабтает ТОЛЬКО длч залогиненных пользователей
+     * В случае успех объект ответа будет сожержать ссылку на фото пользователя
+     * @param file
+     */
+    public async uploadAvatar(file: File): Promise<Response> {
+        const formData = new FormData();
+        formData.append('file', file);
+        return this.post('upload', formData, {isFormData: true});
+    }
+
+    /**
+     * Меняет дланные для залогиненного пользователя
+     */
+    public async edit(nextData: Partial<IUser>): Promise<Response> {
+        const formData = new FormData();
+        for (const key in nextData) {
+            formData.append(key, nextData[key]);
+        }
+        return this.post('/edit', formData, {isFormData: true});
     }
 }
 
