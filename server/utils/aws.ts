@@ -2,11 +2,6 @@ import AWS, {S3, AWSError} from 'aws-sdk';
 import config from 'config';
 import uuid from 'uuid/v4';
 
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID || config.get('secrets.aws.AWS_ACCESS_KEY_ID');
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || config.get('secrets.aws.AWS_SECRET_ACCESS_KEY');
-const region: string = config.get('aws.region');
-const endpointUrl = config.get('aws.endpoint');
-
 interface FileType {
     fieldname: string;
     originalname: string;
