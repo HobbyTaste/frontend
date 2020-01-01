@@ -1,29 +1,61 @@
 .buttons {
-    display: flex;
-    justify-content: space-around;
+    display: inline-block;
 }
 
-/*.header {
-    width: 100%;
-    background: linear-gradient(to right, #79827a, #19B95D);
-    height: 100px;
-    display: flex;
-    vertical-align: middle;
-    text-align: center;
-    border-bottom: 2px solid black;
-    position:relative;
-}*/
-
-/*
-.headerTitle {
-    color: white;
-    font-size: 30px;
-    margin: auto 20px;
+.upload {
+    color: #19B95D;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.upload:hover {
+    color: #128040;
 }
 
-.signIn {
-    margin: auto 0;
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
     position: absolute;
-    right: 30px;
-    top: 10px;
+    z-index: -1;
+}
+
+.avatar {
+    height: 80px;
+}
+
+/*.holder {
+    !*position:relative;*!
 }*/
+
+.uploadBlock {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.cloud {
+    /*border: 1px solid red;*/
+    width: 57%;
+    text-align: right;
+}
+
+.image {
+    /*border: 1px solid red;*/
+    width: 43%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.closeIcon {
+    /*position:absolute;*/
+    /*left:0;
+    bottom:0;
+    right:0;
+    top:0;*/
+    /*background:rgba(255,255,255, 0.7);
+    display:none;*/
+
+    margin-bottom: 60px;
+    margin-left: 5px;
+    cursor: pointer;
+}
