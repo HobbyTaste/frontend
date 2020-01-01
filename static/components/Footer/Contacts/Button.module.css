@@ -90,3 +90,7 @@
 .registrationForm:hover {
     box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
 }
+
+.loginButContainer {
+    margin-top: 15px;
+}
