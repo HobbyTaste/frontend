@@ -3,6 +3,7 @@ import Provider, {IProvider} from "../models/provider";
 import multer from "multer";
 import config from "config";
 import {uploadFileToS3} from "../utils/aws";
+import Hobby from "../models/hobby";
 
 const providerRouter: Router = Router();
 
@@ -100,7 +101,7 @@ providerRouter.post('/edit', upload.single('avatar'), async (req: Request, res: 
         res.status(403).send('Партнер не авторизован');
         return;
     }
-    const {_id: id} = req.session.partner;
+    const {_id: id} = req.session.provider;
     try {
         req.session.provider = await Provider.findByIdAndUpdate(id, nextData, {new: true});
         res.end();
@@ -110,5 +111,14 @@ providerRouter.post('/edit', upload.single('avatar'), async (req: Request, res: 
     res.end();
 });
 
+providerRouter.get('/hobbies', async (req: Request, res: Response) => {
+    if (!req.session || !req.session.provider) {
+        res.status(400).send('Неавторизован партнер');
+        return;
+    }
+    const {_id: owner} = req.session.provider;
+    const hobbies = await Hobby.find({owner});
+    res.json(hobbies);
+});
 
 export default providerRouter;
