@@ -32,7 +32,11 @@ class Provider extends BaseFetchClass {
      * Запрос на создание партнера
      */
     public async create(provider: IProvider): Promise<Response> {
-        return  this.post('/create', provider);
+        const formData = new FormData();
+        for (const key in provider) {
+            formData.append(key, provider[key]);
+        }
+        return  this.post('/create', formData, {isFormData: true});
     }
 
     /**
