@@ -4,10 +4,12 @@ import style from './Button.module.css';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
-import {ProviderRegistration} from "../../ProviderRegistration/ProviderRegistration";
 import {GreenButton, GreenLargeButton} from "../../Common/MaterialsButtons";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from 'react-router-dom';
+import {withModalWindow} from "../../../HOC/ModalWindow/ModalWindow";
+import Login from "../../Header/LoginUser/SignIn/SignIn";
+import ProviderRegistration from "../../ProviderRegistration/ProviderRegistration";
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -29,6 +31,7 @@ export const FullScreenDialogButton = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
+    let SignIn = withModalWindow(Login);
     return (
         <div>
             <div onClick={handleClickOpen} >
@@ -40,9 +43,12 @@ export const FullScreenDialogButton = (props) => {
                         <ArrowBackIosIcon style={{fontSize: 40}} className={style.closeButton} onClick={handleClose}/>
                         <div className={style.headerTitle}>Вход в личный кабинет партнера</div>
                         <div className={style.signIn}>
-                            <Link to='/provider_cabinet'>
+                            <div className={style.loginButContainer}>
+                                <SignIn buttonName={"ВОЙТИ"}/>
+                            </div>
+                            {/*<Link to='/provider_cabinet'>
                             <button className={style.partnerLoginBut}>ВОЙТИ</button>
-                            </Link>
+                            </Link>*/}
                         </div>
                     </div>
                 </AppBar>
