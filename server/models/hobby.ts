@@ -14,7 +14,7 @@ export interface IHobby extends Document {
     shortDescription: string,
     owner: string,
     subscribers: string[],
-    imagesUrl: string,
+    avatar: string,
 }
 
 const HobbySchema: Schema = new Schema({
