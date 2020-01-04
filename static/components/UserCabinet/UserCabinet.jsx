@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import style from "./UserCabinet.module.css";
 import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import UserHobbyCard from "./UserHobbyCard/UserHobbyCard";
+import HeaderContainer from "../Header/HeaderContainer";
 
 const UserCabinet = (props) => {
 

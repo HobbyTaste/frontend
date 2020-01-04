@@ -4,11 +4,10 @@ import style from './Button.module.css';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
-import {GreenButton, GreenLargeButton} from "../../Common/MaterialsButtons";
+import {GreenLargeButton} from "../../Common/MaterialsButtons";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import {Link} from 'react-router-dom';
 import {withModalWindow} from "../../../HOC/ModalWindow/ModalWindow";
-import Login from "../../Header/LoginUser/SignIn/SignIn";
+import ProviderLogin from "./ProviderLogin";
 import ProviderRegistration from "../../ProviderRegistration/ProviderRegistration";
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +30,7 @@ export const FullScreenDialogButton = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
-    let SignIn = withModalWindow(Login);
+    let SignIn = withModalWindow(ProviderLogin);
     return (
         <div>
             <div onClick={handleClickOpen} >
@@ -46,13 +45,10 @@ export const FullScreenDialogButton = (props) => {
                             <div className={style.loginButContainer}>
                                 <SignIn buttonName={"ВОЙТИ"}/>
                             </div>
-                            {/*<Link to='/provider_cabinet'>
-                            <button className={style.partnerLoginBut}>ВОЙТИ</button>
-                            </Link>*/}
                         </div>
                     </div>
                 </AppBar>
-                <div className={style.backgroung}>
+                <div className={style.background}>
                     <div className={style.registrationForm}>
                         <ProviderRegistration />
                     </div>

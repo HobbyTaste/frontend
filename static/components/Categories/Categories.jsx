@@ -3,9 +3,14 @@ import style from './Categories.module.css';
 import HobbyTypeCard from "./HobbyTypeCard/HobbyTypeCard";
 import Footer from "../Footer/Footer";
 import {Link} from 'react-router-dom';
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import HeaderContainer from "../Header/HeaderContainer";
 
 const Categories = (props) => {
+    if(props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
     return (<div>
+       {/* <HeaderContainer/>*/}
         <div className={style.background}> </div>
         <div className={style.chooseHobby}>Выберите категорию хобби</div>
         <div className={style.cardsBoard}>
@@ -99,4 +104,8 @@ const Categories = (props) => {
     </div>);
 };
 
-export default Categories;
+let mapStateToProps = (state) => ({
+    providerIsAuth: state.providerCabinet.providerIsAuth
+});
+
+export default connect(mapStateToProps, null)(Categories);
