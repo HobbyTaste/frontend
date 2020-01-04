@@ -12,6 +12,7 @@ interface IUser {
     name: string;
     email: string;
     avatar: any;
+    password?: string;
 }
 
 /**
@@ -40,14 +41,13 @@ class User extends BaseFetchClass {
 
     /**
      * Запрос на создание пользователя
-     * @param email почта пользователя, должна быть уникальной у каждого пользователя
-     * @param password пароль
-     * @param name имя пользователя
-     * В случае ошибки приходит сообщение об ошибки, если ошибки нет, возвращается null
      */
-    public async create(email: string, password: string, name?: string): Promise<string | null> {
-        const response = await this.post('/create', {email, password, name});
-        return await response.text() || null;
+    public async create(user: IUser): Promise<Response> {
+        const formData = new FormData();
+        for (const key in user) {
+            formData.append(key, user[key]);
+        }
+        return this.post('/create', formData, {isFormData: true});
     }
 
     /**
