@@ -14,7 +14,7 @@ const LogoutUser = (props) => {
                         <MainPageButton />
                     </div>
                 </Link> :
-                <Link to='/user_cabinet'>
+                <Link to='/user/cabinet'>
                     <div onClick={props.setInCabinet}>
                         <UserCabinetButton/>
                     </div>

@@ -9,18 +9,16 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CloseIcon from '@material-ui/icons/Close';
 
 let mainFile = null;
-const ProviderRegistrationForm = ({handleSubmit, error, ...custom}) => {
+const ProviderRegistrationForm = ({handleSubmit, error}) => {
     let [url, setUrl] = useState('');
     let [file, setFile] = useState(null);
     let uploadImage = (e) => {
-        /* e.preventDefault();*/
         let reader = new FileReader();
         let photo_file = e.target.files[0];
-        //url = reader.result;
         reader.onloadend = () => {
             setUrl(`${reader.result}`);
             setFile(photo_file);
-            mainFile = photo_file
+            mainFile = file;
         };
         reader.readAsDataURL(photo_file)
     };
@@ -63,8 +61,7 @@ const ProviderRegistrationForm = ({handleSubmit, error, ...custom}) => {
                 </div>
             </div>
             <div className={style.buttons}>
-                <GreenLargeButton text={"ЗАРЕГИСТРИРОВАТЬСЯ"} label="Submit" onSubmit={handleSubmit}
-                                  onClick={custom.handleClose}/>
+                <GreenLargeButton text={"ЗАРЕГИСТРИРОВАТЬСЯ"} label="Submit" onSubmit={handleSubmit}/>
             </div>
         </div>
     );

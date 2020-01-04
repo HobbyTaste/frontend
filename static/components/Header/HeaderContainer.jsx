@@ -5,7 +5,7 @@ import {setInCabinet, setOutCabinet, logout} from "../../redux/reducers/auth-red
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
-    inUserCabinet: state.auth.inUserCabinet
+    inUserCabinet: state.auth.inUserCabinet,
 });
 
 export default connect(mapStateToProps, {setInCabinet, setOutCabinet, logout})(Header);

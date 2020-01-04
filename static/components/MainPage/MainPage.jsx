@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeMainPage} from "../../redux/reducers/mainPage-reducer";
 import Preloader from "../Common/Preloader/Preloader";
+import HeaderContainer from "../Header/HeaderContainer";
 
 class MainPage extends React.Component {
     componentDidMount() {
@@ -17,6 +18,7 @@ class MainPage extends React.Component {
             return <Preloader />;
         }
         return (<div>
+           {/* <HeaderContainer/>*/}
             <div className={s.background}> </div>
             <SearchContent/>
             <Footer/>

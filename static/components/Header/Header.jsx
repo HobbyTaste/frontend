@@ -15,10 +15,9 @@ const Header = (props) => {
             </div>
             { props.isAuth
                 ? <div className={s.tmp}><LogoutUser logout={props.logout} inUserCabinet={props.inUserCabinet}
-                                                     setInCabinet={props.setInCabinet} setOutCabinet={props.setOutCabinet}/></div>
-                : <div className={s.tmp}><LoginUser /></div> }
-
-
+                                                     setInCabinet={props.setInCabinet}
+                                                     setOutCabinet={props.setOutCabinet}/></div>
+                : <div className={s.tmp}><LoginUser/></div> }
         </header>);
 };
 

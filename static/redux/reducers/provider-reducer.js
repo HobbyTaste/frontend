@@ -61,12 +61,11 @@ const ProviderCabinetReducer = (state = initialState, action) => {
             return {
                 ...state, id: action.id,
                 name: action.name,
-                password: action.password,
                 email: action.email,
                 avatar: action.avatar,
                 phone: action.phone,
                 info: action.info,
-                providerIsAuth: true
+                providerIsAuth: action.providerIsAuth
             }
         }
         default:
@@ -84,15 +83,20 @@ export const setInfo = (info) => ({type: SET_INFO, info});
 export const setImage = (file, imageUrl) => ({type: SET_IMAGE_URL, file, imageUrl});
 export const reset = () => ({type: RESET});
 
-export const setAuthProviderData = (id, name, password, email, avatar, phone, info, providerIsAuth) =>
-    ({type: SET_PROVIDER_DATA, id, name, password, email, avatar, phone, info, providerIsAuth});
+export const setAuthProviderData = (avatar, email, id, info, name, phone, providerIsAuth) =>
+    ({type: SET_PROVIDER_DATA, avatar, email, id, info, name, phone, providerIsAuth});
 
 export const getAuthProviderData = () => (dispatch) => {
     return providerApi.getInfo()
         .then(response => {
-            if(response.status === 200) {
-                let {id, name, password, email, avatar, phone, info} = response;
-                dispatch(setAuthProviderData(id, name, password, email, avatar, phone, info, true));
+            if(response.ok) {
+                response.json().then(body => {
+                    let{avatar, email, id, info, name, phone} = body;
+                    dispatch(setAuthProviderData(avatar, email, id, info, name, phone, true));
+                });
+            }
+            else {
+                response.json().then(console.log);
             }
         });
 };
@@ -102,12 +106,34 @@ export const createNewProvider = (name, password, email, avatar, phone, info) =>
         name: name, password: password, email: email, avatar: avatar, phone: phone, info:info
     };
     providerApi.create(providerData).then((response) => {
-        debugger;
-        if (response.status === 200) {
+        if (response.ok) {
             dispatch(getAuthProviderData());
         }
         else {
-            return response.json().then(console.log);
+            response.json().then(console.log);
+        }
+    })
+};
+
+export const loginProvider = (email, password) => (dispatch) => {
+    providerApi.login(email, password).then((response) => {
+        if (response.ok) {
+            dispatch(getAuthProviderData());
+        }
+        else {
+            response.json().then(console.log);
+        }
+    })
+};
+
+export const logoutProvider = () => (dispatch) => {
+    providerApi.logout().then((response) => {
+        if (response.ok) {
+            dispatch(setAuthProviderData(null, null, null, null, null,
+                null, false));
+        }
+        else {
+            response.json().then(console.log);
         }
     })
 };
