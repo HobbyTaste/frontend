@@ -2,20 +2,30 @@ import {Router, Request, Response} from 'express';
 import {isNil} from 'lodash';
 
 import Hobby, {IHobby} from '../models/hobby';
+import multer from "multer";
+import config from "config";
+import {uploadFileToS3} from "../utils/aws";
 
 const hobbyRouter: Router = Router();
+
+const upload = multer({limits: {fieldSize: Number(config.get('aws.maxFileSize'))}});
 
 /**
  * Добавление нового хобби в БД
  */
-hobbyRouter.post('/add', async (req: Request, res: Response) => {
+hobbyRouter.post('/add', upload.single('avatar'), async (req: Request, res: Response) => {
   try {
       if (!req.session || !req.session.provider) {
           res.status(403).send('Неавторизированный партнер');
           return;
       }
-      const {_id: owner} = req.session.provider;
       const hobbyInfo: Partial<IHobby> = {...req.body};
+      const file = req.file;
+      if (file) {
+          hobbyInfo.avatar = await uploadFileToS3('hobbies', file);
+      }
+      //+79182725831 Александра Сергеевна.
+      const {_id: owner} = req.session.provider;
       const newHobby = new Hobby({...hobbyInfo, owner});
       await newHobby.save();
       res.status(200).send();

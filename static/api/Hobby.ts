@@ -1,5 +1,17 @@
 import BaseFetchClass from './BaseFetchClass';
-import {IHobby} from '../../server/models/hobby';
+
+interface IHobby {
+    label: string,     // название
+    phone?: string,    // номер телефона
+    email?: string,    // контактный email
+    address?: string,   // точный адрес
+    metroStation?: string,  // название станции метро ближайшей
+    metroId?: string,   // id-шник станции метро
+    description: string,  // полное описание хобби
+    shortDescription: string,   // краткое описание
+    owner?: string,         // id-шник партнера, кто создал хобби
+    avatar: string | File, // при отправке это файл пользователя e.target.file, при получении - url на картнку в облаках
+}
 
 const BASE_URL = '/hobby';
 
@@ -17,7 +29,11 @@ class Hobby extends BaseFetchClass{
      * @return {Promise<IHobby>}
      */
     public async add(hobbyState: IHobby): Promise<Response> {
-        const response = await this.post('/add', hobbyState);
+        const formData = new FormData();
+        for (const key in hobbyState) {
+            formData.append(key, hobbyState[key]);
+        }
+        const response = await this.post('/add', formData, {isFormData: true});
         if (!response.ok) {
             console.error(response);
         }
