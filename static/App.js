@@ -22,10 +22,9 @@ class App extends React.Component {
                 <div>
                     {this.props.providerIsAuth ? <ProviderHeaderContainer/>
                         : <HeaderContainer/>}
-                    <ProviderCabinet/>
+                    <MainPage/>
                     {/*<Route exact path="/" render={() => <Categories/>}/>
                     <Route exact path="/main/page" render={() => <MainPage/>}/>
-                    <Route exact path="/hobbies" render={() => <Hobbies/>}/>
                     <Route exact path="/user/cabinet" render={() => <UserCabinetContainer/>}/>
                     <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>*/}
                 </div>

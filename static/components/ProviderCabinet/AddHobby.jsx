@@ -56,9 +56,9 @@ const AddHobbyForm = (props) => {
     };
 
     const onSubmit = () => {
-        debugger;
         props.addNewHobby(organization, telephone, email,
             address, metro, information, props.id, file);
+        props.handleClose();
     };
     return(
         <div>

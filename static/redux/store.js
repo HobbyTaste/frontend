@@ -7,7 +7,6 @@ import thunkMiddleware from "redux-thunk";
 import appReducer from "./reducers/app-reducer";
 import ProviderCabinetReducer from "./reducers/provider-reducer";
 import UserCabinetReducer from "./reducers/user-reducer";
-import HobbiesReducer from "./reducers/hobby-reducer";
 
 let reducers = combineReducers({
     mainPage: mainPageReducer,
@@ -16,8 +15,7 @@ let reducers = combineReducers({
     form: formReducer,
     app: appReducer,
     providerCabinet: ProviderCabinetReducer,
-    userCabinet: UserCabinetReducer,
-    hobbies: HobbiesReducer
+    userCabinet: UserCabinetReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));

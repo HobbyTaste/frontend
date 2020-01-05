@@ -12,7 +12,6 @@ export const AddHobbyCard = (props) => {
                 <ul>
                     <li>Телефон: {props.telephone}</li>
                     <li>Email: {props.email}</li>
-                    <li>Сайт: {props.site}</li>
                     <li>Станция метро: {props.metro}</li>
                     <li>Точный адрес: {props.address}</li>
                 </ul>
