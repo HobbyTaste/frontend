@@ -81,6 +81,10 @@ class Provider extends BaseFetchClass {
         }
         return this.post('/edit', formData, {isFormData: true});
     }
+
+    public async getHobbies(): Promise<Response> {
+        return this.get('/hobbies');
+    }
 }
 
 export default Provider;
