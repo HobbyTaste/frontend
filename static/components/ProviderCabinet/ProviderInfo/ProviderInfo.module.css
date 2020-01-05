@@ -1,7 +1,7 @@
 .name {
     color: #19B95D;
     margin-top: 10px;
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
 }
 
@@ -13,8 +13,6 @@
     text-align: left;
 }
 
-.buttonContainer {
-    display: flex;
-    width: 50%;
-    margin-left: 10px;
+.title {
+    font-weight: bold;
 }

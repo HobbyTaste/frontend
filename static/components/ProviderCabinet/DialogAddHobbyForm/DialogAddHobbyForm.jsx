@@ -45,7 +45,7 @@ export const DialogAddHobbyForm = (props) => {
                     </div>
                 </AppBar>
                 <div className={style.backImage}>
-                        <AddHobbyForm  />
+                        <AddHobbyForm  handleClose={handleClose}/>
                 </div>
             </Dialog>
         </div>

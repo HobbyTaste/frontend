@@ -70,7 +70,6 @@ const ProviderRegistrationForm = ({handleSubmit, error}) => {
 const RegistrationReduxForm = reduxForm({form: 'providerRegistration'})(ProviderRegistrationForm);
 
 const ProviderRegistration = (props) => {
-//name, password, email, avatar, phone, info
     const onSubmit = (formData) => {
         props.createNewProvider(formData.organization, formData.password, formData.email,
             mainFile, formData.telephone, formData.info);

@@ -7,7 +7,6 @@ import {RedButton} from "../../../../Common/MaterialsButtons";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import User from '../../../../../api/User';
 
-
 const userApi = new User();
 
 const ChangeUserInfoForm = ({handleSubmit, error}) => {
