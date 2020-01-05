@@ -1,47 +1,65 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Input} from "./FormsControlsAddHobby/FormsControls";
 import {CommonButton} from "../Common/CommonButton";
 import style from "./AddHobby.module.css";
-import AddHobbyCardContainer from "./AddHobbyCard/AddHobbyCardContainer";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import {AddHobbyCard} from './AddHobbyCard/AddHobbyCard'
+import {addNewHobby} from "../../redux/reducers/provider-reducer";
+import {connect} from "react-redux";
 
-export const AddHobbyForm = (props) => {
+const AddHobbyForm = (props) => {
+    let [organization, setOrganization] = useState('');
+    let [telephone, setTelephone] = useState('');
+    let [email, setEmail] = useState('');
+    let [metro, setMetro] = useState('');
+    let [address, setAddress] = useState('');
+    let [information, setInformation] = useState('');
+    let [image, setImage] = useState('');
+    let [file, setFile] = useState(null);
+
     let onOrganizationChange = (e) => {
-        let tmp = e.target.value;
-        props.setOrganization(tmp);
+        setOrganization(e.target.value);
     };
     let onTelChange = (e) => {
-        props.setTelephone(e.target.value);
+        setTelephone(e.target.value);
     };
     let onEmailChange = (e) => {
-        props.setEmail(e.target.value);
-    };
-    let onSiteChange = (e) => {
-        props.setSite(e.target.value);
+        setEmail(e.target.value);
     };
     let onMetroChange = (e) => {
-        props.setMetro(e.target.value);
+        setMetro(e.target.value);
     };
-    let onAdressChange = (e) => {
-        props.setAdress(e.target.value);
+    let onAddressChange = (e) => {
+        setAddress(e.target.value);
     };
     let onInfoChange = (e) => {
-        props.setInfo(e.target.value);
+        setInformation(e.target.value);
     };
     let uploadImage = (e) => {
-       /* e.preventDefault();*/
         let reader = new FileReader();
-        let file = e.target.files[0];
-
+        let photo_file = e.target.files[0];
         reader.onloadend = () => {
-            props.setImage(file, reader.result);
+            setImage(`${reader.result}`);
+            setFile(photo_file);
         };
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(photo_file)
     };
     let resetForm = () => {
-        props.reset();
+        setOrganization('');
+        setTelephone('');
+        setEmail('');
+        setMetro('');
+        setAddress('');
+        setInformation('');
+        setImage('');
+        setFile(null);
     };
 
+    const onSubmit = () => {
+        debugger;
+        props.addNewHobby(organization, telephone, email,
+            address, metro, information, props.id, file);
+    };
     return(
         <div>
             <div className={style.pageContent}>
@@ -49,14 +67,13 @@ export const AddHobbyForm = (props) => {
                     <div className={style.hobbyFormContainer}>
                     <h1>Заполните форму о вашем хобби</h1>
                     <form action="#" className={style.form}>
-                        <Input name='organization' onChange={onOrganizationChange} value={props.organization}
+                        <Input name='organization' onChange={onOrganizationChange} value={organization}
                                placeholder={"Название организации"} autoFocus={true}/>
-                        <Input name='telephone' onChange={onTelChange} value={props.telephone} placeholder={"Телефон *"} type="telephone"/>
-                        <Input name='email' onChange={onEmailChange} value={props.email} placeholder={"Email *"} type="email"/>
-                        <Input name='site' onChange={onSiteChange} value={props.site} placeholder={"Сайт *"}/>
-                        <Input name='metro' onChange={onMetroChange} value={props.metro} placeholder={"Станция метро *"}/>
-                        <Input name='adress' onChange={onAdressChange} value={props.adress} placeholder={"Точный адресс *"}/>
-                        <Input name='info' onChange={onInfoChange} value={props.info} placeholder={"Краткая информация о хобби *"}/>
+                        <Input name='telephone' onChange={onTelChange} value={telephone} placeholder={"Телефон *"} type="telephone"/>
+                        <Input name='email' onChange={onEmailChange} value={email} placeholder={"Email *"} type="email"/>
+                        <Input name='address' onChange={onAddressChange} value={address} placeholder={"Точный адресс *"}/>
+                        <Input name='metro' onChange={onMetroChange} value={metro} placeholder={"Станция метро *"}/>
+                        <Input name='info' onChange={onInfoChange} value={information} placeholder={"Краткая информация о хобби *"}/>
                     </form>
                     <label htmlFor="file">
                         <CloudUploadIcon className={style.upload} style={{ fontSize: 80 }} />
@@ -66,9 +83,12 @@ export const AddHobbyForm = (props) => {
                         </div>
                 </div>
                 <div className={style.formContainer}>
-                    <AddHobbyCardContainer />
+                    <AddHobbyCard organization={organization} telephone={telephone}
+                                  email={email} metro={metro}
+                                  address={address} information={information}
+                                  image={image}/>
                     <div className={style.buttonsContainer}>
-                        <CommonButton text="ДОБАВИТЬ"/>
+                            <CommonButton text="ДОБАВИТЬ" onSubmit={onSubmit}/>
                         <div onClick={resetForm}>
                         <CommonButton text="СБРОСИТЬ"/>
                         </div>
@@ -78,3 +98,11 @@ export const AddHobbyForm = (props) => {
                     </div>
     );
 };
+
+const mapStateToProps = (state) => {
+    return {
+        id: state.providerCabinet.providerId
+    }
+};
+
+export default connect(mapStateToProps, {addNewHobby})(AddHobbyForm);

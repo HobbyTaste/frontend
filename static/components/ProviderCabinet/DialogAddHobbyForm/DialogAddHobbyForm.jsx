@@ -7,8 +7,8 @@ import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
-import AddHobbyFormContainer from "../AddHobbyFormContainer";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import AddHobbyForm from "../AddHobby";
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -45,7 +45,7 @@ export const DialogAddHobbyForm = (props) => {
                     </div>
                 </AppBar>
                 <div className={style.backImage}>
-                        <AddHobbyFormContainer />
+                        <AddHobbyForm  />
                 </div>
             </Dialog>
         </div>

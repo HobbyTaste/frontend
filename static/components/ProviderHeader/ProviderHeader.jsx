@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import s from '../Header/Header.module.css';
 import Logo from "../Header/Logo/Logo";
-import {Link} from "react-router-dom";
-import {logoutProvider} from "../../redux/reducers/provider-reducer";
+import LogoutButton from "../Header/LogoutUser/Buttons/LogoutButton";
 
 const ProviderHeader = (props) => {
     return (
         <header className={s.header}>
             <div className={s.logoContainer}>
-                    <Logo />
+                <Logo/>
             </div>
             <div className={s.tmp}>
-                <button onClick={props.logoutProvider}>ВЫХОД</button>
+                <LogoutButton logout={props.logoutProvider}/>
             </div>
         </header>);
 };
