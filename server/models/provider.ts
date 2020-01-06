@@ -1,11 +1,10 @@
 import {Schema, connection as db, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
-import {string} from "prop-types";
+import config from 'config';
 
 const EMAIL_REG_EXP = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 const PHONE_REG_EXP = /^\+\d{11}$/;
-const SALT_WORK_FACTOR = 10;
 
 export interface IProvider extends Document {
     name: string;
@@ -59,7 +58,7 @@ ProviderSchema.pre<IProvider>('save', async function() {
 
     try {
         // генерируем соль
-        const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+        const salt = await bcrypt.genSalt(Number(config.get('saltWorkFactor')));
         // получаем хэш пароля
         this.password = await bcrypt.hash(this.password, salt);
     } catch(err) {

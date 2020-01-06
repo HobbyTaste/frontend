@@ -5,6 +5,7 @@ import config from 'config';
 import User from '../models/user';
 import {user as BASE_URL} from './routes.json';
 import {uploadFileToS3} from '../utils/aws';
+import bcrypt from "bcrypt";
 
 const userRouter: Router = Router();
 
@@ -76,10 +77,16 @@ userRouter.post('/edit', upload.single('avatar'), async (req: Request, res: Resp
     if (file) {
         nextData.avatar = await uploadFileToS3('users', file);
     }
-    console.log(file);
     if (!req.session || !req.session.user) {
         res.status(403).send('Пользователь не авторизован');
         return;
+    }
+    if ('password' in nextData) {
+        // генерируем соль
+        const salt = await bcrypt.genSalt(Number(config.get('saltWorkFactor')));
+        // получаем хэш пароля
+        nextData.password = await bcrypt.hash(nextData.password, salt);
+        console.log(nextData.password);
     }
     const {_id: id} = req.session.user;
     try {
