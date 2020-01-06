@@ -4,6 +4,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const DESTINATION_DIR = 'dist';
 
+const IS_DEV = process.env.NODE_ENV === 'development';
+
 module.exports = {
     entry: './static/index.js',
     devtool: 'sourcemap',
@@ -21,7 +23,12 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true
+                            modules: {
+                                mode: 'local',
+                                localIdentName: IS_DEV
+                                    ? '[name]__[local]__[hash:base64:5]'
+                                    : '[hash:base64:5]'
+                            },
                         }
                     },
                 ],
