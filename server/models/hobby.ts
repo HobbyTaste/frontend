@@ -62,6 +62,9 @@ const HobbySchema: Schema = new Schema({
         type: Array,
         default: []
     },
+    avatar: {
+        type: String,
+    }
 });
 
 /**
