@@ -51,7 +51,7 @@
     "start": "NODE_APP_INSTANCE=secrets NODE_ENV=production node server/build/app.js",
     "start:watch": "NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts",
     "build:front": "NODE_ENV=production webpack --mode production",
-    "build:front:watch": "webpack --watch --mode development",
+    "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
     "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
     "build": "yarn build:front && yarn build:server",
     "heroku-postbuild": "yarn build:server"
@@ -97,7 +97,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "copy-webpack-plugin": "^5.1.1",
     "css-hot-loader": "^1.4.4",
-    "css-loader": "^2.1.0",
+    "css-loader": "^3.4.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-babel": "^5.3.0",
