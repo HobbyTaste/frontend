@@ -11,6 +11,8 @@ interface IHobby {
     shortDescription: string,   // краткое описание
     owner?: string,         // id-шник партнера, кто создал хобби
     avatar: string | File, // при отправке это файл пользователя e.target.file, при получении - url на картнку в облаках
+    category?: string,   // строка с категорией
+    subscribers: string[],  // подписчики на данное хобби
 }
 
 const BASE_URL = '/hobby';
@@ -92,6 +94,16 @@ class Hobby extends BaseFetchClass{
             console.error(response);
         }
         return response;
+    }
+
+    /**
+     * Запрос всех хобби с фильтрацией по полям модели (действует по === )
+     * Можно использовать для отображения хобби по конкретной категории (category)
+     * Подробнее см описание типа IHobby
+     * @param filterObject
+     */
+    public async getWithFilter(filterObject: Partial<IHobby>): Promise<Response> {
+        return this.get('/filter', filterObject);
     }
 }
 
