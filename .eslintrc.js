@@ -6,7 +6,8 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        "plugin:@typescript-eslint/eslint-recommended",
+        "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -22,8 +23,12 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
     ],
+    "settings": {
+        "import/resolver": "webpack"
+    },
     "rules": {
+        "indent": ['error', 4]
     }
 };
