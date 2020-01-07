@@ -54,7 +54,8 @@
     "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
     "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
     "build": "yarn build:front && yarn build:server",
-    "heroku-postbuild": "yarn build:server"
+    "heroku-postbuild": "yarn build:server",
+    "mongo": "PATH=~/Mongo/mongodb-shell-linux-x86_64-ubuntu1804-4.2.2/mongodb-linux-x86_64-ubuntu1804-4.2.2/bin mongo \"mongodb+srv://hobbytaste-a3rpe.mongodb.net/test\"  --username sikalov"
   },
   "eslintConfig": {
     "extends": "react-app"
