@@ -10,6 +10,7 @@ export interface IUser extends Document {
     password: string;
     email: string;
     avatar: string;
+    hobbies: string[];
 }
 
 interface IUserModel extends IUser {
@@ -33,6 +34,9 @@ const UserSchema: Schema = new Schema({
     },
     avatar: {
         type: String,
+    },
+    hobbies: {
+        type: [String],
     }
 });
 
