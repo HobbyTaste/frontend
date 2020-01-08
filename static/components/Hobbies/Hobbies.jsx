@@ -6,7 +6,6 @@ import HeaderContainer from "../Header/HeaderContainer";
 
 const Hobbies = (props) => {
     return (<div>
-       {/* <HeaderContainer/>*/}
                <div className={s.background}> </div>
                <HobbiesContentContainer />
                <Footer />

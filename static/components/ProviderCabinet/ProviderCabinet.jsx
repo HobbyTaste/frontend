@@ -14,20 +14,22 @@ import ProviderInfo from "./ProviderInfo/ProviderInfo";
 
 class ProviderCabinet extends React.Component {
     componentDidMount() {
+        debugger;
         this.props.initializeProviderCabinet();
     }
-
     render() {
+        if (!this.props.providerInitialized) {
+            return <Preloader/>
+        }
+        debugger;
+        if (!this.props.providerIsAuth) return <Redirect to={"/"}/>;
         const providerHobbies = this.props.providerHobbies.map(hobby =>
             <AddHobbyCard organization={hobby.label} image={hobby.avatar}
                           telephone={hobby.phone} email={hobby.email}
                           metro={hobby.metroStation} address={hobby.address}
-                          information={hobby.description}/>
+                          information={hobby.description}
+                            category={hobby.category}/>
         );
-        if (!this.props.providerInitialized) {
-            return <Preloader/>
-        }
-        if (!this.props.providerIsAuth) return <Redirect to={"/"}/>;
         return (<div>
             <div className={style.background}>
                 <div className={style.layout}>

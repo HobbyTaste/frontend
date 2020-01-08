@@ -41,6 +41,7 @@ const ChangeProviderForm = ({handleSubmit, error}) => {
                 </label>
                 <input type="file" name="file" id="file" onChange={uploadImage} className={style.input}/>
                 <div>Загрузить фото</div>
+                {url ? <span>{url.substring(0,30)}...</span> : null}
             </div>
             <div className={style.saveButton}>
                 <RedButton text={"СОХРАНИТЬ"} label="Submit" onSubmit={handleSubmit} />

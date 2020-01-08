@@ -18,7 +18,7 @@ const ProviderRegistrationForm = ({handleSubmit, error}) => {
         reader.onloadend = () => {
             setUrl(`${reader.result}`);
             setFile(photo_file);
-            mainFile = file;
+            mainFile = photo_file;
         };
         reader.readAsDataURL(photo_file)
     };

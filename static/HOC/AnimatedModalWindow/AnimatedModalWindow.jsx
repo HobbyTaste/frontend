@@ -52,7 +52,7 @@ Fade.propTypes = {
     onExited: PropTypes.func,
 };
 
-export const AnimatedModalWindow = (Component) => {
+export const AnimatedModalWindow = (Component, text, hobbyProps) => {
     let WrapperContainer = (props) => {
         const classes = useStyles();
         const [open, setOpen] = React.useState(false);
@@ -67,7 +67,7 @@ export const AnimatedModalWindow = (Component) => {
         return (
             <div>
                 <div onClick={handleOpen}>
-                    <GreenButton text={"ИЗМЕНИТЬ"} type="button"/>
+                    <GreenButton text={text} type="button"/>
                 </div>
                 <Modal
                     aria-labelledby="spring-modal-title"
@@ -82,7 +82,7 @@ export const AnimatedModalWindow = (Component) => {
                     }}>
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <Component />
+                            <Component {...hobbyProps}/>
                         </div>
                     </Fade>
                 </Modal>

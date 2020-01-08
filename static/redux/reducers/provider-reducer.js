@@ -17,6 +17,7 @@ let initialState = {
     avatar: '',
     phone: '',
     info: '',
+    category: '',
     providerIsAuth: false,
     providerInitialized: false,
     providerHobbies: []
@@ -49,7 +50,7 @@ const ProviderCabinetReducer = (state = initialState, action) => {
     }
 };
 
-export const setAuthProviderData = (avatar, email, id, info, name, phone, providerIsAuth, providerInitialized) =>
+export const setAuthProviderData = (avatar, email, id, info, name, phone, providerIsAuth) =>
     ({type: SET_PROVIDER_DATA, avatar, email, id, info, name, phone, providerIsAuth});
 export const initializeProvider = () => ({type: INITIALIZE_PROVIDER_SUCCESS});
 export const setProviderHobbies = (providerHobbies) => ({type: SET_PROVIDER_HOBBIES, providerHobbies});
@@ -126,18 +127,19 @@ export const loginProvider = (email, password) => (dispatch) => {
 export const logoutProvider = () => (dispatch) => {
     providerApi.logout().then((response) => {
         if (response.ok) {
+            debugger;
             dispatch(setAuthProviderData(null, null, null, null, null,
-                null, false, false));
+                null, false));
         } else {
             response.json().then(console.log);
         }
     })
 };
 
-export const addNewHobby = (organization, telephone, email, address, metro, info, providerId, file) => (dispatch) => {
+export const addNewHobby = (organization, telephone, email, address, metro, info, providerId, file, category) => (dispatch) => {
     const hobbyData = {
         label: organization, phone: telephone, email: email, address: address, metroStation: metro,
-        description: info, shortDescription: info, owner: providerId, avatar: file
+        description: info, shortDescription: info, owner: providerId, avatar: file, category: category
     };
     hobbyApi.add(hobbyData).then((response) => {
         if (response.ok) {

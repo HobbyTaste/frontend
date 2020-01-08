@@ -10,10 +10,11 @@ export const AddHobbyCard = (props) => {
             <div className={style.hobbyInfo}>
                 <h1 className={style.title}>Контактные данные</h1>
                 <ul>
-                    <li>Телефон: {props.telephone}</li>
-                    <li>Email: {props.email}</li>
-                    <li>Станция метро: {props.metro}</li>
-                    <li>Точный адрес: {props.address}</li>
+                    {props.telephone ? <li>Телефон: {props.telephone}</li> : null}
+                    {props.email ? <li>Email: {props.email}</li> : null}
+                    {props.metro ? <li>Станция метро: {props.metro}</li> : null}
+                    {props.address ? <li>Точный адрес: {props.address}</li> : null}
+                    {props.category ? <li>Категория: {props.category}</li> : null}
                 </ul>
                 <div className={style.emptyCell} />
                 <h1 className={style.title}>Краткая информация</h1>

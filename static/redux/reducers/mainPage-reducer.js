@@ -39,7 +39,7 @@ const mainPageReducer = (state = initialState, action) => {
             };
         case SUBMIT:
             return {
-                ...state, isSubmit: true
+                ...state, isSubmit: action.submit
             };
         case INITIALIZED_MAIN_PAGE_SUCCESS:
             return {
@@ -55,7 +55,7 @@ export const setHobbiesToSelect = (hobbiesToSelect) => ({ type: SET_HOBBIES_TO_S
 
 export const setMetroStations = (stations) => ({ type: SET_METRO_STATIONS, stations});
 export const setStationsToSelect = (stationsToSelect) => ({ type: SET_STATIONS_TO_SELECT, stationsToSelect});
-export const setSubmit = () => ({type: SUBMIT});
+export const setSubmit = (submit) => ({type: SUBMIT, submit});
 export const initializedMainPageSuccess = () => ({type: INITIALIZED_MAIN_PAGE_SUCCESS});
     export default mainPageReducer;
 
@@ -71,12 +71,13 @@ export const getMetro = () => (dispatch) => {
         })
 };
 
-export const getHobbies = () => (dispatch) => {
-    return hobbyApi.getAll()
+export const getHobbies = (hobbyType) => (dispatch) => {
+    const obj = {category: hobbyType};
+    return hobbyApi.getWithFilter(obj)
         .then((response) => {
             if (response.ok) {
                 response.json().then(body => {
-                    dispatch(setHobbies(body));
+                    /*dispatch(setHobbies(body));*/
                     let ans = body.map(hobby => ({label: hobby.label,
                         value: hobby.label}));
                     dispatch(setHobbiesToSelect(ans));
@@ -90,15 +91,19 @@ export const getHobbies = () => (dispatch) => {
 export const findHobbies = (label, metroId) => (dispatch) => {
     return hobbyApi.find(label, metroId)
         .then((response) => {
-            if(response.ok) {
-
+            if (response.ok) {
+                response.json().then(body => {
+                    dispatch(setHobbies(body));
+                });
+            } else {
+                response.json().then(console.log);
             }
         })
 };
 
-export const initializeMainPage = () => (dispatch) => {
+export const initializeMainPage = (hobbyType) => (dispatch) => {
     let promise = dispatch(getMetro());
-    let promise2 = dispatch(getHobbies());
+    let promise2 = dispatch(getHobbies(hobbyType));
     Promise.all([promise, promise2])
         .then(() => {
             dispatch(initializedMainPageSuccess());

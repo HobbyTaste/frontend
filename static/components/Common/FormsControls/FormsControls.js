@@ -1,14 +1,14 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Select from 'react-select';
-import s from "../../MainPage/SearchContent/Search/Search.module.css";
+import s from '../../MainPage/SearchContent/Search/Search.module.css';
+import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        padding: '0 10px'
+        padding: '0 10px',
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -18,25 +18,27 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const selectStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'white' ,
+    control: (styles) => ({
+        ...styles,
+        backgroundColor: 'white',
         width: '700px',
         height: '70px',
-        fontSize: '24px'
+        fontSize: '24px',
     }),
 
-    option: (styles, {isDisabled, isFocused, isSelected }) => {
-        return {
-            ...styles,
-            backgroundColor: isFocused ? 'rgba(189,255,52,0.49)' : isSelected ? '#85C633' : 'white',
-            cursor: 'pointer',
-            fontSize: '24px',
-            color: '#000',
-            borderColor: 'none'
-        };
-    },
+    option: (styles, { isFocused, isSelected }) => ({
+        ...styles,
+        backgroundColor: isFocused ? 'rgba(25,243,145,0.59)' : isSelected ? '#19f391' : 'white',
+        cursor: 'pointer',
+        fontSize: '24px',
+        color: '#000',
+        borderColor: 'none',
+    }),
 };
 
-export const Input = ({input, label, meta: {error}, ...custom}) => {
+export const Input = ({
+    input, label, meta: { error }, ...custom
+}) => {
     const classes = useStyles();
     return (
         <div>
@@ -62,36 +64,23 @@ export const Input = ({input, label, meta: {error}, ...custom}) => {
                     {...input}
                     {...custom}
                 />
-                {/*<TextField
-                    id="outlined-textarea"
-                    label={custom.fieldName}
-                    className={classes.textField}
-                    type={custom.type}
-                    multiline
-                    margin="normal"
-                    variant="outlined"
-                    {...input}
-                    {...custom}
-                />*/}
             </div>}
         </div>
     );
 };
 
 export const MySelect = (props) => {
-    const {input, options, placeholder} = props;
+    const { input, options, placeholder } = props;
     return (
         <div className={s.searchContainer}>
-            {/*<div className={s.title}>{label}</div>*/}
             <Select
                 {...input}
-                onChange={value => input.onChange(value)}
+                onChange={(value) => input.onChange(value)}
                 onBlur={() => input.onBlur(input.value)}
                 options={options}
                 placeholder={placeholder}
                 styles={selectStyles}
             />
         </div>
-    )
+    );
 };
-

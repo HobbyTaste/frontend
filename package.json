@@ -14,11 +14,6 @@
     "lint:all": "yarn eslint server/ static/",
     "mongo": "PATH=~/Mongo/mongodb-shell-linux-x86_64-ubuntu1804-4.2.2/mongodb-linux-x86_64-ubuntu1804-4.2.2/bin mongo \"mongodb+srv://hobbytaste-a3rpe.mongodb.net/test\"  --username sikalov"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
-  },
   "browserslist": [
     ">0.2%",
     "not dead",

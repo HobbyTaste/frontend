@@ -1,81 +1,71 @@
-import {stopSubmit} from "redux-form";
-import user from "../../api/User";
+import { stopSubmit } from 'redux-form';
+import User from '../../api/User.ts';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
-let initialState = {
+const initialState = {
     id: null,
     email: null,
     name: null,
     isAuth: false,
-    inUserCabinet: false
+    inUserCabinet: false,
 };
-const userApi = new user();
+const userApi = new User();
 
 const authReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SET_USER_DATA:
-            return {
-                ...state,
-                id: action.id,
-                email: action.email,
-                name: action.name,
-                isAuth: action.isAuth
-            };
-        default:
-            return state;
+    switch (action.type) {
+    case SET_USER_DATA:
+        return {
+            ...state,
+            id: action.id,
+            email: action.email,
+            name: action.name,
+            isAuth: action.isAuth,
+        };
+    default:
+        return state;
     }
 };
 
-export const setAuthUserData = (id, email, name, isAuth) =>
-    ({type: SET_USER_DATA, id, email, name, isAuth});
+export const setAuthUserData = (id, email, name, isAuth) => ({
+    type: SET_USER_DATA, id, email, name, isAuth,
+});
 export default authReducer;
+
+export const getAuthUserData = () => (dispatch) => userApi.getInfo()
+    .then((response) => {
+        if (typeof response === 'object') {
+            const { id, name, email } = response;
+            dispatch(setAuthUserData(id, email, name, true));
+        }
+    });
 
 export const login = (email, password) => (dispatch) => {
     userApi.login(email, password)
         .then((response) => {
             if (response === null) {
                 dispatch(getAuthUserData());
-            }
-            else {
-                if(response.login) {
-                    dispatch(stopSubmit("login", {email: "Неверный email"}));
-                }
-                else if(response.password) {
-                    dispatch(stopSubmit("login", {password: "Неверный пароль"}));
-                }
-            }
-        })
-};
-
-export const createNewUser = (email, password, name) => (dispatch) => {
-    userApi.create(email, password, name).then((response) => {
-        debugger;
-        if (response === null) {
-            dispatch(getAuthUserData());
-            /*dispatch(setAuthUserData(1, email, name, true));*/
-        }
-        /*else {
-            alert("error_create");
-        }*/
-    })
-};
-
-export const logout = () => (dispatch) => {
-    userApi.logout()
-        .then(response => {
-            if(response === null) {
-                dispatch(setAuthUserData(null, null, null,false));
+            } else if (response.login) {
+                dispatch(stopSubmit('login', { email: 'Неверный email' }));
+            } else if (response.password) {
+                dispatch(stopSubmit('login', { password: 'Неверный пароль' }));
             }
         });
 };
 
-export const getAuthUserData = () => (dispatch) => {
-    return userApi.getInfo()
-        .then(response => {
-            if(typeof response === 'object') {
-                let {id, name, email} = response;
-                dispatch(setAuthUserData(id, email, name, true));
+export const createNewUser = (email, password, name) => (dispatch) => {
+    userApi.create(email, password, name).then((response) => {
+        if (response === null) {
+            dispatch(getAuthUserData());
+        }
+    });
+};
+
+export const logout = () => (dispatch) => {
+    userApi.logout()
+        .then((response) => {
+            if (response === null) {
+                dispatch(setAuthUserData(null, null, null, false));
             }
         });
 };

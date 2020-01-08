@@ -4,7 +4,7 @@ import {AnimatedModalWindow} from '../../../HOC/AnimatedModalWindow/AnimatedModa
 import ChangeFormProvider from './ChangeProviderForm/ChangeProviderForm'
 
 const ProviderInfo = (props) => {
-    let Change = AnimatedModalWindow(ChangeFormProvider);
+    let Change = AnimatedModalWindow(ChangeFormProvider, "ИЗМЕНИТЬ");
     return (
         <div>
             <div className={style.name}>

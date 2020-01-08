@@ -27,7 +27,7 @@ class Hobby extends BaseFetchClass{
 
     /**
      * Добавляет хобби
-     * @param{IHobby} hobbyState
+     * @param{{owner: *, address: *, phone: *, description: *, label: *, shortDescription: *, avatar: *, category: *, email: *, metroStation: *}} hobbyState
      * @return {Promise<IHobby>}
      */
     public async add(hobbyState: IHobby): Promise<Response> {

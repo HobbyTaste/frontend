@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, formValueSelector} from 'redux-form';
 import {MySelect} from "../../../Common/FormsControls/FormsControls";
@@ -6,6 +6,7 @@ import style from "./HobbySelect.module.css";
 import {compose} from 'redux';
 import {RedLongButton} from "../../../Common/MaterialsButtons";
 import {findHobbies, setSubmit} from "../../../../redux/reducers/mainPage-reducer";
+import {Link} from 'react-router-dom';
 
 let SelectForm = ({handleSubmit, hobbies, metroStations}) => {
     return (
@@ -32,22 +33,19 @@ const SelectingFormValuesForm = reduxForm({
 })(SelectForm);
 
 const Seleect = (props) => {
-
     const onSubmit = (values, dispatch) => {
         props.findHobbies(values.hobby.label, values.metro.label);
-        props.setSubmit();
+        props.setSubmit(true);
     };
 
     const metroStations = props.metroStationsToSelect;
     const hobbies = props.hobbiesToSelect;
-    {
-            return (
-                <div>
-                    <SelectingFormValuesForm onSubmit={onSubmit} hobbies={hobbies} metroStations={metroStations}/>
-                </div>
-            );
+    return (
+        <div>
+            <SelectingFormValuesForm onSubmit={onSubmit} hobbies={hobbies} metroStations={metroStations}/>
+        </div>
+    );
 
-    }
 };
 
 const selector = formValueSelector('mainSelect');
