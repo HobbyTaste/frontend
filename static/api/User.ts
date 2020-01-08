@@ -111,6 +111,21 @@ class User extends BaseFetchClass {
         }
         return this.post('/edit', formData, {isFormData: true});
     }
+
+    /**
+     * Добавление хобби пользователем в свой личный кабинет
+     * @param id{string} - id-шник хобби
+     */
+    public async addHobby(id: string): Promise<Response> {
+        return this.get('/subscribe', {id});
+    }
+
+    /**
+     * Получает список всех хобби, на которые подписан пользователь
+     */
+    public async getHobbies(): Promise<Response> {
+        return this.get('/hobbies');
+    }
 }
 
 export default User;

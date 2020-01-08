@@ -5,6 +5,7 @@ import Hobby, {IHobby} from '../models/hobby';
 import multer from "multer";
 import config from "config";
 import {uploadFileToS3} from "../utils/aws";
+import logger from "../utils/logger";
 
 const hobbyRouter: Router = Router();
 
@@ -56,6 +57,21 @@ hobbyRouter.get('/find', async (req: Request, res: Response) => {
     }
     res.status(400).send(`typeof label = ${typeof label}`);
 });
+
+/**
+ * Поиск хобби с нативной фильтрацией
+ */
+hobbyRouter.get('/filter', async (req: Request, res: Response) => {
+    const {...filters} = req.query;
+    try {
+        const hobbies = await Hobby.find(filters);
+        res.json(hobbies);
+    } catch (e) {
+        logger.error(e);
+        res.status(500).json(e);
+    }
+});
+
 
 /**
  * Возвращает все хобби из БД

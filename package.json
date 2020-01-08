@@ -2,6 +2,29 @@
   "name": "hobby_time",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "NODE_APP_INSTANCE=secrets NODE_ENV=production node server/build/app.js",
+    "start:watch": "NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts",
+    "build:front": "NODE_ENV=production webpack --mode production",
+    "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
+    "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
+    "build": "yarn build:front && yarn build:server",
+    "heroku-postbuild": "yarn build:server",
+    "lint": "./tasks/lint-staging",
+    "lint:all": "yarn eslint server/ static/",
+    "mongo": "PATH=~/Mongo/mongodb-shell-linux-x86_64-ubuntu1804-4.2.2/mongodb-linux-x86_64-ubuntu1804-4.2.2/bin mongo \"mongodb+srv://hobbytaste-a3rpe.mongodb.net/test\"  --username sikalov"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.5.1",
@@ -47,28 +70,6 @@
     "typescript": "^3.6.4",
     "uuid": "^3.3.3"
   },
-  "scripts": {
-    "start": "NODE_APP_INSTANCE=secrets NODE_ENV=production node server/build/app.js",
-    "start:watch": "NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts",
-    "build:front": "NODE_ENV=production webpack --mode production",
-    "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
-    "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
-    "build": "yarn build:front && yarn build:server",
-    "heroku-postbuild": "yarn build:server"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "engines": {
-    "node": ">=10.16.3",
-    "yarn": "1.x"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
@@ -100,12 +101,15 @@
     "css-loader": "^3.4.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-import-resolver-webpack": "^0.12.0",
     "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "extract-css-chunks-webpack-plugin": "^4.3.1",
     "file-loader": "^3.0.1",
+    "husky": "^4.0.0",
     "mini-css-extract-plugin": "^0.6.0",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.7.2",
