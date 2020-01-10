@@ -58,7 +58,7 @@ userRouter.post('/create', upload.single('avatar'), async (req: Request, res: Re
     }
 
     if (file) {
-        profile.avatar = uploadFileToS3('users', file);
+        profile.avatar = await uploadFileToS3('users', file);
     }
     const newUser = new User({...profile});
     if (req.session) {

@@ -29,6 +29,7 @@ module.exports = {
         "import/resolver": "webpack"
     },
     "rules": {
-        "indent": ['error', 4]
+        "indent": ['error', 4],
+        "max-len": ['error', 128]
     }
 };

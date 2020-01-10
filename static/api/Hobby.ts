@@ -1,18 +1,19 @@
 import BaseFetchClass from './BaseFetchClass';
 
 interface IHobby {
-    label: string,     // название
-    phone?: string,    // номер телефона
-    email?: string,    // контактный email
-    address?: string,   // точный адрес
-    metroStation?: string,  // название станции метро ближайшей
-    metroId?: string,   // id-шник станции метро
-    description: string,  // полное описание хобби
-    shortDescription: string,   // краткое описание
-    owner?: string,         // id-шник партнера, кто создал хобби
-    avatar: string | File, // при отправке это файл пользователя e.target.file, при получении - url на картнку в облаках
-    category?: string,   // строка с категорией
-    subscribers: string[],  // подписчики на данное хобби
+    _id: string; // id-хобби
+    label: string, // название
+    phone?: string, // номер телефона
+    email?: string, // контактный email
+    address?: string, // точный адрес
+    metroStation?: string, // название станции метро ближайшей
+    metroId?: string, // id-шник станции метро
+    description: string, // полное описание хобби
+    shortDescription: string, // краткое описание
+    owner?: string, // id-шник партнера, кто создал хобби
+    avatar: string | File, // при отправке это файл пользователя e.target.file, при получении url на картнку в облаках
+    category?: string, // строка с категорией
+    subscribers: string[], // подписчики на данное хобби
 }
 
 const BASE_URL = '/hobby';
