@@ -5,8 +5,7 @@ import style from "./ProviderRegistration.module.css";
 import {GreenLargeButton} from "../Common/MaterialsButtons";
 import {connect} from "react-redux";
 import {createNewProvider} from "../../redux/reducers/provider-reducer";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import CloseIcon from '@material-ui/icons/Close';
+import UploadPhoto from "../Common/UploadFotoBlock/UploadPhoto";
 
 let mainFile = null;
 const ProviderRegistrationForm = ({handleSubmit, error}) => {
@@ -45,21 +44,7 @@ const ProviderRegistrationForm = ({handleSubmit, error}) => {
             <div><Field component={Input} name={"second_password"} placeholder={"Повторите пароль *"} type={"password"}
                         fieldName={"Повторите пароль"}/></div>
         </form>
-            <div className={style.uploadBlock}>
-                <div className={style.cloud}>
-                    <label htmlFor="file">
-                        <CloudUploadIcon className={style.upload} style={{fontSize: 80}}/>
-                    </label>
-                    <input type="file" name="file" id="file" onChange={uploadImage} className={style.input}/>
-                    <div>Загрузить фото</div>
-                </div>
-                <div className={style.image}>
-                    {url ? <div>
-                            <img className={style.avatar} src={`${url}`} alt="картинка"/>
-                            <CloseIcon className={style.closeIcon} onClick={deleteUrl}/>
-                        </div> : ''}
-                </div>
-            </div>
+            <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
             <div className={style.buttons}>
                 <GreenLargeButton text={"ЗАРЕГИСТРИРОВАТЬСЯ"} label="Submit" onSubmit={handleSubmit}/>
             </div>

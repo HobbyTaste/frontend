@@ -3,7 +3,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
 let initialState = {
     hobbyCards: [],
-    isFetching: false
+    isFetching: []
 };
 
 const hobbiesPageReducer = (state = initialState, action) => {

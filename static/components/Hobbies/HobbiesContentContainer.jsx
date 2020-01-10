@@ -7,14 +7,15 @@ import {
     toggleIsFetching
 } from "../../redux/reducers/hobbiesPage-reducer";
 import HobbiesContent from "./HobbiesContent";
-import {addMyHobby} from "../../redux/reducers/user-reducer";
+import {addNewHobby} from "../../redux/reducers/provider-reducer";
 
 class HobbiesContentContainer extends React.Component {
     render() {
         return <div>
             <HobbiesContent hobbyCards={this.props.hobbies}
                             addMyHobby={this.props.addMyHobby}
-                            isAuth={this.props.isAuth}/>
+                            isAuth={this.props.isAuth}
+                            addingInProgress={this.props.addingInProgress}/>
         </div>
     }
 }
@@ -22,8 +23,10 @@ class HobbiesContentContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         hobbies: state.mainPage.hobbies,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        addingInProgress: state.hobbiesPage.addingInProgress,
+        isFetching: state.hobbiesPage.isFetching
     }
 };
 
-export default connect(mapStateToProps, {addMyHobby})(HobbiesContentContainer)
+export default connect(mapStateToProps, {addNewHobby})(HobbiesContentContainer)

@@ -24,12 +24,15 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
     button: {
-        margin: theme.spacing(1),
+        /*margin: theme.spacing(1),*/
+       /* marginLeft: 'auto',*/
+        /*marginRight: 'auto',*/
+        /*margin: '10px auto',*/
         height: '50px',
         width: '60px',
         padding: '0 60px',
         borderRadius: '10px',
-        float: 'right',
+        float: 'right'
     },
     buttonLarge: {
         margin: theme.spacing(2),

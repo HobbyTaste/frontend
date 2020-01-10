@@ -7,6 +7,8 @@ const initialState = {
     id: null,
     email: null,
     name: null,
+    avatar: null,
+    password: null,
     isAuth: false,
     inUserCabinet: false,
 };
@@ -20,6 +22,8 @@ const authReducer = (state = initialState, action) => {
             id: action.id,
             email: action.email,
             name: action.name,
+            avatar: action.avatar,
+            password: action.password,
             isAuth: action.isAuth,
         };
     default:
@@ -27,20 +31,22 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-export const setAuthUserData = (id, email, name, isAuth) => ({
-    type: SET_USER_DATA, id, email, name, isAuth,
+export const setAuthUserData = (id, email, name, avatar, password, isAuth) => ({
+    type: SET_USER_DATA, id, email, name, avatar, password, isAuth,
 });
 export default authReducer;
 
 export const getAuthUserData = () => (dispatch) => userApi.getInfo()
     .then((response) => {
         if (typeof response === 'object') {
-            const { id, name, email } = response;
-            dispatch(setAuthUserData(id, email, name, true));
+            /*debugger;*/
+            const { id, name, email, avatar, password } = response;
+            dispatch(setAuthUserData(id, email, name, avatar, password, true));
         }
     });
 
 export const login = (email, password) => (dispatch) => {
+    let promise = dispatch(getUserHobbies());
     userApi.login(email, password)
         .then((response) => {
             if (response === null) {
@@ -53,9 +59,12 @@ export const login = (email, password) => (dispatch) => {
         });
 };
 
-export const createNewUser = (email, password, name) => (dispatch) => {
-    userApi.create(email, password, name).then((response) => {
-        if (response === null) {
+export const createNewUser = (email, password, name, avatar) => (dispatch) => {
+    const obj = {
+        password: password, name: name, avatar: avatar, email: email
+    };
+    userApi.create(obj).then((response) => {
+        if (response.ok) {
             dispatch(getAuthUserData());
         }
     });
@@ -65,7 +74,18 @@ export const logout = () => (dispatch) => {
     userApi.logout()
         .then((response) => {
             if (response === null) {
-                dispatch(setAuthUserData(null, null, null, false));
+                dispatch(setAuthUserData(null, null, null,
+                    null, null, false));
             }
         });
 };
+
+/*
+export const addNewHobby = (hobbyID) => (dispatch) => {
+    userApi.addHobby(hobbyID)
+        .then((response) => {
+            if(response.ok) {
+                dispatch()
+            }
+        });
+};*/

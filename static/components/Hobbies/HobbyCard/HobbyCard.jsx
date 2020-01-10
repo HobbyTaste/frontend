@@ -6,7 +6,9 @@ import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModa
 import HobbyInfo from "./CardImage/HobbyInfo/HobbyInfo";
 
 const HobbyCard = (props) => {
-
+    const addHobby = () => {
+        props.addNewHobby(true, props.id);
+    };
     let Details = AnimatedModalWindow(HobbyInfo, "ПОДРОБНЕЕ", props);
     return (
         <div className={style.scrollBlock}>
@@ -20,7 +22,10 @@ const HobbyCard = (props) => {
                         <li>Станция метро: {props.metroStation}</li>
                     </ul>
                     {props.isAuth ? <div className={style.buttons}>
-                        <GreenButton text="ДОБАВИТЬ ХОББИ" type="button"/>
+                        {props.addingInProgress.some(id => id === props.id) ?
+                            <div>DISABLED</div> : <div onClick={addHobby}>
+                                <GreenButton text="ДОБАВИТЬ ХОББИ" type="button"/>
+                            </div>}
                         <Details/>
                     </div> : <Details/>}
                 </div>
