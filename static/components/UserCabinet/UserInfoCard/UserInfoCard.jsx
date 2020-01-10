@@ -6,7 +6,7 @@ import UserInfo from "./UserInfo/UserInfo";
 const UserInfoCard = (props) => {
     return (
         <div className={style.info}>
-            <UserAvatar avatar={props.url}/>
+            <UserAvatar url={props.avatar}/>
             <UserInfo name={props.name} email={props.email}/>
         </div>
     );

@@ -6,8 +6,7 @@ let HobbiesContent = (props) => {
 
     const hobbyCards = props.hobbyCards.map(c => <HobbyCard {...c} isAuth={props.isAuth}
                                                             addNewHobby={props.addNewHobby}
-                                                            addingInProgress={props.addingInProgress}
-                                                            isFetching={props.isFetching}/>);
+                                                            userId={props.userId}/>);
 
     return (<div>
         <div className={s.title}>Результаты поиска</div>

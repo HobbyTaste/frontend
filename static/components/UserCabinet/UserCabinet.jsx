@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import style from "./UserCabinet.module.css";
 import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import UserHobbyCard from "./UserHobbyCard/UserHobbyCard";
+import {Redirect} from "react-router-dom";
 
 const UserCabinet = (props) => {
-
-    const myHobbies = props.myHobbyCards.map(c => <UserHobbyCard {...c}/>);
+    if(!props.isAuth) {
+        return <Redirect to={'/'} />
+    }
+    const myHobbies = props.userHobbies.map(c => <UserHobbyCard {...c}/>);
 
     return (<div>
         <div className={style.background}>

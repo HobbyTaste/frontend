@@ -1,3 +1,4 @@
+/*
 const SET_HOBBY_CARDS = 'SET-HOBBY-CARDS';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
@@ -19,4 +20,4 @@ const hobbiesPageReducer = (state = initialState, action) => {
 
 export const setHobbyCards = (hobbyCards) => ({type: SET_HOBBY_CARDS, hobbyCards});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export default hobbiesPageReducer;
+export default hobbiesPageReducer;*/

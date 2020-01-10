@@ -4,7 +4,7 @@ import {AnimatedModalWindow} from "../../../../HOC/AnimatedModalWindow/AnimatedM
 import ChangeForm from "./ChangeUserInfoForm/ChangeUserInfoForm";
 
 const UserInfo = (props) => {
-    let Change = AnimatedModalWindow(ChangeForm);
+    let Change = AnimatedModalWindow(ChangeForm, "ИЗМЕНИТЬ");
     return (
         <div>
             <div className={style.name}>

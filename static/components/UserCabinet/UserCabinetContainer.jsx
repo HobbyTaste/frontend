@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
         email: state.auth.email,
         name: state.auth.name,
         avatar: state.auth.avatar,
-        myHobbyCards: state.userCabinet.myHobbyCards
+        userHobbies: state.auth.userHobbies,
+        isAuth: state.auth.isAuth
     }
 };
 

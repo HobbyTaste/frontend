@@ -1,3 +1,4 @@
+/*
 const ADD_NEW_HOBBY = 'ADD_NEW_HOBBY';
 const TOGGLE_IS_ADDING_PROGRESS = 'TOGGLE_IS_ADDING_PROGRESS';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
@@ -56,4 +57,4 @@ export const addNewHobby = (isFetching, hobbyID) => (dispatch) => {
             dispatch(toggleAddingProgress(false, hobbyID));
         });
 };
-export default UserCabinetReducer;
+export default UserCabinetReducer;*/
