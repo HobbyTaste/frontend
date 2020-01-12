@@ -7,8 +7,7 @@ import {compose} from "redux";
 import {initializeMainPage} from "../../redux/reducers/mainPage-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import Hobbies from "../Hobbies/Hobbies";
-import {withRouter} from 'react-router-dom';
-import {Redirect} from "react-router-dom";
+import {withRouter, Redirect} from 'react-router-dom';
 
 class MainPage extends React.Component {
     componentDidMount() {
@@ -19,10 +18,12 @@ class MainPage extends React.Component {
         if (!this.props.initializedMainPage) {
             return <Preloader />;
         }
-        if(this.props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
+        if(this.props.providerIsAuth) {
+            return <Redirect to={"/provider/cabinet"} />;
+        }
         return (<div>
             <div className={s.background}> </div>
-            {this.props.isSubmit ? <Hobbies/> : <SearchContent/>}
+            <SearchContent/>
             <Footer/>
         </div>);
     }

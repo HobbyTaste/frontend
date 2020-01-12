@@ -31,7 +31,7 @@ const ChangeProviderForm = ({handleSubmit, error}) => {
         <form onSubmit={handleSubmit}>
             <div><Field component={Input} name={"newName"} placeholder={"Новое имя"} autoFocus={true} type={"text"} fieldName={"Новое имя"}/></div>
             <div><Field component={Input} name={"newEmail"} placeholder={"Новый email"} type={"email"} fieldName={"Новый email"}/></div>
-            <div><Field component={Input} name={"oldPassword"} placeholder={"Старый пароль"} type={"password"} fieldName={"Старый пароль"}/></div>
+            {/*<div><Field component={Input} name={"oldPassword"} placeholder={"Старый пароль"} type={"password"} fieldName={"Старый пароль"}/></div>*/}
             <div><Field component={Input} name={"newPassword"} placeholder={"Новый пароль"} type={"password"} fieldName={"Новый пароль"}/></div>
             <div><Field component={Input} name={"newPhone"} placeholder={"Новый номер телефона"} type={"telephone"} fieldName={"Новый номер телефона"}/></div>
             <div><Field component={Input} name={"newInfo"} placeholder={"Информация о вас"} type={"text"} fieldName={"Информация о вас"}/></div>
@@ -55,12 +55,27 @@ const ChangeProviderReduxForm = reduxForm({ form: 'changeProvider' })(ChangeProv
 const ChangeFormProvider = (props) => {
     const onSubmit = (formData) => {
         let dataToChange = {
-            name: formData.newName === undefined ? props.curName : formData.newName,
+            /*name: formData.newName === undefined ? props.curName : formData.newName,
             password: formData.newPassword === undefined ? props.curPassword : formData.newPassword,
             email: formData.newEmail === undefined ? props.curEmail : formData.newEmail,
             phone: formData.newPhone === undefined ? props.curPhone : formData.newPhone,
-            info: formData.newInfo === undefined ? props.curInfo : formData.newInfo
+            info: formData.newInfo === undefined ? props.curInfo : formData.newInfo*/
         };
+        if(formData.newName !== undefined) {
+            dataToChange['name'] = formData.newName;
+        }
+        if(formData.newPassword !== undefined) {
+            dataToChange['password'] = formData.newPassword;
+        }
+        if(formData.newEmail !== undefined) {
+            dataToChange['email'] = formData.newEmail;
+        }
+        if(formData.newPhone !== undefined) {
+            dataToChange['phone'] = formData.newPhone;
+        }
+        if(formData.newInfo !== undefined) {
+            dataToChange['info'] = formData.newInfo;
+        }
         if(mainFile !== null) {
             dataToChange['avatar'] = mainFile;
         }
@@ -74,15 +89,4 @@ const ChangeFormProvider = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        curName: state.providerCabinet.name,
-        curPassword: state.providerCabinet.password,
-        curEmail: state.providerCabinet.email,
-        curAvatar: state.providerCabinet.avatar,
-        curPhone: state.providerCabinet.phone,
-        curInfo: state.providerCabinet.info
-    }
-};
-
-export default connect(mapStateToProps, {providerEdit})(ChangeFormProvider);
+export default connect(null, {providerEdit})(ChangeFormProvider);

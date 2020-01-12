@@ -16,3 +16,9 @@
 .title {
     font-weight: bold;
 }
+
+.changeButton {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    display: flex;
+}

@@ -24,10 +24,6 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
     button: {
-        /*margin: theme.spacing(1),*/
-       /* marginLeft: 'auto',*/
-        /*marginRight: 'auto',*/
-        /*margin: '10px auto',*/
         height: '50px',
         width: '60px',
         padding: '0 60px',
@@ -91,11 +87,17 @@ export const HobbyCardAddButton = (props) => {
 export const GreenButton = (props) => {
     const classes = useStyles();
     return (
-        <ThemeProvider theme={theme}>
-            <Button theme={theme} variant="contained" color="primary" className={classes.button} onClick={props.onSubmit}>
-                {props.text}
-            </Button>
-        </ThemeProvider>
+        <div>
+            {props.disabled === "ok" ? <ThemeProvider theme={theme}>
+                <Button theme={theme} variant="contained" color="primary" className={classes.button} disabled>
+                    {props.text}
+                </Button>
+            </ThemeProvider> : <ThemeProvider theme={theme}>
+                <Button theme={theme} variant="contained" color="primary" className={classes.button} onClick={props.onSubmit}>
+                    {props.text}
+                </Button>
+            </ThemeProvider> }
+        </div>
     );
 };
 

@@ -2,30 +2,29 @@
     display: flex;
     flex-direction: column;
     box-shadow: #79827a;
-    height: 550px;
     width: 315px;
-    /*margin-top: 15px;*/
     background-color: floralwhite;
     border-radius: 2px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 24px;
+    margin-bottom: 10px;
+    height: 550px;
 }
 
 .ul {
-    margin-top: 0;
+    margin-top: 10px;
 }
 
 .name {
-    margin: 10px auto;
-    color: #85C633;
-    font-size: 24px;
+    margin: 15px auto;
+    color: #19B95D;
+    font-size: 28px;
     font-style: italic;
     filter: drop-shadow(1px 1px green);
 }
 
 .add {
     color: white;
-    background-color: #85C633;
+    background-color: #19B95D;
     border-radius: 5px;
     width: 245px;
     height: 30px;
@@ -39,4 +38,5 @@
     flex-wrap: wrap;
     padding: 5px;
     font-size: 12px;
+    justify-content: space-around;
 }

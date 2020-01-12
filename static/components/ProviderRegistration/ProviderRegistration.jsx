@@ -41,8 +41,8 @@ const ProviderRegistrationForm = ({handleSubmit, error}) => {
                         fieldName={"Информация о вас"}/></div>
             <div><Field component={Input} name={"password"} placeholder={"Пароль для входа в личный кабинет *"}
                         type={"password"} fieldName={"Пароль для входа в личный кабинет"}/></div>
-            <div><Field component={Input} name={"second_password"} placeholder={"Повторите пароль *"} type={"password"}
-                        fieldName={"Повторите пароль"}/></div>
+            {/*<div><Field component={Input} name={"second_password"} placeholder={"Повторите пароль *"} type={"password"}
+                        fieldName={"Повторите пароль"}/></div>*/}
         </form>
             <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
             <div className={style.buttons}>

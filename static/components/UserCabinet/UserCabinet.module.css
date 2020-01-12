@@ -22,13 +22,11 @@
 }
 
 .hobbiesBlock {
-    height: 700px;
-    margin-left: 100px;
-    width: 1200px;
-    position: relative;
-    text-align: center;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    width: 1200px;
+    margin-left: 100px;
 }
 
 .title {
@@ -43,9 +41,22 @@
     font-size: 24px;
 }
 
-/*.hobbiesContainer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}*/
+.scrollBlock {
+    width: 100%;
+    max-height: 750px;
+    display: inline-block;
+    overflow-x: hidden;
+    margin: 10px -3px;
+    padding-top: 1px;
+}
+
+.blockForCards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+#scrollBlock{}::-webkit-scrollbar{width: 5px;height: 5px;}
+::-webkit-scrollbar-track-piece{background-color: #ffffff;}
+::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #19B95D;}
+::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #19b95d;}

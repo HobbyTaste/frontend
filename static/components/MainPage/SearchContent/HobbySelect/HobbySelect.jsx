@@ -5,8 +5,9 @@ import {MySelect} from "../../../Common/FormsControls/FormsControls";
 import style from "./HobbySelect.module.css";
 import {compose} from 'redux';
 import {RedLongButton} from "../../../Common/MaterialsButtons";
-import {findHobbies, setSubmit} from "../../../../redux/reducers/mainPage-reducer";
-import {Link} from 'react-router-dom';
+import {setSubmit} from "../../../../redux/reducers/mainPage-reducer";
+import { withRouter } from "react-router-dom";
+import {findHobbies} from "../../../../redux/reducers/hobbiesPage-reducer";
 
 let SelectForm = ({handleSubmit, hobbies, metroStations}) => {
     return (
@@ -20,10 +21,10 @@ let SelectForm = ({handleSubmit, hobbies, metroStations}) => {
                            placeholder={"Введите станцию метро"}/>
                 </div>
             </div>
-            <div className={style.SearchHobbyButton}>
-                <RedLongButton className={style.button} text={"Подобрать хобби"} label="Submit"
-                               onSubmit={handleSubmit}/>
-            </div>
+                <div className={style.SearchHobbyButton}>
+                    <RedLongButton className={style.button} text={"Подобрать хобби"} label="Submit"
+                                   onSubmit={handleSubmit}/>
+                </div>
         </form>
     )
 };
@@ -34,8 +35,11 @@ const SelectingFormValuesForm = reduxForm({
 
 const Seleect = (props) => {
     const onSubmit = (values, dispatch) => {
-        props.findHobbies(values.hobby.label, values.metro.label);
-        props.setSubmit(true);
+        if (values.metro) {
+            props.history.push('/hobbies/' + values.hobby.label + '/' + values.metro.label);
+        } else {
+            props.history.push('/hobbies/' + values.hobby.label);
+        }
     };
 
     const metroStations = props.metroStationsToSelect;
@@ -70,5 +74,5 @@ export default compose(
                 hobbyValue, metroValue
             }
         }
-    )
+    ), withRouter
 )(Seleect);

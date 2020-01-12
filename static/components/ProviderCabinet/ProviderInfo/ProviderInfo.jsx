@@ -4,7 +4,7 @@ import {AnimatedModalWindow} from '../../../HOC/AnimatedModalWindow/AnimatedModa
 import ChangeFormProvider from './ChangeProviderForm/ChangeProviderForm'
 
 const ProviderInfo = (props) => {
-    let Change = AnimatedModalWindow(ChangeFormProvider, "ИЗМЕНИТЬ");
+    let Change = AnimatedModalWindow(ChangeFormProvider, "ИЗМЕНИТЬ", null, false);
     return (
         <div>
             <div className={style.name}>
@@ -23,7 +23,9 @@ const ProviderInfo = (props) => {
                         <span className={style.title}>Информация о партнере: </span> {props.info}
                     </li>
                 </ul>
+                <div className={style.changeButton}>
                     <Change />
+                </div>
             </div>
         </div>
     );
