@@ -12,7 +12,6 @@ const hobbyApi = new Hobby();
 let initialState = {
     providerId: '',
     name: '',
-    password: '',
     email: '',
     avatar: '',
     phone: '',
@@ -70,7 +69,7 @@ export const getAuthProviderData = () => (dispatch) => {
             if (response.ok) {
                 response.json().then(body => {
                     let {avatar, email, id, info, name, phone} = body;
-                    dispatch(setAuthProviderData(avatar, email, id, info, name, phone, true, true));
+                    dispatch(setAuthProviderData(avatar, email, id, info, name, phone, true));
                 });
             } else {
                 response.json().then(console.log);

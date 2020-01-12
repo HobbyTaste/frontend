@@ -30,27 +30,17 @@
 }
 
 .cloud {
-    /*border: 1px solid red;*/
     width: 57%;
     text-align: right;
 }
 
 .image {
-    /*border: 1px solid red;*/
     width: 43%;
     margin-top: auto;
     margin-bottom: auto;
 }
 
 .closeIcon {
-    /*position:absolute;*/
-    /*left:0;
-    bottom:0;
-    right:0;
-    top:0;*/
-    /*background:rgba(255,255,255, 0.7);
-    display:none;*/
-
     margin-bottom: 60px;
     margin-left: 5px;
     cursor: pointer;

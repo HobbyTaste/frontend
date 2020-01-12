@@ -17,7 +17,7 @@ const Header = (props) => {
                 </Link>
             </div>
             { props.isAuth
-                ? <div className={s.tmp}><LogoutUser logout={props.logout}/></div>
+                ? <div className={s.tmp}><LogoutUser logout={props.logout} avatar={props.avatar}/></div>
                 : <div className={s.tmp}><LoginUser/></div> }
         </header>);
 };

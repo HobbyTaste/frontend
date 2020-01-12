@@ -1,28 +1,25 @@
 import React, {Component} from 'react';
-import s from './UserHobbyCard.module.css';
-import {HobbyCardAddButton, SmallHobbyButton} from "../../Common/MaterialsButtons";
-import CardImage from "./../../Hobbies/HobbyCard/CardImage/CardImage";
+import style from './UserHobbyCard.module.css';
+import {GreenButton} from "../../Common/MaterialsButtons";
+import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
+import CardImage from "../../Hobbies/HobbyCard/CardImage/CardImage";
+import HobbyInfo from "../../Hobbies/HobbyCard/CardImage/HobbyInfo/HobbyInfo";
 
 const UserHobbyCard = (props) => {
-    let deleteHobby = () => {
-        props.delete(props.id);
-    };
+    let Details = AnimatedModalWindow(HobbyInfo, "ПОДРОБНЕЕ", props);
     return (
-        <div className={s.card} key={props.id}>
-            <CardImage cardImg={props.photo}/>
-            <span className={s.name}>{props.name}</span>
-            <ul className={s.ul}>
-                <li>Телефон: {props.description.telephone}</li>
-                <li>email: {props.description.email}</li>
-                <li>Адрес: {props.description.location}</li>
-                <li>Информация: {props.description.info}</li>
-            </ul>
-            <div onClick={deleteHobby}>
-                <HobbyCardAddButton text="Удалить хобби"/>
-            </div>
-            <div className={s.buttons}>
-                <SmallHobbyButton text="Оставить заявку"/>
-                <SmallHobbyButton text="Подробнее"/>
+        <div>
+            <div className={style.card} key={props.owner}>
+                <CardImage cardImg={props.avatar}/>
+                <span className={style.name}>{props.label}</span>
+                <ul className={style.ul}>
+                    <li>Телефон: {props.phone}</li>
+                    <li>Email: {props.email}</li>
+                    <li>Метро: {props.metroStation}</li>
+                </ul>
+                <div className={style.buttons}>
+                    <Details/>
+                </div>
             </div>
         </div>
     );

@@ -1,17 +1,19 @@
-import { stopSubmit } from 'redux-form';
+import {stopSubmit} from 'redux-form';
 import User from '../../api/User.ts';
-const ADD_NEW_HOBBY = 'ADD_NEW_HOBBY';
+import {findHobbies, toggleAddingProgress} from "./hobbiesPage-reducer";
+
 const SET_HOBBIES = 'SET_HOBBIES';
 const SET_USER_DATA = 'SET_USER_DATA';
+const INITIALIZE_USER_SUCCESS = 'INITIALIZE_USER_SUCCESS';
 
 const initialState = {
     id: null,
     email: null,
     name: null,
     avatar: null,
-    password: null,
     isAuth: false,
     inUserCabinet: false,
+    userInitialized: false,
 
     userHobbies: []
 };
@@ -19,34 +21,48 @@ const userApi = new User();
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-    case SET_USER_DATA:
-        return {
-            ...state,
-            id: action.id,
-            email: action.email,
-            name: action.name,
-            avatar: action.avatar,
-            password: action.password,
-            isAuth: action.isAuth,
-        };
+        case INITIALIZE_USER_SUCCESS: {
+            return {
+                ...state, userInitialized: action.initialize
+            };
+        }
+        case SET_USER_DATA:
+            return {
+                ...state,
+                id: action.id,
+                email: action.email,
+                name: action.name,
+                avatar: action.avatar,
+                isAuth: action.isAuth
+            };
         case SET_HOBBIES:
             return {
                 ...state, userHobbies: action.userHobbies
             };
-    default:
-        return state;
+        default:
+            return state;
     }
 };
 
-export const setAuthUserData = (id, email, name, avatar, password, isAuth) => ({
-    type: SET_USER_DATA, id, email, name, avatar, password, isAuth,
+export const setAuthUserData = (id, email, name, avatar, isAuth) => ({
+    type: SET_USER_DATA, id, email, name, avatar, isAuth
 });
 const setUserHobbies = (userHobbies) => ({type: SET_HOBBIES, userHobbies});
+const initializeUser = (initialize) => ({type: INITIALIZE_USER_SUCCESS, initialize});
+
+export const initializeUserCabinet = () => (dispatch) => {
+    let promise = dispatch(getAuthUserData());
+    let promise2 = dispatch(getUserHobbies());
+    Promise.all([promise, promise2])
+        .then(() => {
+            dispatch(initializeUser(true));
+        });
+};
 
 export const getUserHobbies = () => (dispatch) => {
     userApi.getHobbies()
         .then((response) => {
-            if(response.ok) {
+            if (response.ok) {
                 response.json().then(body => {
                     dispatch(setUserHobbies(body));
                 });
@@ -54,20 +70,23 @@ export const getUserHobbies = () => (dispatch) => {
         })
 };
 
-export const addNewHobby = (hobbyID) => (dispatch) => {
+export const addNewHobby = (hobbyID, type, metro) => (dispatch) => {
     userApi.addHobby(hobbyID)
         .then((response) => {
-            if(response.ok) {
+            dispatch(toggleAddingProgress(true, hobbyID));
+            if (response.ok) {
                 dispatch(getUserHobbies());
+                dispatch(findHobbies(type, metro))
             }
         });
+    dispatch(toggleAddingProgress(false, hobbyID));
 };
 
 export const getAuthUserData = () => (dispatch) => userApi.getInfo()
     .then((response) => {
         if (typeof response === 'object') {
-            const { id, name, email, avatar, password } = response;
-            dispatch(setAuthUserData(id, email, name, avatar, password, true));
+            const {id, name, email, avatar} = response;
+            dispatch(setAuthUserData(id, email, name, avatar, true));
         }
     });
 
@@ -78,9 +97,9 @@ export const login = (email, password) => (dispatch) => {
                 dispatch(getAuthUserData());
                 dispatch(getUserHobbies());
             } else if (response.login) {
-                dispatch(stopSubmit('login', { email: 'Неверный email' }));
+                dispatch(stopSubmit('login', {email: 'Неверный email'}));
             } else if (response.password) {
-                dispatch(stopSubmit('login', { password: 'Неверный пароль' }));
+                dispatch(stopSubmit('login', {password: 'Неверный пароль'}));
             }
         });
 };
@@ -101,13 +120,13 @@ export const logout = () => (dispatch) => {
         .then((response) => {
             if (response === null) {
                 dispatch(setAuthUserData(null, null, null,
-                    null, null, false));
+                    null, false));
+                dispatch(initializeUser(false));
             }
         });
 };
 
 export const userEdit = (editData) => (dispatch) => {
-    debugger;
     userApi.edit(editData)
         .then((response) => {
             if (response.ok) {

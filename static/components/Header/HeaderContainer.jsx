@@ -5,7 +5,8 @@ import {logout} from "../../redux/reducers/auth-reducer";
 import {setSubmit} from "../../redux/reducers/mainPage-reducer";
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    avatar: state.auth.avatar
 });
 
 export default connect(mapStateToProps, {logout, setSubmit})(Header);

@@ -13,6 +13,14 @@ const pagesToRender = [
 ];
 
 pagesToRender.forEach(path => indexRouter.get(...renderPage(path)));
+indexRouter.get(['/?',
+    '/user/cabinet/?',
+    '/provider/cabinet/?',
+    '/hobbies/:type/:metro?',
+    '/search/:category',
+], (req, res) => {
+    res.end(getTemplate());
+});
 
 export default indexRouter;
 

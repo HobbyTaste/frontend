@@ -45,11 +45,16 @@ const ChangeReduxForm = reduxForm({ form: 'change' })(ChangeUserInfoForm);
 
 const ChangeForm = (props) => {
     const onSubmit = (formData) => {
-        let dataToChange = {
-            name: formData.name === undefined ? props.curName : formData.name,
-            password: formData.password === undefined ? props.curPassword : formData.password,
-            email: formData.email === undefined ? props.curEmail : formData.email
-        };
+        let dataToChange = {};
+        if(formData.name !== undefined) {
+            dataToChange['name'] = formData.name;
+        }
+        if(formData.password !== undefined) {
+            dataToChange['password'] = formData.password;
+        }
+        if(formData.email !== undefined) {
+            dataToChange['email'] = formData.email;
+        }
         if(mainFile !== null) {
             dataToChange['avatar'] = mainFile;
         }
@@ -63,12 +68,4 @@ const ChangeForm = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        curName: state.auth.name,
-        curPassword: state.auth.password,
-        curEmail: state.auth.email
-    }
-};
-
-export default connect(mapStateToProps, {userEdit})(ChangeForm);
+export default connect(null, {userEdit})(ChangeForm);

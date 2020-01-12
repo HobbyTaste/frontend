@@ -1,30 +1,22 @@
 import {getMetroStations} from "../../api/Geo";
 import Hobby from "../../api/Hobby";
 
-const SET_HOBBIES = 'SET-HOBBIES';
 const SET_HOBBIES_TO_SELECT = 'SET_HOBBIES_TO_SELECT';
 const SET_METRO_STATIONS = 'SET-METRO-STATIONS';
 const SET_STATIONS_TO_SELECT = 'SET-STATIONS-TO-SELECT';
-const SUBMIT = 'SUBMIT';
 const INITIALIZED_MAIN_PAGE_SUCCESS = 'INITIALIZED_MAIN_PAGE_SUCCESS';
 
 const hobbyApi = new Hobby();
 
 let initialState = {
-    hobbies: [],
     hobbiesToSelect: [],
     metroStations: [],
     metroStationsToSelect: [],
-    isSubmit: false,
     initializedMainPage: false
 };
 
 const mainPageReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SET_HOBBIES:
-            return {
-                ...state, hobbies: action.hobbies
-            };
+    switch (action.type) {
         case SET_HOBBIES_TO_SELECT:
             return {
                 ...state, hobbiesToSelect: action.hobbiesToSelect
@@ -35,29 +27,22 @@ const mainPageReducer = (state = initialState, action) => {
             };
         case SET_STATIONS_TO_SELECT:
             return {
-              ...state, metroStationsToSelect: action.stationsToSelect
-            };
-        case SUBMIT:
-            return {
-                ...state, isSubmit: action.submit
+                ...state, metroStationsToSelect: action.stationsToSelect
             };
         case INITIALIZED_MAIN_PAGE_SUCCESS:
             return {
-                ...state, initializedMainPage: true
+                ...state, initializedMainPage: action.initialize
             };
         default:
             return state;
     }
 };
 
-export const setHobbies = (hobbies) => ({ type: SET_HOBBIES, hobbies});
-export const setHobbiesToSelect = (hobbiesToSelect) => ({ type: SET_HOBBIES_TO_SELECT, hobbiesToSelect});
-
-export const setMetroStations = (stations) => ({ type: SET_METRO_STATIONS, stations});
-export const setStationsToSelect = (stationsToSelect) => ({ type: SET_STATIONS_TO_SELECT, stationsToSelect});
-export const setSubmit = (submit) => ({type: SUBMIT, submit});
-export const initializedMainPageSuccess = () => ({type: INITIALIZED_MAIN_PAGE_SUCCESS});
-    export default mainPageReducer;
+export const setHobbiesToSelect = (hobbiesToSelect) => ({type: SET_HOBBIES_TO_SELECT, hobbiesToSelect});
+export const setMetroStations = (stations) => ({type: SET_METRO_STATIONS, stations});
+export const setStationsToSelect = (stationsToSelect) => ({type: SET_STATIONS_TO_SELECT, stationsToSelect});
+export const initializedMainPageSuccess = (initialize) => ({type: INITIALIZED_MAIN_PAGE_SUCCESS, initialize});
+export default mainPageReducer;
 
 export const getMetro = () => (dispatch) => {
     return getMetroStations()
@@ -65,11 +50,41 @@ export const getMetro = () => (dispatch) => {
             let metroStations = response;
             dispatch(setMetroStations(metroStations));
             let tmpAns = response.map(station => station.caption);
-            let ans = tmpAns.map(station => ({label: station,
-                                                        value: station}));
+            let ans = tmpAns.map(station => ({
+                label: station,
+                value: station
+            }));
             dispatch(setStationsToSelect(ans));
         })
 };
+
+function removeDuplicates(arr) {
+    const result = [];
+    const duplicatesIndices = [];
+    arr.forEach((current, index) => {
+        if (duplicatesIndices.includes(index)) return;
+        result.push(current);
+        for (let comparisonIndex = index + 1; comparisonIndex < arr.length; comparisonIndex++) {
+            const comparison = arr[comparisonIndex];
+            const currentKeys = Object.keys(current);
+            const comparisonKeys = Object.keys(comparison);
+            if (currentKeys.length !== comparisonKeys.length) continue;
+            const currentKeysString = currentKeys.sort().join("").toLowerCase();
+            const comparisonKeysString = comparisonKeys.sort().join("").toLowerCase();
+            if (currentKeysString !== comparisonKeysString) continue;
+            let valuesEqual = true;
+            for (let i = 0; i < currentKeys.length; i++) {
+                const key = currentKeys[i];
+                if ( current[key] !== comparison[key] ) {
+                    valuesEqual = false;
+                    break;
+                }
+            }
+            if (valuesEqual) duplicatesIndices.push(comparisonIndex);
+        }
+    });
+    return result;
+}
 
 export const getHobbies = (hobbyType) => (dispatch) => {
     const obj = {category: hobbyType};
@@ -77,23 +92,12 @@ export const getHobbies = (hobbyType) => (dispatch) => {
         .then((response) => {
             if (response.ok) {
                 response.json().then(body => {
-                    /*dispatch(setHobbies(body));*/
-                    let ans = body.map(hobby => ({label: hobby.label,
-                        value: hobby.label}));
-                    dispatch(setHobbiesToSelect(ans));
-                });
-            } else {
-                response.json().then(console.log);
-            }
-        })
-};
-
-export const findHobbies = (label, metroId) => (dispatch) => {
-    return hobbyApi.find(label, metroId)
-        .then((response) => {
-            if (response.ok) {
-                response.json().then(body => {
-                    dispatch(setHobbies(body));
+                    let ans = body.map(hobby => ({
+                        label: hobby.label,
+                        value: hobby.label
+                    }));
+                    const filteredLabels = removeDuplicates(ans);
+                    dispatch(setHobbiesToSelect(filteredLabels));
                 });
             } else {
                 response.json().then(console.log);
@@ -102,10 +106,11 @@ export const findHobbies = (label, metroId) => (dispatch) => {
 };
 
 export const initializeMainPage = (hobbyType) => (dispatch) => {
+    initializedMainPageSuccess(false);
     let promise = dispatch(getMetro());
     let promise2 = dispatch(getHobbies(hobbyType));
     Promise.all([promise, promise2])
         .then(() => {
-            dispatch(initializedMainPageSuccess());
+            dispatch(initializedMainPageSuccess(true));
         });
 };

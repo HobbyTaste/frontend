@@ -9,6 +9,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {withModalWindow} from "../../../HOC/ModalWindow/ModalWindow";
 import ProviderLogin from "./ProviderLogin";
 import ProviderRegistration from "../../ProviderRegistration/ProviderRegistration";
+import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -30,7 +31,7 @@ export const FullScreenDialogButton = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
-    let SignIn = withModalWindow(ProviderLogin);
+    let SignIn = AnimatedModalWindow(ProviderLogin, "ВХОД", null, true);
     return (
         <div>
             <div onClick={handleClickOpen} >
