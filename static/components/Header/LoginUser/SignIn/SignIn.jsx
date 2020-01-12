@@ -11,8 +11,9 @@ const LoginForm = ({handleSubmit, error}) => {
         <form onSubmit={handleSubmit}>
             <div><Field component={Input} name={"email"} placeholder={"Email *"} autoFocus={true} type={"email"} fieldName={"Email"}/></div>
             <div><Field component={Input} name={"password"} placeholder={"Пароль *"} type="password" fieldName="Пароль"/></div>
-             <RedButton text={"ВОЙТИ"} label="Submit" onSubmit={handleSubmit}>ВОЙТИ</RedButton>
-
+            <div className={style.ButtonContainer}>
+            <RedButton text={"ВОЙТИ"} label="Submit" onSubmit={handleSubmit}>ВОЙТИ</RedButton>
+            </div>
         </form>
     );
 };

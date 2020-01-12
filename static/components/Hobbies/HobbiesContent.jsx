@@ -1,34 +1,25 @@
 import React, {Component} from 'react';
 import s from './HobbiesContent.module.css';
 import HobbyCard from "./HobbyCard/HobbyCard";
-import {Link} from 'react-router-dom';
-
 
 let HobbiesContent = (props) => {
-    /*let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages = [];
-    for(let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }*/
-
-    const hobbyCards = props.hobbyCards.map(c => <HobbyCard {...c}
-                                                            addMyHobby={props.addMyHobby}/>);
+    const hobbyCards = props.hobbyCards.map(c => <HobbyCard {...c} isAuth={props.isAuth}
+                                                            addNewHobby={props.addNewHobby}
+                                                            userId={props.userId}
+                                                            hobbiesMetro={props.hobbiesMetro}
+                                                            type={props.type}
+                                                            addingInProgress={props.addingInProgress}/>);
 
     return (<div>
         <div className={s.title}>Результаты поиска</div>
         <div className={s.body}>
+            <div className={s.scrollBlock}>
+                <div className={s.blockForCards}>
             {hobbyCards}
-{/*                {
-                props.hobbyCards.map(c => <div className={s.card} key={c.id}>
-                        <img src={c.photo} alt="" />
-                    </div>)
-                    }*/}
-
-            {/*<div className={s.cardContainer}> </div>
-            <div className={s.cardContainer}> </div>*/}
+                </div>
+            </div>
         </div>
-
     </div>);
 };
 

@@ -32,7 +32,11 @@ class Provider extends BaseFetchClass {
      * Запрос на создание партнера
      */
     public async create(provider: IProvider): Promise<Response> {
-        return  this.post('/create', provider);
+        const formData = new FormData();
+        for (const key in provider) {
+            formData.append(key, provider[key]);
+        }
+        return  this.post('/create', formData, {isFormData: true});
     }
 
     /**
@@ -76,6 +80,10 @@ class Provider extends BaseFetchClass {
             formData.append(key, nextData[key]);
         }
         return this.post('/edit', formData, {isFormData: true});
+    }
+
+    public async getHobbies(): Promise<Response> {
+        return this.get('/hobbies');
     }
 }
 

@@ -14,7 +14,8 @@ export interface IHobby extends Document {
     shortDescription: string,
     owner: string,
     subscribers: string[],
-    imagesUrl: string,
+    category?: string,
+    avatar?: string,
 }
 
 const HobbySchema: Schema = new Schema({
@@ -59,9 +60,15 @@ const HobbySchema: Schema = new Schema({
         type: String
     },
     subscribers: {
-        type: Array,
+        type: [String],
         default: []
     },
+    avatar: {
+        type: String,
+    },
+    category: {
+        type: String,
+    }
 });
 
 /**

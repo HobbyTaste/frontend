@@ -4,10 +4,12 @@ import style from './Button.module.css';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
-import {ProviderRegistration} from "../../ProviderRegistration/ProviderRegistration";
-import {GreenButton, GreenLargeButton} from "../../Common/MaterialsButtons";
+import {GreenLargeButton} from "../../Common/MaterialsButtons";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import {Link} from 'react-router-dom';
+import {withModalWindow} from "../../../HOC/ModalWindow/ModalWindow";
+import ProviderLogin from "./ProviderLogin";
+import ProviderRegistration from "../../ProviderRegistration/ProviderRegistration";
+import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -29,6 +31,7 @@ export const FullScreenDialogButton = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
+    let SignIn = AnimatedModalWindow(ProviderLogin, "ВХОД", null, true);
     return (
         <div>
             <div onClick={handleClickOpen} >
@@ -40,13 +43,13 @@ export const FullScreenDialogButton = (props) => {
                         <ArrowBackIosIcon style={{fontSize: 40}} className={style.closeButton} onClick={handleClose}/>
                         <div className={style.headerTitle}>Вход в личный кабинет партнера</div>
                         <div className={style.signIn}>
-                            <Link to='/provider_cabinet'>
-                            <button className={style.partnerLoginBut}>ВОЙТИ</button>
-                            </Link>
+                            <div className={style.loginButContainer}>
+                                <SignIn buttonName={"ВОЙТИ"}/>
+                            </div>
                         </div>
                     </div>
                 </AppBar>
-                <div className={style.backgroung}>
+                <div className={style.background}>
                     <div className={style.registrationForm}>
                         <ProviderRegistration />
                     </div>

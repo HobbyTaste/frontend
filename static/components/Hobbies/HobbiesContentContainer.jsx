@@ -1,44 +1,44 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {setHobbyCards, setCurrentPage, setTotalHobbiesCount, toggleIsFetching} from "../../redux/reducers/hobbiesPage-reducer";
 import HobbiesContent from "./HobbiesContent";
-import {addMyHobby} from "../../redux/reducers/user-reducer";
+import {addNewHobby} from "../../redux/reducers/auth-reducer";
+import {withRouter} from 'react-router-dom';
+import {compose} from "redux";
+import {initializeHobbiesPage} from "../../redux/reducers/hobbiesPage-reducer";
+import Preloader from "../Common/Preloader/Preloader";
 
 class HobbiesContentContainer extends React.Component {
-
+    componentDidMount() {
+        const type = this.props.match.params.type;
+        const metro = this.props.match.params.metro;
+        this.props.initializeHobbiesPage(type, metro);
+    }
     render() {
+        if(!this.props.initializedHobbiesPage) {
+            return <Preloader />
+        }
         return <div>
-            <HobbiesContent hobbyCards={this.props.hobbyCards} pageSize={this.props.pageSize}
-                            addMyHobby={this.props.addMyHobby}/>
+
+            <HobbiesContent hobbyCards={this.props.hobbies}
+                            addNewHobby={this.props.addNewHobby}
+                            isAuth={this.props.isAuth}
+                            userId={this.props.userId}
+                            type={this.props.match.params.type}
+                            hobbiesMetro={this.props.match.params.metro}
+                            addingInProgress={this.props.addingInProgress}
+                            />
         </div>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        hobbyCards: state.hobbiesPage.hobbyCards,
-        pageSize: state.hobbiesPage.pageSize,
-        totalHobbiesCount: state.hobbiesPage.totalHobbiesCount,
-        currentPage: state.hobbiesPage.currentPage,
-        isFetching: state.hobbiesPage.isFetching
+        hobbies: state.hobbiesPage.hobbyCards,
+        initializedHobbiesPage: state.hobbiesPage.initializedHobbiesPage,
+        isAuth: state.auth.isAuth,
+        userId: state.auth.id,
+        addingInProgress: state.hobbiesPage.addingInProgress
     }
 };
 
-/*let mapDispatchToProps = (dispatch) => {
-  return {
-      setHobbyCards: (hobbyCards) => {
-          dispatch(setHobbyCards(hobbyCards));
-      },
-      setCurrentPage: (currentPage) => {
-          dispatch(setCurrentPage(currentPage));
-      },
-      setTotalHobbiesCount: (totalCount) => {
-          dispatch(setTotalHobbiesCount(totalCount));
-      },
-      toggleIsFetching: (isFetching) => {
-          dispatch(toggleIsFetching(isFetching));
-      }
-  }
-};*/
-
-export default connect(mapStateToProps, {addMyHobby})(HobbiesContentContainer)
+export default compose(connect(mapStateToProps, {addNewHobby, initializeHobbiesPage}), withRouter)(HobbiesContentContainer)

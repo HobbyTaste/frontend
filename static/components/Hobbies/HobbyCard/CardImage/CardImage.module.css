@@ -1,8 +1,6 @@
-
 .img {
     width: 100%;
     height: 100%;
-
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,7 +15,7 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    border: 3px solid #85C633;
+    border: 3px solid #19B95D;
     height: 259px;
 }
 

@@ -4,7 +4,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import {useSpring, animated} from 'react-spring/web.cjs';
-import {GreenButton} from "../../components/Common/MaterialsButtons"; // web.cjs is required for IE 11 support
+import {GreenButton} from "../../components/Common/MaterialsButtons";
+import s from "../../components/Header/HeaderButtons.module.css"; // web.cjs is required for IE 11 support
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -17,9 +18,8 @@ const useStyles = makeStyles(theme => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        borderRadius: '15px',
-        height: '600px'
-    },
+        borderRadius: '15px'
+    }
 }));
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -53,7 +53,7 @@ Fade.propTypes = {
     onExited: PropTypes.func,
 };
 
-export const AnimatedModalWindow = (Component) => {
+export const AnimatedModalWindow = (Component, text, hobbyProps, isHeader) => {
     let WrapperContainer = (props) => {
         const classes = useStyles();
         const [open, setOpen] = React.useState(false);
@@ -68,7 +68,9 @@ export const AnimatedModalWindow = (Component) => {
         return (
             <div>
                 <div onClick={handleOpen}>
-                    <GreenButton text={"ИЗМЕНИТЬ"} type="button"/>
+                    {isHeader ? <button type="button" className={s.headerButtons}>
+                        {text}
+                    </button> : <GreenButton text={text} type="button"/>}
                 </div>
                 <Modal
                     aria-labelledby="spring-modal-title"
@@ -83,7 +85,7 @@ export const AnimatedModalWindow = (Component) => {
                     }}>
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <Component />
+                            <Component {...hobbyProps}/>
                         </div>
                     </Fade>
                 </Modal>

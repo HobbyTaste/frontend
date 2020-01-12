@@ -1,27 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Input} from "../Common/FormsControls/FormsControls";
-/*import {maxLengthCreator, required} from "../../utils/validators/validators";*/
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import createField from "./../Common/FormsControls/FormsControls";
 import {createNewUser} from "../../redux/reducers/auth-reducer";
 import style from ".././Header/LoginUser/SignIn/SignIn.module.css";
 import {RedButton} from "../Common/MaterialsButtons";
+import UploadPhoto from "../Common/UploadFotoBlock/UploadPhoto";
 
-/*const maxLength = maxLengthCreator(30);*/
-
+let mainFile = null;
 const RegistrationForm = ({handleSubmit, error}) => {
+    let [url, setUrl] = useState('');
+    let [file, setFile] = useState(null);
+    let uploadImage = (e) => {
+        let reader = new FileReader();
+        let photo_file = e.target.files[0];
+        reader.onloadend = () => {
+            setUrl(`${reader.result}`);
+            setFile(photo_file);
+            mainFile = photo_file;
+        };
+        reader.readAsDataURL(photo_file)
+    };
+    const deleteUrl = () => {
+        setUrl('');
+        setFile(null);
+        mainFile = null;
+    };
     return(
         <form onSubmit={handleSubmit}>
             <div><Field component={Input} name={"email"} placeholder={"Email *"} autoFocus={true} fieldName={"Email"}/></div>
             <div><Field component={Input} name={"password"} placeholder={"Пароль *"} type={"password"} fieldName={"Пароль"}/></div>
             <div><Field component={Input} name={"name"} placeholder={"Имя *"} fieldName={"Имя"}/></div>
-            <RedButton text={"Регистрация"} label="Submit" onSubmit={handleSubmit} />
+            <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
+            <div className={style.ButtonContainer}>
+                <RedButton text={"Регистрация"} label="Submit" onSubmit={handleSubmit} />
+            </div>
 
-            {/*<div>
-                <button>Зарегистрироваться</button>
-            </div>*/}
         </form>
     );
 };
@@ -31,8 +45,7 @@ const RegistrationReduxForm = reduxForm({ form: 'registration' })(RegistrationFo
 const Registration = (props) => {
 
     const onSubmit = (formData) => {
-        /*debugger;*/
-        props.createNewUser(formData.email, formData.password, formData.name);
+        props.createNewUser(formData.email, formData.password, formData.name, mainFile);
     };
 
     return(
@@ -42,8 +55,5 @@ const Registration = (props) => {
         </div>
     );
 };
-/*const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
-});*/
 
 export default connect(null, {createNewUser})(Registration);

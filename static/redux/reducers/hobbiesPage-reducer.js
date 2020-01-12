@@ -1,63 +1,72 @@
+import Hobby from "../../api/Hobby";
+
 const SET_HOBBY_CARDS = 'SET-HOBBY-CARDS';
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const TOTAL_HOBBIES_COUNT = 'TOTAL-HOBBIES-COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const INITIALIZE_HOBBIES = 'INITIALIZE_HOBBIES';
+const TOGGLE_IS_ADDING_PROGRESS = 'TOGGLE_IS_ADDING_PROGRESS';
+const TOGGLE_IS_LOADING = 'TOGGLE_IS_LOADING';
+
+const hobbyApi = new Hobby();
 
 let initialState = {
-    hobbyCards: [{
-        photo: "https://static.mk.ru/upload/entities/2018/09/13/articles/detailPicture/88/68/4b/6f/1465fb241b8ddf492b3de2bb6899f436.jpg",
-        name: "Футбол",
-        id: 1,
-        description: {
-            telephone: "+7-123-456-78-90",
-            email: "football@mail.ru",
-            location: "м.Тимирязевская, ул.Тимирязева, д.7",
-            info: "Футбольная секция для детей и взрослых"
-        }
-    },{
-        photo: "http://www.min2win.ru/images/nails/7097l_300.jpg",
-        name: "Шашки",
-        id: 2,
-        description: {
-            telephone: "+7-800-555-35-35",
-            email: "chess@mail.ru",
-            location: "м.Новослободская, ул.Кравченко, д.53",
-            info: "Турниры по шашкам каждую пятницу! Вход свободный."
-        }
-    }, {
-        photo: "https://cdn.fishki.net/upload/post/2016/05/06/1942632/tn/1118full-anna-sidorova.jpg",
-        name: "Керлинг",
-        id: 3,
-        description: {
-            telephone: "+7-495-879-78-92",
-            email: "kerling@mail.ru",
-            location: "м.Марьина Роща, клуб Новая Лига",
-            info: "Тренировки с 19 до 21 каждый вторник и четверг."
-        }
-    }],
-    pageSize: 3,
-    totalHobbiesCount: 0,
-    currentPage: 1,
-    isFetching: false
+    hobbyCards: [],
+    initializedHobbiesPage: false,
+    addingInProgress: [],
+    isLoading: false
 };
 
 const hobbiesPageReducer = (state = initialState, action) => {
     switch (action.type) {
+        case INITIALIZE_HOBBIES:
+            return {
+                ...state, initializedHobbiesPage: action.initialize
+            };
         case SET_HOBBY_CARDS:
             return {...state, hobbyCards: action.hobbyCards};
-        case SET_CURRENT_PAGE:
-            return {...state, currentPage: action.currentPage};
-        case TOTAL_HOBBIES_COUNT:
-            return {...state, totalHobbiesCount: action.totalCount};
-        case TOGGLE_IS_FETCHING:
-            return {...state, isFetching: action.isFetching};
+        case TOGGLE_IS_LOADING: {
+            return {...state, isLoading: action.isLoading}
+        }
+        case TOGGLE_IS_ADDING_PROGRESS:
+            return {
+                ...state,
+                addingInProgress: action.isLoading ?
+                    [...state.addingInProgress, action.hobbyId]
+                    : state.addingInProgress.filter(id => id !== action.hobbyId)
+            };
         default:
             return state;
     }
 };
 
-export const setHobbyCards = (hobbyCards) => ({type: SET_HOBBY_CARDS, hobbyCards});
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export const setTotalHobbiesCount = (totalCount) => ({type: TOTAL_HOBBIES_COUNT, totalCount});
-export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+const setHobbyCards = (hobbyCards) => ({type: SET_HOBBY_CARDS, hobbyCards});
+const initializedHobbiesPageSuccess = (initialize) => ({type: INITIALIZE_HOBBIES, initialize});
+export const toggleAddingProgress = (isLoading, hobbyId) => ({type: TOGGLE_IS_ADDING_PROGRESS,
+    isLoading, hobbyId});
 export default hobbiesPageReducer;
+
+export const findHobbies = (label, metroId) => (dispatch) => {
+    return hobbyApi.find(label, metroId)
+        .then((response) => {
+            if (response.ok) {
+                response.json().then(body => {
+                    dispatch(setHobbyCards(body));
+                });
+            } else {
+                response.json().then(console.log);
+            }
+        })
+};
+
+export const initializeHobbiesPage = (type, metro) => (dispatch) => {
+    dispatch(initializedHobbiesPageSuccess(false));
+    let promise;
+    if(metro) {
+        promise = dispatch(findHobbies(type, metro));
+    }
+    else {
+        promise = dispatch(findHobbies(type));
+    }
+    Promise.all([promise])
+        .then(() => {
+            dispatch(initializedHobbiesPageSuccess(true));
+        });
+};

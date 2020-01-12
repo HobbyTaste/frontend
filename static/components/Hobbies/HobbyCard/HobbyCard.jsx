@@ -1,28 +1,74 @@
 import React, {Component} from 'react';
-import s from './HobbyCard.module.css';
-import {HobbyCardAddButton, SmallHobbyButton} from "../../Common/MaterialsButtons";
+import style from './HobbyCard.module.css';
+import {GreenButton} from "../../Common/MaterialsButtons";
 import CardImage from "./CardImage/CardImage";
+import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
+import HobbyInfo from "./CardImage/HobbyInfo/HobbyInfo";
 
 const HobbyCard = (props) => {
-    let addNewHobby = () => {
-        props.addMyHobby(props.photo, props.name, props.id, props.description);
+    const addHobby = () => {
+        props.addNewHobby(props._id, props.type, props.hobbiesMetro);
     };
+    let Details = AnimatedModalWindow(HobbyInfo, "ПОДРОБНЕЕ", props);
+    if (!props.isAuth) {
+        return (
+                    <div className={style.card} key={props.owner}>
+                        <CardImage cardImg={props.avatar}/>
+                        <span className={style.name}>{props.label}</span>
+                        <ul className={style.ul}>
+                            <li>Телефон: {props.phone}</li>
+                            <li>Email: {props.email}</li>
+                            <li>Станция метро: {props.metroStation}</li>
+                        </ul>
+                        <div className={style.buttons}>
+                            <Details/>
+                        </div>
+                    </div>
+        );
+    }
+    //пользователь есть и не подписан на хобби
+    else if (props.isAuth && props.subscribers.indexOf(props.userId) === -1) {
+        return (
+                    <div className={style.card} key={props.owner}>
+                        <CardImage cardImg={props.avatar}/>
+                        <span className={style.name}>{props.label}</span>
+                        <ul className={style.ul}>
+                            <li>Телефон: {props.phone}</li>
+                            <li>Email: {props.email}</li>
+                            <li>Станция метро: {props.metroStation}</li>
+                        </ul>
+                        <div className={style.buttons}>
+                            {
+                                props.addingInProgress.some(id => id === props._id) ?
+                                <div>
+                                    <GreenButton text="ДОБАВИТЬ ХОББИ" type="button" disabled="ok"/>
+                                </div> :
+                                <div onClick={addHobby}>
+                                    <GreenButton text="ДОБАВИТЬ ХОББИ" type="button"/>
+                                </div>
+                            }
+                            <Details/>
+                        </div>
+                    </div>
+        );
+    }
+    //пользователь есть и подписан на хобби
     return (
-        <div className={s.card} key={props.id}>
-            <CardImage cardImg={props.photo}/>
-            <span className={s.name}>{props.name}</span>
-            <ul className={s.ul}>
-                <li>Телефон: {props.description.telephone}</li>
-                <li>email: {props.description.email}</li>
-                <li>Адрес: {props.description.location}</li>
-                <li>Информация: {props.description.info}</li>
-            </ul>
-            <div onClick={addNewHobby}>
-                <HobbyCardAddButton text="Добавить в свой кабинет"/>
-            </div>
-            <div className={s.buttons}>
-                <SmallHobbyButton text="Оставить заявку"/>
-                <SmallHobbyButton text="Подробнее"/>
+        <div>
+            <div className={style.card} key={props.owner}>
+                <CardImage cardImg={props.avatar}/>
+                <span className={style.name}>{props.label}</span>
+                <ul className={style.ul}>
+                    <li>Телефон: {props.phone}</li>
+                    <li>Email: {props.email}</li>
+                    <li>Станция метро: {props.metroStation}</li>
+                </ul>
+                <div className={style.buttons}>
+                    <div>
+                        <GreenButton text="ХОББИ ДОБАВЛЕНО" type="button"/>
+                    </div>
+                    <Details/>
+                </div>
             </div>
         </div>
     );

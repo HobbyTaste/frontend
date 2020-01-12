@@ -1,0 +1,28 @@
+.card {
+    border: none;
+    font-size: 24px;
+    width: 400px;
+}
+
+.image img{
+    width: 300px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-size: 32px;
+    filter: drop-shadow(1px 1px #007200);
+    color: #18ae57;
+    margin: 10px auto;
+}
+
+.span {
+    text-shadow: #19B95D;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.container {
+    text-align: center;
+}
