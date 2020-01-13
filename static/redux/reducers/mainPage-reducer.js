@@ -50,9 +50,10 @@ export const getMetro = () => (dispatch) => {
             let metroStations = response;
             dispatch(setMetroStations(metroStations));
             let tmpAns = response.map(station => station.caption);
-            let ans = tmpAns.map(station => ({
-                label: station,
-                value: station
+            let idAndStation = response.map(station => ({label: station.caption, id: station.id}));
+            let ans = idAndStation.map(station => ({
+                label: station.label,
+                value: station.id
             }));
             dispatch(setStationsToSelect(ans));
         })

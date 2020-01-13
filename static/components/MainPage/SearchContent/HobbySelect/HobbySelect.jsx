@@ -36,6 +36,8 @@ const SelectingFormValuesForm = reduxForm({
 const Seleect = (props) => {
     const onSubmit = (values, dispatch) => {
         if (values.metro) {
+            /*console.log(values.metro.value);*/
+            console.log(values.metro.label);
             props.history.push('/hobbies/' + values.hobby.label + '/' + values.metro.label);
         } else {
             props.history.push('/hobbies/' + values.hobby.label);
