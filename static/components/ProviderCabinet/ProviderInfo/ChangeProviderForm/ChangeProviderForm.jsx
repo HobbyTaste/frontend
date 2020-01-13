@@ -4,8 +4,8 @@ import {Input} from "../../../Common/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import style from "./ChangeProviderForm.module.css";
 import {RedButton} from "../../../Common/MaterialsButtons";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {providerEdit} from "../../../../redux/reducers/provider-reducer";
+import UploadPhoto from "../../../Common/UploadFotoBlock/UploadPhoto";
 
 let mainFile = null;
 const ChangeProviderForm = ({handleSubmit, error}) => {
@@ -35,14 +35,7 @@ const ChangeProviderForm = ({handleSubmit, error}) => {
             <div><Field component={Input} name={"newPassword"} placeholder={"Новый пароль"} type={"password"} fieldName={"Новый пароль"}/></div>
             <div><Field component={Input} name={"newPhone"} placeholder={"Новый номер телефона"} type={"telephone"} fieldName={"Новый номер телефона"}/></div>
             <div><Field component={Input} name={"newInfo"} placeholder={"Информация о вас"} type={"text"} fieldName={"Информация о вас"}/></div>
-            <div className={style.uploadContainer}>
-                <label htmlFor="file">
-                    <CloudUploadIcon className={style.upload} style={{ fontSize: 80 }} />
-                </label>
-                <input type="file" name="file" id="file" onChange={uploadImage} className={style.input}/>
-                <div>Загрузить фото</div>
-                {url ? <span>{url.substring(0,30)}...</span> : null}
-            </div>
+            <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
             <div className={style.saveButton}>
                 <RedButton text={"СОХРАНИТЬ"} label="Submit" onSubmit={handleSubmit} />
             </div>
@@ -54,13 +47,7 @@ const ChangeProviderReduxForm = reduxForm({ form: 'changeProvider' })(ChangeProv
 
 const ChangeFormProvider = (props) => {
     const onSubmit = (formData) => {
-        let dataToChange = {
-            /*name: formData.newName === undefined ? props.curName : formData.newName,
-            password: formData.newPassword === undefined ? props.curPassword : formData.newPassword,
-            email: formData.newEmail === undefined ? props.curEmail : formData.newEmail,
-            phone: formData.newPhone === undefined ? props.curPhone : formData.newPhone,
-            info: formData.newInfo === undefined ? props.curInfo : formData.newInfo*/
-        };
+        let dataToChange = {};
         if(formData.newName !== undefined) {
             dataToChange['name'] = formData.newName;
         }
