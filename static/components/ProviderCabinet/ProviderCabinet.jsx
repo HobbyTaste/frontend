@@ -14,7 +14,6 @@ import ProviderInfo from "./ProviderInfo/ProviderInfo";
 
 class ProviderCabinet extends React.Component {
     componentDidMount() {
-        debugger;
         this.props.initializeProviderCabinet();
     }
     render() {
