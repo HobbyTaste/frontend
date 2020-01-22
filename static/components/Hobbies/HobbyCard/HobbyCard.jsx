@@ -12,18 +12,32 @@ const HobbyCard = (props) => {
     let Details = AnimatedModalWindow(HobbyInfo, "ПОДРОБНЕЕ", props);
     if (!props.isAuth) {
         return (
-                    <div className={style.card} key={props.owner}>
-                        <CardImage cardImg={props.avatar}/>
-                        <span className={style.name}>{props.label}</span>
-                        <ul className={style.ul}>
-                            <li>Телефон: {props.phone}</li>
-                            <li>Email: {props.email}</li>
-                            <li>Станция метро: {props.metroStation}</li>
-                        </ul>
-                        <div className={style.buttons}>
-                            <Details/>
-                        </div>
+            <div>
+                <div className={style.card} key={props.owner}>
+                    <CardImage cardImg={props.avatar}/>
+                    <span className={style.name}>{props.label}</span>
+                    <ul className={style.ul}>
+                        <li>Телефон: {props.phone}</li>
+                        <li>Email: {props.email}</li>
+                        <li>Станция метро: {props.metroStation}</li>
+                    </ul>
+                    <div className={style.buttons}>
+                        <Details/>
                     </div>
+                </div>
+                {/*<div className={style.card} key={props.owner}>
+                    <CardImage cardImg={props.avatar}/>
+                    <span className={style.name}>{props.label}</span>
+                    <ul className={style.ul}>
+                        <li>Телефон: {props.phone}</li>
+                        <li>Email: {props.email}</li>
+                        <li>Станция метро: {props.metroStation}</li>
+                    </ul>
+                    <div className={style.buttons}>
+                        <Details/>
+                    </div>
+                </div>*/}
+            </div>
         );
     }
     //пользователь есть и не подписан на хобби

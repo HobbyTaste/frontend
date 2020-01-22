@@ -21,7 +21,7 @@ class MainPage extends React.Component {
         }
         return (<div>
             <div className={style.background}> </div>
-            <SearchContent/>
+                <SearchContent/>
         </div>);
     }
 }

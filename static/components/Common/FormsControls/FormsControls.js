@@ -21,9 +21,10 @@ const selectStyles = {
     control: (styles) => ({
         ...styles,
         backgroundColor: 'white',
-        width: '700px',
         height: '70px',
         fontSize: '24px',
+        marginLeft: 'auto',
+        marginRight: 'auto'
     }),
 
     option: (styles, { isFocused, isSelected }) => ({
@@ -32,8 +33,8 @@ const selectStyles = {
         cursor: 'pointer',
         fontSize: '24px',
         color: '#000',
-        borderColor: 'none',
-    }),
+        borderColor: 'none'
+    })
 };
 
 export const Input = ({
@@ -80,6 +81,7 @@ export const MySelect = (props) => {
                 options={options}
                 placeholder={placeholder}
                 styles={selectStyles}
+                className={s.selects}
             />
         </div>
     );

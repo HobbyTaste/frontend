@@ -1,7 +1,27 @@
 .info {
-    height: 470px;
+    /*height: 470px;*/
+    height: 60%;
     background-color: white;
     width: 329px;
     position: relative;
     box-shadow: #79827a;
+   /* margin-left: 100px;*/
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+
+@media all and (max-width: 1000px) {
+    .info {
+        margin-right: 0;
+        margin-left: 40px;
+    }
+}
+
+@media all and (max-width: 850px) {
+    .info {
+        margin-right: 0;
+        margin-left: 20px;
+    }
 }

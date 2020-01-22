@@ -8,7 +8,6 @@ const Hobbies = (props) => {
     return (<div>
                <div className={s.background}> </div>
                <HobbiesContentContainer />
-              {/* <Footer />*/}
     </div>);
 };
 

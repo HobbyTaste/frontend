@@ -2,11 +2,46 @@
     margin: 70px auto;
     width: 700px;
     height: 100px;
-    /*background-color: whitesmoke;*/
     padding: 10px;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+}
+
+.selects {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
+@media all and (max-width: 800px) {
+    .selects {
+        width: 600px;
+    }
+}
+
+@media all and (max-width: 710px) {
+    .selects {
+        width: 400px;
+    }
+}
+
+@media all and (max-width: 680px) {
+    .selects {
+        width: 350px;
+    }
+}
+
+@media all and (max-width: 570px) {
+    .selects {
+        width: 250px;
+    }
+}
+
+@media all and (max-width: 300px) {
+    .selects {
+        width: 100px;
+    }
 }
 
 .title {
@@ -16,11 +51,6 @@
     text-align: center;
     margin: 40px auto;
 }
-
-/*
-.hobbySelect {
-    height: 50px;
-}*/
 
 .mySelect {
     border-radius: 20px;

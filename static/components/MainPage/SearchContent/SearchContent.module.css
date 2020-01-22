@@ -3,8 +3,7 @@
     flex-wrap: wrap;
     z-index: 20;
     position: relative;
-    width: 1000px;
-    margin: 70px auto;
+    margin-top: 70px;
     flex-direction: column;
 }
 
