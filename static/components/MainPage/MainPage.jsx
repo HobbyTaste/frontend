@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import s from './MainPage.module.css';
+import style from './MainPage.module.css';
 import SearchContent from "./SearchContent/SearchContent";
-import Footer from "../Footer/Footer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeMainPage} from "../../redux/reducers/mainPage-reducer";
 import Preloader from "../Common/Preloader/Preloader";
-import Hobbies from "../Hobbies/Hobbies";
 import {withRouter, Redirect} from 'react-router-dom';
 
 class MainPage extends React.Component {
@@ -22,9 +20,8 @@ class MainPage extends React.Component {
             return <Redirect to={"/provider/cabinet"} />;
         }
         return (<div>
-            <div className={s.background}> </div>
-            <SearchContent/>
-            <Footer/>
+            <div className={style.background}> </div>
+                <SearchContent/>
         </div>);
     }
 }

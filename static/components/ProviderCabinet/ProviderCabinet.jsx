@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import style from './ProviderCabinet.module.css';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import {Link} from 'react-router-dom';
 import {DialogAddHobbyForm} from "./DialogAddHobbyForm/DialogAddHobbyForm";
-import ProviderHeader from "../ProviderHeader/ProviderHeader";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {initializeProviderCabinet, logoutProvider} from "../../redux/reducers/provider-reducer";
@@ -14,14 +11,12 @@ import ProviderInfo from "./ProviderInfo/ProviderInfo";
 
 class ProviderCabinet extends React.Component {
     componentDidMount() {
-        debugger;
         this.props.initializeProviderCabinet();
     }
     render() {
         if (!this.props.providerInitialized) {
             return <Preloader/>
         }
-        debugger;
         if (!this.props.providerIsAuth) return <Redirect to={"/"}/>;
         const providerHobbies = this.props.providerHobbies.map(hobby =>
             <AddHobbyCard organization={hobby.label} image={hobby.avatar}

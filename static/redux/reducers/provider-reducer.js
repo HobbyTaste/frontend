@@ -55,6 +55,8 @@ export const initializeProvider = () => ({type: INITIALIZE_PROVIDER_SUCCESS});
 export const setProviderHobbies = (providerHobbies) => ({type: SET_PROVIDER_HOBBIES, providerHobbies});
 
 export const initializeProviderCabinet = () => (dispatch) => {
+    dispatch(setAuthProviderData(null, null, null, null, null,
+        null, false));
     let promise = dispatch(getAuthProviderData());
     let promise2 = dispatch(getProviderHobbies());
     Promise.all([promise, promise2])
@@ -126,7 +128,6 @@ export const loginProvider = (email, password) => (dispatch) => {
 export const logoutProvider = () => (dispatch) => {
     providerApi.logout().then((response) => {
         if (response.ok) {
-            debugger;
             dispatch(setAuthProviderData(null, null, null, null, null,
                 null, false));
         } else {

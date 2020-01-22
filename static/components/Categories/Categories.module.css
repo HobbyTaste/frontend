@@ -14,10 +14,32 @@
 }
 
 .cardsBoard {
-    margin: 30px auto;
-    width: 70%;
+    margin: 0 auto;
+    width: 1260px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: normal;
+}
+
+@media all and (max-width: 1270px) {
+    .cardsBoard {
+        width: 1050px;
+    }
+}
+@media all and (max-width: 1065px) {
+    .cardsBoard {
+        width: 850px;
+    }
+}
+@media all and (max-width: 860px) {
+    .cardsBoard {
+        width: 630px;
+    }
+}
+@media all and (max-width: 640px) {
+    .cardsBoard {
+        width: 420px;
+    }
 }
 
 .chooseHobby {
@@ -32,7 +54,7 @@
     z-index: 20;
     height: 50px;
     border-radius: 10px;
-    width: 1000px;
+    width: 70%;
 }
 
 .hobbyName {
@@ -57,123 +79,72 @@
 }
 
 .sport {
-    background: url("ball.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(209, 0, 4, 0.6);
+    background: rgba(209, 0, 4, 0.6) url("ball.png") no-repeat 50% 50%;
 }
 
 .music {
-    background: url("music.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(0, 166, 185, 0.6);
+    background: rgba(0, 166, 185, 0.6) url("music.png") no-repeat 50% 50%;
 }
 
 .travel {
-    background: url("travel.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(25, 185, 93, 0.6);
+    background: rgba(25, 185, 93, 0.6) url("travel.png") no-repeat 50% 50%;
 }
 
 .cook {
-    background: url("cook.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(235, 202, 0, 0.6);
+    background: rgba(235, 202, 0, 0.6) url("cook.png") no-repeat 50% 50%;
 }
 
 .fish {
-    background: url("fish.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(0, 166, 185, 0.6);
+    background: rgba(0, 166, 185, 0.6) url("fish.png") no-repeat 50% 50%;
 }
 
 .handmade {
-    background: url("handmade.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background: rgba(185, 0, 157, 0.6) url("handmade.png") no-repeat 50% 50%;
     background-size: 40%;
-    background-color: rgba(185, 0, 157, 0.6);
 }
 
 .money {
-    background: url("money.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(0, 166, 185, 0.6);
+    background: rgba(0, 166, 185, 0.6) url("money.png") no-repeat 50% 50%;
 }
 
 .videogames {
-    background: url("videogames.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(235, 202, 0, 0.6);
+    background: rgba(235, 202, 0, 0.6) url("videogames.png") no-repeat 50% 50%;
 }
 
 .photo {
-    background: url("photo.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(209, 0, 4, 0.6);
+    background: rgba(209, 0, 4, 0.6) url("photo.png") no-repeat 50% 50%;
 }
 
 .paint {
-    background: url("paint1.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background: rgba(185, 0, 157, 0.6) url("paint1.png") no-repeat 50% 50%;
     background-size: 50%;
-    background-color: rgba(185, 0, 157, 0.6);
 }
 
 .garden {
-    background: url("garden.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(25, 185, 93, 0.6);
+    background: rgba(25, 185, 93, 0.6) url("garden.png") no-repeat 50% 50%;
 }
 
 .flag {
-    background: url("flag.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(209, 0, 4, 0.6);
+    background: rgba(209, 0, 4, 0.6) url("flag.png") no-repeat 50% 50%;
 }
 
 .flower {
-    background: url("flower.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(25, 185, 93, 0.6);
+    background: rgba(25, 185, 93, 0.6) url("flower.png") no-repeat 50% 50%;
 }
 
 .dog {
-    background: url("dog.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(185, 0, 157, 0.6);
+    background: rgba(185, 0, 157, 0.6) url("dog.png") no-repeat 50% 50%;
 }
 
 .cinema {
-    background: url("cinema.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(0, 166, 185, 0.6);
+    background: rgba(0, 166, 185, 0.6) url("cinema.png") no-repeat 50% 50%;
 }
 
 .auto {
-    background: url("auto.png");
-    background-repeat: no-repeat;
+    background: rgba(209, 0, 4, 0.6) url("auto.png") no-repeat 50% 50%;
     background-size: 70%;
-    background-position: 50% 50%;
-    background-color: rgba(209, 0, 4, 0.6);
 }
 
 .other {
-    background: url("other.png");
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: rgba(235, 202, 0, 0.6);
+    background: rgba(235, 202, 0, 0.6) url("other.png") no-repeat 50% 50%;
 }

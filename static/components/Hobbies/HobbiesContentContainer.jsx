@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import HobbiesContent from "./HobbiesContent";
 import {addNewHobby} from "../../redux/reducers/auth-reducer";
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import {compose} from "redux";
 import {initializeHobbiesPage} from "../../redux/reducers/hobbiesPage-reducer";
 import Preloader from "../Common/Preloader/Preloader";
@@ -17,8 +17,8 @@ class HobbiesContentContainer extends React.Component {
         if(!this.props.initializedHobbiesPage) {
             return <Preloader />
         }
+        if(this.props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
         return <div>
-
             <HobbiesContent hobbyCards={this.props.hobbies}
                             addNewHobby={this.props.addNewHobby}
                             isAuth={this.props.isAuth}
@@ -37,7 +37,8 @@ let mapStateToProps = (state) => {
         initializedHobbiesPage: state.hobbiesPage.initializedHobbiesPage,
         isAuth: state.auth.isAuth,
         userId: state.auth.id,
-        addingInProgress: state.hobbiesPage.addingInProgress
+        addingInProgress: state.hobbiesPage.addingInProgress,
+        providerIsAuth: state.providerCabinet.providerIsAuth
     }
 };
 

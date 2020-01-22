@@ -14,72 +14,35 @@
 }
 
 .info {
-    /*height: 470px;*/
     background-color: white;
     width: 329px;
     position: relative;
     box-shadow: #79827a;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
-
-.img {
-    width: 100%;
-    height: 100%;
-    /*background-image: url("https://mirpozitiva.ru/uploads/posts/2016-08/medium/1472042492_01.jpg");*/
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s;
-}
-
-.imgWrapper {
-    width: 323px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border: 3px solid #19B95D;
-    height: 300px;
-}
-
-.imgContainer {
-    overflow: hidden;
-    position: relative;
-    float: left;
-    display: inline-block;
-    cursor: pointer;
-    width: 323px;
-    height: 300px;
-
-}
-
-.imgContainer:hover .img,
-.imgContainer:focus .img
-{
-    -ms-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
+    min-height: 500px;
+    max-height: 650px;
+    height: 650px;
 }
 
 .layout {
+    border: 1px solid red;
     display: flex;
-    position: relative;
+    flex-wrap: wrap;
+    /*position: relative;*/
     width: 100%;
     margin-top: 100px;
     padding-left: 80px;
 }
+
 .hobbiesBlock {
-    height: 200px;
+    /*height: 200px;*/
     margin-left: 100px;
 
     width: 1200px;
     position: relative;
     text-align: center;
+    border: 2px solid yellow;
 }
 
 .title {
@@ -165,7 +128,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    /*border: 2px solid red;*/
 }
 
 .scrollBlock {
@@ -181,3 +143,47 @@
 ::-webkit-scrollbar-track-piece{background-color: #ffffff;}
 ::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #19B95D;}
 ::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #19b95d;}
+
+
+/*
+.img {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.imgWrapper {
+    width: 323px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #19B95D;
+    height: 300px;
+}
+
+.imgContainer {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    display: inline-block;
+    cursor: pointer;
+    width: 323px;
+    height: 300px;
+
+}
+
+.imgContainer:hover .img,
+.imgContainer:focus .img
+{
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}*/

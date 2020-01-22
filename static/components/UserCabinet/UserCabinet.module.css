@@ -15,10 +15,9 @@
 
 .layout {
     display: flex;
-    position: relative;
-    width: 100%;
+    flex-wrap: wrap;
     margin-top: 100px;
-    padding-left: 80px;
+    justify-content: center;
 }
 
 .hobbiesBlock {
@@ -26,7 +25,54 @@
     flex-wrap: wrap;
     position: relative;
     width: 1200px;
-    margin-left: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    /*margin-left: 100px;*/
+}
+
+@media all and (max-width: 1540px) {
+    .hobbiesBlock {
+        width: 1000px;
+    }
+}
+
+@media all and (max-width: 1340px) {
+    .hobbiesBlock {
+        width: 800px;
+    }
+}
+
+@media all and (max-width: 1140px) {
+    .hobbiesBlock {
+        width: 600px;
+    }
+}
+
+@media all and (max-width: 1000px) {
+    .hobbiesBlock {
+        width: 400px;
+        margin-left: 120px;
+    }
+}
+@media all and (max-width: 900px) {
+    .hobbiesBlock {
+        width: 400px;
+        margin-left: 80px;
+    }
+}
+
+@media all and (max-width: 850px) {
+    .hobbiesBlock {
+        width: 400px;
+        margin-left: 40px;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .layout {
+        width: 400px;
+        margin-left: 160px;
+    }
 }
 
 .title {
@@ -52,8 +98,11 @@
 
 .blockForCards {
     width: 100%;
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*display: grid;
+    grid-template-columns: 33% 33% 33%;*/
 }
 
 #scrollBlock{}::-webkit-scrollbar{width: 5px;height: 5px;}

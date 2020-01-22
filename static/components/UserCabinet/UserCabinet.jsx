@@ -5,11 +5,9 @@ import {Redirect} from "react-router-dom";
 import HobbyCard from "../Hobbies/HobbyCard/HobbyCard";
 import {initializeUserCabinet} from "../../redux/reducers/auth-reducer";
 import {connect} from "react-redux";
-import s from "../Hobbies/HobbiesContent.module.css";
 import UserHobbyCard from "./UserHobbyCard/UserHobbyCard";
 
 const UserCabinet = (props) => {
-
     useEffect(() => {
         props.initializeUserCabinet()
     }, []);
