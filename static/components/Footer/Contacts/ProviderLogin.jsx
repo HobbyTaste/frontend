@@ -1,19 +1,17 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {connect} from "react-redux";
-import {RedButton} from "../../Common/MaterialsButtons";
-import {Input} from "../../Common/FormsControls/FormsControls";
-import {loginProvider} from "../../../redux/reducers/provider-reducer";
-import style from "../../Header/LoginUser/SignIn/SignIn.module.css";
+import {connect} from 'react-redux';
+import {ColorButton} from '../../Common/MaterialsButtons';
+import {PartnerInput} from '../../Common/FormsControls/FormsControls';
+import {loginProvider} from '../../../redux/reducers/provider-reducer';
+import style from './ProviderLogin.module.css'
 
 const ProviderLoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={handleSubmit}>
-            <div><Field component={Input} name={"email"} placeholder={"Email *"} autoFocus={true} type={"email"} fieldName={"Email"}/></div>
-            <div><Field component={Input} name={"password"} placeholder={"Пароль *"} type="password" fieldName="Пароль"/></div>
-            <div className={style.ButtonContainer}>
-            <RedButton text={"ВОЙТИ"} label="Submit" onSubmit={handleSubmit}>ВОЙТИ</RedButton>
-            </div>
+        <form onSubmit={handleSubmit} className={style.headerForm}>
+                <Field component={PartnerInput} name={"email"} placeholder={"Email *"} autoFocus={true} type={"email"} fieldName={"Email"}/>
+                <Field component={PartnerInput} name={"password"} placeholder={"Пароль *"} type="password" fieldName="Пароль"/>
+            <ColorButton text={"ВОЙТИ"} label="Submit" onSubmit={handleSubmit} />
         </form>
     );
 };
@@ -28,7 +26,7 @@ const ProviderLogin = (props) => {
 
     return(
         <div>
-            <h1 style={{marginLeft: '20px'}}>Вход</h1>
+           {/* <h1 style={{marginLeft: '20px'}}>Вход</h1>*/}
             <ProviderLoginReduxForm onSubmit={onSubmit} />
         </div>
     );

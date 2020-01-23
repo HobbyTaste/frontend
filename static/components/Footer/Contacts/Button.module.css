@@ -13,8 +13,8 @@
     background: linear-gradient(to right, #79827a, #19B95D);
     height: 100px;
     display: flex;
-    vertical-align: middle;
-    text-align: center;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 2px solid black;
 }
 
@@ -22,16 +22,13 @@
     color: white;
     font-size: 32px;
     margin: auto 0;
+    align-items: center;
+    display: flex;
 }
 
-.signIn {
-    position: absolute;
-    right: 40px;
-    top: 15px;
-    display: flex;
-    align-items: center;
-    width: 300px;
-    justify-content: flex-end;
+.headerText {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .formTitle {
@@ -69,10 +66,22 @@
     background: #128040;
 }
 
-.background {
-    background: url("waves.png") repeat 100% 100%;
-    height: 100%;
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+   /* border: 1px solid red;*/
 }
+
+.stuffContainer {
+    width: 50%;
+    vertical-align: center;
+    text-align: center;
+}
+
+.image {
+    width: 500px;
+}
+
 
 .registrationForm {
     width: 40%;
@@ -88,6 +97,17 @@
     box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
 }
 
-.loginButContainer {
-    margin-top: 15px;
+@font-face {
+    font-family: "Fonts";
+    src: url("./Fonts/myFont2.otf");
+}
+
+.text {
+    margin: 60px auto;
+    font-size: 30px;
+    width: 90%;
+    font-weight: bold;
+    color: #336633;
+    vertical-align: center;
+    font-family: "Fonts";
 }

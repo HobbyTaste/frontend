@@ -7,7 +7,7 @@ const Contacts = (props) => {
     return (
         <div className={s.contacts}>
             <Info />
-            <FullScreenDialogButton />
+            {props.isAuth ? null : <FullScreenDialogButton />}
         </div>);
 };
 

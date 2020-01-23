@@ -6,7 +6,9 @@
     background-color: floralwhite;
     border-radius: 2px;
     font-size: 24px;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     height: 550px;
 }
 

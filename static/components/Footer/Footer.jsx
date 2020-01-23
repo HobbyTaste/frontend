@@ -6,7 +6,7 @@ import Feedback from "./Feedback/Feedback";
 const Footer = (props) => {
     return (
             <footer className={style.footer}>
-                <Contacts/>
+                <Contacts isAuth={props.isAuth}/>
                 <Feedback/>
             </footer>
     );

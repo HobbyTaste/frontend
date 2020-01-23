@@ -3,7 +3,12 @@ import s from './Logo.module.css';
 
 
 const Logo = (props) => {
-    return (<div className={s.logo}>HobbyTaste</div>);
+
+    let setUserOutCabinet = () => {
+        props.setIsUserInCabinet(false);
+    };
+
+    return (<div className={s.logo} onClick={setUserOutCabinet}>HobbyTaste</div>);
 };
 
 export default Logo;

@@ -1,4 +1,4 @@
-import {getAuthUserData} from "./auth-reducer";
+import {getAuthUserData, setIsUserInCabinet} from "./auth-reducer";
 import {getMetro} from "./mainPage-reducer";
 import {getAuthProviderData} from "./provider-reducer";
 
@@ -23,6 +23,7 @@ const appReducer = (state = initialState, action) => {
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const initializeApp = () => (dispatch) => {
+    dispatch(setIsUserInCabinet(false));
     let promise = dispatch(getAuthUserData());
     let promise2 = dispatch(getAuthProviderData());
     Promise.all([promise, promise2])

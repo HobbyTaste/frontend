@@ -2,7 +2,6 @@ import React, {Component, useEffect} from 'react';
 import style from "./UserCabinet.module.css";
 import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import {Redirect} from "react-router-dom";
-import HobbyCard from "../Hobbies/HobbyCard/HobbyCard";
 import {initializeUserCabinet} from "../../redux/reducers/auth-reducer";
 import {connect} from "react-redux";
 import UserHobbyCard from "./UserHobbyCard/UserHobbyCard";
