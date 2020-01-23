@@ -10,7 +10,7 @@ const Header = (props) => {
         <header className={style.header}>
             <div className={style.logoContainer}>
                 <Link to='/'>
-                <Logo />
+                <Logo setIsUserInCabinet={props.setIsUserInCabinet}/>
                 </Link>
             </div>
             { props.isAuth

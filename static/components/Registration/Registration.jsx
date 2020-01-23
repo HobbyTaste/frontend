@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Input} from "../Common/FormsControls/FormsControls";
+import {Input, PartnerInput} from "../Common/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import {createNewUser} from "../../redux/reducers/auth-reducer";
 import style from ".././Header/LoginUser/SignIn/SignIn.module.css";
@@ -28,9 +28,9 @@ const RegistrationForm = ({handleSubmit, error}) => {
     };
     return(
         <form onSubmit={handleSubmit}>
-            <div><Field component={Input} name={"email"} placeholder={"Email *"} autoFocus={true} fieldName={"Email"}/></div>
-            <div><Field component={Input} name={"password"} placeholder={"Пароль *"} type={"password"} fieldName={"Пароль"}/></div>
-            <div><Field component={Input} name={"name"} placeholder={"Имя *"} fieldName={"Имя"}/></div>
+            <div><Field component={PartnerInput} name={"email"} placeholder={"Email *"} autoFocus={true} fieldName={"Email"}/></div>
+            <div><Field component={PartnerInput} name={"password"} placeholder={"Пароль *"} type={"password"} fieldName={"Пароль"}/></div>
+            <div><Field component={PartnerInput} name={"name"} placeholder={"Имя *"} fieldName={"Имя"}/></div>
             <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
             <div className={style.ButtonContainer}>
                 <RedButton text={"Регистрация"} label="Submit" onSubmit={handleSubmit} />

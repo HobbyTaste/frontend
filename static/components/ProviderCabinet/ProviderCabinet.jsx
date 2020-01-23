@@ -11,7 +11,7 @@ import ProviderInfo from "./ProviderInfo/ProviderInfo";
 
 class ProviderCabinet extends React.Component {
     componentDidMount() {
-        this.props.initializeProviderCabinet();
+        this.props.initializeProviderCabinet(true);
     }
     render() {
         if (!this.props.providerInitialized) {
@@ -38,7 +38,9 @@ class ProviderCabinet extends React.Component {
                         <div className={style.scrollBlock}>
                             <div className={style.blockForCards}>
                                 {providerHobbies}
-                                <DialogAddHobbyForm/>
+                                <div className={style.formContainer}>
+                                    <DialogAddHobbyForm/>
+                                </div>
                             </div>
                         </div>
                     </div>

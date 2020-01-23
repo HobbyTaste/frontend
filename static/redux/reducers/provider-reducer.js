@@ -1,6 +1,7 @@
 import Provider from "../../api/Provider";
 import Hobby from "../../api/Hobby";
 import {stopSubmit} from "redux-form";
+import {setIsUserInCabinet} from "./auth-reducer";
 
 const SET_PROVIDER_DATA = 'SET_PROVIDER_DATA';
 const INITIALIZE_PROVIDER_SUCCESS = 'INITIALIZE_PROVIDER_SUCCESS';
@@ -37,7 +38,7 @@ const ProviderCabinetReducer = (state = initialState, action) => {
         }
         case INITIALIZE_PROVIDER_SUCCESS: {
             return {
-                ...state, providerInitialized: true
+                ...state, providerInitialized: action.status
             }
         }
         case SET_PROVIDER_HOBBIES:
@@ -51,17 +52,17 @@ const ProviderCabinetReducer = (state = initialState, action) => {
 
 export const setAuthProviderData = (avatar, email, id, info, name, phone, providerIsAuth) =>
     ({type: SET_PROVIDER_DATA, avatar, email, id, info, name, phone, providerIsAuth});
-export const initializeProvider = () => ({type: INITIALIZE_PROVIDER_SUCCESS});
+export const initializeProvider = (status) => ({type: INITIALIZE_PROVIDER_SUCCESS, status});
 export const setProviderHobbies = (providerHobbies) => ({type: SET_PROVIDER_HOBBIES, providerHobbies});
 
 export const initializeProviderCabinet = () => (dispatch) => {
-    dispatch(setAuthProviderData(null, null, null, null, null,
-        null, false));
+    dispatch(initializeProvider(false));
+    dispatch(setIsUserInCabinet(false));
     let promise = dispatch(getAuthProviderData());
     let promise2 = dispatch(getProviderHobbies());
     Promise.all([promise, promise2])
         .then(() => {
-            dispatch(initializeProvider());
+            dispatch(initializeProvider(true));
         });
 };
 
@@ -111,17 +112,20 @@ export const loginProvider = (email, password) => (dispatch) => {
             dispatch(getAuthProviderData());
         }
         else {
-            response.json().then(console.log);
+            response.json().then(
+                body => {
+                    if(body.login) {
+                        dispatch(stopSubmit("providerLogin", {email: "Неверный email"}));
+                    }
+                    else if(body.password) {
+                        dispatch(stopSubmit("providerLogin", {password: "Неверный пароль"}));
+                    }
+                    else {
+                        console.log(body);
+                    }
+                }
+               );
         }
-        /*else {
-                if(response.login) {
-                    dispatch(stopSubmit("providerLogin", {email: "Неверный email"}));
-                }
-                else if(response.password) {
-                    dispatch(stopSubmit("providerLogin", {password: "Неверный пароль"}));
-                }
-            /!*response.json().then(console.log);*!/
-        }*/
     })
 };
 

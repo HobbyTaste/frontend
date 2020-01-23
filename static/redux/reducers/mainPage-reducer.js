@@ -1,5 +1,6 @@
 import {getMetroStations} from "../../api/Geo";
 import Hobby from "../../api/Hobby";
+import {setIsUserInCabinet} from "./auth-reducer";
 
 const SET_HOBBIES_TO_SELECT = 'SET_HOBBIES_TO_SELECT';
 const SET_METRO_STATIONS = 'SET-METRO-STATIONS';
@@ -107,7 +108,8 @@ export const getHobbies = (hobbyType) => (dispatch) => {
 };
 
 export const initializeMainPage = (hobbyType) => (dispatch) => {
-    initializedMainPageSuccess(false);
+    dispatch(initializedMainPageSuccess(false));
+    dispatch(setIsUserInCabinet(false));
     let promise = dispatch(getMetro());
     let promise2 = dispatch(getHobbies(hobbyType));
     Promise.all([promise, promise2])

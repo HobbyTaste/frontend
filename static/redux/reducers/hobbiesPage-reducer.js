@@ -1,4 +1,5 @@
 import Hobby from "../../api/Hobby";
+import {setIsUserInCabinet} from "./auth-reducer";
 
 const SET_HOBBY_CARDS = 'SET-HOBBY-CARDS';
 const INITIALIZE_HOBBIES = 'INITIALIZE_HOBBIES';
@@ -58,6 +59,7 @@ export const findHobbies = (label, metroId) => (dispatch) => {
 
 export const initializeHobbiesPage = (type, metro) => (dispatch) => {
     dispatch(initializedHobbiesPageSuccess(false));
+    dispatch(setIsUserInCabinet(false));
     let promise;
     if(metro) {
         promise = dispatch(findHobbies(type, metro));

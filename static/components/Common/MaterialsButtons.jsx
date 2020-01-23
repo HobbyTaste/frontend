@@ -19,6 +19,12 @@ const theme = createMuiTheme({
             dark: '#ca025c',
             contrastText: '#fff',
         },
+        third: {
+            light: 'rgba(246,0,255,0.57)',
+            main: '#9f00ff',
+            dark: '#7000ca',
+            contrastText: '#fff',
+        }
     },
 });
 
@@ -29,6 +35,16 @@ const useStyles = makeStyles(theme => ({
         padding: '0 60px',
         borderRadius: '10px',
         float: 'right'
+    },
+    color: {
+        height: '50px',
+        width: '60px',
+        padding: '0 60px',
+        borderRadius: '10px',
+        marginLeft: '5px',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        boxShadow: 'inset 0 0 5px 1px #128040'
     },
     buttonLarge: {
         margin: theme.spacing(2),
@@ -117,6 +133,17 @@ export const RedButton = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <Button theme={theme} variant="contained" color="secondary" className={classes.button} onClick={props.onSubmit}>
+                {props.text}
+            </Button>
+        </ThemeProvider>
+    );
+};
+
+export const ColorButton = (props) => {
+    const classes = useStyles();
+    return (
+        <ThemeProvider theme={theme}>
+            <Button theme={theme} variant="contained" color="primary" className={classes.color} onClick={props.onSubmit}>
                 {props.text}
             </Button>
         </ThemeProvider>

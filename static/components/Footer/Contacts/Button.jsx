@@ -6,10 +6,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
 import {GreenLargeButton} from "../../Common/MaterialsButtons";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import {withModalWindow} from "../../../HOC/ModalWindow/ModalWindow";
 import ProviderLogin from "./ProviderLogin";
 import ProviderRegistration from "../../ProviderRegistration/ProviderRegistration";
-import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
+import hobby from '../../../assets/images/hobby.jpg'
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -31,7 +30,6 @@ export const FullScreenDialogButton = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
-    let SignIn = AnimatedModalWindow(ProviderLogin, "ВХОД", null, true);
     return (
         <div>
             <div onClick={handleClickOpen} >
@@ -40,18 +38,25 @@ export const FullScreenDialogButton = (props) => {
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar className={classes.appBar}>
                     <div className={style.header}>
-                        <ArrowBackIosIcon style={{fontSize: 40}} className={style.closeButton} onClick={handleClose}/>
-                        <div className={style.headerTitle}>Вход в личный кабинет партнера</div>
-                        <div className={style.signIn}>
-                            <div className={style.loginButContainer}>
-                                <SignIn buttonName={"ВОЙТИ"}/>
+                        <div className={style.headerTitle}>
+                            <ArrowBackIosIcon style={{fontSize: 40}} className={style.closeButton} onClick={handleClose}/>
+                            <span className={style.headerText}>Вход в личный кабинет партнера</span>
                             </div>
-                        </div>
+                                <ProviderLogin />
                     </div>
                 </AppBar>
-                <div className={style.background}>
-                    <div className={style.registrationForm}>
-                        <ProviderRegistration />
+                <div>
+                    <div className={style.layout}>
+                        <div className={style.stuffContainer}>
+                            <div className={style.text}>
+                                Поделитесь информацией о ваших хобби, и мы найдем людей, которые с удовольствием посетят ваши
+                                кружки и занятия.
+                            </div>
+                            <img src={hobby} alt="hobby" className={style.image}/>
+                        </div>
+                        <div className={style.registrationForm}>
+                            <ProviderRegistration />
+                        </div>
                     </div>
                 </div>
             </Dialog>

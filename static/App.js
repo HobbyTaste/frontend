@@ -36,9 +36,9 @@ class App extends React.Component {
                     <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                     <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                 </div>
-                {this.props.providerIsAuth || this.props.isAuth ?
+                {this.props.providerIsAuth || this.props.inUserCabinet ?
                     null : <div className={style.appFooter}>
-                        <Footer/>
+                        <Footer isAuth={this.props.isAuth}/>
                     </div>}
             </div>
         );
@@ -48,7 +48,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
     providerIsAuth: state.providerCabinet.providerIsAuth,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    inUserCabinet: state.auth.inUserCabinet
 });
 
 export default compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);

@@ -5,6 +5,7 @@ import {findHobbies, toggleAddingProgress} from "./hobbiesPage-reducer";
 const SET_HOBBIES = 'SET_HOBBIES';
 const SET_USER_DATA = 'SET_USER_DATA';
 const INITIALIZE_USER_SUCCESS = 'INITIALIZE_USER_SUCCESS';
+const SET_IS_USER_IN_CABINET = 'SET_IS_USER_IN_CABINET';
 
 const initialState = {
     id: null,
@@ -39,6 +40,10 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state, userHobbies: action.userHobbies
             };
+        case SET_IS_USER_IN_CABINET:
+            return {
+                ...state, inUserCabinet: action.status
+            };
         default:
             return state;
     }
@@ -49,8 +54,11 @@ export const setAuthUserData = (id, email, name, avatar, isAuth) => ({
 });
 const setUserHobbies = (userHobbies) => ({type: SET_HOBBIES, userHobbies});
 const initializeUser = (initialize) => ({type: INITIALIZE_USER_SUCCESS, initialize});
+export const setIsUserInCabinet = (status) => ({type: SET_IS_USER_IN_CABINET, status});
 
 export const initializeUserCabinet = () => (dispatch) => {
+    dispatch(initializeUser(false));
+    dispatch(setIsUserInCabinet(true));
     let promise = dispatch(getAuthUserData());
     let promise2 = dispatch(getUserHobbies());
     Promise.all([promise, promise2])
@@ -122,6 +130,7 @@ export const logout = () => (dispatch) => {
                 dispatch(setAuthUserData(null, null, null,
                     null, false));
                 dispatch(initializeUser(false));
+                dispatch(setIsUserInCabinet(false));
             }
         });
 };
