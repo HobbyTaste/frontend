@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_APP_INSTANCE=secrets NODE_ENV=production node server/build/app.js",
-    "start:watch": "./start-watch.sh",
+    "start:watch": "./start-watch",
     "build:front": "NODE_ENV=production webpack --mode production",
     "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
     "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
