@@ -4,10 +4,11 @@ CONTAINER=hobbytaste_mongodb
 
 echo "Setting up DB..."
 trap './tasks/cleanup $CONTAINER' EXIT
-if ! sudo docker start $CONTAINER 2>/dev/null
+if ! docker start $CONTAINER 2>/dev/null
 then
-	sudo docker pull mongo
-        sudo docker run -dp 27017:27017 --name $CONTAINER mongo
+	docker pull mongo >/dev/null
+        docker run -dp 27017:27017 --name $CONTAINER mongo >/dev/null
+	echo $CONTAINER
 fi
 echo "Running server..."
-NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts 1>/dev/null 2>/dev/null
+NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts

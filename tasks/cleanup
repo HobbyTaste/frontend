@@ -1,5 +1,5 @@
 #!/bin/bash
 
 echo "Stopping DB..."
-sudo docker stop $1 >/dev/null
+docker stop $1 >/dev/null
 echo "success"
