@@ -4,8 +4,9 @@
 ## Содержание
 1. [Настройка окружения и установка необходмых пакетов для разработки (Linux, MacOS)](#settings-env)
 2. [Разработка](#dev-rules)
-3. [Архитектура backend](#backend) 
-4. [Frontend](#frontend)
+3. [Запуск docker-контейнера](#docker)
+4. [Архитектура backend](#backend) 
+5. [Frontend](#frontend)
 
 <a name="settings-env"></a>
 
@@ -71,10 +72,11 @@ yarn start:watch
 
 Также с другими командами и скриптами можно ознакомится в файле `package.json` в разделе _scripts_.
 
-## Запуск докера для запуска на production
+<a name="docker"></a>
+## Запуск докер-контейнера на production
 1. Сначала создаем docker-контейнер
 ```shell script
-docker build -t <name_of_docker_image>
+docker build . -t <name_of_docker_image>
 ```
 2. Запустить контейнер с пробросом порта, на котором слушает сервер (на текущий момент, 8100)
 ``` shell script

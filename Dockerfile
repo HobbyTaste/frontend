@@ -1,9 +1,12 @@
 FROM node:10
 
-WORKDIR /src/app
-COPY . .
+WORKDIR /app
+
+COPY package.json ./
 
 RUN ["yarn"]
-RUN ["yarn", "build"]
 
+COPY . .
+
+RUN ["yarn", "build"]
 CMD ["yarn", "start"]
