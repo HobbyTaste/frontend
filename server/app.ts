@@ -10,7 +10,6 @@ import config from 'config';
 import logger from './utils/logger';
 
 import routes from './routes/routes.json';
-import indexRouter from './routes/index';
 import hobbyRouter from './routes/hobby';
 import providerRouter from './routes/provider';
 import userRouter from './routes/user';
@@ -50,17 +49,11 @@ app.use(expressSession({
 }));
 app.use(csrf());
 
-app.use('/dist', express.static('dist', {
-  etag: false,
-}));
-app.use('/public/images', express.static('images'));
-
 app.listen(LISTENING_PORT, () => {
   logger.info(`Server start listening on PORT: ${LISTENING_PORT}, http://localhost:${LISTENING_PORT}`);
 });
 
 // routes
-app.use(routes.index, indexRouter);
 app.use(routes.hobby, hobbyRouter);
 app.use(routes.provider, providerRouter);
 app.use(routes.user, userRouter);
