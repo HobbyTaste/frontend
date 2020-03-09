@@ -23,4 +23,3 @@ indexRouter.get(['/?',
 });
 
 export default indexRouter;
-
