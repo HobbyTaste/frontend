@@ -80,7 +80,7 @@ docker build . -t <name_of_docker_image>
 ```
 2. Запустить контейнер с пробросом порта, на котором слушает сервер (на текущий момент, 8100)
 ``` shell script
-docker run -p 8100:8100 <name_of_docker_image>
+docker run --rm -p 8100:8100 <name_of_docker_image>
 ```
 
 <a name="backend"></a>
