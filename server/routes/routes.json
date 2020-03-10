@@ -1,4 +1,5 @@
 {
+  "index": "/",
   "user": "/user",
   "hobby": "/hobby",
   "provider": "/provider"
