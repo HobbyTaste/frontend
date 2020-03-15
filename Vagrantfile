@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "Vagrantfile"
   config.vm.network "forwarded_port", guest: 8100, host: 8100
 
-  config.vm.synced_folder "./", "/srv/website"
+  config.vm.synced_folder "./", "/srv/website", type: "rsync", rsync__auto: true, rsync__exclude: ['node_modules/']
 
   config.vm.provision "install", type: "shell", inline: <<-SHELL
     apt-get update
