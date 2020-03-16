@@ -1,0 +1,183 @@
+.background {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.1)), url("./../../assets/images/provider_my_back.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.info {
+    background-color: white;
+    width: 329px;
+    position: relative;
+    box-shadow: #79827a;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 60%;
+
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    justify-content: center;
+}
+
+.hobbiesBlock {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media all and (max-device-width: 1540px) {
+    .hobbiesBlock {
+        width: 1000px;
+    }
+}
+
+@media all and (max-device-width: 1340px) {
+    .hobbiesBlock {
+        width: 800px;
+    }
+}
+
+@media all and (max-device-width: 1140px) {
+    .hobbiesBlock {
+        width: 600px;
+    }
+}
+
+@media all and (max-device-width: 1000px) {
+    .layout {
+        width: 400px;
+    }
+    .info {
+        margin-left: 600px;
+    }
+
+    .hobbiesBlock {
+        margin-left: 600px;
+    }
+}
+
+
+
+.title {
+    background-color: #19B95D;
+    color: white;
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.hobbiesContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.addHobbyButton {
+    height: 270px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    position: relative;
+    border: none;
+    padding-top: 50px;
+    margin-right: 15px;
+}
+
+.addHobbyButton:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
+.addHobbyText {
+    color: white;
+    font-size: 24px;
+    margin-top: 5px;
+}
+
+.mdDark {
+    color: white;
+    margin-top: 20px;
+}
+
+.header {
+    width: 100%;
+    background: linear-gradient(to right, #79827a, #19B95D);
+    height: 100px;
+    display: flex;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 2px solid black;
+    position:relative;
+}
+
+.headerTitle {
+    color: white;
+    font-size: 40px;
+    margin: auto auto;
+}
+
+.closeButton {
+    margin: auto 15px;
+    color: rgba(249, 249, 255, 0.56);
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: rgba(249, 249, 255, 0.96);
+    cursor: pointer;
+}
+
+.backImage {
+    background: url("waves.png") repeat 100% 100%;
+    height: 100%;
+}
+
+.blockForCards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.scrollBlock {
+    width: 100%;
+    max-height: 750px;
+    display: inline-block;
+    overflow-x: hidden;
+    margin: 10px -3px;
+    padding-top: 1px;
+}
+
+#scrollBlock{}::-webkit-scrollbar{width: 5px;height: 5px;}
+::-webkit-scrollbar-track-piece{background-color: #ffffff;}
+::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #19B95D;}
+::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #19b95d;}
+
+.formContainer {
+    width: 500px;
+    margin: 10px auto;
+    padding: 15px;
+}

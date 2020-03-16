@@ -1,0 +1,62 @@
+.body {
+    z-index: 20;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    height: 600px;
+}
+
+@media all and (max-device-width: 1200px) {
+    .body {
+        width: 900px;
+    }
+}
+
+@media all and (max-device-width: 900px) {
+    .body {
+        width: 700px;
+    }
+}
+
+@media all and (max-device-width: 690px) {
+    .body {
+        width: 400px;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    margin: 24px auto;
+    font-size: 26px;
+    position: relative;
+    z-index: 20;
+    height: 50px;
+    border-radius: 10px;
+    width: 55%;
+}
+
+.scrollBlock {
+    width: 100%;
+    max-height: 650px;
+    display: inline-block;
+    overflow-x: hidden;
+    margin: 0 -3px;
+    padding-top: 1px;
+}
+
+.blockForCards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   /* height: 600px;*/
+}
+
+#scrollBlock{}::-webkit-scrollbar{width: 5px;height: 5px;}
+::-webkit-scrollbar-track-piece{background-color: #ffffff;}
+::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #19B95D;}
+::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #19b95d;}

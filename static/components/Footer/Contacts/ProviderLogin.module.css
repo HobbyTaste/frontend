@@ -1,0 +1,7 @@
+.headerForm {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20%;
+}

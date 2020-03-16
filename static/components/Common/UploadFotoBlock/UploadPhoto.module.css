@@ -1,0 +1,35 @@
+.uploadBlock {
+    text-align: center;
+}
+
+.upload {
+    color: #19B95D;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.upload:hover {
+    color: #128040;
+}
+
+.image {
+    margin-top: 10px;
+}
+
+.closeIcon {
+    margin-left: 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 80px;
+}
+
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}

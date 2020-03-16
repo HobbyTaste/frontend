@@ -1,0 +1,22 @@
+name: buildCheck
+
+on:
+  push:
+    branches:
+      - development
+      - front-1
+
+jobs:
+  build:
+    name: Building app
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Building app
+        run: |
+          yarn
+          yarn build

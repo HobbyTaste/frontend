@@ -1,0 +1,14 @@
+.body {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 20;
+    position: relative;
+    margin-top: 70px;
+    flex-direction: column;
+}
+
+.mainTitle {
+    color: white;
+    margin: 1px auto;
+    font-size: 52px;
+}

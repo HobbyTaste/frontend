@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "es2015", "es2017", "esnext.asynciterable"],
+        "sourceMap": true,
+        "jsx": "react",
+        "module": "es6",
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "experimentalDecorators": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "pretty": true,
+        "removeComments": true,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "keyofStringsOnly": true
+    },
+    "include": [
+        // FIXME: Перенести все в static
+        "src/**/*",
+        "static/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

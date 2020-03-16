@@ -1,0 +1,64 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: #79827a;
+    width: 315px;
+    background-color: floralwhite;
+    border-radius: 2px;
+    font-size: 24px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 550px;
+}
+
+.ul {
+    margin-top: 10px;
+}
+
+.name {
+    margin: 15px auto;
+    color: #19B95D;
+    font-size: 28px;
+    font-style: italic;
+    filter: drop-shadow(1px 1px green);
+}
+
+.add {
+    color: white;
+    background-color: #19B95D;
+    border-radius: 5px;
+    width: 245px;
+    height: 30px;
+    border: none;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    font-size: 12px;
+    justify-content: space-around;
+}
+
+.scrollBlock {
+    width: 100%;
+    max-height: 650px;
+    display: inline-block;
+    overflow-x: hidden;
+    margin: 0 -3px;
+    padding-top: 1px;
+}
+
+.blockForCards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+#scrollBlock{}::-webkit-scrollbar{width: 5px;height: 5px;}
+::-webkit-scrollbar-track-piece{background-color: #ffffff;}
+::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #19B95D;}
+::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #19b95d;}

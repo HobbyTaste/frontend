@@ -1,0 +1,150 @@
+.background {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.3)), url("https://kolobok.ua/i/81/72/70/817270/aae4f418dbcfc4c2f0fc8662010cf1dc-quality_70Xresize_crop_1Xallow_enlarge_0Xw_698Xh_465.jpg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.cardsBoard {
+    margin: 0 auto;
+    width: 1260px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+@media all and (max-width: 1270px) {
+    .cardsBoard {
+        width: 1050px;
+    }
+}
+@media all and (max-width: 1065px) {
+    .cardsBoard {
+        width: 850px;
+    }
+}
+@media all and (max-width: 860px) {
+    .cardsBoard {
+        width: 630px;
+    }
+}
+@media all and (max-width: 640px) {
+    .cardsBoard {
+        width: 420px;
+    }
+}
+
+.chooseHobby {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    margin: 24px auto;
+    font-size: 26px;
+    position: relative;
+    z-index: 20;
+    height: 50px;
+    border-radius: 10px;
+    width: 70%;
+}
+
+.hobbyName {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: 500ms;
+}
+
+.sport {
+    background: rgba(209, 0, 4, 0.6) url("ball.png") no-repeat 50% 50%;
+}
+
+.music {
+    background: rgba(0, 166, 185, 0.6) url("music.png") no-repeat 50% 50%;
+}
+
+.travel {
+    background: rgba(25, 185, 93, 0.6) url("travel.png") no-repeat 50% 50%;
+}
+
+.cook {
+    background: rgba(235, 202, 0, 0.6) url("cook.png") no-repeat 50% 50%;
+}
+
+.fish {
+    background: rgba(0, 166, 185, 0.6) url("fish.png") no-repeat 50% 50%;
+}
+
+.handmade {
+    background: rgba(185, 0, 157, 0.6) url("handmade.png") no-repeat 50% 50%;
+    background-size: 40%;
+}
+
+.money {
+    background: rgba(0, 166, 185, 0.6) url("money.png") no-repeat 50% 50%;
+}
+
+.videogames {
+    background: rgba(235, 202, 0, 0.6) url("videogames.png") no-repeat 50% 50%;
+}
+
+.photo {
+    background: rgba(209, 0, 4, 0.6) url("photo.png") no-repeat 50% 50%;
+}
+
+.paint {
+    background: rgba(185, 0, 157, 0.6) url("paint1.png") no-repeat 50% 50%;
+    background-size: 50%;
+}
+
+.garden {
+    background: rgba(25, 185, 93, 0.6) url("garden.png") no-repeat 50% 50%;
+}
+
+.flag {
+    background: rgba(209, 0, 4, 0.6) url("flag.png") no-repeat 50% 50%;
+}
+
+.flower {
+    background: rgba(25, 185, 93, 0.6) url("flower.png") no-repeat 50% 50%;
+}
+
+.dog {
+    background: rgba(185, 0, 157, 0.6) url("dog.png") no-repeat 50% 50%;
+}
+
+.cinema {
+    background: rgba(0, 166, 185, 0.6) url("cinema.png") no-repeat 50% 50%;
+}
+
+.auto {
+    background: rgba(209, 0, 4, 0.6) url("auto.png") no-repeat 50% 50%;
+    background-size: 70%;
+}
+
+.other {
+    background: rgba(235, 202, 0, 0.6) url("other.png") no-repeat 50% 50%;
+}

@@ -1,0 +1,113 @@
+.appBar {
+    position: relative;
+}
+
+.form {
+    width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.header {
+    width: 100%;
+    background: linear-gradient(to right, #79827a, #19B95D);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.headerTitle {
+    color: white;
+    font-size: 32px;
+    margin: auto 0;
+    align-items: center;
+    display: flex;
+}
+
+.headerText {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.formTitle {
+    margin: 30px auto;
+    width: 1200px;
+}
+
+.closeButton {
+    margin: auto 15px;
+    color: rgba(249, 249, 255, 0.56);
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: rgba(249, 249, 255, 0.96);
+    cursor: pointer;
+}
+
+.partnerLoginBut {
+    margin-top: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    padding: 10px 15px;
+    display: inline-block;
+    outline: none;
+    background: transparent;
+    transition: all 300ms;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+}
+
+.partnerLoginBut:hover {
+    background: #128040;
+}
+
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+   /* border: 1px solid red;*/
+}
+
+.stuffContainer {
+    width: 50%;
+    vertical-align: center;
+    text-align: center;
+}
+
+.image {
+    width: 500px;
+}
+
+
+.registrationForm {
+    width: 40%;
+    background-color: white;
+    margin: 55px auto;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 1px rgba(18, 128, 64, 0.54);
+    padding: 20px;
+}
+
+.registrationForm:hover {
+    box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
+}
+
+@font-face {
+    font-family: "Fonts";
+    src: url("./Fonts/myFont2.otf");
+}
+
+.text {
+    margin: 60px auto;
+    font-size: 30px;
+    width: 90%;
+    font-weight: bold;
+    color: #336633;
+    vertical-align: center;
+    font-family: "Fonts";
+}

@@ -1,0 +1,57 @@
+.form {
+    width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.formContainer {
+    width: 45%;
+    text-align: center;
+    vertical-align: top;
+   /* border: 1px solid red;*/
+}
+
+.hobbyFormContainer {
+    background-color: #FFFFFF;
+    padding: 15px;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 1px rgba(18, 128, 64, 0.54);
+}
+
+.hobbyFormContainer:hover {
+    box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
+}
+
+.pageContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.upload {
+    color: #19B95D;
+    cursor: pointer;
+}
+.upload:hover {
+    color: #128040;
+}
+
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.buttonsContainer {
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-around;
+}

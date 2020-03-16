@@ -1,0 +1,24 @@
+.name {
+    color: #19B95D;
+    margin-top: 10px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.userInfo {
+    font-size: 18px;
+}
+
+.information {
+    text-align: left;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.changeButton {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    display: flex;
+}

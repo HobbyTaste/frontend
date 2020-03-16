@@ -1,0 +1,31 @@
+.info {
+    height: 60%;
+    background-color: white;
+    width: 329px;
+    position: relative;
+    box-shadow: #79827a;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+
+@media all and (max-device-width: 1000px) {
+    .info {
+        margin-right: 0;
+        margin-left: 40px;
+    }
+}
+
+@media all and (max-device-width: 850px) {
+    .info {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+}
+
+@media all and (max-device-width: 800px) {
+    .info {
+        margin-left: 300px;
+    }
+}
