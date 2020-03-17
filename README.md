@@ -69,6 +69,8 @@ yarn build:front:watch
 ```shell script
 yarn start:watch
 ```
+Перед началом разработки в этом режиме в вашей системе должен быть установлен Docker (например, согласно [этой](https://docs.docker.com/install/linux/docker-ce/ubuntu/) инструкции). После установки убедитесь, что можете запускать docker-команды без sudo, иначе требуется [самостоятельно](https://docs.docker.com/install/linux/linux-postinstall/) настроить эту возможность.
+
 Обращаю внимание, что для разработки frontend-части приложения, сервер должен быть запущен в режиме development (то есть командой `yarn start:wath`).
 
 Также с другими командами и скриптами можно ознакомится в файле `package.json` в разделе _scripts_.
