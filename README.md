@@ -4,8 +4,9 @@
 ## Содержание
 1. [Настройка окружения и установка необходмых пакетов для разработки (Linux, MacOS)](#settings-env)
 2. [Разработка](#dev-rules)
-3. [Архитектура backend](#backend) 
-4. [Frontend](#frontend)
+3. [Запуск docker-контейнера](#docker)
+4. [Архитектура backend](#backend) 
+5. [Frontend](#frontend)
 
 <a name="settings-env"></a>
 
@@ -70,6 +71,17 @@ yarn start:watch
 Обращаю внимание, что для разработки frontend-части приложения, сервер должен быть запущен в режиме development (то есть командой `yarn start:wath`).
 
 Также с другими командами и скриптами можно ознакомится в файле `package.json` в разделе _scripts_.
+
+<a name="docker"></a>
+## Запуск докер-контейнера на production
+1. Сначала создаем docker-контейнер
+```shell script
+docker build . -t <name_of_docker_image>
+```
+2. Запустить контейнер с пробросом порта, на котором слушает сервер (на текущий момент, 8100)
+``` shell script
+docker run --rm -p 8100:8100 <name_of_docker_image>
+```
 
 <a name="backend"></a>
 
