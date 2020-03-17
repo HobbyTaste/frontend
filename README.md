@@ -7,7 +7,7 @@
 3. [Запуск docker-контейнера](#docker)
 4. [Архитектура backend](#backend) 
 5. [Frontend](#frontend)
-5. [Локальный запуск на виртуалке](#vagrant)
+6. [Локальный запуск на виртуалке](#vagrant)
 
 <a name="settings-env"></a>
 
