@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const Fixtures = require('node-mongodb-fixtures');
-const fixtures = new Fixtures{
+const fixtures = new Fixtures({
 	dir: './server/fixtures'
 });
 
