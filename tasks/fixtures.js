@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const Fixtures = require('node-mongodb-fixtures');
-const fixtures = new Fixtures({
-  dir: './server/fixtures'
+const fixtures = new Fixtures{
+	dir: './server/fixtures'
 });
 
 const config = require('config');
@@ -16,4 +16,3 @@ fixtures
 	.then(() => fixtures.unload())
 	.then(() => fixtures.load())
 	.then(() => fixtures.disconnect());
-
