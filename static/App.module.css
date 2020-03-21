@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 .appWrapper {
     min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    font-family: Roboto;
 }
 
 .appWrapperContent {
@@ -9,6 +13,10 @@
 }
 
 .appHeader {
+    flex: 0 0 auto;
+}
+
+.appNavigation{
     flex: 0 0 auto;
 }
 

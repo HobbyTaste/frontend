@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import style from './Header.module.css';
 import Logo from "./Logo/Logo";
+import Searcher from './Search/Search';
 import LoginUser from "./LoginUser/LoginUser";
 import LogoutUser from "./LogoutUser/LogoutUser";
 import {Link} from 'react-router-dom';
@@ -13,9 +14,13 @@ const Header = (props) => {
                 <Logo setIsUserInCabinet={props.setIsUserInCabinet}/>
                 </Link>
             </div>
-            { props.isAuth
-                ? <div className={style.buttonContainer}><LogoutUser logout={props.logout} avatar={props.avatar}/></div>
+            <div className={style.searchContainer}>
+            <Searcher/>
+            </div>
+          { !props.isAuth
+                ? <div className={style.buttonContainer}><LogoutUser logout={props.logout} name= "Азалия"/></div>
                 : <div className={style.buttonContainer}><LoginUser/></div> }
+
         </header>);
 };
 

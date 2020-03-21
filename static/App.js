@@ -4,6 +4,7 @@ import MainPage from './components/MainPage/MainPage';
 import Hobbies from './components/Hobbies/Hobbies'
 import {initializeApp} from './redux/reducers/app-reducer';
 import Categories from './components/Categories/Categories';
+import Navigation from './components/Navigation/Navigation';
 import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProviderHeaderContainer from './components/ProviderHeader/ProviderHeaderContainer';
@@ -26,8 +27,10 @@ class App extends React.Component {
         return (
             <div className={style.appWrapper}>
                 <div className={style.appHeader}>
-                    {this.props.providerIsAuth ? <ProviderHeaderContainer/>
-                        : <HeaderContainer/>}
+                    <HeaderContainer/>
+                </div>
+                <div className={style.appNavigation}>
+                    <Navigation/>
                 </div>
                 <div className={style.appWrapperContent}>
                     <Route exact path="/" render={() => <Categories/>}/>
@@ -36,10 +39,7 @@ class App extends React.Component {
                     <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                     <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                 </div>
-                {this.props.providerIsAuth || this.props.inUserCabinet ?
-                    null : <div className={style.appFooter}>
-                        <Footer isAuth={this.props.isAuth}/>
-                    </div>}
+                <Footer/>
             </div>
         );
     }

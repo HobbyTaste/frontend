@@ -1,38 +1,31 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-.Searcher {box-sizing: border-box;}
-.Searcher div{
-    position: absolute;
-    width: 400px;
-    left:270px;
+.searcher {box-sizing: border-box;}
+.searcher{
+    display:flex;
     height: 30px;
+    width: 100%;
     background: #E9F0C0;
     border-radius: 4px;
-    top: calc(50% - 30px/2 + 1px);
     z-index: 20;
-    display:flex;
-    flex-wrap: wrap;
 }
-.Searcher input::-webkit-input-placeholder {
-    color: #DCD294 !important;
+.searcher input::-webkit-input-placeholder {
+    color: #DCD294;
 }
 
-.Searcher input {
+.searcher input {
     display: inline-block;
+    width: 94%;
     box-sizing: border-box;
     border: none;
     outline: none;
-    width: 367px;
     -webkit-appearance: none;
-    position: relative;
     background: #E9F0C0;
     border-radius: 4px;
-    font-family: Roboto;
     font-size: 16px;
     color:#DCD294;
     padding-left: 20px;
 }
 
-.Searcher button[type="submit"] {
+.searcher button[type="submit"] {
     display: inline-block;
     width: 22px;
     float: left;
@@ -43,4 +36,3 @@
     background: url(search.png) no-repeat 50% 50%;
     cursor: pointer;
 }
-

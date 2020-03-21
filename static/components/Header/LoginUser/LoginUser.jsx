@@ -6,10 +6,8 @@ import Registration from "../../Registration/Registration";
 import {AnimatedModalWindow} from "../../../HOC/AnimatedModalWindow/AnimatedModalWindow";
 
 const LoginUser = (props) => {
-    let SignIn = AnimatedModalWindow(Login, "ВХОД", '', true);
-    let SignUp = AnimatedModalWindow(Registration, "РЕГИСТРАЦИЯ", '', true);
+    let SignIn = AnimatedModalWindow(Login, "Вход", '', true);
     return (<div className={s.buttonsContainer}>
-            <SignUp buttonName={"РЕГИСТРАЦИЯ"}/>
             <SignIn buttonName={"ВОЙТИ"}/>
         </div>
     );

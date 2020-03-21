@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import s from './../../HeaderButtons.module.css';
+import style from '../../Header.module.css'
 import {Link} from "react-router-dom";
 
 const LogoutButton = (props) => {
     return (
-            <div>
-                <button onClick={props.logout} className={s.headerButtons}>
-                    ВЫЙТИ
+            <div className={style.nameContainer}>
+                <button className={s.headerButtons}>
+                    {props.name}
                 </button>
             </div>
     );

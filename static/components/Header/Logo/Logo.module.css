@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Rancho&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Prosto+One&display=swap');
 .logo {
-    font-size: 40px;
-    margin-bottom: 0;
-    line-height: 50px;
-    color: white;
-    text-shadow: 2px 2px 5px black;
-    font-family: "Rancho", cursive;
+    position: absolute;
+    left: 20px;
+    top: 7px;
+
+    font-family: Prosto One;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 24px;
     cursor: pointer;
-    margin-top: 0;
-    text-align: center;
-    vertical-align: middle;
-    font-weight: 500;
-    box-sizing: border-box;
-    font-variant: tabular-nums;
-    font-feature-settings: 'tnum';
-    --antd-wave-shadow-color: #1890ff;
+
+    /* or 69% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.15px;
+
+    color: #FFFFFF;
+
 }
