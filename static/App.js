@@ -14,6 +14,7 @@ import {compose} from 'redux';
 import UserCabinet from './components/UserCabinet/UserCabinet';
 import style from './App.module.css';
 import Footer from "./components/Footer/Footer";
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends React.Component {
     componentDidMount() {
@@ -25,21 +26,28 @@ class App extends React.Component {
             return <Preloader/>
         }
         return (
-            <div className={style.appWrapper}>
-                <div className={style.appHeader}>
-                    <HeaderContainer/>
+            <div className={style.appBackground}>
+                <div className={style.appWrapper}>
+                    <div className={style.appHeader}>
+                        <HeaderContainer/>
+                    </div>
+                    <div className={style.appNavigation}>
+                        <Navigation/>
+                    </div>
+                    <div className={style.appLayout}>
+                        <div className={style.appSidebar}>
+                            <Sidebar/>
+                        </div>
+                        <div className={style.appWrapperContent}>
+                            <Route exact path="/" render={() => <Categories/>}/>
+                            <Route path="/search/:category?" render={() => <MainPage/>}/>
+                            <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
+                            <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
+                        </div>
+                    </div>
+                    <Footer/>
                 </div>
-                <div className={style.appNavigation}>
-                    <Navigation/>
-                </div>
-                <div className={style.appWrapperContent}>
-                    <Route exact path="/" render={() => <Categories/>}/>
-                    <Route path="/search/:category?" render={() => <MainPage/>}/>
-                    <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
-                    <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
-                    <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
-                </div>
-                <Footer/>
             </div>
         );
     }
