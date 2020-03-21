@@ -1,7 +1,0 @@
-#!/bin/bash
-
-FILES_TO_CHECK=$(git diff --cached --name-only -- '*.js' '.jsx' '.ts' '.tsx')
-
-if [[ -n "$FILES_TO_CHECK" ]]; then
-  yarn eslint $FILES_TO_CHECK
-fi
