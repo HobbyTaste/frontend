@@ -17,8 +17,7 @@
 }
 .appWrapperContent {
     z-index:0;
-    width:997px;
-
+    width:71.5%;
     background: #FFFFFF;
 
 }
@@ -35,7 +34,7 @@
     align-items: center;
     padding-top:26px;
     background: #E9F0C0;
-    width: 133px;
+    width: 9.5%;
 }
 
 .appHeader {

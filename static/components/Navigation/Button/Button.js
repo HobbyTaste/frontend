@@ -6,12 +6,13 @@ const Button = (props) => {
     return (
         <div className={style.dropdown}>
            <button className={style.dropBtn}>Каталог</button>
-            <div className={style.dropdownContent}>
-                <a href="/">Subtitle 1</a>
-                <a href="/">Subtitle 1</a>
-                <a href="/">Subtitle 1</a>
-                <a href="/">Subtitle 1</a>
-            </div>
+            <ul className={style.dropdownContent}>
+                <li><a href="/">Subtitle 1</a></li>
+                <li><a href="/">Subtitle 1</a></li>
+                <li><a href="/">Subtitle 1</a></li>
+                <li><a href="/">Subtitle 1</a></li>
+                <li><a href="/">Subtitle 1</a></li>
+            </ul>
         </div>
     );
 };
