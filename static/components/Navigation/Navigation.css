@@ -6,19 +6,23 @@
 }
 .menu{
     display: flex;
-    height: 13px;
+    justify-content: space-between;
+    margin-top: 13px;
+    margin-bottom: 13px;
     list-style-type: none;
+    padding-left: 0;
+
 
 }
+
 .menu > li > a{
     color: #739C3E;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    line-height: 13px;
     text-decoration: none;
 
     display: block;
-    padding: 0 47px;
-    margin: 0;
+    padding: 0 35px;
+    margin: auto;
 }

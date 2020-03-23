@@ -8,12 +8,12 @@ const Navigation = (props) => {
         <nav className={style.navSite}>
             <Button/>
             <ul className={style.menu}>
-                <li><a href="/">ITEM ONE</a></li>
-                <li><a href="/">ITEM TWO</a></li>
-                <li><a href="/">ITEM THREE</a></li>
-                <li><a href="/">ITEM FOUR</a></li>
-                <li><a href="/">ITEM FIVE</a></li>
-                <li><a href="/">ITEM SIX</a></li>
+                <li><a href="/">КАТЕГОРИЯ 1</a></li>
+                <li><a href="/">КАТЕГОРИЯ 2</a></li>
+                <li><a href="/">КАТЕГОРИЯ 3</a></li>
+                <li><a href="/">КАТЕГОРИЯ 4</a></li>
+                <li><a href="/">КАТЕГОРИЯ 5</a></li>
+                <li><a href="/">КАТЕГОРИЯ 6</a></li>
             </ul>
         </nav>
 
