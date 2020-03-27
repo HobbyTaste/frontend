@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Футбольная секция",
+    "phone": "89009009191",
+    "email": "sport-football@test.com",
+    "address": "1-я Магистральная ул., 12",
+    "metroStation": "Третьяковская",
+    "metroId": "136",
+    "description": "football classes",
+    "hortDescription": "football",
+    "imageUrl": null,
+    "owner": "sport@test.com",
+    "subscribers": ["alice@test.com", "bob@test.com"],
+    "avatar": null,
+    "category": "sport"
+  },
+  {
+    "label": "Уроки фортепиано",
+    "phone": "88008008181",
+    "email": "music-piano@test.com",
+    "address": "Рубцовская наб., 11/2",
+    "metroStation": "Медведково",
+    "metroId": "86",
+    "description": "piano classes",
+    "shortDescription": "piano",
+    "imageUrl": null,
+    "owner": "music@test.com",
+    "subscribers": ["bob@test.com", "caroline@test.com"],
+    "avatar": null,
+    "category": "music"
+  }
+]

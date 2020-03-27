@@ -1,0 +1,23 @@
+[
+  {
+    "hobbies" : ["sport-football@test.com"],
+    "password" : "alice",
+    "name" : "Alice",
+    "avatar" : null,
+    "email" : "alice@test.com"
+  },
+  {
+    "hobbies" : ["music-piano@test.com", "sport-football@test.com"],
+    "password" : "bob",
+    "name" : "Bob",
+    "avatar" : null,
+    "email" : "bob@test.com"
+  },
+  {
+    "hobbies" : ["music-piano@test.com"],
+    "password" : "caroline",
+    "name" : "Caroline",
+    "avatar" : null,
+    "email" : "caroline@test.com"
+  }
+]
