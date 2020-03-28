@@ -5,6 +5,7 @@ import Hobbies from './components/Hobbies/Hobbies'
 import {initializeApp} from './redux/reducers/app-reducer';
 import Categories from './components/Categories/Categories';
 import Navigation from './components/Navigation/Navigation';
+import HobbyCard from './components/HobbyCard/HobbyCard';
 import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProviderHeaderContainer from './components/ProviderHeader/ProviderHeaderContainer';
@@ -42,6 +43,7 @@ class App extends React.Component {
                             <Route exact path="/" render={() => <Categories/>}/>
                             <Route path="/search/:category?" render={() => <MainPage/>}/>
                             <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
+                            <Route path="/hobbycard/" render={() => <HobbyCard/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                         </div>

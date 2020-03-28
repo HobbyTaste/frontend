@@ -1,0 +1,17 @@
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px
+}
+.gridBlock{
+    grid-template-columns: 49% 51%;
+    grid-template-rows: ;
+}
+.panel{
+
+}
+
+.communication{
+
+}
