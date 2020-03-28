@@ -9,6 +9,7 @@ from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
 from goose3 import Goose
 from difflib import SequenceMatcher
 import copy
+import vk
 
 from googlesearch import search
 
@@ -20,7 +21,7 @@ logging.getLogger('scrapy').propagate = False
 
 class Scraper(object):
 
-    def __init__(self, data, reject):
+    def __init__(self, data, reject=[], vk_token=''):
         for i in range(data['Сайт'].size):
             if not 'http' in str(data['Сайт'][i]):
                 data['Сайт'][i] = 'http://' + str(data['Сайт'][i])
@@ -28,6 +29,7 @@ class Scraper(object):
         self.urls = data['Сайт']
         self.data = data
         self.reject = reject
+        self.vk_token=vk_token
 
         self.results = dict()
         for url in self.urls:
@@ -49,6 +51,46 @@ class Scraper(object):
             crawle.crawl(self.DataSpider, start_urls=[url],
                          path=self.results, reject=self.reject)
         crawle.start()
+
+    def process_vk_page(self, link):
+        output = dict({'address': '',
+                       'metro_station': '',
+                       'image_source': ''})
+
+        if not self.vk_token:
+            return output
+        
+        try:
+            session = vk.Session(access_token=self.vk_token)
+            vk_api = vk.API(session)
+
+            group_name = link.split('/')[-1]
+            info = vk_api.groups.getById(v=6.0, group_id=group_name)[0]
+
+            group_id = info['id']
+
+            if ('photo_200' in info.keys()):
+                output['image_source'] = info['photo_200']
+            
+            address_info = vk_api.groups.getAddresses(v=6.0, group_id=group_id)['items']
+
+            if address_info:
+
+                if('address' in address_info[0].keys()):
+                    output['address'] = address_info[0]['address']
+
+                if('metro_station_id' in address_info[0].keys()):
+                    metro_station_id = address_info[0]['metro_station_id']
+                    metro_station = vk_api.database.getMetroStationsById(v=6.0,
+                                                                         station_ids=metro_station_id)
+                    output['metro_station'] = metro_station[0]['name']
+
+        except vk.exceptions.VkAPIError:
+            print('vk api error')
+
+        return output
+
+
 
     def process_output(self):
         columns = ['url', 'email', 'phone', 'vk.com', 'instagram.com', 'facebook.com',
@@ -81,6 +123,10 @@ class Scraper(object):
                     curr_row[key] = np.nan
 
             curr_row['url'] = res
+            curr_row['address'] = ''
+
+            if curr_row['vk']:
+                curr_row['address'] = ''
 
             self.output_df = pd.concat([self.output_df,
                                        pd.DataFrame(curr_row, index=[0])])
