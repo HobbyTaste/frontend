@@ -17,7 +17,7 @@ const Header = (props) => {
             <div className={style.searchContainer}>
             <Searcher/>
             </div>
-          { props.isAuth
+          { !props.isAuth
                 ? <div className={style.buttonContainer}><LogoutUser logout={props.logout} name= "Азалия"/></div>
                 : <div className={style.buttonContainer}><LoginUser/></div> }
 

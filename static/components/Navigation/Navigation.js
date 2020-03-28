@@ -6,9 +6,7 @@ import {Link} from 'react-router-dom';
 const Navigation = (props) => {
     return (
         <nav className={style.navSite}>
-            <div className={style.buttonContainer}>
-                <Button/>
-            </div>
+            <Button/>
             <ul className={style.menu}>
                 <li><a href="/">КАТЕГОРИЯ 1</a></li>
                 <li><a href="/">КАТЕГОРИЯ 2</a></li>
