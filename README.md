@@ -4,8 +4,10 @@
 ## Содержание
 1. [Настройка окружения и установка необходмых пакетов для разработки (Linux, MacOS)](#settings-env)
 2. [Разработка](#dev-rules)
-3. [Архитектура backend](#backend) 
-4. [Frontend](#frontend)
+3. [Запуск docker-контейнера](#docker)
+4. [Архитектура backend](#backend) 
+5. [Frontend](#frontend)
+5. [Локальный запуск на виртуалке](#vagrant)
 
 <a name="settings-env"></a>
 
@@ -73,6 +75,17 @@ yarn start:watch
 
 Также с другими командами и скриптами можно ознакомится в файле `package.json` в разделе _scripts_.
 
+<a name="docker"></a>
+## Запуск докер-контейнера на production
+1. Сначала создаем docker-контейнер
+```shell script
+docker build . -t <name_of_docker_image>
+```
+2. Запустить контейнер с пробросом порта, на котором слушает сервер (на текущий момент, 8100)
+``` shell script
+docker run --rm -p 8100:8100 <name_of_docker_image>
+```
+
 <a name="backend"></a>
 
 ## Архитектура backend
@@ -115,3 +128,35 @@ docker build -t front-server -f ./frontServer/Dockerfile .
 docker run -p 8080:8080 front-server
 ```
 Сервер будет находиться на порту 8080
+
+<a name="vagrant"></a>
+
+## Локальный запуск на виртуалке
+Для локального запуска будем использовать виртуальную машину с заведомо подходящими настройками.
+
+Предварительно требуется:
+1. `VirtualBox`. Установка для разных ОС и дистрибутивов приведена [тут](https://www.virtualbox.org/wiki/Downloads).
+2. `vagrant`
+3. Вскрытые секреты. Если не настроены, запускаем из корневой директории проекта:
+```shell script
+git secret reveal
+```
+4. Установленный образ ОС для `vagrant`:
+```shell script
+vagrant box add ubuntu/xenial64
+```
+
+Теперь можем запустить сервер непосредственно на ВМ. Далее все комады запускаются из корневой директории проекта:
+1. Для запуска виртуальной машины делаем:
+```shell script
+vagrant up
+```
+Тут при первом запуске машины запустятся `provisioner`-ы. При последующих запусках они запускаться не будут.
+2. Далее, для перезапуска сервера останавливаем старый запуск с помощью `Ctrl+C` и перезапускаем. Для этого достаточно только одного `provisioner`-а:
+```shell script
+vagrant provision --provision-with run
+```
+3. Для выключения виртуальной машины делаем:
+``` shell script
+vagrant halt
+```
