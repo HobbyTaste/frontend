@@ -10,6 +10,7 @@ from goose3 import Goose
 from difflib import SequenceMatcher
 import copy
 import vk
+import math
 
 from googlesearch import search
 
@@ -56,6 +57,7 @@ class Scraper(object):
         output = dict({'address': '',
                        'metro_station': '',
                        'image_source': ''})
+        print(link)
 
         if not self.vk_token:
             return output
@@ -116,17 +118,22 @@ class Scraper(object):
                         results[res][elem] = [answer]
 
             curr_row = results[res].copy()
+
             for key in curr_row:
                 if len(curr_row[key]) > 0:
                     curr_row[key] = curr_row[key][0]
                 else:
-                    curr_row[key] = np.nan
+                    curr_row[key] = ''
 
             curr_row['url'] = res
             curr_row['address'] = ''
+            curr_row['metro_station'] = ''
 
-            if curr_row['vk']:
-                curr_row['address'] = ''
+            if curr_row['vk.com']:
+                vk_parser_result = self.process_vk_page(curr_row['vk.com'])
+                curr_row['address'] = vk_parser_result['address']
+                curr_row['metro_station'] = vk_parser_result['metro_station']
+                curr_row['image_source'] += ' ' + vk_parser_result['image_source']
 
             self.output_df = pd.concat([self.output_df,
                                        pd.DataFrame(curr_row, index=[0])])

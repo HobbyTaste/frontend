@@ -27,29 +27,18 @@ def request_token():
 
 
 if __name__ == "__main__":
-    '''data = pd.read_excel('data.xlsx')
+    data = pd.read_excel('data.xlsx')
     data = data.head(100)
+
+    token = request_token()
     
     scraper = Scraper(data=data, reject=['youtube', 'twitter', 'wiki', 'zoom', 
-                                         'kudago', 't.me', 'telegram'])
+                                         'kudago', 't.me', 'telegram'],
+                                         vk_token=token)
 
     scraper.inspect()
     
     output = scraper.process_output()
     create_file('./result.csv')
-    output.to_csv('./result.csv')'''
+    output.to_csv('./result.csv')
 
-
-    token = request_token()
-
-    input_data = pd.read_excel('data.xlsx')
-
-    scraper = Scraper(data=input_data, reject=['youtube', 'twitter', 'wiki', 'zoom', 
-                                         'kudago', 't.me', 'telegram'], 
-                      vk_token=token)
-
-    data = pd.read_csv('result.csv')
-
-    for url in data['vk.com'].dropna():
-        print(url)
-        print(str(scraper.process_vk_page(url)))
