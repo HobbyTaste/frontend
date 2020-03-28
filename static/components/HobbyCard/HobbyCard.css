@@ -2,15 +2,22 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    box-sizing: border-box;
     padding: 25px
 }
 .gridBlock{
+    width: 84%;
     grid-template-columns: 49% 51%;
-    grid-template-rows: ;
+    grid-template-rows: 91% 9%;
 }
 .panel{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+
 
 }
+
 
 .communication{
 

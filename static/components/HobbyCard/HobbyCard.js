@@ -9,11 +9,15 @@ const HobbyCard = (props) => {
     return (
         <div>
             <div className={style.infoContainer}>
+                <div>
                 <div className={style.gridBlock}>
                     <div>картинка</div>
                     <div>информация</div>
-                    <div>описание картинки</div>
+                    <div>пустота</div>
                     <div>кнопочка</div>
+                </div>
+                <div>
+                    описание
                 </div>
                 <div className={style.panel}>
                     боковая панель
