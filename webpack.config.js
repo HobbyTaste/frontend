@@ -7,7 +7,7 @@ const DESTINATION_DIR = 'dist';
 const IS_DEV = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    entry: path.resolve(__dirname, 'static') + '/index.js',
+    entry: path.join(path.resolve(__dirname, 'static'), 'index.js'),
     devtool: 'sourcemap',
     module: {
         rules: [
