@@ -10,5 +10,7 @@ then
         docker run -dp 27017:27017 --name $CONTAINER mongo >/dev/null
 	echo DB container $CONTAINER
 fi
+echo "Loading fixtures..."
+node tasks/fixtures.js >/dev/null
 echo "Running server..."
 NODE_APP_INSTANCE=secrets NODE_ENV=development ts-node-dev --project server/tsconfig.json --clear --respawn --transpileOnly ./server/app.ts
