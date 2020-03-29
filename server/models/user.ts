@@ -36,7 +36,7 @@ const UserSchema: Schema = new Schema({
         type: String,
     },
     hobbies: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
     }
 });
 
