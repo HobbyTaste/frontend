@@ -1,21 +1,41 @@
 .infoContainer{
     display: flex;
-    flex-direction: column;
     width: 100%;
+    justify-content:space-between;
     box-sizing: border-box;
     padding: 25px
 }
-.gridBlock{
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 84%;
-    grid-template-columns: 49% 51%;
-    grid-template-rows: 91% 9%;
+}
+.mainBlock{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+
+}
+
+.imageContainer{
+    width: 49%;
+    height: 325px;
+
+}
+.textContainer{
+    display: flex;
+    paddinf: 3px;
+
 }
 .panel{
     display: flex;
     flex-direction: column;
     width: 150px;
-
-
 }
 
 

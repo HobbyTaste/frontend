@@ -3,21 +3,27 @@ import style from './HobbyCard.css';
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import ImageSlider from './Image/Image'
+import Button from '@material-ui/core/Button';
 
 const HobbyCard = (props) => {
    // if(props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
     return (
         <div>
             <div className={style.infoContainer}>
-                <div>
-                <div className={style.gridBlock}>
-                    <div>картинка</div>
-                    <div>информация</div>
-                    <div>пустота</div>
-                    <div>кнопочка</div>
-                </div>
-                <div>
-                    описание
+                <div className={style.mainContainer}>
+                    <div className={style.mainBlock}>
+                        <div className={style.imageContainer}><ImageSlider/></div>
+                        <div className={style.textContainer}>информация</div>
+                    </div>
+                    <div className={style.buttonContainer}>
+                        <Button className={style.button}>
+                            кнопка
+                        </Button>
+                    </div>
+                    <div>
+                        описание
+                    </div>
                 </div>
                 <div className={style.panel}>
                     боковая панель
