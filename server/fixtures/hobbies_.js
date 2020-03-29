@@ -16,11 +16,14 @@ getCollection = (name) => {
 module.exports = (collection) => {
     return collection.find().toArray()
         .then(hobbies => getCollection('users')
-            .then(userList => Promise.all(hobbies.map(async hobby => {
-                const hobbySubscribers = userList.filter(user => hobby.subscribers.includes(user.email));
-                const hobbySubscribersId = hobbySubscribers.map(user => user._id);
-                return {...hobby, subscribers: hobbySubscribersId};
-            }))))
+            .then(userList => getCollection('providers')
+                .then(providerList => Promise.all(hobbies.map(async hobby => {
+                    const hobbySubscribers = userList.filter(user => hobby.subscribers.includes(user.email));
+                    const hobbySubscribersId = hobbySubscribers.map(user => user._id);
+                    const hobbyOwner = providerList.find(provider => hobby.owner === provider.email);
+                    const hobbyOwnerId = hobbyOwner._id;
+                    return {...hobby, subscribers: hobbySubscribersId, owner: hobbyOwnerId};
+                })))))
         .then(updatedHobbies => collection.deleteMany()
             .then(() => collection.insertMany(updatedHobbies)))
 };

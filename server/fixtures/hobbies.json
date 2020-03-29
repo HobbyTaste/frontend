@@ -7,7 +7,7 @@
     "metroStation": "Третьяковская",
     "metroId": "136",
     "description": "football classes",
-    "hortDescription": "football",
+    "shortDescription": "football",
     "imageUrl": null,
     "owner": "sport@test.com",
     "subscribers": ["alice@test.com", "bob@test.com"],
