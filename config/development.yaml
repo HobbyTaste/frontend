@@ -1,3 +1,2 @@
 static:
   baseUrl: /dist
-dbHost: mongodb://localhost:27017
