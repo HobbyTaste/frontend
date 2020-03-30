@@ -33,20 +33,32 @@ dbHost = dbHost.replace(/{dbUser}/, dbUser);
 dbHost = dbHost.replace(/{dbPassword}/, dbPassword);
 
 app.use(express.json());
-app.use(morgan('dev'));
+// disable logs while testing
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'));
+}
+else {
+  console.log = () => {};
+  console.warn = () => {};
+  console.info = () => {};
+  console.error = () => {};
+}
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 /*
 app.use(fileUpload());
 */
 
+// for testing
+export const store = new MongoStore({
+  url: dbHost
+})
+
 app.use(expressSession({
   secret: 'pugs do drugs',
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore({
-    url: dbHost
-  })
+  store: store
 }));
 app.use(csrf());
 
@@ -82,6 +94,12 @@ try {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-        .then(() => logger.info(`Connect to mongoDB: success`))
+        .then(() => {
+          if (process.env.NODE_ENV !== 'test')
+           logger.info(`Connect to mongoDB: success`)
+        })
         .catch(logger.error);
 } catch (e) {}
+
+// for testing
+export default app;
