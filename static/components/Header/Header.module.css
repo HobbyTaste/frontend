@@ -16,7 +16,7 @@
     flex-basis: 270px;
 }
 .searchContainer{
-    min-width: 28%;
+    width: 28%;
     height: 30px;
     display: flex;
     margin: auto 0;
