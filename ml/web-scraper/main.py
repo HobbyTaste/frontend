@@ -7,7 +7,7 @@ import pandas as pd
 from scraper import Scraper
 
 
-def ask_user(question: str) -> str:
+def ask_user(question: str) -> bool:
     response = input(question + ' y/n' + '\n')
     return response == 'y'
 
