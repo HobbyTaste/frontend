@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100% !important',
         height: '100% !important',
     },
+    bar:{
+        height:'40%'
+    }
 }));
 
 const tile = {
@@ -44,7 +47,7 @@ export default function ImageSlider() {
             <GridList cellHeight={180} className={classes.gridList}>
                     <GridListTile key={tile.img} className={classes.image}>
                         <img src={tile.img} alt={tile.title} className={style.image} />
-                        <GridListTileBar
+                        <GridListTileBar className={classes.bar}
                             title={tile.title}
                             subtitle={<span>by: {tile.author}</span>}
                         />
