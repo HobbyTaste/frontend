@@ -15,7 +15,8 @@ logging.getLogger('scrapy').propagate = False
 
 class Scraper(object):
 
-    def __init__(self, data, reject=[], vk_token=''):
+    def __init__(self, data: pd.DataFrame, reject: list = [],
+                 vk_token: str = '') -> None:
         for i in range(data['Сайт'].size):
             if 'http' not in str(data['Сайт'][i]):
                 data['Сайт'][i] = 'http://' + str(data['Сайт'][i])
@@ -38,15 +39,15 @@ class Scraper(object):
                                 'title': []})
             self.results[url] = curr_result
 
-    def inspect(self):
-        crawle = crawler.CrawlerProcess({'USER_AGENT': 'Mozilla/5.0'})
+    def inspect(self) -> None:
+        crawle = crawler.CrawlerProcess()
 
         for url in self.urls:
             crawle.crawl(self.DataSpider, start_urls=[url],
                          path=self.results, reject=self.reject)
         crawle.start()
 
-    def process_vk_page(self, link):
+    def process_vk_page(self, link: str) -> dict:
         output = dict({'address': '',
                        'metro_station': '',
                        'image_source': ''})
@@ -86,7 +87,7 @@ class Scraper(object):
 
         return output
 
-    def process_output(self):
+    def process_output(self) -> pd.DataFrame:
         columns = ['url', 'email', 'phone', 'vk.com', 'instagram.com', 'facebook.com',
                    'image_source', 'schedule', 'title']
 
