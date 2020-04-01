@@ -1,7 +1,9 @@
-from scraper import Scraper
-import pandas as pd
 import os
+
 import numpy as np
+import pandas as pd
+
+from scraper import Scraper
 
 
 def ask_user(question):
@@ -22,6 +24,7 @@ def create_file(path):
     with open(path, 'wb') as file:
         file.close()
 
+
 def request_token():
     return input('Введите vk токен для запросов к api \n')
 
@@ -31,14 +34,13 @@ if __name__ == "__main__":
     data = data.head(100)
 
     token = request_token()
-    
-    scraper = Scraper(data=data, reject=['youtube', 'twitter', 'wiki', 'zoom', 
+
+    scraper = Scraper(data=data, reject=['youtube', 'twitter', 'wiki', 'zoom',
                                          'kudago', 't.me', 'telegram'],
-                                         vk_token=token)
+                      vk_token=token)
 
     scraper.inspect()
-    
+
     output = scraper.process_output()
     create_file('./result.csv')
     output.to_csv('./result.csv')
-

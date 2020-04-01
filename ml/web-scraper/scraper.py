@@ -1,36 +1,29 @@
+import copy
 import logging
-import os
-import pandas as pd
 import re
+from difflib import SequenceMatcher
+
+import pandas as pd
 import scrapy
 import scrapy.crawler as crawler
-import numpy as np
-from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
-from goose3 import Goose
-from difflib import SequenceMatcher
-import copy
 import vk
-import math
-
-from googlesearch import search
-
-from multiprocessing import Process, Queue
-from twisted.internet import reactor
-from threading import Thread
+from goose3 import Goose
+from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
 
 logging.getLogger('scrapy').propagate = False
+
 
 class Scraper(object):
 
     def __init__(self, data, reject=[], vk_token=''):
         for i in range(data['Сайт'].size):
-            if not 'http' in str(data['Сайт'][i]):
+            if 'http' not in str(data['Сайт'][i]):
                 data['Сайт'][i] = 'http://' + str(data['Сайт'][i])
 
         self.urls = data['Сайт']
         self.data = data
         self.reject = reject
-        self.vk_token=vk_token
+        self.vk_token = vk_token
 
         self.results = dict()
         for url in self.urls:
@@ -61,7 +54,7 @@ class Scraper(object):
 
         if not self.vk_token:
             return output
-        
+
         try:
             session = vk.Session(access_token=self.vk_token)
             vk_api = vk.API(session)
@@ -73,8 +66,9 @@ class Scraper(object):
 
             if ('photo_200' in info.keys()):
                 output['image_source'] = info['photo_200']
-            
-            address_info = vk_api.groups.getAddresses(v=6.0, group_id=group_id)['items']
+
+            address_info = vk_api.groups.getAddresses(
+                v=6.0, group_id=group_id)['items']
 
             if address_info:
 
@@ -92,15 +86,13 @@ class Scraper(object):
 
         return output
 
-
-
     def process_output(self):
         columns = ['url', 'email', 'phone', 'vk.com', 'instagram.com', 'facebook.com',
-           'image_source', 'schedule', 'title']
+                   'image_source', 'schedule', 'title']
 
         self.output_df = pd.DataFrame(columns=columns)
         results = copy.deepcopy(self.results)
-        
+
         for i, res in enumerate(results):
             for elem in columns[1:]:
                 results[res][elem] = list(set(results[res][elem]))
@@ -112,7 +104,8 @@ class Scraper(object):
                         answer = results[res][elem][0]
                         for email in results[res][elem]:
                             if SequenceMatcher(None, email, res).ratio() > max_ratio:
-                                max_ratio = SequenceMatcher(None, email, res).ratio()
+                                max_ratio = SequenceMatcher(
+                                    None, email, res).ratio()
                                 answer = email
 
                         results[res][elem] = [answer]
@@ -133,14 +126,13 @@ class Scraper(object):
                 vk_parser_result = self.process_vk_page(curr_row['vk.com'])
                 curr_row['address'] = vk_parser_result['address']
                 curr_row['metro_station'] = vk_parser_result['metro_station']
-                curr_row['image_source'] += ' ' + vk_parser_result['image_source']
+                curr_row['image_source'] += ' ' + \
+                    vk_parser_result['image_source']
 
             self.output_df = pd.concat([self.output_df,
-                                       pd.DataFrame(curr_row, index=[0])])
+                                        pd.DataFrame(curr_row, index=[0])])
 
         return self.output_df
-
-
 
     class DataSpider(scrapy.Spider):
 
@@ -166,8 +158,6 @@ class Scraper(object):
             if img:
                 self.path[self.start_urls[0]]['image_source'].append(img.src)
 
-            return
-
         def get_title(self, response):
             title = self.goose.extract(url=str(response.url)).title
             self.path[self.start_urls[0]]['title'].append(title)
@@ -187,7 +177,7 @@ class Scraper(object):
                     if word in link:
                         self.path[self.start_urls[0]][word].append(link)
 
-                if not 't.me' in link:
+                if 't.me' not in link:
                     corr_links.append(link)
 
             corr_links = list(tuple(corr_links))
