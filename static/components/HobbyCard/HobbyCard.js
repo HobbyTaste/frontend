@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import ImageSlider from './Image/Image'
 import Button from '@material-ui/core/Button';
+import InformationForm from './InformationForm/InformationForm';
+
 
 const HobbyCard = (props) => {
    // if(props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
@@ -14,7 +16,7 @@ const HobbyCard = (props) => {
                 <div className={style.mainContainer}>
                     <div className={style.mainBlock}>
                         <div className={style.imageContainer}><ImageSlider/></div>
-                        <div className={style.textContainer}>информация</div>
+                        <div className={style.textContainer}><InformationForm /></div>
                     </div>
                     <div className={style.buttonContainer}>
                         <Button className={style.button}>
