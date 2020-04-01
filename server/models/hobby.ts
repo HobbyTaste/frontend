@@ -57,10 +57,10 @@ const HobbySchema: Schema = new Schema({
         type: String,
     },
     owner: {
-        type: String
+        type: Schema.Types.ObjectId,
     },
     subscribers: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
         default: []
     },
     avatar: {
