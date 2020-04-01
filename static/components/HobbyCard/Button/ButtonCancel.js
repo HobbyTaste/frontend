@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonCancel:{
         margin: '0px 8px',
+        marginRight: '0px',
         display: 'flex',
         marginLeft: '0px',
         background: '#AEC55D',

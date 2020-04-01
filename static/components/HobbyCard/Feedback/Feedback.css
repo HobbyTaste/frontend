@@ -58,8 +58,12 @@
 .list{
     padding: 0;
 }
+.containerAction{
+    margin-right: 30px;
+}
 .textArea{
-    min-width: 90%;
+    padding-left: 5px;
+    min-width: 99%;
     border: none;
 }
 .text{
@@ -84,5 +88,5 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px;
+    margin: 8px 0px;
 }

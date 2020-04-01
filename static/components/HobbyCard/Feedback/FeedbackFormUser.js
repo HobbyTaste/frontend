@@ -74,6 +74,7 @@ class FeedbackFormUser extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className={style.containerAction}>
                 <form className={style.text}>
                     <textarea id="TextFeedback" placeholder="Оставьте свой отзыв" className={style.textArea}/>
                 </form>
@@ -85,7 +86,7 @@ class FeedbackFormUser extends React.Component {
                     <div className={style.buttonsContainer}><ButtonSend/><ButtonCancel/>
                     </div>
                 </div>
-
+                </div>
             </div>
         )
     }
