@@ -1,10 +1,28 @@
 import React, {Component} from 'react';
-//import style from './InformationForm.css';
+import style from './InformationForm.css';
 import { Link, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { compose } from 'redux';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { connect } from 'react-redux';
+import HalfRating from './FeedbackStatistic';
+import { initializeMainPage } from '../../../redux/reducers/mainPage-reducer';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        color: 'rgba(0, 0, 0, 0.54)',
+        '& > * + *': {
+            marginTop: theme.spacing(1),
+        },
+    },
+    stars:{
+        color: 'rgba(0, 0, 0, 0.54)',
+    }
+}));
+
 
 
 class InformationForm extends React.Component {
@@ -28,34 +46,47 @@ class InformationForm extends React.Component {
     render() {
         return (
             <form>
-                <label>
-                    Я собираюсь пойти:
-                    <input
-                        name="hobbyName"
-                        type="text"
-                        value={"Name"}
-                        onChange={this.handleInputChange} />
-                </label>
-                <label>
-                    <LocationOnIcon/>
-                    <input
-                        name="metro"
-                        type="text"
-                        value={this.state.numberOfGuests}
-                        onChange={this.handleInputChange} />
-                </label>
+                <div className={style.nameContainer}>
+                    <h1 className={style.nameHobby}>{this.props.name}</h1>
+                    <HalfRating isUserAuth = {this.props.isUserAuth}/>
+                </div>
+                <span className={style.metro}>
+                <LocationOnIcon /> {this.props.metro}
+                </span>
+                <div className={style.description}>
+                <h3>
+                    Адрес: {this.props.adress}
+                </h3>
+                <h3>
+                    Время занятий: {this.props.time}
+                </h3>
+                    <h3>
+                        Удобства: {this.props.comfortable}
+                    </h3>
+                    {this.props.equipment && <h3> Экипировка: {this.props.equipment} </h3>}
+                    <h3>
+                        Особые условия: {this.props.specialConditions}
+                    </h3>
+                </div>
             </form>
         );
     }
 }
+//export default InformationForm;
 
 
 const mapStateToProps = (state) => ({
-    //initializedHobbyPage: state.
+/*    initializedHobbyPage: state.
     providerIsAuth: state.providerCabinet.providerIsAuth,
 
     isAuthUser: state.auth.isAuth,
     isAuth: state.auth.isAuth || state.providerCabinet.providerIsAuth,
+*/
+
+    isProviderAuth: false,
+    isUserAuth: false,
+    isAuth: false,
 });
 
-export default compose(mapStateToProps, withRouter)(InformationForm);
+
+export default compose(connect(mapStateToProps), withRouter)(InformationForm);

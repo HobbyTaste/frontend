@@ -1,0 +1,88 @@
+.container{
+    background: #F9FBEF;
+    border-radius: 4px;
+    margin-bottom: 35px;
+    padding-left: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+.containerInfo{
+    display: flex;
+}
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.infoData{
+
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.data{
+    margin: 0;
+    padding: 0;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #9B9B9B;
+}
+.icon{
+    margin: 0;
+    color:#AEC55D;
+}
+.userName{
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+
+    color: #000000;
+
+}
+.list{
+    padding: 0;
+}
+.textArea{
+    min-width: 90%;
+    border: none;
+}
+.text{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.buttonContainer{
+    display: flex;
+    justify-content: right;
+}
+.buttonsContainer{
+    display: flex;
+
+}
+.lastLine{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px;
+}

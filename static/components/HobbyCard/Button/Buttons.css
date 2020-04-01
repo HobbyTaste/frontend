@@ -1,0 +1,48 @@
+.addMyHobby{
+
+}
+.icon{
+    display: flex;
+    justify-content: right;
+    padding-left: 22px;
+    margin: 0;
+    color: #6b6e58;
+}
+.iconProvider{
+    display: flex;
+    justify-content: right;
+    padding: 0px 8px;
+    margin: 0;
+    color: #6b6e58;
+    transform: scale(-1, 1);
+}
+.text{
+    margin: 0;
+    padding-left: 8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.16px;
+    color: #739C3E;
+}
+.textCancel{
+    margin: 0;
+    padding-left: 8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.16px;
+    color: #121212;
+
+}
+.textAddMyHobby{
+    font-size: 20px;
+}

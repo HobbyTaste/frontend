@@ -1,0 +1,95 @@
+.container{
+    box-sizing: border-box;
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+    width: 150px;
+    justify-content: center;
+    color: #739C3E;
+    background: #F9FBEF;
+    border-radius: 6px;
+    overflow-x: scroll;
+
+}
+.headerPrice{
+    text-align: center;
+    margin: 4px auto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #739C3E;
+}
+.text{
+    margin: 4px auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.5);
+}
+.contantContainer{
+    margin-top:20px;
+    margin-bottom: 0px;
+}
+.contact{;
+    text-align: left;
+    max-width: 100%;
+    text-after-overflow: 10;
+    margin: 0;
+    padding: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #739C3E;
+
+
+}
+.icon{
+    display: flex;
+    padding-right: 10px;
+    justify-content: left;
+    color:#6b6e58;
+}
+.flags{
+    margin:5px 0px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+    max-height: 20px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    border-radius: 6px;
+    font-style: normal;
+    text-transform: uppercase;
+    padding-left: 10px;
+
+}
+.parking{
+    font-size: 10px;
+    background: #F9FBEF;
+    color: #739C3E;
+
+}
+
+.beginner{
+    background: #E9F0C0;
+    font-size: 10px;
+    color: #739C3E;
+}
+
+.rent{
+    background: #AEC55D;
+    font-size: 8px;
+    color: #2F1E0A;
+}
