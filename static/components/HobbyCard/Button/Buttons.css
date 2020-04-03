@@ -6,19 +6,17 @@
     justify-content: right;
     padding-left: 22px;
     margin: 0;
-    color: #6b6e58;
+    color:  rgba(0, 0, 0, 0.87);
 }
 .iconProvider{
     display: flex;
     justify-content: right;
-    padding: 0px 8px;
     margin: 0;
     color: #6b6e58;
     transform: scale(-1, 1);
 }
 .text{
     margin: 0;
-    padding-left: 8px;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -27,11 +25,10 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.16px;
-    color: #739C3E;
+    color: #034488;;
 }
 .textCancel{
     margin: 0;
-    padding-left: 8px;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;

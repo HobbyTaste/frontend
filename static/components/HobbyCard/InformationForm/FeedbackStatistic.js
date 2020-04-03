@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
  //он должен откуда-то импортироваться потом
 const answers =[{
@@ -42,8 +43,8 @@ export default function HalfRating(props) {
     return (
         <div className={classes.root}>
             { props.isUserAuth
-                ? <Rating className={classes.stars} size='small' name="half-rating" defaultValue={avarageStars(answers)} precision={0.5} />
-                : <Rating className={classes.stars} size='small' name="half-rating-read" defaultValue={avarageStars(answers)} precision={0.5} readOnly /> }
+                ? <Rating className={classes.stars} size='small' name="half-rating" defaultValue={avarageStars(answers)} precision={0.5}  emptyIcon={<StarBorderIcon fontSize="inherit" />}/>
+                : <Rating className={classes.stars} size='small' name="half-rating-read" defaultValue={avarageStars(answers)} precision={0.5}  emptyIcon={<StarBorderIcon fontSize="inherit" />} readOnly /> }
             <span className={classes.countStars}> {answers.length}</span>
         </div>
     );

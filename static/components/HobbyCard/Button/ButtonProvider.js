@@ -10,10 +10,14 @@ const useStyles = makeStyles((theme) => ({
     },
     button:{
         margin: '0px 8px',
+        paddingLeft: '6px',
         display: 'flex',
+        justifyContent: 'space-between',
         maxWidth: '170px',
+        width: '176px',
         marginLeft: '0px',
-        background: '#E9F0C0',
+        background: '#EDECE8',
+        border: '1px solid #807466',
         borderRadius: '4px',
         textTransform: 'none',
         maxHeight: '36px',
@@ -21,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ButtonInMyHobby(props) {
+export default function ButtonProvider(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>

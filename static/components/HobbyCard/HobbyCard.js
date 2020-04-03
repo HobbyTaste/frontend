@@ -10,7 +10,6 @@ import Sidebar from './Sidebar/Sidebar';
 import ButtonUser from './Button/ButtonUser';
 import ButtonProvider from './Button/ButtonProvider'
 
-
 import InformationForm from './InformationForm/InformationForm';
 const textExample="      Как держаться в седле?\n" +
     "\n" +
@@ -55,7 +54,7 @@ const HobbyCard = (props) => {
                          </h4>
                 </div>
                 <div className={style.panel}>
-                    <Sidebar price="подробные цены за все варианты" mobile="+7-***-***-**-**" email="ld@gmail.com" flag={flags}/>
+                    <Sidebar price="подробные цены за все варианты" mobile="+7(***)***-**-**" email="ld@gmail.com" flag={flags}/>
                 </div>
             </div>
             <div className={style.communication}>
@@ -69,8 +68,8 @@ const HobbyCard = (props) => {
 
 let mapStateToProps = (state) => ({
     //providerIsAuth: state.providerCabinet.providerIsAuth
-    isUserAuth: true,
-    isProviderAuth: false,
+    isUserAuth: false,
+    isProviderAuth: true,
 });
 
 export default connect(mapStateToProps, null)(HobbyCard);

@@ -1,14 +1,14 @@
 .container{
     box-sizing: border-box;
+    border: 1px solid #2F1E0A;
     display: flex;
     margin-bottom: 20px;
     flex-direction: column;
     width: 150px;
     justify-content: center;
-    color: #739C3E;
-    background: #F9FBEF;
+    color: #034488;;
+    background: #FFFCF6;
     border-radius: 6px;
-    overflow-x: scroll;
 
 }
 .headerPrice{
@@ -19,7 +19,7 @@
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 0.15px;
-    color: #739C3E;
+    color: #034488;
 }
 .text{
     margin: 4px auto;
@@ -48,9 +48,12 @@
     line-height: 16px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #739C3E;
+    color: #034488;;
 
 
+}
+.mobile{
+    font-size: 10px;
 }
 .icon{
     display: flex;
@@ -73,23 +76,21 @@
     font-style: normal;
     text-transform: uppercase;
     padding-left: 10px;
-
+    font-size: 10px;
 }
 .parking{
-    font-size: 10px;
-    background: #F9FBEF;
-    color: #739C3E;
+
+    background: #FFFCF6;
+    color: #034488;
 
 }
 
 .beginner{
-    background: #E9F0C0;
-    font-size: 10px;
-    color: #739C3E;
+    background:  #EDECE8;
+    color: #034488;
 }
 
 .rent{
-    background: #AEC55D;
-    font-size: 8px;
-    color: #2F1E0A;
+    background: #178FD6;;
+    color: #FFFFFF;
 }

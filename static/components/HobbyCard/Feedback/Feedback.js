@@ -4,6 +4,9 @@ import Rating from '@material-ui/lab/Rating';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ButtonProvider from '../Button/ButtonProvider';
 import { connect } from 'react-redux';
+
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+
 const anwerInBD=[{
     userId: 1,
     userName: 'Азалия',
@@ -44,7 +47,7 @@ class Feedback extends React.Component {
         super(props);
         this.state = {
             isUserAuth: false,
-            isProviderAuth: false,
+            isProviderAuth: true,
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -75,7 +78,7 @@ class Feedback extends React.Component {
                                 </div>
                                 {isProvider && <ButtonProvider className={style.buttonContainer} text="Ответить"/>}
                             </div>
-                            <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={item.star} precision={0.5} readOnly />
+                            <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={item.star} emptyIcon={<StarBorderIcon fontSize="inherit" />} precision={0.5} readOnly />
                             <div className={style.text}>
                                 {item.text}
                             </div>

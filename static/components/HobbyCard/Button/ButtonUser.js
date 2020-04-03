@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     button:{
         display: 'flex',
         marginLeft: '0px',
-        background: '#E9F0C0',
+        border: '1px solid #b7b7b7',
+        background: '#EDECE8;',
         borderRadius: '4px',
         textTransform: 'none',
         maxHeight: '36px',

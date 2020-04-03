@@ -51,7 +51,7 @@ class InformationForm extends React.Component {
                     <HalfRating isUserAuth = {this.props.isUserAuth}/>
                 </div>
                 <span className={style.metro}>
-                <LocationOnIcon /> {this.props.metro}
+                <LocationOnIcon style={{color: '#178fd6'}} /> {this.props.metro}
                 </span>
                 <div className={style.description}>
                 <h3>

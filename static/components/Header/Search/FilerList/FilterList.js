@@ -130,15 +130,18 @@ class FilteredList extends React.Component {
         const {classes} = this.props;
         return (
             <div className={style.searcher}>
+                <div className={style.withoutList}>
                 <form className={style.form}>
                     <fieldset className={style.fieldSet}>
                         <input type="text" className={style.inputSearch} placeholder="Search..." id="searchInput" onChange={this.filterList}/>
                     </fieldset>
                 </form>
-
                 <button className={style.buttonFind} value="" ><SearchIcon style={{ fontSize: 30 }} /></button>
+                </div>
+                <div>
                 { (this.state.isShow) && <List items={this.state.items} handleClose = {this.handleClose}/>
                 }
+                </div>
             </div>
         );
     }

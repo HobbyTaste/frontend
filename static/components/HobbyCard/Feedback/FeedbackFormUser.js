@@ -4,6 +4,8 @@ import Rating from '@material-ui/lab/Rating';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ButtonSend from '../Button/ButtonsSend';
 import ButtonCancel from '../Button/ButtonCancel';
+
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { connect } from 'react-redux';
 const anwerInBD=[{
     userId: 1,
@@ -32,6 +34,7 @@ const useStyles = theme => ({
         color: 'rgba(0, 0, 0, 0.54)',
     },
     stars:{
+        marginLeft: '5px',
         color: 'rgba(0, 0, 0, 0.54)'
     },
     countStars:{
@@ -79,9 +82,9 @@ class FeedbackFormUser extends React.Component {
                     <textarea id="TextFeedback" placeholder="Оставьте свой отзыв" className={style.textArea}/>
                 </form>
                 <div className={style.lastLine}>
-                    <div>
+                    <div className={style.rating}>
                         Моя оценка:
-                        <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={0} precision={1}/>
+                        <Rating style={classes.stars} size='small' name="half-rating-read" emptyIcon={<StarBorderIcon fontSize="inherit" />} defaultValue={0} precision={1}/>
                     </div>
                     <div className={style.buttonsContainer}><ButtonSend/><ButtonCancel/>
                     </div>

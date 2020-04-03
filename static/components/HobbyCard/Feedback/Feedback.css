@@ -1,5 +1,5 @@
 .container{
-    background: #F9FBEF;
+    background: #fffcf6;
     border-radius: 4px;
     margin-bottom: 35px;
     padding-left: 12px;
@@ -39,7 +39,7 @@
 }
 .icon{
     margin: 0;
-    color:#AEC55D;
+    color:#178fd6;
 }
 .userName{
     margin: 0;
@@ -59,12 +59,19 @@
     padding: 0;
 }
 .containerAction{
+    margin-top: 20px;
     margin-right: 30px;
 }
+
+
+
 .textArea{
     padding-left: 5px;
     min-width: 99%;
     border: none;
+}
+.textArea::-webkit-input-placeholder {
+    color: #DADADA;
 }
 .text{
     font-style: normal;
@@ -88,5 +95,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px 0px;
+    margin: 20px 0px;
+}
+.rating{
+    display:flex;
+    color: #034488;
 }

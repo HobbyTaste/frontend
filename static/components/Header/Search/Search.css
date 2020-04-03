@@ -1,18 +1,24 @@
 .searcher{
     box-sizing: border-box;
-    display:inline-block;
-    height: 30px;
+    display:flex;
+    flex-direction: column;
+    flex: 1 1;
     width: 100%;
-    background: #E9F0C0;
+    background:  #EDECE8;
     border-radius: 4px;
     z-index: 20;
 }
+.withoutList{
+    display: flex;
+    justify-content: space-between;
+}
 .searcher input::-webkit-input-placeholder {
-    color: #DCD294;
+    color: #CCDDE8;
 }
 .list{
     box-sizing: border-box;
     display: inline-block;
+    z-index: 22;
     width:100%;
     height: 203px;
     padding: 0;
@@ -42,6 +48,7 @@
     box-sizing: border-box;
     width: 85%;
 }
+
 .fieldSet{
     box-sizing: border-box;
     width: 100%;
@@ -58,19 +65,20 @@
     border: none;
     cursor: pointer;
     color:#FFFFFF;
-    background: #E9F0C0;
+    background: #EDECE8;
 }
 
 .inputSearch{
-    display: inline-block;
+    display: flex;
+    flex-shrink: 1;
     width: 100%;
     box-sizing: border-box;
     border: none;
     outline: none;
     -webkit-appearance: none;
-    background: #E9F0C0;
+    background: #EDECE8;
     border-radius: 4px;
     font-size: 16px;
-    color: #453e2f;
+    color: #178FD6;
     padding-left: 20px;
 }

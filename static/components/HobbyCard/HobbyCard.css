@@ -22,6 +22,7 @@
 }
 
 .imageContainer{
+    display: flex;
     width: 49%;
     height: 325px;
 

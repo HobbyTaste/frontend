@@ -9,17 +9,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
     button: {
+        border: '1px solid #2F1E0A',
         margin: '5px 0px',
-        background: '#E9F0C0',
-        color: '#739C3E',
+        background: '#EDECE8;',
+        color: '#034488;',
         borderRadius: '4px',
         width: '94%',
         padding: '0',
         height: '75%',
-        border:'none',
         fontStyle: 'normal',
         fontWeight: '500',
         fontSize: '20px',
+
+        lineHeight: '18px',
         letterSpacing: '0.16px',
         textAlign: 'center',
         textTransform: 'none',
