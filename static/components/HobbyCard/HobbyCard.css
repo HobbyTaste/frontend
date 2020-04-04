@@ -19,6 +19,7 @@
 }
 .buttonContainer{
     display: flex;
+    margin-top: 5px;
 
 }
 

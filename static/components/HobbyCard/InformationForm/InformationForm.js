@@ -30,7 +30,7 @@ class InformationForm extends React.Component {
 
     render() {
         return (
-            <form>
+            <form className={style.form}>
                 <div className={style.nameContainer}>
                     <h1 className={style.nameHobby}>{this.props.name}</h1>
                     <HalfRating isUserAuth = {this.props.isUserAuth}/>

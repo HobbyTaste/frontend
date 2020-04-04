@@ -1,6 +1,9 @@
 .stars{
     color:rgba(0, 0, 0, 0.54);
 }
+.form{
+    min-height: 325px;
+}
 .nameContainer{
     display: flex;
 
