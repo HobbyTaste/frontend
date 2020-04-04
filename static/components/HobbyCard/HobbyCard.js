@@ -31,7 +31,6 @@ const flags={
 
 
 const HobbyCard = (props) => {
-   // if(props.providerIsAuth) return <Redirect to={"/provider/cabinet"} />;
     return (
         <div>
             <div className={style.infoContainer}>
@@ -60,16 +59,18 @@ const HobbyCard = (props) => {
             <div className={style.communication}>
                 Отзывы:
                     <Feedback isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth} />
-                 {props.isUserAuth && <FeedbackFormUser />}
+
             </div>
         </div>
        );
 };
 
+/*Их стора куча данных достать и сделать свойствами*/
 let mapStateToProps = (state) => ({
     //providerIsAuth: state.providerCabinet.providerIsAuth
     isUserAuth: false,
     isProviderAuth: true,
+
 });
 
 export default connect(mapStateToProps, null)(HobbyCard);

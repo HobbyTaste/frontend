@@ -10,21 +10,6 @@ import { initializeMainPage } from '../../../redux/reducers/mainPage-reducer';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        color: 'rgba(0, 0, 0, 0.54)',
-        '& > * + *': {
-            marginTop: theme.spacing(1),
-        },
-    },
-    stars:{
-        color: 'rgba(0, 0, 0, 0.54)',
-    }
-}));
-
-
-
 class InformationForm extends React.Component {
     constructor(props) {
         super(props);

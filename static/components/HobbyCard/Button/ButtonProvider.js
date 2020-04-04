@@ -29,7 +29,7 @@ export default function ButtonProvider(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Button className={classes.button}><p className={style.text}>{props.text}</p> <p className={style.iconProvider}><EditIcon style={{ fontSize: 20}}/></p></Button>
+            <Button className={classes.button} onClick={props.onClick}><p className={style.text}>{props.text}</p> <p className={style.iconProvider}><EditIcon style={{ fontSize: 20}}/></p></Button>
         </div>
     );
 }

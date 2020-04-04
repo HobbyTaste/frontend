@@ -1,95 +1,94 @@
 import  React, {Component} from 'react'
 import style from './Feedback.css';
-import Rating from '@material-ui/lab/Rating';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ButtonProvider from '../Button/ButtonProvider';
 import { connect } from 'react-redux';
+import CommentText from './CommentText';
+import CommentInput from './CommentInput';
 
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-const anwerInBD=[{
+
+const comments=[{
+    idComment: 1,
     userId: 1,
-    userName: 'Азалия',
-    data: '28.12.2020',
-    text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
-    star: 5,
+    isHaveAnswer: true,
+    text: 'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
+    nameWriter: 'Азалия',
+    date: '28.12.2020',
+    stars: 5,
     answerId:1,
 },
     {
+        idComment: 2,
         userId: 2,
-        userName: 'Имя',
-        data: '21.10.2020',
+        isHaveAnswer: false,
         text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
-        star: 3,
-        answerId:2,
+        nameWriter: 'Имя',
+        date: '28.12.2020',
+        stars: 5,
+        answerId: null,
+    },
+
+    {
+        idComment: 3,
+        userId: 3,
+        isHaveAnswer: true,
+        text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
+        nameWriter: 'Имя еще',
+        date: '30.3.2020',
+        stars: 4,
+        answerId: 2,
     },
 ]
-
-
-
-const useStyles = theme => ({
-    root: {
-        display: 'flex',
-        alignItems: 'center',
-        color: 'rgba(0, 0, 0, 0.54)',
-    },
-    stars:{
-        color: 'rgba(0, 0, 0, 0.54)'
-    },
-    countStars:{
-        margin: '0px 5px',
+const answers=[{
+    answer_id: 1,
+    providerId: 1,
+    text: 'Спасибо за ваш отзыв! бла бла бла',
+    nameWriter: 'Имя парнера',
+    status: 'директор',
+    idComment: 1,
+    date: '15.04.2020',
+},
+    {
+        answerId:2,
+        providerId: 2,
+        text: 'Спасибо за ваш отзыв! бла бла бла',
+        nameWriter: 'Имя парнера2',
+        status: 'руководитель',
+        idComment: 3,
+        date: '16.04.2020',
     }
-});
-
+]
 
 class Feedback extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserAuth: false,
-            isProviderAuth: true,
+            isUserAuth: props.isUserAuth,
+            isProviderAuth: props.isProviderAuth,
         };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-    handleClick(event) {
-        //dds
     }
 
-    handleClose () {
-    //    this.setState({isShow: false});
 
-    }
     render(){
-        const classes = useStyles()
         const isProvider = this.state.isProviderAuth;
+        function getAnswer(answerId){
+            return answers[answerId-1];
+        }
         return (
+            <div>
             <ul className={style.list}>
                 {
-                    anwerInBD.map(function(item) {
-                        return <li key={item.answerId} className={style.container}>
-                            <div className={style.info}>
-                                <div className={style.containerInfo}>
-                                <p className={style.icon}><AccountCircleIcon style={{ fontSize: 40}} /></p>
-                                <div className={style.infoData}>
-                                    <p className={style.userName}>{item.userName}</p>
-                                    <p className={style.data}> {item.data}</p>
-                                </div>
-                                </div>
-                                {isProvider && <ButtonProvider className={style.buttonContainer} text="Ответить"/>}
-                            </div>
-                            <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={item.star} emptyIcon={<StarBorderIcon fontSize="inherit" />} precision={0.5} readOnly />
-                            <div className={style.text}>
-                                {item.text}
-                            </div>
+                    comments.map(function(item) {
+                        return <li key={item.idComment} className={style.container}>
+                            <CommentText comment={item} isProviderAuth={isProvider} isItAnswerProvider={false}  />
+                            {item.isHaveAnswer && <CommentText comment={getAnswer(item.answerId)} isProviderAuth={isProvider} isItAnswerProvider={true}/>}
                         </li>
                     })
                 }
             </ul>
-
+                {this.state.isUserAuth && <CommentInput isAnswer={false} />}
+        </div>
         );
     }
 }
-
 
 export default Feedback;
