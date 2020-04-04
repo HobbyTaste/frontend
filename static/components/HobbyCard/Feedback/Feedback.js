@@ -85,7 +85,7 @@ class Feedback extends React.Component {
                     })
                 }
             </ul>
-                {this.state.isUserAuth && <CommentInput isAnswer={false} />}
+                {this.state.isUserAuth && <div><p className={style.labelAnswer} > Добавить отзыв:</p> <CommentInput isAnswer={false} /> </div>}
         </div>
         );
     }

@@ -28,7 +28,7 @@ export default function ButtonСancel(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Button className={classes.buttonCancel}><p className={style.textCancel}>Отменить</p> </Button>
+            <Button className={classes.buttonCancel} onClick={props.onClick}><p className={style.textCancel}>Отменить</p> </Button>
         </div>
     );
 

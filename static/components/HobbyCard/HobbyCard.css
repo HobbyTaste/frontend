@@ -3,7 +3,8 @@
     width: 100%;
     justify-content:space-between;
     box-sizing: border-box;
-    padding: 25px
+    padding: 25px;
+    padding-bottom: 0px;
 }
 .mainContainer{
     display: flex;
@@ -23,18 +24,18 @@
 
 .imageContainer{
     display: flex;
-    width: 49%;
+    width: 47%;
     height: 325px;
 
 }
 .textContainer{
-    margin:0px 46px;
+    margin:0px 20px;
     display: flex;
     flex-direction: column;
 
 }
 .mainDescription{
-    margin-right:46px;
+    margin-right:20px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;

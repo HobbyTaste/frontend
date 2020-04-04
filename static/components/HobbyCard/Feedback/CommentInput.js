@@ -7,6 +7,7 @@ import ButtonCancel from '../Button/ButtonCancel';
 
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { connect } from 'react-redux';
+
 const anwerInBD=[{
     userId: 1,
     userName: 'Азалия',
@@ -47,27 +48,28 @@ class CommentInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            value: '',
             isAnswer: props.isAnswer,
             userName: 'Имя пользователя из store',
         };
         this.handleClick = this.handleClick.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
     }
 
     handleClick(event) {
-        //dds
+        this.setState({value: ''});
     }
 
-    handleClose() {
-        //    this.setState({isShow: false});
-
-    }
 
     render() {
         const classes = useStyles()
         var today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
 
-        let classContainer = style.container+' '+style.containerComment;
+        let classContainer = style.container +' '+ style.containerComment;
         if (this.state.isAnswer) {
             classContainer += (' ' + style.containerAnswer);
         }
@@ -83,14 +85,14 @@ class CommentInput extends React.Component {
                 </div>
                 <div className={style.containerAction}>
                     <form className={style.text}>
-                        <textarea id="TextFeedback" placeholder="Оставьте свой отзыв" className={style.textArea}/>
+                        <textarea value={this.state.value} id="TextFeedback" placeholder="Оставьте свой отзыв" onChange={this.handleChange} className={style.textArea}/>
                     </form>
                     <div className={style.lastLine}>
                         {!this.state.isAnswer ? <div className={style.rating}>
                             Моя оценка:
                             <Rating style={classes.stars} size='small' name="half-rating-read" emptyIcon={<StarBorderIcon fontSize="inherit" />} defaultValue={0} precision={1}/>
                         </div> : <div></div>}
-                        <div className={style.buttonsContainer}><ButtonSend/><ButtonCancel/>
+                        <div className={style.buttonsContainer}><ButtonSend/><ButtonCancel onClick={this.handleClick}/>
                         </div>
                     </div>
                 </div>

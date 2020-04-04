@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'normal',
         fontSize: '16px',
         lineHeight: '20px',
-        color: '#739C3E',
+        color: '#034488',
 
     },
     buttonExit: {
