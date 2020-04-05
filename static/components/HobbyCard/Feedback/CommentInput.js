@@ -4,7 +4,7 @@ import Rating from '@material-ui/lab/Rating';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ButtonSend from '../Button/ButtonsSend';
 import ButtonCancel from '../Button/ButtonCancel';
-
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { connect } from 'react-redux';
 
@@ -85,7 +85,7 @@ class CommentInput extends React.Component {
                 </div>
                 <div className={style.containerAction}>
                     <form className={style.text}>
-                        <textarea value={this.state.value} id="TextFeedback" placeholder="Оставьте свой отзыв" onChange={this.handleChange} className={style.textArea}/>
+                        <TextareaAutosize value={this.state.value} id="TextFeedback" placeholder="Оставьте свой отзыв" onChange={this.handleChange} className={style.textArea}/>
                     </form>
                     <div className={style.lastLine}>
                         {!this.state.isAnswer ? <div className={style.rating}>

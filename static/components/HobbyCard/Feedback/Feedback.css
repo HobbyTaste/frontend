@@ -79,6 +79,7 @@
     padding-left: 5px;
     min-width: 99%;
     border: none;
+    min-height: 50px;
 }
 .textArea::-webkit-input-placeholder {
     color: #DADADA;
