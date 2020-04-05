@@ -10,15 +10,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
     button: {
+        border: '1px solid #2F1E0A',
         height: '30px',
         boxShadow: 'none',
         margin: '5px 0px',
-        background: '#E9F0C0',
-        color: '#739C3E',
+        background: '#EDECE8',
+        color: '#034488',
         borderRadius: '4px',
         width: '94%',
         padding: '0px 10px',
-        border: 'none',
         fontStyle: 'normal',
         fontWeight: '500',
         fontSize: '20px',
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'normal',
         fontSize: '16px',
         lineHeight: '20px',
-        color: '#739C3E',
+        color: '#034488',
 
     },
     buttonExit: {

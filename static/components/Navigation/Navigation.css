@@ -1,7 +1,7 @@
 .navSite{
     display: flex;
     justify-content: center;
-    background: #F9FBEF;
+    background: #FFFCF6;;
     height: 40px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
 }
@@ -19,7 +19,7 @@
 }
 
 .menu > li > a{
-    color: #739C3E;
+    color: #034488;;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;

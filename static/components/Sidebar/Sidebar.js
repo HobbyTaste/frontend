@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const Sidebar = (props) => {
     return (
-        <div>
+        <div className={style.container}>
            <div className={style.calendar}></div>
             <div className={style.advert}></div>
         </div>

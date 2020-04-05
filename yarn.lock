@@ -1106,6 +1106,17 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
+"@material-ui/lab@^4.0.0-alpha.47":
+  version "4.0.0-alpha.47"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.47.tgz#757a336e4c2496f700a392ff41e25a7d460a387b"
+  integrity sha512-+WC3O0M/769D3nO9Rqupusc+lob7tQMe5/DnOjAhZ0bpXlJbhZb7N84WkEk4JgQLj6ydP8e9Jhqd1lG+mGj+xw==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@material-ui/utils" "^4.9.6"
+    clsx "^1.0.4"
+    prop-types "^15.7.2"
+    react-is "^16.8.0"
+
 "@material-ui/styles@^4.8.2":
   version "4.8.2"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.8.2.tgz#841acbc4314accbe82a45cb1feb758d47448c802"
@@ -1148,6 +1159,15 @@
   version "4.7.1"
   resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.7.1.tgz#dc16c7f0d2cd02fbcdd5cfe601fd6863ae3cc652"
   integrity sha512-+ux0SlLdlehvzCk2zdQ3KiS3/ylWvuo/JwAGhvb8dFVvwR21K28z0PU9OQW2PGogrMEdvX3miEI5tGxTwwWiwQ==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    prop-types "^15.7.2"
+    react-is "^16.8.0"
+
+"@material-ui/utils@^4.9.6":
+  version "4.9.6"
+  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.9.6.tgz#5f1f9f6e4df9c8b6a263293b68c94834248ff157"
+  integrity sha512-gqlBn0JPPTUZeAktn1rgMcy9Iczrr74ecx31tyZLVGdBGGzsxzM6PP6zeS7FuoLS6vG4hoZP7hWnOoHtkR0Kvw==
   dependencies:
     "@babel/runtime" "^7.4.4"
     prop-types "^15.7.2"
@@ -3654,6 +3674,11 @@ clsx@^1.0.2:
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.0.4.tgz#0c0171f6d5cb2fe83848463c15fcc26b4df8c2ec"
   integrity sha512-1mQ557MIZTrL/140j+JVdRM6e31/OA4vTYxXgqIIZlndyfjHpyawKZia1Im05Vp9BWmImkcNrNtFYQMyFcgJDg==
 
+clsx@^1.0.4:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.0.tgz#62937c6adfea771247c34b54d320fb99624f5702"
+  integrity sha512-3avwM37fSK5oP6M5rQ9CNe99lwxhXDOeSWVPAOYF6OazUTgZCMb0yWlJpmdD74REy1gkEaFiub2ULv4fq9GUhA==
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -4772,6 +4797,13 @@ dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
   integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
+
+dom7@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.1.3.tgz#a736f9c3bfbc4ca039a81cd095f97d1d7f3de19c"
+  integrity sha512-QTxHHDox+M6ZFz1zHPAHZKI3JOHY5iY4i9BK2uctlggxKQwRhO3q3HHFq1BKsT25Bm/ySSj70K6Wk/G4bs9rMQ==
+  dependencies:
+    ssr-window "^1.0.1"
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -11338,6 +11370,13 @@ react-hot-loader@^4.7.2:
     shallowequal "^1.1.0"
     source-map "^0.7.3"
 
+react-id-swiper@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-3.0.0.tgz#110cc0d5a84c5f6e2c6247ca71f12f5783ebd020"
+  integrity sha512-80iJPfxPeuLpMxvAYIS9uw38MLngRoZ51RmL5ya5y/+Qw/H/ZxMBwIGfBRKU4REl+tJxARMHvESbwQUEdJgzqA==
+  dependencies:
+    object-assign "^4.1.1"
+
 react-input-autosize@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"
@@ -12654,6 +12693,11 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
+ssr-window@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-1.0.1.tgz#30752a6a4666e7767f0b7e6aa6fc2fdbd0d9b369"
+  integrity sha512-dgFqB+f00LJTEgb6UXhx0h+SrG50LJvti2yMKMqAgzfUmUXZrLSv2fjULF7AWGwK25EXu8+smLR3jYsJQChPsg==
+
 ssri@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.1.tgz#2a3c41b28dd45b62b63676ecb74001265ae9edd8"
@@ -12982,6 +13026,14 @@ svgo@^1.0.0, svgo@^1.2.2:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+swiper@^5.3.6:
+  version "5.3.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-5.3.6.tgz#102b7f8145d734ec4c30e04602160382356b5948"
+  integrity sha512-FUz50g6RuvGAuXQWmR5lRPoA129leRUZ/p57ckr8+P5kR7VktElVQ47JGmWD86mOJCFfvMhUf0hinyC5UFL5iw==
+  dependencies:
+    dom7 "^2.1.3"
+    ssr-window "^1.0.1"
 
 symbol-observable@^1.2.0:
   version "1.2.0"
