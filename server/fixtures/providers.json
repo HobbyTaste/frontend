@@ -1,0 +1,26 @@
+[
+  {
+    "name" : "Sport Organization",
+    "password" : "sport",
+    "email" : "sport@test.com",
+    "avatar" : null,
+    "phone" : "+79009009090",
+    "info" : "sport events"
+  },
+  {
+    "name" : "Music Organization",
+    "password" : "music",
+    "email" : "music@test.com",
+    "avatar" : null,
+    "phone" : "+78008008080",
+    "info" : "music events"
+  },
+  {
+    "name" : "Travel Agency",
+    "password" : "travel",
+    "email" : "travel@test.com",
+    "avatar" : null,
+    "phone" : "+77007007070",
+    "info" : "travel events"
+  }
+]
