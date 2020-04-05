@@ -29,11 +29,13 @@ class App extends React.Component {
         return (
             <div className={style.appBackground}>
                 <div className={style.appWrapper}>
-                    <div className={style.appHeader}>
-                        <HeaderContainer/>
-                    </div>
-                    <div className={style.appNavigation}>
-                        <Navigation/>
+                    <div className={style.fixedHeader}>
+                        <div className={style.appHeader}>
+                            <HeaderContainer/>
+                        </div>
+                        <div className={style.appNavigation}>
+                            <Navigation/>
+                        </div>
                     </div>
                     <div className={style.appLayout}>
                         <div className={style.appSidebar}>
