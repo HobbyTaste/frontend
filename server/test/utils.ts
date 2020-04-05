@@ -2,28 +2,41 @@ import chai from 'chai';
 import 'mocha';
 import chaiHttp from 'chai-http';
 import mongoose from 'mongoose';
+import config from 'config';
+// @ts-ignore
+import Fixtures from 'node-mongodb-fixtures';
 
 import server from '../app';
-import { HTTP_STATUS } from './test';
 import User, { IUser } from '../models/user';
 import Hobby, { IHobby } from '../models/hobby';
 import Provider, { IProvider } from '../models/provider';
-import * as data from './sample_data';
 
 const assert: Chai.AssertStatic = chai.assert;
 chai.use(chaiHttp);
 
+export enum HTTP_STATUS {
+    BAD_REQUEST = 400,
+    UNAUTHORIZED = 401,
+    NOT_FOUND = 404,
+    OK = 200,
+};
+
+export const dbHost = config.get('dbHost');
+
+export const fixtures = new Fixtures({
+	dir: './server/fixtures'
+});
+
 export let agent: ChaiHttp.Agent = chai.request.agent(server);
-export let csrfToken: string = '';
 
 export function create_provider(provider: Partial<IProvider>, done: Mocha.Done) {
     agent.post('/provider/create')
     .send(provider)
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.UNAUTHORIZED, 'Status code is not 401');
-        csrfToken = res.header['csrf-token'];
+        process.env.csrfToken = res.header['csrf-token'];
         agent.post('/provider/create')
-        .set('csrf-token', csrfToken)
+        .set('csrf-token', process.env.csrfToken || '')
         .send(provider)
         .then((res: ChaiHttp.Response) => {
             assert.equal(res.status, HTTP_STATUS.OK, 'Status code is not 200');
@@ -37,7 +50,7 @@ export function create_provider(provider: Partial<IProvider>, done: Mocha.Done) 
 
 export function logout_provider(done: Mocha.Done): void {
     agent.get('/provider/logout')
-    .set('csrf-token', csrfToken)
+    .set('csrf-token', process.env.csrfToken || '')
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.OK, 'Logout failed');
         done();
@@ -46,7 +59,7 @@ export function logout_provider(done: Mocha.Done): void {
 
 export function login_provider(email: string | undefined, password: string | undefined, done: Mocha.Done): void {
     agent.post('/provider/login')
-    .set('csrf-token', csrfToken)
+    .set('csrf-token', process.env.csrfToken || '')
     .send({email: email, password: password})
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.OK, 'Email and password checking failed');
@@ -57,7 +70,7 @@ export function login_provider(email: string | undefined, password: string | und
 export function create_hobby_adder(hobby: Partial<IHobby>): async.AsyncFunction<any> {
     return function(callback: Function) {
         return agent.post('/hobby/add')
-        .set('csrf-token', csrfToken)
+        .set('csrf-token', process.env.csrfToken || '')
         .send(hobby)
         .then((res: ChaiHttp.Response) => {
             assert.equal(res.status, HTTP_STATUS.OK, 'Hobby was not added to database');
@@ -85,7 +98,7 @@ export function unify_hobby_list(hobby_list: Partial<IHobby>[]) {
 export function filter_test(filter: Partial<IHobby>, done: Mocha.Done) {
     agent.get('/hobby/filter')
     .query(filter)
-    .set('csrf-token', csrfToken)
+    .set('csrf-token', process.env.csrfToken || '')
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.OK, 'Status code is not 200');
         Hobby.find(filter, (err, hobbies) => {
@@ -102,9 +115,9 @@ export function create_user(user: Partial<IUser>, done: Mocha.Done) {
     .send(user)
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.UNAUTHORIZED, 'Status code is not 401');
-        const csrfToken = res.header['csrf-token'];
+        process.env.csrfToken = res.header['csrf-token'];
         agent.post('/user/create')
-        .set('csrf-token', csrfToken)
+        .set('csrf-token', process.env.csrfToken || '')
         .send(user)
         .then((res: ChaiHttp.Response) => {
             assert.equal(res.status, HTTP_STATUS.OK, 'Status code is not 200');
@@ -118,7 +131,7 @@ export function create_user(user: Partial<IUser>, done: Mocha.Done) {
 
 export function login_user(email: string | undefined, password: string | undefined, done: Mocha.Done): void {
     agent.post('/user/login')
-    .set('csrf-token', csrfToken)
+    .set('csrf-token', process.env.csrfToken || '')
     .send({email: email, password: password})
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.OK, 'Email and password checking failed');
@@ -128,7 +141,7 @@ export function login_user(email: string | undefined, password: string | undefin
 
 export function logout_user(done: Mocha.Done): void {
     agent.get('/user/logout')
-    .set('csrf-token', csrfToken)
+    .set('csrf-token', process.env.csrfToken || '')
     .then((res: ChaiHttp.Response) => {
         assert.equal(res.status, HTTP_STATUS.OK, 'Logout failed');
         done();
@@ -140,7 +153,7 @@ export function create_subscriber(label: string): async.AsyncFunction<any> {
         return Hobby.findOne({label: label}, (err, hobby) => {
             agent.get('/user/subscribe')
             .query({id: hobby?._id.toHexString()})
-            .set('csrf-token', csrfToken)
+            .set('csrf-token', process.env.csrfToken || '')
             .then((res: ChaiHttp.Response) => {
                 assert.equal(res.status, HTTP_STATUS.OK, 'Status code is not 200');
                 callback(null, hobby);

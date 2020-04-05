@@ -5,7 +5,7 @@
   "scripts": {
     "start": "NODE_APP_INSTANCE=secrets NODE_ENV=production node server/build/app.js",
     "start:front": "NODE_ENV=production ts-node --project frontServer/tsconfig.json frontServer/app.ts",
-    "start:watch": "./tasks/start-watch",
+    "start:watch": "./tasks/start-db && ./tasks/start-watch",
     "build:front": "NODE_ENV=production webpack --mode production",
     "build:front:watch": "NODE_ENV=development webpack --watch --mode development",
     "build:server": "NODE_ENV=production tsc --project server/tsconfig.json",
@@ -13,8 +13,7 @@
     "heroku-postbuild": "yarn build:server",
     "lint": "./tasks/lint-staging",
     "lint:all": "yarn eslint server/ static/",
-    "mongo": "PATH=~/Mongo/mongodb-shell-linux-x86_64-ubuntu1804-4.2.2/mongodb-linux-x86_64-ubuntu1804-4.2.2/bin mongo \"mongodb+srv://hobbytaste-a3rpe.mongodb.net/test\"  --username sikalov",
-    "test": "NODE_ENV=test env TS_NODE_PROJECT='server/tsconfig.json' mocha --exit"
+    "test": "./tasks/start-db && ./tasks/test"
   },
   "browserslist": [
     ">0.2%",

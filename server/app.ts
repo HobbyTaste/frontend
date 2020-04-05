@@ -49,7 +49,6 @@ app.use(cookieParser());
 app.use(fileUpload());
 */
 
-// for testing
 export const store = new MongoStore({
   url: dbHost
 })
