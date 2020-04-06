@@ -1,2 +1,3 @@
 static:
   baseUrl: https://storage.yandexcloud.net/hobby-taste/static
+port_front: 8080
