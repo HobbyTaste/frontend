@@ -1,13 +1,14 @@
 const path = require('path');
 const config = require('config');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 const DESTINATION_DIR = 'dist';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    entry: path.join(path.resolve(__dirname, 'static'), 'index.js'),
+    entry: './static/index.js',
     devtool: 'sourcemap',
     module: {
         rules: [
@@ -48,8 +49,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-        modules: [path.resolve(__dirname, 'node_modules')]
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
     },
     output: {
         path: path.join(__dirname, DESTINATION_DIR),
@@ -59,6 +59,9 @@ module.exports = {
     plugins: [
         new CopyPlugin([{
             from: 'public/images/favicon.ico',
-        }])
-    ]
+        }]),
+        new webpack.DefinePlugin({
+            BACK_HOST: "'" + `${config.get('backHost')}` + "'",
+        }),
+    ],
 };

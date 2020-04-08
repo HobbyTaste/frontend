@@ -1,6 +1,6 @@
 import BaseFetchClass from './BaseFetchClass';
 
-const BASE_URL = '/provider';
+const BASE_URL = BACK_HOST + '/provider';
 
 interface IProvider {
     name: string;
