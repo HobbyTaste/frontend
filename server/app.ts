@@ -49,15 +49,13 @@ app.use(cookieParser());
 app.use(fileUpload());
 */
 
-export const store = new MongoStore({
-  url: dbHost
-})
-
 app.use(expressSession({
   secret: 'pugs do drugs',
   resave: false,
   saveUninitialized: false,
-  store: store
+  store: new MongoStore({
+    url: dbHost
+  })
 }));
 app.use(csrf());
 
@@ -93,11 +91,7 @@ try {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-        .then(() => {
-          if (process.env.NODE_ENV !== 'test')
-           logger.info(`Connect to mongoDB: success`)
-        })
-        .catch(logger.error);
+    .catch(logger.error);
 } catch (e) {}
 
 // for testing
