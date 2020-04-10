@@ -13,27 +13,27 @@ class Preprocessor:
         dataset: np.ndarray,
         max_pred_horizon: int = 28,
         max_train_horizon: int = 30,
-        D_size: int = 5,
+        dim_size: int = 5,
         device=None,
     ):
         """
         dataset = [num_samples, dimentions]
         """
-        self.dataset = dataset[:, :D_size]
-        self.raw_dataset = dataset[:, :D_size]
+        self.dataset = dataset[:, :dim_size]
+        self.raw_dataset = dataset[:, :dim_size]
         self.max_pred_horizon = max_pred_horizon
         self.max_train_horizon = max_train_horizon
-        self.D_size = D_size
+        self.dim_size = dim_size
         self.device = device
         self.scaler = None
         self.train_size = None
         self.val_size = None
         self.test_size = None
-        self.X_train = None
+        self.x_train = None
         self.y_train = None
-        self.X_val = None
+        self.x_val = None
         self.y_val = None
-        self.X_test = None
+        self.x_test = None
         self.y_test = None
         self.batch_size = None
 
@@ -85,13 +85,12 @@ class Preprocessor:
         self,
         name: str,
         torch_tensor=True,
-        to_device=True,
     ) -> torch.Tensor:
         if name not in [
-            'X_train', 'X_val', 'X_test',
+            'x_train', 'x_val', 'x_test',
             'y_train', 'y_val', 'y_test',
         ]:
-            raise "Private field cannot be accessed"
+            raise AttributeError("Private field cannot be accessed")
         else:
             if torch_tensor:
                 return torch.Tensor(getattr(self, name)).to(self.device)
@@ -106,45 +105,45 @@ class Preprocessor:
         if name not in [
             'train', 'val', 'test',
         ]:
-            raise "Incorrect type"
-        X = torch.Tensor(getattr(self, 'X_'+name)).to(self.device)
+            raise TypeError("Incorrect type")
+        x = torch.Tensor(getattr(self, 'x_'+name)).to(self.device)
         y = torch.Tensor(getattr(self, 'y_'+name)).to(self.device)
-        if X is None:
-            raise "Doesn't have the field of this type"
+        if x is None:
+            raise TypeError("Doesn't have the field of this type")
         if name == 'train':
             return DataLoader(
-                TensorDataset(X, y),
+                TensorDataset(x, y),
                 shuffle=True,
                 batch_size=batch_size,
             )
         return DataLoader(
-            TensorDataset(X, y),
+            TensorDataset(x, y),
             shuffle=False,
             batch_size=batch_size,
         )
 
-    def _make_X_part(
+    def _make_x_part(
         self,
         begin: int,
         end: int,
         use_tqdm: bool = True,
     ) -> np.ndarray:
         """
-        X = [num_samples, max_train_horizon, D_size]
+        x = [num_samples, max_train_horizon, dim_size]
         """
-        X = self.dataset[begin:begin+self.max_train_horizon,
+        x = self.dataset[begin:begin+self.max_train_horizon,
                          :][np.newaxis, :, :]
         if use_tqdm:
             for i in tqdm(range(begin+1, end)):
                 new_elem = self.dataset[i:i+self.max_train_horizon,
                                         :][np.newaxis, :, :]
-                X = np.concatenate((X, new_elem))
+                x = np.concatenate((x, new_elem))
         else:
             for i in range(begin+1, end):
                 new_elem = self.dataset[i:i+self.max_train_horizon,
                                         :][np.newaxis, :, :]
-                X = np.concatenate((X, new_elem))
-        return X
+                x = np.concatenate((x, new_elem))
+        return x
 
     def _make_y_part(
         self,
@@ -153,7 +152,7 @@ class Preprocessor:
         use_tqdm: bool = True,
     ) -> np.ndarray:
         """
-        y = [num_samples, max_pred_horizon, D_size]
+        y = [num_samples, max_pred_horizon, dim_size]
         """
         y = self.dataset[begin+self.max_train_horizon:begin +
                          self.max_train_horizon+self.max_pred_horizon,
@@ -178,11 +177,11 @@ class Preprocessor:
         use_tqdm: bool = True,
     ):
         self.val_size = None
-        self.X_val, self.y_val = None, None
+        self.x_val, self.y_val = None, None
         self.train_size = train_size
         self.test_size = self.dataset.shape[0] - self.max_train_horizon -\
             self.max_pred_horizon - self.train_size
-        self.X_train = self._make_X_part(
+        self.x_train = self._make_x_part(
             begin=0,
             end=train_size,
             use_tqdm=use_tqdm
@@ -192,7 +191,7 @@ class Preprocessor:
             end=train_size,
             use_tqdm=use_tqdm
         )
-        self.X_test = self._make_X_part(
+        self.x_test = self._make_x_part(
             begin=train_size,
             end=self.dataset.shape[0]-self.max_train_horizon
             - self.max_pred_horizon,
@@ -215,7 +214,7 @@ class Preprocessor:
         self.val_size = val_size
         self.test_size = self.dataset.shape[0] - self.max_train_horizon -\
             self.max_pred_horizon - train_size - val_size
-        self.X_train = self._make_X_part(
+        self.x_train = self._make_x_part(
             begin=0,
             end=train_size,
             use_tqdm=use_tqdm
@@ -225,7 +224,7 @@ class Preprocessor:
             end=train_size,
             use_tqdm=use_tqdm
         )
-        self.X_val = self._make_X_part(
+        self.x_val = self._make_x_part(
             begin=train_size,
             end=train_size+val_size,
             use_tqdm=use_tqdm
@@ -235,7 +234,7 @@ class Preprocessor:
             end=train_size+val_size,
             use_tqdm=use_tqdm
         )
-        self.X_test = self._make_X_part(
+        self.x_test = self._make_x_part(
             begin=train_size+val_size,
             end=self.dataset.shape[0]-self.max_train_horizon
             - self.max_pred_horizon,
