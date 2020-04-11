@@ -1,6 +1,6 @@
 import BaseFetchClass from './BaseFetchClass';
 
-const BASE_URL = '/user';
+const BASE_URL = BACK_HOST + '/user';
 
 interface ILoginError {
     email?: string;
