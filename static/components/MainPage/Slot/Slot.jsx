@@ -11,7 +11,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const Slot = (props) => {
     return (<div className={style.slot}>
-        <span className={style.slotPic}/>
+        <img className={style.slotPic} src='https://i2.wp.com/soznatelno.ru/wp-content/uploads/2016/11/no-image-icon-23485.png'/>
         <span className={style.slotDescription}>
             <div className={style.slotHeader}>
                 <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>

@@ -17,7 +17,7 @@ const CardSlider = () => {
         pagination: {
             el: '.swiper-pagination',
             type: 'bullets',
-            clickable: true
+            clickable: true,
         },
         loop: true,
         spaceBetween: 5,
@@ -39,30 +39,3 @@ const CardSlider = () => {
 }
 
 export default CardSlider;
-
-/*const SimpleSwiperWithParams = () => {
-    const params = {
-        slidesPerView: 3,
-        pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true
-        },
-        loop: true,
-        spaceBetween: 5
-    }
-
-    return (
-        <Swiper {...params}>
-            {
-                images.map(function(im, index) {
-                    return <div>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[index]}/>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+1)%images.length]}/>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+2)%images.length]}/>
-                    </div>
-                })
-            }
-        </Swiper>
-    )
-}*/

@@ -11,9 +11,7 @@
     width: 60px;
     height: 60px;
     margin-left: 16px;
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.1));
+    object-fit: cover;
 }
 
 .slotDescription {
@@ -51,11 +49,6 @@
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.4px;
-}
-
-.metroPic {
-    height: 16px;
-    width: 10px;
 }
 
 .address {
