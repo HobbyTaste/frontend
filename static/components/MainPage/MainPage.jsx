@@ -29,6 +29,36 @@ class MainPage extends React.Component {
             <div className={style.slotContainer}>
                 <div className="center">
                     <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                        price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                        isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                        isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+                </div>
+                <div className="center">
+                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                          price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                          isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                          isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+                </div>
+                <div className="center">
+                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                          price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                          isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                          isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+                </div>
+                <div className="center">
+                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                          price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                          isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                          isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+                </div>
+                <div className="center">
+                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                          price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                          isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                          isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+                </div>
+                <div className="center">
+                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
                           price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
                           isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
                           isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
@@ -45,13 +75,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(connect(mapStateToProps, { initializeMainPage }), withRouter)(MainPage);
-
-/*
-            <div className={style.slotContainer}>
-                <div className="center">
-                    <Slot name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                          price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                          isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                          isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
-                </div>
-            </div>*/

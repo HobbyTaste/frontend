@@ -28,9 +28,9 @@ const CardSlider = () => {
             {
                 images.map(function(im, index) {
                     return <div>
-                        <img src={images[index]}/>
-                        <img src={images[index]}/>
-                        <img src={images[index]}/>
+                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[index]}/>
+                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+1)%images.length]}/>
+                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+2)%images.length]}/>
                     </div>
                 })
             }
