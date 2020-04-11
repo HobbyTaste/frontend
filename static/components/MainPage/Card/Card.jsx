@@ -13,7 +13,7 @@ const Card = (props) => {
             <span className={style.cardDescription}>
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
-                    <span style={{ color: 'white' }}><HalfRating isUserAuth = {props.isUserAuth}/></span>
+                    <HalfRating isUserAuth = {props.isUserAuth}/>
                 </div>
                 <span className={style.icon}><MoreHorizIcon style={{ color: '#FFFFFF' }}/></span>
                 <div className={`${style.metro} ${style.colorBlueCard}`}>
