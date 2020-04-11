@@ -19,8 +19,8 @@ const Slot = (props) => {
             </div>
             <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
         </span>
-        <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
         <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
+        <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
 
     </div>);
 }

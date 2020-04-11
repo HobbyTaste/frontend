@@ -10,14 +10,12 @@ const Card = (props) => {
             <span className={style.cardDescription}>
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
+                    <HalfRating isUserAuth = {props.isUserAuth}/>
                 </div>
                 <div className={`${style.metro} ${style.colorBlueCard}`}>
-                    {props.metro}
+                    <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
                 </div>
-                <div className={`${style.metro} ${style.colorBlueCard}`}>
-                    {props.metro}
-                </div>
-                <div className={`${style.address} ${style.colorGrayCard}`}>{props.adress}</div>
+                <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
             </span>
         </span>
     </div>);
