@@ -64,6 +64,19 @@
     letter-spacing: 0.25px;
 }
 
+.icon {
+    margin-left: 12px;
+    margin-right: 12px;
+    top: 50%;
+    transform: translate(15%, 25%);
+}
+
+.iconEmpty {
+    width: 50px;
+    top: 50%;
+    transform: translate(15%, 25%);
+}
+
 .colorBlueSlot {
     color: #034488;
 }

@@ -33,3 +33,10 @@
     background: #178FD6;
     color: white;
 }
+
+.icon {
+    float: right;
+    top: 50%;
+    transform: translate(0, 2%);
+    margin-right: 5px;
+}

@@ -13,7 +13,7 @@ const Card = (props) => {
                     <HalfRating isUserAuth = {props.isUserAuth}/>
                 </div>
                 <div className={`${style.metro} ${style.colorBlueCard}`}>
-                    <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
+                    <LocationOnIcon style={{ color: '#178FD6', fontSize: 'small' }} /> {props.metro}
                 </div>
                 <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
             </span>
