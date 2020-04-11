@@ -16,7 +16,7 @@ interface IHobby {
     subscribers: string[], // подписчики на данное хобби
 }
 
-const BASE_URL = BACK_HOST + '/hobby';
+const BASE_URL = '/restapi/hobby';
 
 /**
  * API для работы с хобби: поиск, добавление, редактирование
