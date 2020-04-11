@@ -42,8 +42,7 @@ class App extends React.Component {
                             <Sidebar/>
                         </div>
                         <div className={style.appWrapperContent}>
-                            <Route exact path="/" render={() => <Categories/>}/>
-                            <Route path="/search/:category?" render={() => <MainPage/>}/>
+                            <Route exact path="/" render={() => <MainPage/>}/>
                             <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
                             <Route exact path="/hobby/card" render={() => <HobbyCard/>}/>
                             <Route exact path="/user/cabinet" render={() => <HobbyCard/>}/>

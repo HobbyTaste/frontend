@@ -1,0 +1,53 @@
+.priceContainer {
+    width: 150px;
+    height: 70px;
+    margin-left: 20px;
+
+    background: #FFFCF6;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 6px;
+
+    position: relative;
+}
+
+.price {
+    position: absolute;
+    left: 51px;
+    top: calc(50% - 24px/2 - 24px);
+    font-size: 20px;
+    line-height: 24px;
+
+    letter-spacing: 0.15px;
+
+    color: #034488;
+}
+
+.priceTime {
+    position: absolute;
+    left: 24px;
+    top: calc(50% - 16px/2);
+
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.priceDays {
+    position: absolute;
+    left: 33px;
+    top: calc(50% - 20px/2 + 22px);
+
+    font-size: 14px;
+    line-height: 20px;
+
+    letter-spacing: 0.25px;
+
+    color: #034488;
+
+}

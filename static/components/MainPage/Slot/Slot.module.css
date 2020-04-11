@@ -1,0 +1,77 @@
+.slot {
+    display: flex;
+    width: 965px;
+    height: 80px;
+    position: center;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.slotPic {
+    width: 60px;
+    height: 60px;
+    margin-left: 16px;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.1));
+}
+
+.slotDescription {
+    margin-left: 20px;
+    width: 440px;
+}
+
+.slotHeader {
+    position: center;
+    display: flex;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+}
+
+.stars {
+    width: 48px;
+    height: 10px;
+    margin: 4px;
+    font-size: 10px;
+}
+
+.comments {
+    width: 105px;
+    height: 16px;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 16px;letter-spacing: 0.4px;
+}
+
+.metro {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+}
+
+.metroPic {
+    height: 16px;
+    width: 10px;
+}
+
+.address {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+}
+
+.colorBlueSlot {
+    color: #034488;
+}
+
+.colorGraySlot {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.colorBlackSlot {
+    color: rgba(0, 0, 0, 0.87);
+}

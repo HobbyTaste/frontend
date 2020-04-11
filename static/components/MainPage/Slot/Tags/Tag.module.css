@@ -1,0 +1,35 @@
+.tagContainer {
+    margin-left: 5px;
+    width: 150px;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.tag {
+    padding-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 16px;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.tagParking {
+    background: #FFFCF6;
+    color: #034488;
+}
+
+.tagBeginner {
+    background: #EDECE8;
+    color: #034488;
+}
+
+.tagRent {
+    background: #178FD6;
+    color: white;
+}
