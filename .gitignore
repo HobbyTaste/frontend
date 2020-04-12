@@ -5,3 +5,4 @@ yarn-error.log
 config/default-secrets.yaml
 /ml/enviroment/env/*
 **/__pycache__/**
+**/.ipynb_checkpoints/**
