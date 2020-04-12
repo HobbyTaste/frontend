@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Feedback from './Feedback/Feedback';
-import FeedbackFormUser from './Feedback/FeedbackFormUser';
-import ImageSlider from './Image/Image';
 import Sidebar from './Sidebar/Sidebar';
 import ButtonInMyHobby from './Button/ButtonUser';
 import ButtonProvider from './Button/ButtonProvider'
@@ -34,8 +32,9 @@ const HobbyCard = (props) => {
                 <div className={style.mainContainer}>
                     <div className={style.mainBlock}>
                         <div className={style.imageContainer}><Slider/></div>
-                        <div className={style.textContainer}><InformationForm name='Вид хобби' metro='Станция метро' time='пн чт 21:30'
-                                                                              equipment= 'выдается' adress="Долгопрудный, Первомайская 32 к2" specialConditions='Чай только зеленый с лимоном без сахара' comfortable='диванчики'/>
+                        <div className={style.textContainer}><InformationForm name={props.hobby_info.label} metro={props.hobby_info.metro} time={props.hobby_info.timeTable}
+                                                                              equipment= {props.hobby_info.equipment} adress={props.hobby_info.address}
+                                                                              specialConditions={props.hobby_info.specialConditions} comfortable={props.hobby_info.comfortable}/>
 
                             <div className={style.buttonContainer}>
                                 {props.isUserAuth && <ButtonInMyHobby />}
@@ -50,7 +49,7 @@ const HobbyCard = (props) => {
                          </h4>
                 </div>
                 <div className={style.panel}>
-                    <Sidebar price="подробные цены за все варианты" mobile="+7(***)***-**-**" email="ld@gmail.com" flag={flags}/>
+                    <Sidebar price={props.hobby_info.price} mobile={props.hobby_info.contact.mobile} website={props.hobby_info.contact.website} flag={props.hobby_info.flag}/>
                 </div>
             </div>
             <div className={style.communication}>
@@ -62,12 +61,25 @@ const HobbyCard = (props) => {
        );
 };
 
-/*Их стора куча данных достать и сделать свойствами*/
 let mapStateToProps = (state) => ({
     //providerIsAuth: state.providerCabinet.providerIsAuth
     isUserAuth: true,
     isProviderAuth: false,
-
+    isPageInitialized: state.hobbyPage.initialized,
+    hobby_info: {
+        label: state.hobbyPage.label,
+        metro: state.hobbyPage.metro,
+        timeTable: state.hobbyPage.timeTable,
+        equipment: state.hobbyPage.equipment,
+        address: state.hobbyPage.address,
+        comfortable: state.hobbyPage.comfortable,
+        specialConditions: state.hobbyPage.specialConditions,
+        description: state.hobbyPage.description,
+        price: state.hobbyPage.price,
+        flag: state.hobbyPage.flag,
+        contact: state.hobbyPage.contact,
+        category: state.hobbyPage.category,
+    },
 });
 
 export default connect(mapStateToProps, null)(HobbyCard);
