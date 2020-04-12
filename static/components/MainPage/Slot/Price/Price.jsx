@@ -6,7 +6,7 @@ const Price = (props) => {
     return (<span className={style.priceContainer}>
         <div className={style.centringContainer}>
             { !(props.price)
-                ? <div className={style.price}>Не указана</div>
+                ? <div className={style.price}>Не указано</div>
                 : <div className={style.price}>{props.price}</div> }
         </div>
         <div className={style.centringContainer}>

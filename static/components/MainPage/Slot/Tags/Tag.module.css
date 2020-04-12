@@ -1,20 +1,23 @@
 .tagContainer {
     margin-left: 5px;
     width: 150px;
+    height: 70px;
 
     flex-wrap: wrap;
     justify-content: normal;
 }
 
 .tag {
+    width: 150px;
+    height: 17px;
     padding-left: 10px;
+    padding-top: 3px;
     margin-bottom: 5px;
     border-radius: 6px;
 
     font-weight: 500;
     font-size: 9px;
-    line-height: 16px;
-
+    line-height: 15px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }

@@ -34,7 +34,9 @@ class MainPage extends React.Component {
             return <Preloader />;
         }
         return (<div className={style.background}>
-            <div className={style.cardContainer}><CardSlider/></div>
+            <div className={style.cardContainer}>
+                <CardSlider isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
+            </div>
             <div className={style.header}>Топ 10 новинок</div>
             <div className={style.slotContainer}>
                 <div className="center">
@@ -76,7 +78,8 @@ class MainPage extends React.Component {
 const mapStateToProps = (state) => ({
     initializedMainPage: state.mainPage.initializedMainPage,
     isSubmit: state.mainPage.isSubmit,
-    providerIsAuth: state.providerCabinet.providerIsAuth
+    providerIsAuth: state.providerCabinet.providerIsAuth,
+    isUserAuth: true,
 });
 
 export default compose(connect(mapStateToProps, { initializeMainPage }), withRouter)(MainPage);

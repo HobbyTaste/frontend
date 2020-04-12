@@ -24,7 +24,7 @@ const Slot = (props) => {
         </span>
         <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
         <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
-        {!props.isUserAuth
+        {props.isUserAuth
             ? (props.isProviderAuth ? <div className={style.icon}><MonetizationOnIcon/></div>
                 : <div className={style.icon}><BookmarkBorderIcon/></div>)
             : <div className={style.iconEmpty}/>}

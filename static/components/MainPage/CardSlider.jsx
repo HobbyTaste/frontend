@@ -3,6 +3,7 @@ import style from '../HobbyCard/Image/Image.css';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import React from 'react';
 import Card from './Card/Card';
+import Slot from './Slot/Slot';
 
 const images = ['https://czech-rurepublic-gb.ru/wp-content/uploads/2015/12/143635088818.jpg',
     'https://w-dog.ru/wallpapers/0/0/437992000662990/kamera-fotoapparat-contax-devushka-fotograf.jpg',
@@ -11,7 +12,7 @@ const images = ['https://czech-rurepublic-gb.ru/wp-content/uploads/2015/12/14363
     'https://images.wallpaperscraft.com/image/craft_souvenir_handmade_hobby_49158_1600x900.jpg',
     'https://images.wallpaperscraft.com/image/skateboard_skateboarder_hobby_116485_1600x1200.jpg']
 
-const CardSlider = () => {
+const CardSlider = (props) => {
     const params = {
         slidesPerView: 3,
         pagination: {
@@ -28,10 +29,16 @@ const CardSlider = () => {
             {
                 images.map(function(im, index) {
                     return <div>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[index]}/>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+1)%images.length]}/>
-                        <Card name='Вид хобби' metro='Китай-город' address='улица Строителей, дом 15' pic={images[(index+2)%images.length]}/>
-                    </div>
+                        <Card name='Вид хобби' metro='Китай-город'
+                              address='улица Строителей, дом 15' pic={images[index]}
+                              isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                        <Card name='Вид хобби' metro='Китай-город'
+                              address='улица Строителей, дом 15' pic={images[index]}
+                              isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                        <Card name='Вид хобби' metro='Китай-город'
+                              address='улица Строителей, дом 15' pic={images[index]}
+                              isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                        </div>
                 })
             }
         </Swiper>
