@@ -22,7 +22,7 @@ const images = ['https://czech-rurepublic-gb.ru/wp-content/uploads/2015/12/14363
     'https://images.wallpaperscraft.com/image/craft_souvenir_handmade_hobby_49158_1600x900.jpg',
     'https://images.wallpaperscraft.com/image/skateboard_skateboarder_hobby_116485_1600x1200.jpg']
 
-const image='https://i2.wp.com/soznatelno.ru/wp-content/uploads/2016/11/no-image-icon-23485.png';
+const image='https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
 class MainPage extends React.Component {
     componentDidMount() {

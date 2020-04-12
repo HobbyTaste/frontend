@@ -12,6 +12,9 @@
     height: 60px;
     margin-left: 16px;
     object-fit: cover;
+
+    box-sizing: border-box;
+    border-radius: 30px;
 }
 
 .slotDescription {
