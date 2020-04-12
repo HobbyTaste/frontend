@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CONTAINER=hobbytaste_mongodb
+
+echo "Setting up DB..."
+if ! docker start $CONTAINER 2>/dev/null
+then
+	docker pull mongo >/dev/null
+        docker run -dp 27017:27017 --name $CONTAINER mongo >/dev/null
+	echo DB container $CONTAINER
+fi

@@ -2,7 +2,7 @@
     display: flex;
     flex: 0 1 auto;
     justify-content: space-between;
-    background-color: #aec55d;
+    background-color: #178FD6;;
     height: 40px;
     box-sizing: border-box;
     position: relative;
@@ -27,12 +27,15 @@
     flex-basis: 51%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     margin: auto 0;
     margin-right: 6px;
 
 }
 
 .buttonsContainer {
+    display: flex;
+    align-items: center;
     margin-right: 10px;
     height: 30px;
 }
