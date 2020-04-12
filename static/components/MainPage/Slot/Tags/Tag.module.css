@@ -19,17 +19,17 @@
     text-transform: uppercase;
 }
 
-.tagParking {
+.tagFirst {
     background: #FFFCF6;
     color: #034488;
 }
 
-.tagBeginner {
+.tagSecond {
     background: #EDECE8;
     color: #034488;
 }
 
-.tagRent {
+.tagThird {
     background: #178FD6;
     color: white;
 }
