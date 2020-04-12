@@ -1,0 +1,91 @@
+.card {
+    width: 315px;
+    height: 325px;
+    background-image: url("https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg");
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.image{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.cardHeader {
+    position: center;
+    display: flex;
+    width: 100%;
+}
+
+.cardDescription {
+    margin-top: 220px;
+    width: 321px;
+    height: 105px;
+    padding-left: 20px;
+    padding-top: 5px;
+    background: rgba(0, 0, 0, 0.5);;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    margin-right: 5px;
+}
+
+.stars {
+    width: 48px;
+    height: 10px;
+    margin: 4px;
+    font-size: 10px;
+}
+
+.comments {
+    width: 105px;
+    height: 16px;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 16px;letter-spacing: 0.4px;
+}
+
+.metro {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    align-content: center;
+}
+
+.address {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+}
+
+.icon {
+    float: right;
+    margin-right: 20px;
+    top: 50%;
+    transform: translate(50%, -80%);
+}
+
+.iconEmpty {
+    top: 50%;
+    transform: translate(15%, 25%);
+}
+
+.colorBlueCard {
+    color: #178FD6;
+}
+
+.colorGrayCard {
+    color: #DADADA;
+}
+
+.colorWhiteCard {
+    color: #FFFFFF;
+}
