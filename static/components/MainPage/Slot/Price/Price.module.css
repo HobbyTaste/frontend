@@ -10,16 +10,20 @@
     border-radius: 6px;
 
     position: relative;
+
 }
 
+.centringContainer {
+    text-align: center;
+}
 .price {
     position: absolute;
-    left: 50%;
+    width: 150px;
     top: calc(50% - 24px/2 - 22px);
     transform: translate(-50%, 0);
+    display: inline-block;
 
     font-size: 20px;
-    line-height: 24px;
     letter-spacing: 0.15px;
 
     color: #034488;
@@ -27,13 +31,13 @@
 
 .priceTime {
     position: absolute;
-    left: 50%;
+    width: 150px;
     top: calc(50% - 16px/2);
     transform: translate(-50%, 0);
+    display: inline-block;
 
     font-weight: 500;
-    font-size: 8px;
-    line-height: 16px;
+    font-size: 10px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 
@@ -42,12 +46,12 @@
 
 .priceDays {
     position: absolute;
-    left: 50%;
+    width: 150px;
     top: calc(50% - 20px/2 + 22px);
+    display: inline-block;
     transform: translate(-50%, 0);
 
     font-size: 14px;
-    line-height: 20px;
     letter-spacing: 0.25px;
 
     color: #034488;
