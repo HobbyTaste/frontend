@@ -61,6 +61,7 @@ const HobbyCard = (props) => {
        );
 };
 
+/*Предполагается, что данные об авторизации будут получатся из соотвествующих редьюсеров, не из редьюсера хобби*/
 let mapStateToProps = (state) => ({
     //providerIsAuth: state.providerCabinet.providerIsAuth
     isUserAuth: true,

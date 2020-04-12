@@ -1,7 +1,4 @@
 import Hobby from '../../api/Hobby';
-import { setIsUserInCabinet } from './auth-reducer';
-
-
 const INITIALIZE_PAGE = 'INITIALIZE_PAGE';
 const ADD_ANSWER = 'ADD_ANSWER';
 const ADD_FEEDBACK = 'ADD_FEEDBACK';
@@ -29,6 +26,7 @@ let initialState = {
         website: '',
     },
     category: '',
+    /*комменарии и ответы изнасально пустые, это для примера*/
     comments: [{
         idComment: 1,
         userId: 1,
@@ -115,6 +113,7 @@ const hobbyPageReducer = (state = initialState, action) => {
     }
 };
 
+// Actions:
 const initializedPageSuccess = (initialized) => ({
     type: INITIALIZE_PAGE,
     initialized
@@ -127,6 +126,7 @@ const addAnswer = answer => ({
     type: ADD_ANSWER,
     answer
 });
+/*Возможность провайдера менять свою страницу хобби*/
 const editPage = (a_label, a_metro, a_timeTable, a_equipment, a_address, a_comfortable, a_description, a_specialConditions, a_price, a_flag, a_contact, a_category) => ({
     type: EDIT_PAGE,
     label: a_label,
