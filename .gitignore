@@ -4,3 +4,4 @@
 yarn-error.log
 config/default-secrets.yaml
 /ml/enviroment/env/*
+**/__pycache__/**
