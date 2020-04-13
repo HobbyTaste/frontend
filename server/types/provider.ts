@@ -8,8 +8,5 @@ export interface IProvider extends Document {
     phone: string;
     info: string;
     comments: string[]; // foreign key
-}
-
-export interface IProviderModel extends IProvider {
     checkPasswords(candidatePassword: string): Promise<boolean>
 }

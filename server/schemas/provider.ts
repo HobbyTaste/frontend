@@ -1,11 +1,11 @@
-import {IProviderModel} from "../types/provider";
 import {Schema} from 'mongoose'
+import {IProvider} from "../types/provider";
 
 const EMAIL_REG_EXP = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 const PHONE_REG_EXP = /^\+\d{11}$/;
 
 
-const ProviderSchema: Schema<IProviderModel> = new Schema({
+const ProviderSchema: Schema<IProvider> = new Schema({
     name: {
         type: String,
         required: true,

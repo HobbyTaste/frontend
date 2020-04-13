@@ -1,4 +1,4 @@
-import {Document} from 'mongoose'
+import {Document, Model} from 'mongoose'
 import {Request} from 'express'
 
 
@@ -18,11 +18,18 @@ export interface IComment extends Document {
     relatedComment: string // foreign key
 }
 
+export interface ICommentModel extends Model<IComment> {
+    userCommentsCount: () => Promise<number>;
+}
+
 export interface ICreateCommentRequest extends Request {
     body: {
         text: string;
         datetime: string;
         evaluation?: number;
     }
-    query: string; // hobbyId if userComment or commentId if providerComment
+    query: {
+        hobbyId: string;
+        relatedId: string;
+    }
 }

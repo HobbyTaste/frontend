@@ -26,7 +26,6 @@ hobbyRouter.post('/add', upload.single('avatar'), async (req: Request, res: Resp
       if (file) {
           hobbyInfo.avatar = await uploadFileToS3('hobbies', file);
       }
-      //+79182725831 Александра Сергеевна.
       const {_id: owner} = req.session.provider;
       const newHobby = new Hobby({...hobbyInfo, owner});
       await newHobby.save();

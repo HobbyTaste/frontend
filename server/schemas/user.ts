@@ -1,9 +1,9 @@
-import {IUserModel} from "../types/user";
 import {Schema} from 'mongoose'
+import {IUser} from "../types/user";
 
 const EMAIL_REG_EXP = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
-const UserSchema: Schema<IUserModel> = new Schema({
+const UserSchema: Schema<IUser> = new Schema({
     name: {
         type: String,
         required: true,

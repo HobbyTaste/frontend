@@ -2,7 +2,7 @@ import {connection as db} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
 import config from 'config';
-import {IProvider, IProviderModel} from "../types/provider";
+import {IProvider} from "../types/provider";
 import ProviderSchema from "../schemas/provider";
 
 
@@ -13,7 +13,7 @@ ProviderSchema.pre<IProvider>('save', async function() {
     try {
         const salt = await bcrypt.genSalt(Number(config.get('saltWorkFactor')));
         this.password = await bcrypt.hash(this.password, salt);
-    } catch(err) {
+    } catch (err) {
         logger.error(err);
     }
 });
@@ -27,5 +27,5 @@ ProviderSchema.methods.checkPasswords = async function(candidatePassword: string
     }
 };
 
-const Provider = db.model<IProviderModel>('Provider', ProviderSchema);
+const Provider = db.model<IProvider>('Provider', ProviderSchema);
 export default Provider;

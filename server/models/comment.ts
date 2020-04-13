@@ -1,6 +1,6 @@
 import {connection as db} from 'mongoose';
 import logger from '../utils/logger';
-import {IComment, Participants} from "../types/comment";
+import {IComment, ICommentModel, Participants} from "../types/comment";
 import CommentSchema from "../schemas/comment";
 
 CommentSchema.pre<IComment>('save', function() {
@@ -18,5 +18,5 @@ CommentSchema.statics.userCommentsCount = function(): number {
     }})
 };
 
-const Comment = db.model<IComment>('Comment', CommentSchema);
+const Comment = db.model<IComment, ICommentModel>('Comment', CommentSchema);
 export default Comment

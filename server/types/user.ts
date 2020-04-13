@@ -7,9 +7,6 @@ export interface IUser extends Document {
     avatar: string;
     hobbies: string[]; // foreign key
     comments: string[]; // foreign key
-}
-
-export interface IUserModel extends IUser {
     checkPasswords(candidatePassword: string): Promise<boolean>
 }
 

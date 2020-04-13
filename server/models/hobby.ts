@@ -24,7 +24,7 @@ HobbySchema.statics.findByLabelWithGeo = function(label: string, metroId: number
     });
 };
 
-HobbySchema.methods.getRating = async function() {
+HobbySchema.methods.getRating = async function(): Promise<number> {
     return 0;
 };
 

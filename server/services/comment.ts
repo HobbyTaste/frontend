@@ -1,55 +1,44 @@
-import {Participants} from "../types/comment";
-import {IComment} from "../types/comment";
-import {IHobby} from "../types/hobby";
-import {IUser} from "../types/user";
-import {IProvider} from "../types/provider";
-import Comment from "../models/comment";
+import {IComment, ICommentModel, Participants} from "../types/comment";
+import {IHobbyModel} from "../types/hobby";
+import {IUserModel} from "../types/user";
+import {IProviderModel} from "../types/provider";
 
-
-import Hobby from "../models/hobby";
-import User from "../models/user";
-import Provider from "../models/provider";
-
+interface HTTPResponse {
+    status: number;
+    message: string;
+}
 
 export default class CommentService {
+    Hobby: IHobbyModel;
+    User: IUserModel;
+    Provider: IProviderModel;
+    Comment: ICommentModel;
 
-    static CreateUserComment = async function (userId: string, hobbyId: string, body: Partial<IComment>) {
-        const type = Participants.user;
-        const hobby: IHobby = Hobby.findById(hobbyId) as any;
-        const user: IUser = User.findById(userId) as any;
-        if (!hobby || !user) {
-            //res.status(404).send('Не найдено такого элемента');
-            return;
+    constructor(Hobby: IHobbyModel, User: IUserModel, Provider: IProviderModel, Comment: ICommentModel) {
+        this.Hobby = Hobby;
+        this.Provider = Provider;
+        this.User = User;
+        this.Comment = Comment;
+    }
+
+    async CreateComment(hobbyId: string, CommentFields: Partial<IComment>): Promise<HTTPResponse> {
+        const hobby = await this.Hobby.findById(hobbyId);
+        const author = CommentFields.author?.type === Participants.user
+            ? await this.User.findById(CommentFields.author.id)
+            : await this.Provider.findById(CommentFields.author?.id);
+        if (!hobby || !author) {
+            return {status: 404, message: 'Не найдено такого элемента'};
         }
-
-        const newComment = new Comment({body, author: {id: userId, type}});
+        const newComment = new this.Comment(CommentFields);
         const {_id: commentId} = await newComment.save();
 
-        const nextHobbyComments = hobby.comments.concat(commentId);
-        await Hobby.findByIdAndUpdate(hobbyId, {comments: nextHobbyComments});
+        await this.Hobby.findByIdAndUpdate(hobbyId, {comments: hobby.comments.concat(commentId)});
 
-        const nextUserComments = user.comments.concat(commentId);
-        await User.findByIdAndUpdate(userId, {comments: nextUserComments});
-        //res.status(200).send();
-    };
-
-    static CreateProviderComment = async function (providerId: string, relatedId: string, body: Partial<IComment>) {
-        const type = Participants.provider;
-        const related: IComment = Comment.findById(relatedId) as any;
-        const provider: IProvider = Provider.findById(providerId) as any;
-        if (!related || !provider) {
-            //res.status(404).send('Не найдено такого элемента');
-            return;
+        if (CommentFields.author?.type === Participants.user) {
+            await this.User.findByIdAndUpdate(CommentFields.author?.id, {comments: author.comments.concat(commentId)});
+        } else {
+            await this.Provider.findByIdAndUpdate(CommentFields.author?.id, {comments: author.comments.concat(commentId)});
         }
-        const hobby: IHobby = Hobby.findOne({comments: relatedId}) as any;
-
-        const newComment = new Comment({body, author: {id: providerId, type}, related: relatedId});
-        const {_id: commentId} = await newComment.save();
-
-        const nextProviderComments = provider.comments.concat(commentId);
-        await Provider.findByIdAndUpdate(providerId, {comments: nextProviderComments});
-
-        const nextHobbyComments = hobby.comments.concat(commentId);
-        await Hobby.findByIdAndUpdate(hobby._id, {comments: nextHobbyComments});
-    };
+        return {status: 200, message: ''}
+    }
 }

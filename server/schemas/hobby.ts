@@ -1,9 +1,9 @@
-import {IHobbyModel, TariffPlans} from "../types/hobby";
+import {IHobby, TariffPlans} from "../types/hobby";
 import {Schema} from 'mongoose'
 
 const EMAIL_REG_EXP = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
-const HobbySchema: Schema<IHobbyModel> = new Schema({
+const HobbySchema: Schema<IHobby> = new Schema({
     label: {
         type: String,
         required: true,

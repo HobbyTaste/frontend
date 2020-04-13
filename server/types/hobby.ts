@@ -46,10 +46,11 @@ export interface IHobby extends Document {
         cost?: number;
     }[]
     workTime: string[];
+
+    getRating(): Promise<number>;
 }
 
 export interface IHobbyModel extends Model<IHobby> {
     findByLabel: (label: string) => Promise<IHobby[]>,
     findByLabelWithGeo: (label: string, metroId: number) => Promise<IHobby>,
-    getRating: () => Promise<number>,
 }

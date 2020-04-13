@@ -1,7 +1,7 @@
 import {connection as db} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
-import {IUser, IUserModel} from '../types/user'
+import {IUser} from '../types/user'
 import UserSchema from "../schemas/user";
 
 const SALT_WORK_FACTOR = 10;
@@ -13,7 +13,7 @@ UserSchema.pre<IUser>('save', async function() {
     try {
         const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
         this.password = await bcrypt.hash(this.password, salt);
-    } catch(err) {
+    } catch (err) {
         logger.error(err);
     }
 });
@@ -27,5 +27,5 @@ UserSchema.methods.checkPasswords = async function (candidatePassword: string): 
     }
 };
 
-const User = db.model<IUserModel>('User', UserSchema);
+const User = db.model<IUser>('User', UserSchema);
 export default User;
