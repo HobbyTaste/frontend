@@ -1,7 +1,8 @@
 import {Router, Request, Response} from 'express';
 import {isNil} from 'lodash';
 
-import Hobby, {IHobby} from '../models/hobby';
+import Hobby from '../models/hobby';
+import {IHobby} from "../types/hobby";
 import multer from "multer";
 import config from "config";
 import {uploadFileToS3} from "../utils/aws";
@@ -134,5 +135,12 @@ hobbyRouter.get('/subscribe', async (req: Request, res: Response) => {
         res.status(500).send(e);
     }
 });
+
+/**
+ * Получить все отзывы о хобби вместе с ответами партнеров
+ */
+hobbyRouter.get('/comments', async (req: Request, res: Response) => {
+
+})
 
 export default hobbyRouter;

@@ -1,12 +1,13 @@
 import {Response, Request, Router} from 'express';
 import multer from 'multer';
 import config from 'config';
-
 import User from '../models/user';
 import {user as BASE_URL} from './routes.json';
 import {uploadFileToS3} from '../utils/aws';
 import bcrypt from "bcrypt";
 import Hobby from '../models/hobby';
+import {IQueryInfo} from "../types/user";
+
 
 const userRouter: Router = Router();
 
@@ -17,31 +18,31 @@ const USER_URL_PAGES = {
 const upload = multer({limits: {fieldSize: Number(config.get('aws.maxFileSize'))}});
 
 userRouter.post('/login', async (req: Request, res: Response) => {
-  if (req.session && req.session.user) {
-    res.end();
-    return;
-  }
-  const {email, password} = req.body;
-  const user = await User.findOne({email});
-  if (!user) {
+    if (req.session && req.session.user) {
+        res.end();
+        return;
+    }
+    const {email, password} = req.body;
+    const user = await User.findOne({email});
+    if (!user) {
+        res.status(400).json({
+            login: 'Неверный логин',
+            password: null,
+        });
+        return;
+    }
+    const isTruePassword = await user.checkPasswords(password);
+    if (isTruePassword) {
+        if (req.session) {
+            req.session.user = user;
+        }
+        res.redirect(`${BASE_URL}/cabinet`);
+        return;
+    }
     res.status(400).json({
-      login: 'Неверный логин',
-      password: null,
-    });
-    return;
-  }
-  const isTruePassword = await user.checkPasswords(password);
-  if (isTruePassword) {
-      if (req.session) {
-          req.session.user = user;
-      }
-      res.redirect(`${BASE_URL}/cabinet`);
-      return;
-  }
-  res.status(400).json({
-      login: null,
-      password: 'Неверный пароль',
-  })
+        login: null,
+        password: 'Неверный пароль',
+    })
 });
 
 userRouter.post('/create', upload.single('avatar'), async (req: Request, res: Response) => {
@@ -105,10 +106,6 @@ userRouter.get('/logout', (req: Request, res: Response) => {
     }
     res.end();
 });
-
-interface IQueryInfo {
-    id?: string;
-}
 
 userRouter.get('/info', async (req: Request, res: Response) => {
     const query: IQueryInfo = req.query;
@@ -194,6 +191,13 @@ userRouter.post('/upload', upload.single('avatar'), async (req: Request, res: Re
     } catch (e) {
         res.status(500).send(e);
     }
+});
+
+/**
+ * Получить все комментарии пользователя с ответами на них от партнеров
+ */
+userRouter.get('/comments', async (req: Request, res: Response) => {
+
 });
 
 export default userRouter;

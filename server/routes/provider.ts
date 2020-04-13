@@ -1,5 +1,6 @@
 import {Response, Request, Router} from 'express';
-import Provider, {IProvider} from "../models/provider";
+import Provider from "../models/provider";
+import {IProvider} from "../types/provider";
 import multer from "multer";
 import config from "config";
 import {uploadFileToS3} from "../utils/aws";
@@ -127,6 +128,13 @@ providerRouter.get('/hobbies', async (req: Request, res: Response) => {
     const {_id: owner} = req.session.provider;
     const hobbies = await Hobby.find({owner});
     res.json(hobbies);
+});
+
+/**
+ * Получить все ответы партнера с отзывами пользователей, к которым они относились
+ */
+providerRouter.get('/comments', async (req: Request, res: Response) => {
+
 });
 
 export default providerRouter;

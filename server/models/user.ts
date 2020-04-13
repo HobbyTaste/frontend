@@ -1,60 +1,21 @@
-import {Schema, connection as db, Document} from 'mongoose';
+import {connection as db} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
+import {IUser, IUserModel} from '../types/user'
+import UserSchema from "../schemas/user";
 
-const EMAIL_REG_EXP = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 const SALT_WORK_FACTOR = 10;
 
-export interface IUser extends Document {
-    name: string;
-    password: string;
-    email: string;
-    avatar: string;
-    hobbies: string[];
-}
-
-interface IUserModel extends IUser {
-    checkPasswords(candidatePassword: string): Promise<boolean>
-}
-
-const UserSchema: Schema = new Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [EMAIL_REG_EXP, 'Неверный формат email'],
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    avatar: {
-        type: String,
-    },
-    hobbies: {
-        type: [Schema.Types.ObjectId],
-    }
-});
-
-
 UserSchema.pre<IUser>('save', async function() {
-  if (!this.isModified('password')) {
-    return;
-  }
-
-  try {
-    // генерируем соль
-    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-    // получаем хэш пароля
-    const hash = await bcrypt.hash(this.password, salt);
-    this.password = hash;
-  } catch(err) {
-    logger.error(err);
-  }
+    if (!this.isModified('password')) {
+      return;
+    }
+    try {
+        const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+        this.password = await bcrypt.hash(this.password, salt);
+    } catch(err) {
+        logger.error(err);
+    }
 });
 
 UserSchema.methods.checkPasswords = async function (candidatePassword: string): Promise<boolean> {
