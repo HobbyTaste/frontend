@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 from catboost import CatBoostRegressor
 from sklearn.multioutput import MultiOutputRegressor
 from torch.utils.data import TensorDataset, DataLoader
@@ -92,14 +93,12 @@ class CatBoost_model:
         x_train,
         y_train,
         train_horizon: int,
-        pred_horizon: int,
     ):
         self.train_horizon_multi = train_horizon
-        self.pred_horizon_multi = pred_horizon
         self.cbr.fit(
             x_train[:, -self.train_horizon_multi:,
                     :].reshape(len(x_train), -1),
-            y_train[:, :self.pred_horizon_multi, :].reshape(len(y_train), -1),
+            y_train[:, 0, :].reshape(len(y_train), -1),
         )
 
     def pred_union(
@@ -146,9 +145,29 @@ class CatBoost_model:
 
     def pred_multi(
         self,
-        x_pred,
+        x_data,
+        horizon_pred_out: int = 1
     ):
-        # TODO
-        return self.pred_union(
-            X_pred[:, -self.train_horizon_multi:, :].reshape(len(x_train), -1),
-        )
+        assert horizon_pred_out >= 1
+        x = x_data[:, -self.train_horizon_multi:, :]
+        output = [
+            self.cbr.predict(
+                x.reshape(len(x), -1),
+            )
+        ]
+        for _ in range(1, horizon_pred_out):
+            x = np.concatenate(
+                (
+                    x[:, -self.train_horizon_multi+1:, :],
+                    np.array(output[-1])[:, np.newaxis, :]
+                ),
+                axis=1
+            )
+            output.append(
+                self.cbr.predict(
+                    x.reshape(len(x), -1)
+                )
+            )
+        if horizon_pred_out == 1:
+            return np.array(output).reshape(len(x_data), -1)
+        return np.array(output).reshape(len(x_data), horizon_pred_out, -1)
