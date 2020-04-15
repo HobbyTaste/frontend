@@ -20,3 +20,6 @@ jobs:
 
       - name: Run tests
         run: yarn test
+        env:
+          DB_USER: "no user, it's just a plug"
+          DB_PASSWORD: "no password, it's also just a plug"
