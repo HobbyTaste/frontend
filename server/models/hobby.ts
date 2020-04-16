@@ -2,6 +2,8 @@ import {connection as db} from 'mongoose';
 import {escapeRegExp} from 'lodash';
 import {IHobby, IHobbyModel} from "../types/hobby";
 import HobbySchema from "../schemas/hobby";
+import Comment from "./comment";
+import {Participants} from "../types/comment";
 
 /**
  * Поиск хобби по названию в БД
@@ -24,8 +26,15 @@ HobbySchema.statics.findByLabelWithGeo = function(label: string, metroId: number
     });
 };
 
-HobbySchema.methods.getRating = async function(): Promise<number> {
-    return 0;
+HobbySchema.methods.getRating = async function() {
+    let evalSum = 0;
+    for (const commentId of this.comments) {
+        const comment = await Comment.findById(commentId);
+        if (!!comment && comment.author.type === Participants.user) {
+            evalSum += comment.evaluation as any;
+        }
+    }
+    this.rating = evalSum / await Comment.userCommentsCount();
 };
 
 const obj: any = {};

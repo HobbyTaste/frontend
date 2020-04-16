@@ -15,7 +15,7 @@ export interface IComment extends Document {
     text: string;
     datetime: string;
     evaluation?: number;
-    relatedComment: string // foreign key
+    relatedComment?: string // foreign key
 }
 
 export interface ICommentModel extends Model<IComment> {
@@ -31,5 +31,21 @@ export interface ICreateCommentRequest extends Request {
     query: {
         hobbyId: string;
         relatedId: string;
+    }
+}
+
+export interface ICommentInfo {
+    userId: string;
+    name: string;
+    datetime: string;
+    avatar: string;
+    text: string;
+    evaluation?: number;
+    answer?: {
+        providerId: string;
+        name: string;
+        datetime: string;
+        avatar: string;
+        text: string;
     }
 }

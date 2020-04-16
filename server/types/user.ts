@@ -1,4 +1,4 @@
-import {Document} from 'mongoose'
+import {Document, Model} from 'mongoose'
 
 export interface IUser extends Document {
     name: string;
@@ -9,6 +9,8 @@ export interface IUser extends Document {
     comments: string[]; // foreign key
     checkPasswords(candidatePassword: string): Promise<boolean>
 }
+
+export interface IUserModel extends Model<IUser, {}>{}
 
 export interface IQueryInfo {
     id?: string;

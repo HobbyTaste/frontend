@@ -1,4 +1,4 @@
-import {Document} from 'mongoose'
+import {Document, Model} from 'mongoose'
 
 export interface IProvider extends Document {
     name: string;
@@ -10,3 +10,5 @@ export interface IProvider extends Document {
     comments: string[]; // foreign key
     checkPasswords(candidatePassword: string): Promise<boolean>
 }
+
+export interface IProviderModel extends Model<IProvider, {}> {}

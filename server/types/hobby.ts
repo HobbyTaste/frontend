@@ -46,8 +46,7 @@ export interface IHobby extends Document {
         cost?: number;
     }[]
     workTime: string[];
-
-    getRating(): Promise<number>;
+    getRating(): void;
 }
 
 export interface IHobbyModel extends Model<IHobby> {

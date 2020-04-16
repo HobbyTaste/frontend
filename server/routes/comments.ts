@@ -1,4 +1,4 @@
-import {Response, Router} from 'express';
+import {Request, Response, Router} from 'express';
 import {Participants} from "../types/comment";
 import CommentService from "../services/comment";
 import {ICreateCommentRequest} from "../types/comment";
@@ -8,6 +8,7 @@ import Provider from "../models/provider";
 import Comment from "../models/comment";
 
 const commentRouter: Router = Router();
+const CommentServiceInstance = new CommentService(Hobby, User, Provider, Comment);
 
 /**
  * Создание комментария
@@ -20,8 +21,7 @@ commentRouter.post('/create', async (req: ICreateCommentRequest, res: Response) 
         }
         const type = !!req.session.user ? Participants.user : Participants.provider;
         const {_id: authorId} = type === Participants.user ? req.session.user : req.session.provider;
-        const CommentServiceInstance = new CommentService(Hobby, User, Provider, Comment);
-        const {status, message} = await CommentServiceInstance.CreateComment(req.query.hobbyId, {
+        await CommentServiceInstance.CreateComment(req.query.hobbyId, {
             author: {
                 id: authorId,
                 type
@@ -29,7 +29,7 @@ commentRouter.post('/create', async (req: ICreateCommentRequest, res: Response) 
             ...req.body,
             relatedComment: req.query.relatedId
         });
-        res.status(status).send(message);
+        res.status(200).send();
     } catch (e) {
         res.status(500).send(e);
     }

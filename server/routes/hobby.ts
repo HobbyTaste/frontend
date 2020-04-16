@@ -1,15 +1,19 @@
 import {Router, Request, Response} from 'express';
 import {isNil} from 'lodash';
-
-import Hobby from '../models/hobby';
 import {IHobby} from "../types/hobby";
 import multer from "multer";
 import config from "config";
 import {uploadFileToS3} from "../utils/aws";
 import logger from "../utils/logger";
+import HobbyService from "../services/hobby";
+import Hobby from '../models/hobby';
+import User from "../models/user";
+import Provider from "../models/provider";
+import Comment from "../models/comment";
+
 
 const hobbyRouter: Router = Router();
-
+const HobbyServiceInstance = new HobbyService(Hobby, User, Provider, Comment);
 const upload = multer({limits: {fieldSize: Number(config.get('aws.maxFileSize'))}});
 
 /**
@@ -27,8 +31,7 @@ hobbyRouter.post('/add', upload.single('avatar'), async (req: Request, res: Resp
           hobbyInfo.avatar = await uploadFileToS3('hobbies', file);
       }
       const {_id: owner} = req.session.provider;
-      const newHobby = new Hobby({...hobbyInfo, owner});
-      await newHobby.save();
+      await HobbyServiceInstance.AddHobby(hobbyInfo, owner);
       res.status(200).send();
   } catch (e) {
       res.status(500).send(e);
@@ -139,7 +142,13 @@ hobbyRouter.get('/subscribe', async (req: Request, res: Response) => {
  * Получить все отзывы о хобби вместе с ответами партнеров
  */
 hobbyRouter.get('/comments', async (req: Request, res: Response) => {
-
+    try {
+        const {hobbyId} = req.query;
+        const body = await HobbyServiceInstance.GetComments(hobbyId);
+        res.json(body);
+    } catch (e) {
+        res.status(500).send(e);
+    }
 })
 
 export default hobbyRouter;

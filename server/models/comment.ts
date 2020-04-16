@@ -12,9 +12,9 @@ CommentSchema.pre<IComment>('save', function() {
     }
 });
 
-CommentSchema.statics.userCommentsCount = function(): number {
+CommentSchema.statics.userCommentsCount = function(): Promise<number> {
     return this.count({author: {
-        type: Participants.user
+        type: Participants.user,
     }})
 };
 
