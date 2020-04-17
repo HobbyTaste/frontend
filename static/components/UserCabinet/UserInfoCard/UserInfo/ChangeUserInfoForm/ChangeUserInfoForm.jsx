@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Input} from "../../../../Common/FormsControls/FormsControls";
-import {connect} from "react-redux";
-import style from "./ChangeUserInfoForm.module.css";
-import {RedButton} from "../../../../Common/MaterialsButtons";
-import UploadPhoto from "../../../../Common/UploadFotoBlock/UploadPhoto";
-import {userEdit} from "../../../../../redux/reducers/auth-reducer";
+import {Input} from '../../../../Common/FormsControls/FormsControls';
+import {connect} from 'react-redux';
+import style from './ChangeUserInfoForm.module.css';
+import {RedButton} from '../../../../Common/MaterialsButtons';
+import UploadPhoto from '../../../../Common/UploadFotoBlock/UploadPhoto';
+import {userEdit} from '../../../../../redux/reducers/auth-reducer';
 
 let mainFile = null;
 const ChangeUserInfoForm = ({handleSubmit, error}) => {

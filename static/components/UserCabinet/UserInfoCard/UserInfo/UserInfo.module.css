@@ -1,16 +1,47 @@
+.infoContainer {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 12px;
+}
+
 .name {
-    color: #19B95D;
-    margin-top: 10px;
-    font-size: 24px;
-    text-align: center;
+    font-size: 25px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.87);
 }
 
-.userInfo {
+.metro {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #034488;
+}
+
+.buttonChange {
+    width: 176px;
+    height: 36px;
+    margin-top: 14px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
     font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
 }
 
-.information {
-    text-align: left;
+.iconEdit {
+    margin-left: 12px;
 }
 
 .buttonContainer {

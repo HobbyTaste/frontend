@@ -27,57 +27,6 @@
     margin-top: 20px;
 }
 
-.info {
-    display: block;
-    margin-left: 12px;
-}
-
-.avatar {
-    width: 370px;
-    height: 325px;
-    object-fit: cover;
-}
-
-.name {
-    font-size: 25px;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-    color: rgba(0, 0, 0, 0.87);
-}
-
-.metro {
-    margin-top: 12px;
-    font-size: 15px;
-    line-height: 16px;
-    letter-spacing: 0.4px;
-    color: #034488;
-}
-
-.buttonChange {
-    width: 176px;
-    height: 36px;
-    margin-top: 14px;
-
-    background: #EDECE8;
-    border: 1px solid #2F1E0A;
-    box-sizing: border-box;
-    border-radius: 4px;
-
-    font-size: 18px;
-    line-height: 18px;
-    font-weight: 500;
-
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.16px;
-
-    color: #034488;
-}
-
-.iconEdit {
-    margin-left: 12px;
-}
-
 .hobbiesBlock {
     display: flex;
     flex-wrap: wrap;
