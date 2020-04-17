@@ -13,9 +13,16 @@ class Feedback extends React.Component {
             comments: props.comments,
             answers: props.answers,
         };
+
     }
 
+    handleSubmit = (values) => {
+        console.log("Submit");
+        console.log(values);
+    };
+
     render() {
+        let {post, dispatch} = this.props;
         const isProvider = this.state.isProviderAuth;
         const answersList = this.state.answers;
         function getAnswer(answerId) {
@@ -37,7 +44,8 @@ class Feedback extends React.Component {
                     }
                 </ul>
                 {this.state.isUserAuth &&
-                <div><p className={style.labelAnswer}> Добавить отзыв:</p> <CommentInput isAnswer={false}/></div>}
+                <div><p className={style.labelAnswer}> Добавить отзыв:</p>
+                    <CommentInput onSubmit={this.handleSubmit} isAnswer={false}/></div>}
             </div>
         );
     }

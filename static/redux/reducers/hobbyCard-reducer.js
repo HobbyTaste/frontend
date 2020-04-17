@@ -7,6 +7,7 @@ const EDIT_PAGE = 'EDIT_PAGE';
 const hobbyApi = new Hobby();
 
 let initialState = {
+    id: null,
     label: 'Вид хобби',
     metro: 'станция метро',
     timeTable: 'расписание',

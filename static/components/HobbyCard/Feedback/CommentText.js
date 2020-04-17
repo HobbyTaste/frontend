@@ -5,27 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ButtonProvider from '../Button/ButtonProvider';
 import { connect } from 'react-redux';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import FeedbackFormUser from './FeedbackFormUser';
 import CommentInput from './CommentInput';
-
-const anwerInBD=[{
-    userId: 1,
-    userName: 'Азалия',
-    data: '28.12.2020',
-    text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
-    star: 5,
-    answerId:1,
-},
-    {
-        userId: 2,
-        userName: 'Имя',
-        data: '21.10.2020',
-        text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
-        star: 3,
-        answerId:2,
-    },
-]
-
 
 
 const useStyles = theme => ({
@@ -57,9 +37,14 @@ class CommentText extends React.Component {
             stars: props.comment.stars,
         };
         this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleClick(event) {
         this.setState({isAnswered: !this.state.isAnswered});
+    }
+    handleSubmit(values) {
+        this.setState({isAnswered: !this.state.isAnswered});
+        console.log(values);
     }
 
     render(){
@@ -86,7 +71,7 @@ class CommentText extends React.Component {
             {this.state.text}
         </div>
             </div>
-                {this.state.isAnswered && <CommentInput isAnswer={true}/>}
+                {this.state.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true}/>}
             </div>
 
 );

@@ -10,7 +10,7 @@ import { initializeMainPage } from '../../../redux/reducers/mainPage-reducer';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
-class InformationForm extends React.Component {
+class InformationBlock extends React.Component {
     constructor(props) {
         super(props);
 
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default compose(connect(mapStateToProps), withRouter)(InformationForm);
+export default compose(connect(mapStateToProps), withRouter)(InformationBlock);

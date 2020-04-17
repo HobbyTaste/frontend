@@ -27,7 +27,7 @@ class ButtonInMyHobby extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserHave: false
+            isUserHave: props.status
         };
         this.handleClick = this.handleClick.bind(this);
     }

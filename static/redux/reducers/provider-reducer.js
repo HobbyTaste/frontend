@@ -20,7 +20,8 @@ let initialState = {
     category: '',
     providerIsAuth: false,
     providerInitialized: false,
-    providerHobbies: []
+    providerHobbies: [],
+    followedHobbies: [],
 };
 
 const ProviderCabinetReducer = (state = initialState, action) => {
