@@ -1,0 +1,19 @@
+{
+    "wrong_hex_string": "123456788765432112345678",
+
+    "provider_update_info": {
+        "name": "Updated Organization",
+        "password": "0000",
+        "phone": "+79112345678",
+        "info": "updated cool provider"
+    },
+
+    "hobby_update": {
+        "phone": "+79702116147"
+    },
+
+    "user_update": {
+        "password": "2222",
+        "email": "updated_user@test.com"
+    }
+}

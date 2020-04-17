@@ -1,0 +1,16 @@
+[
+    {
+        "hobbies": [],
+        "password": "anatoly",
+        "name": "Anatoly",
+        "avatar": "",
+        "email": "anatoly@test.com"
+    },
+    {
+        "hobbies": [],
+        "password": "vladimir",
+        "name": "Vladimir",
+        "avatar": "",
+        "email": "vladimir@test.com"
+    }
+]
