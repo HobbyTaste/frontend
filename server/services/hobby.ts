@@ -27,7 +27,7 @@ export default class HobbyService {
         }
         for (const commentId of hobby.comments) {
             const comment = await this.Comment.findById(commentId);
-            if (comment && comment.author.type === Participants.user) {
+            if (comment?.author.type === Participants.user) {
                 comments.push(await comment.repr())
             }
         }

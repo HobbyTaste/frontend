@@ -39,7 +39,7 @@ CommentSchema.methods.repr = async function() {
         userId: this.author.id,
         name: author?.name || 'undefined',
         datetime: this.datetime,
-        avatar: author?.avatar || 'none',
+        avatar: author?.avatar || '',
         text: this.text,
         evaluation: this.evaluation,
         answer: answerInfo

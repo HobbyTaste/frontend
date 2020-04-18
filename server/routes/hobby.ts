@@ -104,7 +104,7 @@ hobbyRouter.post('/edit', async (req: Request, res: Response) => {
 });
 
 hobbyRouter.get('/subscribe', async (req: Request, res: Response) => {
-    if (!req.session || !req.session.user) {
+    if (!req.session?.user) {
         res.status(403).send('Пользователь не авторизирован');
         return;
     }
