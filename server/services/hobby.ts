@@ -1,7 +1,7 @@
 import {IHobby, IHobbyModel} from "../types/hobby";
 import {IUserModel} from "../types/user";
 import {IProviderModel} from "../types/provider";
-import {ICommentInfo, ICommentModel, Participants} from "../types/comment";
+import {ICommentModel, IComment} from "../types/comment";
 import {isNil} from 'lodash';
 import {uploadFileToS3} from "../utils/aws";
 
@@ -20,18 +20,14 @@ export default class HobbyService {
     }
 
     async GetComments(hobbyId: string) {
-        const comments: ICommentInfo[] = [];
         const hobby = await this.Hobby.findById(hobbyId);
         if (!hobby) {
             throw {status: 404, message: 'Не найдено такого элемента'};
         }
-        for (const commentId of hobby.comments) {
-            const comment = await this.Comment.findById(commentId);
-            if (comment?.author.type === Participants.user) {
-                comments.push(await comment.repr())
-            }
-        }
-        return comments;
+        const comments = await hobby.userComments();
+        const result = comments.map((comment: IComment) => comment.repr());
+        await Promise.all(result);
+        return result
     }
 
     async AddHobby(hobbyInfo: Partial<IHobby>, providerId: string, file?: Express.Multer.File) {
