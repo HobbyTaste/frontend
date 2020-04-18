@@ -8,26 +8,26 @@ import EditIcon from '@material-ui/icons/Edit';
 const UserInfo = (props) => {
     // const Edit = AnimatedModalWindow(ChangeForm, 'Редактировать');
     const [editing, setEditing] = useState(false);
-    function Edit() {
-        function handleClick(e) {
-            setEditing(true);
-        }
-        return (
-            <button className={style.buttonChange} onClick={handleClick}>
-                Редактировать<EditIcon className={style.iconEdit}/>
-            </button>
-        );
+
+    function handleClick(e) {
+        setEditing(!editing);
     }
+
     return (
         <div className={style.infoContainer}>
             { editing
-                ? <ChangeForm name={props.name} metro={props.metro}/>
+                ? <div>
+                    <ChangeForm name={props.name} metro={props.metro}/>
+                    <button onClick={handleClick} placeholder='Техническая кнопка'/>
+                </div>
                 : <div>
                     <div className={style.name}>{props.name}</div>
                     <div className={style.metro}>
                         <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
                     </div>
-                    <Edit/>
+                    <button className={style.buttonChange} onClick={handleClick}>
+                        Редактировать<EditIcon className={style.iconEdit}/>
+                    </button>
                 </div>
             }
         </div>
