@@ -28,5 +28,10 @@ UserSchema.methods.checkPasswords = async function (candidatePassword: string): 
     }
 };
 
+UserSchema.methods.repr = async function() {
+    const {_id: id, name, email, avatar} = this;
+    return {id, name, email, avatar}
+}
+
 const User = db.model<IUser, IUserModel>('User', UserSchema);
 export default User;

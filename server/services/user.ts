@@ -1,5 +1,5 @@
 import {IHobbyModel} from "../types/hobby";
-import {IUser, IUserModel} from "../types/user";
+import {IUser, IUserInfo, IUserModel} from "../types/user";
 import {IProviderModel} from "../types/provider";
 import {ICommentModel} from "../types/comment";
 import bcrypt from 'bcrypt'
@@ -57,13 +57,12 @@ export default class UserService {
         return this.User.findByIdAndUpdate(userId, nextData, {new: true})
     }
 
-    async UserInfo(userId: string): Promise<Partial<IUser>> {
+    async UserInfo(userId: string): Promise<IUserInfo> {
         const user = await this.User.findById(userId);
         if (!user) {
             throw {status: 404, message: 'Не найден такой пользователь'}
         }
-        const {_id: id, name, email, avatar} = user;
-        return {id, name, email, avatar}
+        return user.repr();
     }
 
     async HobbySubscribe(user: IUser, hobbyId?: string) {

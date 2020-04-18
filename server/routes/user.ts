@@ -23,7 +23,7 @@ userRouter.post('/login', async (req: Request, res: Response) => {
     try {
         const {email, password} = req.body;
         if (req.session) {
-            req.session.user = UserServiceInstance.LoginUser(email, password);
+            req.session.user = await UserServiceInstance.LoginUser(email, password);
         }
         res.redirect(`${BASE_URL}/cabinet`);
     } catch (e) {

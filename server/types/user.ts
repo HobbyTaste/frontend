@@ -8,7 +8,14 @@ export interface IUser extends Document {
     hobbies: string[]; // foreign key
     comments: string[]; // foreign key
     checkPasswords(candidatePassword: string): Promise<boolean>
+    repr(): Promise<IUserInfo>
+}
+
+export interface IUserInfo {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
 }
 
 export interface IUserModel extends Model<IUser>{}
-
