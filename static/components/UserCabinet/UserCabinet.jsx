@@ -13,11 +13,15 @@ const UserCabinet = (props) => {
         props.initializeUserCabinet();
     }, []);
 
-    const [mainPage, setMainPage] = useState(false);
+    const [mainPage, setMainPage] = useState(true);
 
     // if (!props.isAuth) {
     //    return <Redirect to={'/'} />;
     // }
+
+    function chaneScreen(e) {
+        setMainPage(!mainPage);
+    }
 
     return (mainPage
         ? <div className={style.background}>
@@ -28,11 +32,13 @@ const UserCabinet = (props) => {
             <div className={style.feedbackContainer}>
                 <Feedback isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth} />
             </div>
+            <button onClick={chaneScreen} placeholder='Техническая кнопка'/>
         </div>
         : <div className={style.background}>
-                <div className={style.hobbyHeader}>Ваши хобби:</div>
-                <UserCabinetHobbies/>
-            </div>
+            <div className={style.hobbyHeader}>Ваши хобби:</div>
+            <UserCabinetHobbies/>
+            <button onClick={chaneScreen} placeholder='Техническая кнопка'/>
+        </div>
     );
 };
 
