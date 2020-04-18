@@ -16,8 +16,7 @@ class CommentInput extends React.Component {
         this.state = {
             value: '',
             isAnswer: props.isAnswer,
-            userName: 'Имя пользователя из store',
-            selectedValue: null,
+            userName: props.name,
         };
     }
 
@@ -47,9 +46,10 @@ class CommentInput extends React.Component {
         )
     }
 }
-const afterSubmit = (result, dispatch) =>
+/*const afterSubmit = (result, dispatch) =>
     dispatch(reset('addFeedback'));
-
-CommentInput = reduxForm({ form: 'addFeedback', onSubmitSuccess: afterSubmit, })(CommentInput);
+*/
+CommentInput = reduxForm({ form: 'addFeedback',})(CommentInput);
 
 export default CommentInput;
+//onSubmitSuccess: afterSubmit

@@ -1,13 +1,9 @@
-import Hobby from '../../api/Hobby';
-const INITIALIZE_PAGE = 'INITIALIZE_PAGE';
-const ADD_ANSWER = 'ADD_ANSWER';
-const ADD_FEEDBACK = 'ADD_FEEDBACK';
-const EDIT_PAGE = 'EDIT_PAGE';
+import * as actionTypes from '../actions/actionsTypes';
 
-const hobbyApi = new Hobby();
 
 let initialState = {
-    id: null,
+    initializedPage: false,
+    id: 1,
     label: 'Вид хобби',
     metro: 'станция метро',
     timeTable: 'расписание',
@@ -27,73 +23,60 @@ let initialState = {
         website: '',
     },
     category: '',
-    /*комменарии и ответы изнасально пустые, это для примера*/
+    /*комменарии и ответы изначально пустые, это для примера*/
     comments: [{
         idComment: 1,
         userId: 1,
-        isHaveAnswer: true,
         text: 'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
         nameWriter: 'Азалия',
         date: '28.12.2020',
         stars: 5,
-        answerId:1,
+        answer: {
+            providerId: 1,
+            text: 'Спасибо за ваш отзыв! ',
+            nameWriter: 'Имя парнера',
+            date: '15.04.2020',
+        }
     },
         {
             idComment: 2,
             userId: 2,
-            isHaveAnswer: false,
             text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
             nameWriter: 'Имя',
             date: '28.12.2020',
             stars: 5,
-            answerId: null,
+            answer: null,
         },
-    ],
-    answers: [{
-        answer_id: 1,
-        providerId: 1,
-        text: 'Спасибо за ваш отзыв! бла бла бла',
-        nameWriter: 'Имя парнера',
-        status: 'директор',
-        idComment: 1,
-        date: '15.04.2020',
-    },
         {
-            answerId:2,
-            providerId: 2,
-            text: 'Спасибо за ваш отзыв! бла бла бла',
-            nameWriter: 'Имя парнера2',
-            status: 'руководитель',
             idComment: 3,
-            date: '16.04.2020',
-        }
-    ],
-    initializedPage: false,
+            userId: 2,
+            text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
+            nameWriter: 'Имя',
+            date: '28.12.2020',
+            stars: 5,
+            answer: { providerId: 2,
+                text: 'Спасибо за ваш отзыв! бла бла бла',
+                nameWriter: 'Имя парнера2',
+                date: '16.04.2020'
+            }
+        }],
 };
-
 const hobbyPageReducer = (state = initialState, action) => {
     switch (action.type) {
-    case INITIALIZE_PAGE:
+    case actionTypes.INITIALIZE_HOBBY_PAGE:
         return {
             ...state,
             initializedPage: action.initialized,
         };
-    case ADD_ANSWER:
+    case actionTypes.ADD_RESPONSE:
         return {
             ...state,
-            answers: [
-                ...state.answers, action.answer
+          comments: [
+                ...state.comments, action.comment
             ]
         };
-    case ADD_FEEDBACK:
-        return {
-            ...state,
-            comments: [
-                ...state.comments,
-                action.comment,
-            ],
-        };
-    case EDIT_PAGE:
+
+    case actionTypes.EDIT_PAGE:
         return {
             ...state,
             label: action.label,
@@ -114,35 +97,6 @@ const hobbyPageReducer = (state = initialState, action) => {
     }
 };
 
-// Actions:
-const initializedPageSuccess = (initialized) => ({
-    type: INITIALIZE_PAGE,
-    initialized
-});
-const addFeedback = comment => ({
-    type: ADD_FEEDBACK,
-    comment
-});
-const addAnswer = answer => ({
-    type: ADD_ANSWER,
-    answer
-});
-/*Возможность провайдера менять свою страницу хобби*/
-const editPage = (a_label, a_metro, a_timeTable, a_equipment, a_address, a_comfortable, a_description, a_specialConditions, a_price, a_flag, a_contact, a_category) => ({
-    type: EDIT_PAGE,
-    label: a_label,
-    metro: a_metro,
-    timeTable: a_timeTable,
-    equipment: a_equipment,
-    address: a_address,
-    comfortable: a_comfortable,
-    specialConditions: a_specialConditions,
-    description: a_description,
-    price: a_price,
-    flag: a_flag,
-    contact: a_contact,
-    category: a_category,
-});
 
 export default hobbyPageReducer;
 

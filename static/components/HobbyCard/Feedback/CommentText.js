@@ -6,6 +6,7 @@ import ButtonProvider from '../Button/ButtonProvider';
 import { connect } from 'react-redux';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import CommentInput from './CommentInput';
+import { addProviderResponse, addUserFeedback } from '../../../redux/actions/hobbyActions';
 
 
 const useStyles = theme => ({
@@ -28,24 +29,22 @@ class CommentText extends React.Component {
         super(props);
         this.state = {
             isAnswered: false,
+            isOwner: props.isOwner,
             isItAnswerProvider: props.isItAnswerProvider,
             isProviderAuth: props.isProviderAuth,
             text: props.comment.text,
             nameWriter: props.comment.nameWriter,
             date: props.comment.date,
-            isHaveAnswer: props.comment.isHaveAnswer,
             stars: props.comment.stars,
+            isHaveAnswer: props.isHaveAnswer,
+
         };
         this.handleClick = this.handleClick.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleClick(event) {
         this.setState({isAnswered: !this.state.isAnswered});
     }
-    handleSubmit(values) {
-        this.setState({isAnswered: !this.state.isAnswered});
-        console.log(values);
-    }
+
 
     render(){
         const classes = useStyles()
@@ -64,14 +63,14 @@ class CommentText extends React.Component {
                         <p className={style.data}> {this.state.date}</p>
                     </div>
                 </div>
-                {(this.state.isProviderAuth && !this.state.isItAnswerProvider && !this.state.isHaveAnswer) && <ButtonProvider className={style.buttonContainer} onClick={this.handleClick} text="Ответить"/>}
+                {(this.state.isOwner && !this.state.isItAnswerProvider && !this.state.isHaveAnswer) && <ButtonProvider className={style.buttonContainer} onClick={this.handleClick} text="Ответить"/>}
                 </div>
         { !this.state.isItAnswerProvider && <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={this.state.stars} emptyIcon={<StarBorderIcon fontSize="inherit" />} precision={0.5} readOnly /> }
         <div className={style.text}>
             {this.state.text}
         </div>
             </div>
-                {this.state.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true}/>}
+                {this.state.isAnswered && <CommentInput onSubmit={this.props.handleSubmit} isAnswer={true}/>}
             </div>
 
 );
@@ -80,3 +79,5 @@ class CommentText extends React.Component {
 
 
 export default CommentText;
+
+

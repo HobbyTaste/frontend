@@ -3,60 +3,66 @@ import style from './Feedback.css';
 import { connect } from 'react-redux';
 import CommentText from './CommentText';
 import CommentInput from './CommentInput';
+import { addProviderResponse, addUserFeedback } from '../../../redux/actions/hobbyActions';
+
 
 class Feedback extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isUserAuth: props.isUserAuth,
-            isProviderAuth: props.isProviderAuth,
-            comments: props.comments,
-            answers: props.answers,
-        };
-
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit = (values) => {
-        console.log("Submit");
         console.log(values);
+        if (this.props.isUserAuth) {
+            this.props.onUserFeedback(this.props.hobbyId, this.props.id, values);
+        } else {
+            this.props.onProviderResponse(this.props.hobbyId, this.props.id, values);
+        }
     };
 
     render() {
-        let {post, dispatch} = this.props;
-        const isProvider = this.state.isProviderAuth;
-        const answersList = this.state.answers;
-        function getAnswer(answerId) {
-            return answersList[answerId - 1];
-        }
-
+        const isProvider = this.props.isProviderAuth;
+        const isOwner = this.props.isOwner;
+        const onSubmit = this.handleSubmit
         return (
             <div>
                 <ul className={style.list}>
                     {
-                        this.state.comments.map(function (item) {
+                        this.props.comments.map(function (item) {
+                            let isHaveAnswer = true;
+                            if ((item.answer) == null){
+                                isHaveAnswer = false;
+                            }
                             return <li key={item.idComment} className={style.container}>
-                                <CommentText comment={item} isProviderAuth={isProvider} isItAnswerProvider={false}/>
-                                {item.isHaveAnswer &&
-                                <CommentText comment={getAnswer(item.answerId)} isProviderAuth={isProvider}
-                                             isItAnswerProvider={true}/>}
+                                <CommentText comment={item} handleSubmit={onSubmit} isProviderAuth={isProvider} isHaveAnswer= {isHaveAnswer} isOwner = {isOwner} isItAnswerProvider={false}/>
+                                {item.answer &&
+                                <CommentText comment={item.answer} isProviderAuth={isProvider} isItAnswerProvider={true}/>}
                             </li>;
                         })
                     }
                 </ul>
-                {this.state.isUserAuth &&
+                {this.props.isUserAuth &&
                 <div><p className={style.labelAnswer}> Добавить отзыв:</p>
-                    <CommentInput onSubmit={this.handleSubmit} isAnswer={false}/></div>}
+                    <CommentInput onSubmit={onSubmit} isAnswer={false} name={this.props.name}/></div>}
             </div>
         );
     }
 }
 
-
-let mapStateToProps = (state) => ({
-    answers: state.hobbyPage.answers,
+const mapStateToProps = (state) => ({
+    isUserAuth: state.auth.isAuth,
+    isProviderAuth: state.providerCabinet.isProviderAuth,
+    id: state.auth.userId || state.providerCabinet.providerId,
+    hobbyId: state.hobbyPage.id,
     comments: state.hobbyPage.comments,
-
+    name: state.auth.name || state.providerCabinet.name,
+});
+const mapDispatchToProps = (dispatch) => ({
+    onUserFeedback: (idHobby, idUser, values) => dispatch(addUserFeedback(idHobby, idUser, values)),
+    onProviderResponse: (idHobby, idUser, values) => dispatch(addProviderResponse(idHobby, idUser, values)),
 });
 
-export default connect(mapStateToProps, null)(Feedback);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
 
