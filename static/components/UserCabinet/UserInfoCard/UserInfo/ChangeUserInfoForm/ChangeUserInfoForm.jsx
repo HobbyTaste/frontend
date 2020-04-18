@@ -8,7 +8,7 @@ import UploadPhoto from '../../../../Common/UploadFotoBlock/UploadPhoto';
 import { userEdit } from '../../../../../redux/reducers/auth-reducer';
 
 let mainFile = null;
-const ChangeUserInfoForm = ({ handleSubmit, error }) => {
+const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
     const [url, setUrl] = useState('');
     const [file, setFile] = useState(null);
     const uploadImage = (e) => {
@@ -29,12 +29,22 @@ const ChangeUserInfoForm = ({ handleSubmit, error }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div><Field component={Input} name={'name'} placeholder={'Новое имя'} autoFocus={true} type={'text'} fieldName={'Новое имя'}/></div>
-            <div><Field component={Input} name={'email'} placeholder={'Новый email'} type={'email'} fieldName={'Новый email'}/></div>
-            <div><Field component={Input} name={'metro'} placeholder={'Новая станция метро'} type={'metro'} fieldName={'Новая станция метро'}/></div>
+            <div>
+                <Field component={Input} name={'name'} placeholder={name} autoFocus={true} type={'text'} fieldName={'Новое имя'}/>
+            </div>
+            {/*<div>*/}
+            {/*    <Field component={Input} name={'email'} placeholder={'Новый email'} type={'email'} fieldName={'Новый email'}/>*/}
+            {/*</div>*/}
+            <div>
+                <Field component={Input} name={'metro'} placeholder={metro} type={'metro'} fieldName={'Новая станция метро'}/>
+            </div>
             {/* <div><Field component={Input} name={"oldPassword"} placeholder={"Старый пароль"} type={"password"} fieldName={"Старый пароль"}/></div> */}
-            <div><Field component={Input} name={'password'} placeholder={'Новый пароль'} type={'password'} fieldName={'Новый пароль'}/></div>
-            <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
+            {/*<div>*/}
+            {/*    <Field component={Input} name={'password'} placeholder={'Новый пароль'} type={'password'} fieldName={'Новый пароль'}/>*/}
+            {/*</div>*/}
+            <div>
+                <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
+            </div>
             <div className={style.saveButton}>
                 <RedButton text={'Сохранить'} label="Submit" onSubmit={handleSubmit} />
             </div>
@@ -63,8 +73,7 @@ const ChangeForm = (props) => {
     };
     return (
         <div>
-            <h1 className={style.label}>Редактирование профиля</h1>
-            <ChangeReduxForm onSubmit={onSubmit} />
+            <ChangeReduxForm onSubmit={onSubmit} name={props.name} metro={props.metro} />
         </div>
     );
 };

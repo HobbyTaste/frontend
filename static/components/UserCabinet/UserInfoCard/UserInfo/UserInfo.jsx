@@ -25,7 +25,7 @@ const UserInfo = (props) => {
                 <LocationOnIcon style={{ color: '##178FD6' }} /> {props.metro}
             </div>
             { editing
-                ? <ChangeForm/>
+                ? <ChangeForm name={props.name} metro={props.metro}/>
                 : <Edit/>
             }
         </div>
