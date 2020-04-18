@@ -1,10 +1,10 @@
 .background {
-    background: linear-gradient(
+   /* background: linear-gradient(
             rgba(0, 0, 0, 0.8),
             rgba(0, 0, 0, 0.3)), url("https://kolobok.ua/i/81/72/70/817270/aae4f418dbcfc4c2f0fc8662010cf1dc-quality_70Xresize_crop_1Xallow_enlarge_0Xw_698Xh_465.jpg") no-repeat center center fixed;
     background-size: cover;
     min-height: 100%;
-    min-width: 1024px;
+    min-width: 1024px;*/
     width: 100%;
     height: auto;
     position: fixed;
@@ -15,7 +15,8 @@
 
 .cardsBoard {
     margin: 0 auto;
-    width: 1260px;
+    /*width: 1260px;
+    */
     display: flex;
     flex-wrap: wrap;
     justify-content: normal;

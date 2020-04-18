@@ -1,35 +1,56 @@
 .header {
-    background-color: #19B95D;
-    padding: 5px 30px;
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.4);
-    z-index: 20;
-    position: relative;
     display: flex;
+    flex: 0 1 auto;
+    justify-content: space-between;
+    background-color: #178FD6;;
+    height: 40px;
     box-sizing: border-box;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
 }
 .logoContainer {
-    flex-grow: 0;
-    max-width: 33.333333%;
-    flex-basis: 33.333333%;
-}
-.buttonsContainer {
-    flex-grow: 0;
-    max-width: 66.666667%;
-    flex-basis: 66.666667%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    flex-grow: 0;
+    flex-basis: 270px;
 }
-
+.searchContainer{
+    width: 28%;
+    height: 30px;
+    display: flex;
+    margin: auto 0;
+    margin-left: -20px;
+}
 .buttonContainer {
-    flex-grow: 0;
-    max-width: 66.666667%;
-    flex-basis: 66.666667%;
+    max-width: 51%;
+    flex-basis: 51%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: auto 0;
+    margin-right: 6px;
+
 }
 
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    height: 30px;
+}
+.nameContainer{
+    margin: auto;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+.icon{
+    color:#FFF;
+}
+.userContainer{
+    display: flex;
+    align-items: center;
+}
 a {
     text-decoration: none;
 }

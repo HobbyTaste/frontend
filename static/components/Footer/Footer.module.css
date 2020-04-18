@@ -1,11 +1,6 @@
 .footer {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    display: flex;
-    justify-content: flex-start;
-    position: relative;
+    background-color:  #034488;;
+    height: 80px;
     width: 100%;
     z-index: 20;
 }

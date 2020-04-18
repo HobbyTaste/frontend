@@ -1,0 +1,57 @@
+.infoContainer{
+    display: flex;
+    width: 100%;
+    justify-content:space-between;
+    box-sizing: border-box;
+    padding: 25px;
+    padding-bottom: 0px;
+}
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 84%;
+}
+.mainBlock{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.buttonContainer{
+    display: flex;
+    margin-top: 5px;
+
+}
+
+.imageContainer{
+    display: flex;
+    width: 47%;
+    height: 325px;
+
+}
+.textContainer{
+    margin:0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.mainDescription{
+    margin-right:20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.panel{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+
+.communication{
+
+    padding: 25px;
+    padding-top: 0;
+}

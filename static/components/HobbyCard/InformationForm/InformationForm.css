@@ -1,0 +1,44 @@
+.stars{
+    color:rgba(0, 0, 0, 0.54);
+}
+.form{
+    min-height: 325px;
+}
+.nameContainer{
+    display: flex;
+
+    align-items: center;
+    justify-content: left;
+}
+.metro{
+    display: flex;
+    align-items: center;
+    color: #034488;;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+}
+.nameHobby{
+    display:flex;
+
+    width: auto;
+    margin:7px 0px;
+    margin-right: 5px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.description h3{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.6);
+}
+

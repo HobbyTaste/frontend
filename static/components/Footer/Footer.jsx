@@ -5,10 +5,8 @@ import Feedback from "./Feedback/Feedback";
 
 const Footer = (props) => {
     return (
-            <footer className={style.footer}>
-                <Contacts isAuth={props.isAuth}/>
-                <Feedback/>
-            </footer>
+        <footer className={style.footer}>
+        </footer>
     );
 };
 

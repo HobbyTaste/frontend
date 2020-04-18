@@ -1,22 +1,22 @@
 .headerButtons {
-    margin-right: 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    padding: 10px 15px;
+    height: 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 18px;
+    color:  #034488;;
+
     display: inline-block;
     outline: none;
     border: none;
-    background: transparent;
+    background: #EDECE8;
     transition: all 300ms;
     box-shadow: none;
-    margin-left: 10px;
     cursor: pointer;
+
+    border-radius: 4px;
 }
 
-.headerButtons:hover {
-    background: #128040;
-}
 
 @media (max-device-width: 425px), (max-width: 425px) {
     .headerButtons {

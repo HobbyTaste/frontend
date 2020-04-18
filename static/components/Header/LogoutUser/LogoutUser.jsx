@@ -1,14 +1,17 @@
 import React from 'react';
 import s from './../Header.module.css';
 import UserCabinetButton from "./Buttons/UserCabinetButton";
-import LogoutButton from "./Buttons/LogoutButton";
+import UserMenu from "./Buttons/UserMenu";
 import Avatar from "./Avatar/Avatar";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
+
+
 
 const LogoutUser = (props) => {
-    return (<div className={s.buttonsContainer}>
-            <Avatar avatar={props.avatar} />
-            <UserCabinetButton/>
-            <LogoutButton logout={props.logout}/>
+    return (<div className={s.userContainer}>
+            <AccountCircleIcon fontSize="large" className={s.icon}></AccountCircleIcon>
+            <UserMenu logout={props.logout} name={props.name}/>
         </div>
     );
 };

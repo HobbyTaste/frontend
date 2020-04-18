@@ -1,14 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 .appWrapper {
     min-height: 100vh;
     display: flex;
+    max-width: 1400px;
+    flex: 0 1 1400px;
     flex-direction: column;
+    font-family: Roboto;
+    background: #FFFCF6;
 }
 
+.appBackground{
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+}
 .appWrapperContent {
+    z-index:0;
+    width:71.5%;
+    background: #FFFFFF;
+
+}
+.appLayout{
+    z-index: 18;
+    margin-top:80px;
     flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.appSidebar{
+    z-index:20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:26px;
+    background: #EDECE8;;
+    width: 9.5%;
 }
 
+.fixedHeader{
+    display: flex;
+    width: 1400px;
+    flex-direction: column;
+    position: fixed;
+    z-index: 21;
+
+}
 .appHeader {
+    z-index: 20;
+    flex: 0 1 auto;
+}
+
+.appNavigation{
+    z-index: 19;
     flex: 0 0 auto;
 }
 
