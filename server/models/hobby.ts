@@ -41,7 +41,7 @@ HobbySchema.methods.updateRating = async function() {
     let evalCount = 0;
     for (const commentId of this.comments) {
         const comment = await mongoose.model('Comment').findById(commentId) as IComment;
-        if (comment && comment.evaluation) {
+        if (comment?.evaluation) {
             evalSum += comment.evaluation;
             evalCount += 1;
         }
@@ -50,7 +50,12 @@ HobbySchema.methods.updateRating = async function() {
 };
 
 HobbySchema.methods.userComments = async function() {
-    return [];
+    return await mongoose.model('Comment').find({
+        _id: {$in: this.comments},
+        author: {
+            type: Participants.user
+        }
+    }) as IComment[];
 }
 
 const obj: any = {};
