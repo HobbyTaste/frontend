@@ -54,6 +54,7 @@
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "swiper": "^5.3.6",
     "typescript": "^3.6.4",
     "uuid": "^3.3.3"
   },
