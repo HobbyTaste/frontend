@@ -16,11 +16,10 @@ export interface IComment extends Document {
     datetime: string;
     evaluation?: number;
     relatedComment?: string // foreign key
+    repr(): Promise<ICommentInfo>;
 }
 
-export interface ICommentModel extends Model<IComment> {
-    userCommentsCount: () => Promise<number>;
-}
+export interface ICommentModel extends Model<IComment> {}
 
 export interface ICreateCommentRequest extends Request {
     body: {
@@ -30,7 +29,7 @@ export interface ICreateCommentRequest extends Request {
     }
     query: {
         hobbyId: string;
-        relatedId: string;
+        relatedId?: string;
     }
 }
 

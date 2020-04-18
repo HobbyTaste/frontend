@@ -13,6 +13,7 @@ const CommentSchema: Schema<IComment> = new Schema({
     },
     text: {
         type: String,
+        required: true
     },
     datetime: {
         type: String,

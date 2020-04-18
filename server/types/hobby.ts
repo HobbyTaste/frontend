@@ -1,4 +1,5 @@
 import {Document, Model} from 'mongoose'
+import {IComment} from "./comment";
 
 
 export type SocialServices = "vk" | "instagram" | "facebook"
@@ -46,7 +47,9 @@ export interface IHobby extends Document {
         cost?: number;
     }[]
     workTime: string[];
-    getRating(): void;
+    updateRating(): void;
+    userCommentsCount(): Promise<number>;
+    userComments(): Promise<IComment[]>;
 }
 
 export interface IHobbyModel extends Model<IHobby> {

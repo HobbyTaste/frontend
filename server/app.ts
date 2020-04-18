@@ -1,8 +1,7 @@
-import express from 'express'
-import config from 'config'
-import * as loaders from './loaders'
-import logger from "./utils/logger"
-
+import express from 'express';
+import config from 'config';
+import * as loaders from './loaders';
+import logger from "./utils/logger";
 
 const LISTENING_PORT = process.env.PORT || Number(config.get('port')) || 3000;
 

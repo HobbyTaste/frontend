@@ -1,8 +1,9 @@
 import {connection as db} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
-import {IUser} from '../types/user'
+import {IUser, IUserModel} from '../types/user'
 import UserSchema from "../schemas/user";
+
 
 const SALT_WORK_FACTOR = 10;
 
@@ -27,5 +28,5 @@ UserSchema.methods.checkPasswords = async function (candidatePassword: string): 
     }
 };
 
-const User = db.model<IUser>('User', UserSchema);
+const User = db.model<IUser, IUserModel>('User', UserSchema);
 export default User;

@@ -2,6 +2,8 @@ import {IHobby, IHobbyModel} from "../types/hobby";
 import {IUserModel} from "../types/user";
 import {IProviderModel} from "../types/provider";
 import {ICommentInfo, ICommentModel, Participants} from "../types/comment";
+import {isNil} from 'lodash';
+import {uploadFileToS3} from "../utils/aws";
 
 
 export default class HobbyService {
@@ -18,53 +20,58 @@ export default class HobbyService {
     }
 
     async GetComments(hobbyId: string) {
-        const body: {comments: ICommentInfo[]} = {comments: []}
+        const comments: ICommentInfo[] = [];
         const hobby = await this.Hobby.findById(hobbyId);
         if (!hobby) {
-            throw new Error('Не найдено такого элемента');
+            throw {status: 404, message: 'Не найдено такого элемента'};
         }
         for (const commentId of hobby.comments) {
             const comment = await this.Comment.findById(commentId);
-            if (!comment || comment.author.type !== Participants.user) {
-                continue;
+            if (comment && comment.author.type === Participants.user) {
+                comments.push(await comment.repr())
             }
-            const user = await this.User.findById(comment.author.id);
-            if (!user) {
-                throw new Error('Сбой в работе запроса');
-            }
-            let answerInfo;
-            if (comment.relatedComment) {
-                const answer = await this.Comment.findById(comment.relatedComment);
-                if (!answer) {
-                    throw new Error('Сбой в работе запроса');
-                }
-                const provider = await this.Provider.findById(answer.author.id);
-                if (!provider) {
-                    throw new Error('Сбой в работе запроса');
-                }
-                answerInfo = {
-                    providerId: answer.author.id,
-                    name: provider.name,
-                    datetime: answer.datetime,
-                    avatar: provider.avatar,
-                    text: answer.text
-                }
-            }
-            body.comments.push({
-                userId: comment.author.id,
-                name: user.name,
-                datetime: comment.datetime,
-                avatar: user.avatar,
-                text: comment.text,
-                evaluation: comment.evaluation,
-                answer: answerInfo
-            });
         }
-        return body;
+        return comments;
     }
 
-    async AddHobby(hobbyInfo: Partial<IHobby>, providerId: string) {
+    async AddHobby(hobbyInfo: Partial<IHobby>, providerId: string, file?: Express.Multer.File) {
+        if (file) {
+            hobbyInfo.avatar = await uploadFileToS3('hobbies', file);
+        }
         const newHobby = new this.Hobby({...hobbyInfo, providerId});
-        await newHobby.save();
+        newHobby.save();
+    }
+
+    async FindByLabel(hobbyInfo: Partial<IHobby>) {
+        const numberMetroId = Number(hobbyInfo.metroId);
+        if (!isNil(hobbyInfo.label)) {
+            return isNaN(numberMetroId)
+                ? this.Hobby.findByLabel(hobbyInfo.label)
+                : this.Hobby.findByLabelWithGeo(hobbyInfo.label, numberMetroId);
+        } else {
+            throw {status: 400, message: `typeof label = ${typeof hobbyInfo.label}`}
+        }
+    }
+
+    async HobbyInfo(hobbyId: string) {
+        return this.Hobby.findById(hobbyId);
+    }
+
+    async Filtered(filters: any) {
+        return this.Hobby.find(filters);
+    }
+
+    async EditHobby(hobbyId: string, updateParams: IHobby) {
+        return this.Hobby.findByIdAndUpdate(hobbyId, updateParams);
+    }
+
+    async Subscribe(hobbyId: string, userId: string) {
+        const hobby = await this.Hobby.findById(hobbyId);
+        if (!hobby) {
+            throw {status: 404, message: 'Не найдено такого элемента'}
+        }
+        const nextSubscribers = hobby.subscribers.concat(userId);
+        this.Hobby.findByIdAndUpdate(hobbyId, {subscribers: nextSubscribers})
     }
 }
+

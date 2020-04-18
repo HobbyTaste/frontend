@@ -10,8 +10,5 @@ export interface IUser extends Document {
     checkPasswords(candidatePassword: string): Promise<boolean>
 }
 
-export interface IUserModel extends Model<IUser, {}>{}
+export interface IUserModel extends Model<IUser>{}
 
-export interface IQueryInfo {
-    id?: string;
-}

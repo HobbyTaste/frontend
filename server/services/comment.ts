@@ -2,7 +2,7 @@ import {IComment, ICommentModel, Participants} from "../types/comment";
 import {IHobbyModel} from "../types/hobby";
 import {IUserModel} from "../types/user";
 import {IProviderModel} from "../types/provider";
-import {ICommentInfo} from "../types/comment";
+
 
 export default class CommentService {
     Hobby: IHobbyModel;
@@ -23,17 +23,19 @@ export default class CommentService {
             ? await this.User.findById(CommentFields.author.id)
             : await this.Provider.findById(CommentFields.author?.id);
         if (!hobby || !author) {
-            throw new Error('Не найдено такого элемента');
+            throw {status: 404, message: 'Не найдено такого элемента'};
         }
         const newComment = new this.Comment(CommentFields);
         const {_id: commentId} = await newComment.save();
 
         await this.Hobby.findByIdAndUpdate(hobbyId, {comments: hobby.comments.concat(commentId)});
 
+        const nextComments = author.comments.concat(commentId);
         if (CommentFields.author?.type === Participants.user) {
-            await this.User.findByIdAndUpdate(CommentFields.author.id, {comments: author.comments.concat(commentId)});
+            await this.User.findByIdAndUpdate(CommentFields.author.id, {comments: nextComments});
         } else {
-            await this.Provider.findByIdAndUpdate(CommentFields.author?.id, {comments: author.comments.concat(commentId)});
+            await this.Provider.findByIdAndUpdate(CommentFields.author?.id, {comments: nextComments});
         }
     }
 }
+

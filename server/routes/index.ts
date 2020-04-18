@@ -14,6 +14,7 @@ const pagesToRender = [
 ];
 
 pagesToRender.forEach(path => indexRouter.get(...renderPage(path)));
+
 indexRouter.get(['/?',
     '/user/cabinet/?',
     '/provider/cabinet/?',

@@ -1,9 +1,9 @@
 import {connection as db} from 'mongoose';
+import mongoose from 'mongoose'
 import {escapeRegExp} from 'lodash';
 import {IHobby, IHobbyModel} from "../types/hobby";
 import HobbySchema from "../schemas/hobby";
-import Comment from "./comment";
-import {Participants} from "../types/comment";
+import {IComment, Participants} from "../types/comment";
 
 /**
  * Поиск хобби по названию в БД
@@ -26,19 +26,35 @@ HobbySchema.statics.findByLabelWithGeo = function(label: string, metroId: number
     });
 };
 
-HobbySchema.methods.getRating = async function() {
+HobbySchema.methods.userCommentsCount = async function() {
+    const commentIds = this.comments;
+    return mongoose.model('Comment').count({
+        _id: {$in: commentIds},
+        author: {
+            type: Participants.user
+        }
+    })
+}
+
+HobbySchema.methods.updateRating = async function() {
     let evalSum = 0;
+    let evalCount = 0;
     for (const commentId of this.comments) {
-        const comment = await Comment.findById(commentId);
-        if (!!comment && comment.author.type === Participants.user) {
-            evalSum += comment.evaluation as any;
+        const comment = await mongoose.model('Comment').findById(commentId) as IComment;
+        if (comment && comment.evaluation) {
+            evalSum += comment.evaluation;
+            evalCount += 1;
         }
     }
-    this.rating = evalSum / await Comment.userCommentsCount();
+    this.rating = evalSum / evalCount;
 };
+
+HobbySchema.methods.userComments = async function() {
+    return [];
+}
 
 const obj: any = {};
 const {}: IHobbyModel = obj;
 
-const Hobby: IHobbyModel = db.model<IHobby, IHobbyModel>('Hobby', HobbySchema);
+const Hobby = db.model<IHobby, IHobbyModel>('Hobby', HobbySchema);
 export default Hobby;

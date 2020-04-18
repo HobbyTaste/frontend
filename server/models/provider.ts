@@ -2,7 +2,7 @@ import {connection as db} from 'mongoose';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger';
 import config from 'config';
-import {IProvider} from "../types/provider";
+import {IProvider, IProviderModel} from "../types/provider";
 import ProviderSchema from "../schemas/provider";
 
 
@@ -27,5 +27,5 @@ ProviderSchema.methods.checkPasswords = async function(candidatePassword: string
     }
 };
 
-const Provider = db.model<IProvider>('Provider', ProviderSchema);
+const Provider = db.model<IProvider, IProviderModel>('Provider', ProviderSchema);
 export default Provider;
