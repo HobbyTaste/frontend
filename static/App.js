@@ -16,6 +16,7 @@ import UserCabinet from './components/UserCabinet/UserCabinet';
 import style from './App.module.css';
 import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
+import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
 
 class App extends React.Component {
     componentDidMount() {
@@ -34,7 +35,11 @@ class App extends React.Component {
                             <HeaderContainer/>
                         </div>
                         <div className={style.appNavigation}>
-                            <Navigation/>
+                            <Route exact path="/" render={() => <Navigation/>}/>
+                            <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
+                            <Route exact path="/hobby/card" render={() => <Navigation/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>

@@ -25,7 +25,7 @@ const UserInfo = (props) => {
                 : <div>
                     <div className={style.name}>{props.name}</div>
                     <div className={style.metro}>
-                        <LocationOnIcon style={{ color: '##178FD6' }} /> {props.metro}
+                        <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
                     </div>
                     <Edit/>
                 </div>
