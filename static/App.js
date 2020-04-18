@@ -17,6 +17,7 @@ import style from './App.module.css';
 import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
+import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
 
 class App extends React.Component {
     componentDidMount() {
@@ -39,6 +40,7 @@ class App extends React.Component {
                             <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
                             <Route exact path="/hobby/card" render={() => <Navigation/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation/>}/>
                             <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
                         </div>
                     </div>
@@ -51,6 +53,7 @@ class App extends React.Component {
                             <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
                             <Route exact path="/hobby/card" render={() => <HobbyCard/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                         </div>
                     </div>

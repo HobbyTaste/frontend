@@ -68,7 +68,6 @@ class MainPage extends React.Component {
                         price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
                         isParking={false} isBeginner={flags.isBeginner} isRent={false}
                         isUserAuth={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/>
-
                 </div>
             </div>
         </div>);
