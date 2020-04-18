@@ -36,7 +36,7 @@ class Metric:
             return not np.all([isna(y) for y in yt]) \
                    and yp not in yt
         elif self.name == 'precision':
-            return not np.any([isna(y) for y in yt]) \
+            return not np.all([isna(y) for y in yt]) \
                    and yp not in yt \
                    and not isna(yp)
         else:
