@@ -20,13 +20,15 @@ const UserInfo = (props) => {
     }
     return (
         <div className={style.infoContainer}>
-            <div className={style.name}>{props.name}</div>
-            <div className={style.metro}>
-                <LocationOnIcon style={{ color: '##178FD6' }} /> {props.metro}
-            </div>
             { editing
                 ? <ChangeForm name={props.name} metro={props.metro}/>
-                : <Edit/>
+                : <div>
+                    <div className={style.name}>{props.name}</div>
+                    <div className={style.metro}>
+                        <LocationOnIcon style={{ color: '##178FD6' }} /> {props.metro}
+                    </div>
+                    <Edit/>
+                </div>
             }
         </div>
     );
