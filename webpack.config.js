@@ -1,7 +1,6 @@
 const path = require('path');
 const config = require('config');
 const CopyPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
 
 const DESTINATION_DIR = 'dist';
 
@@ -60,8 +59,5 @@ module.exports = {
         new CopyPlugin([{
             from: 'public/images/favicon.ico',
         }]),
-        new webpack.DefinePlugin({
-            BACK_HOST: "'" + `${config.get('backHost')}` + "'",
-        }),
     ],
 };
