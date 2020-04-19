@@ -76,21 +76,21 @@ const hobbyPageReducer = (state = initialState, action) => {
             ]
         };
 
-    case actionTypes.EDIT_PAGE:
+    case actionTypes.SET_HOBBY_DATA:
         return {
             ...state,
-            label: action.label,
-            metro: action.metro,
-            timeTable: action.timeTable,
-            equipment: action.equipment,
-            address: action.address,
-            comfortable: action.comfortable,
-            specialConditions: action.specialConditions,
-            description: action.description,
-            price: action.price,
-            flag: action.flag,
-            contact: action.contact,
-            category: action.category,
+            label: action.payload.label,
+            metro: action.payload.metro,
+            timeTable: action.payload.timeTable,
+            equipment: action.payload.equipment,
+            address: action.payload.address,
+            comfortable: action.payload.comfortable,
+            specialConditions: action.payload.specialConditions,
+            description: action.payload.description,
+            price: action.payload.price,
+            flag: action.payload.flag,
+            contact: action.payload.contact,
+            category: action.payload.category,
         };
     default:
         return state;

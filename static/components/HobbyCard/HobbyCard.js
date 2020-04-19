@@ -12,6 +12,8 @@ import InformationBlock from './InformationForm/InformationForm';
 import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
 import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
 import { isInArray } from '../../utils/functions';
+import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
+import Preloader from '../Common/Preloader/Preloader';
 
 
 class HobbyCard extends React.Component {
@@ -19,6 +21,9 @@ class HobbyCard extends React.Component {
         super(props);
         this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
         this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
+    }
+    componentDidMount() {
+        this.props.initialize(this.props.hobbyInfo.id);
     }
 
     handleAddMyHobby(event) {
@@ -40,6 +45,9 @@ class HobbyCard extends React.Component {
     }
 
     render() {
+        if (!this.props.initializedPage){
+            return <Preloader/>
+        }
         const isOwner = isInArray(this.props.hobbyInfo.id, this.props.hobbiesOwnedProvider);
         return (
             <div>
@@ -80,6 +88,7 @@ class HobbyCard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+    initializedPage: state.hobbyPage. initializedPage,
     id: state.auth.userId || state.providerCabinet.providerId,
     isUserAuth: state.auth.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
@@ -108,6 +117,7 @@ const mapDispatchToProps = (dispatch) => ({
     onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
     onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
     onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
+    initialize: (idHobby) => dispatch(initializeHobbyPage(idHobby)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HobbyCard);

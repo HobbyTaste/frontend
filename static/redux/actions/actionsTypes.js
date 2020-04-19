@@ -10,7 +10,7 @@ export const SOME_FAIL = 'SOME_FAIL';
 /*hobby*/
 export const INITIALIZE_HOBBY_PAGE = 'INITIALIZE_HOBBY_PAGE';
 export const ADD_RESPONSE = 'ADD_RESPONSE';
-export const EDIT_PAGE = 'EDIT_PAGE';
+export const SET_HOBBY_DATA = 'SET_HOBBY_DATA';
 
 /*reducer*/
 
