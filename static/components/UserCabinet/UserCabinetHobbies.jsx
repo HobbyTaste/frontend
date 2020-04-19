@@ -13,16 +13,16 @@ const flags = {
 const image = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
 const UserCabinetHobbies = (props) => {
-    // useEffect(() => {
-    //     props.initializeUserCabinet();
-    // }, []);
+    useEffect(() => {
+        props.initializeUserCabinet();
+    }, []);
 
     // if (!props.isAuth) {
     //    return <Redirect to={'/'} />;
     // }
 
     // add selecting hobbies from props info
-    // const myHobbies = props.userHobbies.map((c) => <UserHobbyCard {...c} isAuth={props.isAuth}/>);
+    const myHobbies = props.userHobbies.map((c) => <UserHobbyCard {...c} isAuth={props.isAuth}/>);
 
     return (<div className={style.slotContainer}>
         <div className="center">
@@ -50,19 +50,19 @@ const UserCabinetHobbies = (props) => {
     </div>);
 };
 
-// const mapStateToProps = (state) => ({
-//     // name: state.auth.name,
-//     name: 'Иван Иванов',
-//     // metro: state.auth.metro,
-//     metro: 'Долгопрудная',
-//     // avatar: state.auth.avatar,
-//     avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
-//     userHobbies: state.auth.userHobbies,
-//     // isAuth: state.auth.isAuth,
-//     isUserAuth: true,
-//     isProviderAuth: false,
-// });
+const mapStateToProps = (state) => ({
+    // name: state.auth.name,
+    name: 'Иван Иванов',
+    // metro: state.auth.metro,
+    metro: 'Долгопрудная',
+    // avatar: state.auth.avatar,
+    avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
+    userHobbies: state.auth.userHobbies,
+    // isAuth: state.auth.isAuth,
+    isUserAuth: true,
+    isProviderAuth: false,
+});
 
 // maybe need own initializer
-// export default connect(mapStateToProps, { initializeUserCabinet })(UserCabinetHobbies);
-export default UserCabinetHobbies;
+export default connect(mapStateToProps, { initializeUserCabinet })(UserCabinetHobbies);
+// export default UserCabinetHobbies;

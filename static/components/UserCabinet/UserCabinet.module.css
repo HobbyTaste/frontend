@@ -66,13 +66,6 @@
     justify-content: normal;
 }
 
-.layout {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 100px;
-    justify-content: center;
-}
-
 .infoContainer {
     position: relative;
     display: flex;
@@ -96,16 +89,6 @@
     margin-left: 20px;
     margin-top: 20px;
     margin-right: 20px;
-}
-
-.hobbiesBlock {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-    /*margin-left: 100px;*/
 }
 
 @media all and (max-device-width: 1540px) {

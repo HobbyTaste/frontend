@@ -3,7 +3,6 @@ import { Route, withRouter } from 'react-router-dom';
 import MainPage from './components/MainPage/MainPage';
 import Hobbies from './components/Hobbies/Hobbies'
 import { initializeApp } from './redux/reducers/app-reducer';
-import Categories from './components/Categories/Categories';
 import Navigation from './components/Navigation/Navigation';
 import HobbyCard from './components/HobbyCard/HobbyCard';
 import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
