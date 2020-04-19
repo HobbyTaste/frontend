@@ -76,13 +76,13 @@
 .infoContainer {
     position: relative;
     display: flex;
-    margin-left: 28px;
+    margin-left: 20px;
     margin-top: 20px;
 }
 
 .feedbackHeader {
     margin-top: 345px;
-    margin-left: 28px;
+    margin-left: 20px;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.15px;
@@ -93,8 +93,9 @@
 .feedbackContainer {
     position: relative;
     display: flex;
-    margin-left: 28px;
+    margin-left: 20px;
     margin-top: 20px;
+    margin-right: 20px;
 }
 
 .hobbiesBlock {

@@ -30,7 +30,7 @@ const UserCabinet = (props) => {
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
-                <Feedback isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth} />
+                <Feedback isUserAuth={false} isProviderAuth={props.isProviderAuth} />
             </div>
             <button onClick={chaneScreen} placeholder='Техническая кнопка'/>
         </div>
