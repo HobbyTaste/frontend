@@ -6,9 +6,12 @@ from typing import List
 from scraper import Scraper
 
 
-vk_token = ''
+def get_token():
+    with open('vk_token.txt', 'r') as file:
+        return file.read()
 
 def test_scraper_vk():
+    vk_token = get_token()
     scraper = Scraper(
         data=pd.DataFrame([['tipaurl.com']], columns=['Сайт']),
         vk_token=vk_token
