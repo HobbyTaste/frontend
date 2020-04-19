@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { compose } from 'redux';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { connect } from 'react-redux';
-import HalfRating from './FeedbackStatistic';
+import HalfRating from '../../Common/FeedbackStatistic';
 import { initializeMainPage } from '../../../redux/reducers/mainPage-reducer';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -20,7 +20,7 @@ class InformationBlock extends React.Component {
             <form className={style.form}>
                 <div className={style.nameContainer}>
                     <h1 className={style.nameHobby}>{this.props.hobbyInfo.label}</h1>
-                    <HalfRating answersArray={this.props.hobbyInfo.comments} isUserAuth = {this.props.hobbyInfo.isUserAuth}/>
+                    <HalfRating answersArray={this.props.hobbyInfo.comments}/>
                 </div>
                 <span className={style.metro}>
                 <LocationOnIcon style={{color: '#178fd6'}} /> {this.props.hobbyInfo.metro}
