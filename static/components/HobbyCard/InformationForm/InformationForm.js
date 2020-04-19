@@ -20,7 +20,7 @@ class InformationBlock extends React.Component {
             <form className={style.form}>
                 <div className={style.nameContainer}>
                     <h1 className={style.nameHobby}>{this.props.hobbyInfo.label}</h1>
-                    <HalfRating isUserAuth = {this.props.hobbyInfo.isUserAuth}/>
+                    <HalfRating answersArray={this.props.hobbyInfo.comments} isUserAuth = {this.props.hobbyInfo.isUserAuth}/>
                 </div>
                 <span className={style.metro}>
                 <LocationOnIcon style={{color: '#178fd6'}} /> {this.props.hobbyInfo.metro}

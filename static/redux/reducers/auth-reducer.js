@@ -5,7 +5,7 @@ const initialState = {
     email: null,
     name: 'Имя временно',
     avatar: null,
-    isAuth: false,
+    isAuth: true,
     inUserCabinet: false,
     userInitialized: false,
 

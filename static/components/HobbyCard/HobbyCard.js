@@ -54,7 +54,7 @@ class HobbyCard extends React.Component {
                 <div className={style.infoContainer}>
                     <div className={style.mainContainer}>
                         <div className={style.mainBlock}>
-                            <div className={style.imageContainer}><Slider/></div>
+                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.photos}/></div>
                             <div className={style.textContainer}>
                                 <InformationBlock hobbyInfo={this.props.hobbyInfo}/>
                                 <div className={style.buttonContainer}>
@@ -88,7 +88,7 @@ class HobbyCard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    initializedPage: state.hobbyPage. initializedPage,
+    initializedPage: state.hobbyPage.initializedPage,
     id: state.auth.userId || state.providerCabinet.providerId,
     isUserAuth: state.auth.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
@@ -97,6 +97,8 @@ const mapStateToProps = (state) => ({
 
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
+        photos: state.hobbyPage.photos,
+        comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,

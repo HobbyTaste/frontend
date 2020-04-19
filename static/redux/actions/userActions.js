@@ -36,12 +36,14 @@ export const someFail = error => ({
         error: error
     }
 );
-
+const getData = () => new Promise(resolve => {
+    setTimeout(() => resolve( {data: {hobbies: [1, 2]}}), 1000)
+})
 
 // функции, отпраправляющие запросы....
 /*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
 export const addHobbyForUser = (hobbyID, userID) => (dispatch) => {
-    axios.post('http://127.0.0.1:8100/user/subscribe', {
+  axios.post('/user/subscribes', {
         hobbyId: hobbyID,
         userId: userID
     }).then(res => {
@@ -53,6 +55,8 @@ export const addHobbyForUser = (hobbyID, userID) => (dispatch) => {
             dispatch(someFail(err))
         })
 }
+
+
 /*удалить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
 export const deleteHobbyForUser = (hobbyID, userID) => (dispatch) => {
     axios.post('http://127.0.0.1:8100/user/subscribe', {

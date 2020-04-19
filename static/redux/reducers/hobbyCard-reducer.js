@@ -1,9 +1,11 @@
 import * as actionTypes from '../actions/actionsTypes';
+import photo from '../../components/HobbyCard/Image/photo.png';
 
 
 let initialState = {
     initializedPage: false,
     id: 1,
+    photos: ['https://czech-rurepublic-gb.ru/wp-content/uploads/2015/12/143635088818.jpg', 'https://w-dog.ru/wallpapers/0/0/437992000662990/kamera-fotoapparat-contax-devushka-fotograf.jpg', photo],
     label: 'Вид хобби',
     metro: 'станция метро',
     timeTable: 'расписание',
@@ -30,7 +32,7 @@ let initialState = {
         text: 'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
         nameWriter: 'Азалия',
         date: '28.12.2020',
-        stars: 5,
+        stars: 2,
         answer: {
             providerId: 1,
             text: 'Спасибо за ваш отзыв! ',
@@ -44,7 +46,7 @@ let initialState = {
             text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
             nameWriter: 'Имя',
             date: '28.12.2020',
-            stars: 5,
+            stars: 3,
             answer: null,
         },
         {

@@ -22,7 +22,7 @@ const setHobbyData = payload =>({
 // теперь какие-то функции....
 //
 const getData = () => new Promise(resolve => {
-    setTimeout(() => resolve( {data: {metro: "Polo", description:"ddd", contact:{mobile: "999", email: "ff"}, flag:{isParking: false,
+    setTimeout(() => resolve( {data: {label: "Название" ,metro: "Новая станция", description:"Описание", contact:{mobile: "+7 999", email: "ааа"}, flag:{isParking: false,
                 isBeginner: true,
                 isRent: false,}}}), 2000)
 })
@@ -45,13 +45,13 @@ export const initializeHobbyPage = (hobbyID) => (dispatch) => {
         })
 }
 
+
 /*добавить отзыв. Отправляем is пользователя, id хобби, для которого этот отзыв.
 Хотим, чтобы в бд автоматически сохранилась текущая дата к этому отзыву. Вернуть обновленный массив отзывов.*/
 export const addUserFeedback = (hobbyID, userID, values) => (dispatch) => {
     console.log("addUserFeedback")
     axios.post('http://127.0.0.1:8080/user/subscribe', {
         hobbyId: hobbyID,
-        userId: userID,
         text: values.TextFeedback,
         stars: values.StarsRating,
     }).then(res => {
@@ -68,7 +68,6 @@ export const addProviderResponse = (hobbyID, providerID, values) => (dispatch) =
     console.log("addProviderResponse")
     axios.post('http://127.0.0.1:8100/user/subscribe', {
         hobbyId: hobbyID,
-        providerId: providerID,
         values: values,
     }).then(res => {
         console.log("addProvider Responce")
