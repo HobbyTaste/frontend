@@ -1,22 +1,18 @@
 import React, {Component} from 'react';
-import style from "./UserAvatar.module.css";
+import style from './UserAvatar.module.css';
 
 const UserAvatar = (props) => {
     let avatar;
-    if(props.url === "null") {
+    if (props.url === 'null') {
         avatar = 'https://images.assetsdelivery.com/compings_v2/jenjawin/jenjawin1904/jenjawin190400208.jpg';
-    }
-    else {
+    } else {
         avatar = props.url;
     }
     return (
-        <div className={style.imgWrapper}>
+        <div className={style.avatar}>
             <div className={style.imgContainer}>
                 <div className={style.img}
-                     style={{
-                         backgroundImage: `url("${avatar}")`
-                         /*backgroundImage: `url("${props.url}")`*/
-                     }}>
+                    style={{ backgroundImage: `url("${avatar}")` }}>
                 </div>
             </div>
         </div>
