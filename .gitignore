@@ -6,3 +6,4 @@ config/default-secrets.yaml
 /ml/enviroment/env/*
 **/__pycache__/**
 **/.ipynb_checkpoints/**
+ml/web-scraper/tests/vk_token.txt
