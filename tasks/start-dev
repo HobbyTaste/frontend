@@ -15,4 +15,4 @@ function exit_handler() {
 trap exit_handler EXIT
 
 echo "Running server..."
-NODE_ENV=development ts-node-dev --watch --project frontServer/tsconfig.json frontServer/app.ts
+NODE_ENV=development ts-node-dev --project frontServer/tsconfig.json --clear --respawn --transpileOnly frontServer/app.ts
