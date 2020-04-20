@@ -46,27 +46,25 @@ const comments =  [{
         }
     }]
 
-const Slot = (props) => {
-    return (<div className={style.slot}>
-        <img className={style.slotPic} src={props.pic}/>
-        <span className={style.slotDescription}>
-            <div className={style.slotHeader}>
-                <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>
-                <HalfRating answersArray={comments}/>
-            </div>
-            <div className={`${style.metro} ${style.colorBlueSlot}`}>
-                <LocationOnIcon style={{ color: '#034488', fontSize: 'small' }} /> {props.metro}
-            </div>
-            <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
-        </span>
-        <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
-        <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
-        {props.isUserAuth
-            ? (props.isProviderAuth ? <div className={style.icon}><MonetizationOnIcon/></div>
-                : <div className={style.icon}><BookmarkBorderIcon/></div>)
-            : <div className={style.iconEmpty}/>}
-        <div className={style.icon}><MoreHorizIcon/></div>
-    </div>);
-}
+const Slot = (props) => (<div className={style.slot}>
+    <img className={style.slotPic} src={props.pic}/>
+    <span className={style.slotDescription}>
+        <div className={style.slotHeader}>
+            <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>
+            <HalfRating isUserAuth = {props.isUserAuth}/>
+        </div>
+        <div className={`${style.metro} ${style.colorBlueSlot}`}>
+            <LocationOnIcon style={{ color: '#034488', fontSize: 'small' }} /> {props.metro}
+        </div>
+        <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
+    </span>
+    <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
+    <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
+    {props.isUserAuth
+        ? (props.isProviderAuth ? <div className={style.icon}><MonetizationOnIcon/></div>
+            : <div className={style.icon}><BookmarkBorderIcon/></div>)
+        : <div className={style.iconEmpty}/>}
+    <div className={style.icon}><MoreHorizIcon/></div>
+</div>);
 
 export default Slot;

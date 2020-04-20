@@ -1,21 +1,22 @@
-import React, {Component} from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import MainPage from './components/MainPage/MainPage';
 import Hobbies from './components/Hobbies/Hobbies'
-import {initializeApp} from './redux/reducers/app-reducer';
-import Categories from './components/Categories/Categories';
+import { initializeApp } from './redux/reducers/app-reducer';
 import Navigation from './components/Navigation/Navigation';
 import HobbyCard from './components/HobbyCard/HobbyCard';
 import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProviderHeaderContainer from './components/ProviderHeader/ProviderHeaderContainer';
 import Preloader from './components/Common/Preloader/Preloader';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import UserCabinet from './components/UserCabinet/UserCabinet';
 import style from './App.module.css';
-import Footer from "./components/Footer/Footer";
+import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
+import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
+import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
 
 class App extends React.Component {
     componentDidMount() {
@@ -34,7 +35,12 @@ class App extends React.Component {
                             <HeaderContainer/>
                         </div>
                         <div className={style.appNavigation}>
-                            <Navigation/>
+                            <Route exact path="/" render={() => <Navigation/>}/>
+                            <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
+                            <Route exact path="/hobby/card" render={() => <Navigation/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
@@ -44,8 +50,9 @@ class App extends React.Component {
                         <div className={style.appWrapperContent}>
                             <Route exact path="/" render={() => <MainPage/>}/>
                             <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
-                            <Route exact path="/hobby_card" render={() => <HobbyCard/>}/>
-                            <Route exact path="/user/cabinet" render={() => <HobbyCard/>}/>
+                            <Route exact path="/hobby/card" render={() => <HobbyCard/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                         </div>
                     </div>

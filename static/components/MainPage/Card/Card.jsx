@@ -44,26 +44,23 @@ const comments =  [{
         }
     }]
 
-
-const Card = (props) => {
-    return (<div>
-        <span className={style.card}>
-            <span className={style.cardDescription}>
-                <div className={style.cardHeader}>
-                    <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
-                    <HalfRating answersArray={comments}/>
-                </div>
-                <span className={style.icon}><MoreHorizIcon style={{ color: '#FFFFFF' }}/></span>
-                <div className={`${style.metro} ${style.colorBlueCard}`}>
-                    <LocationOnIcon style={{ color: '#178FD6', fontSize: 'small' }} /> {props.metro}
-                </div>
-                <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
-                {props.isUserAuth
-                    ? (props.isProviderAuth ? <span className={style.icon}><MonetizationOnIcon style={{ color: '#FFFFFF', fontSize: 'small' }}/></span>
-                        : <span className={style.icon}><BookmarkBorderIcon style={{ color: '#FFFFFF' }}/></span>)
-                    : <span className={style.iconEmpty}/>}
-            </span>
+const Card = (props) => (<div>
+    <span className={style.card}>
+        <span className={style.cardDescription}>
+            <div className={style.cardHeader}>
+                <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
+                <HalfRating isUserAuth = {props.isUserAuth}/>
+            </div>
+            <span className={style.icon}><MoreHorizIcon style={{ color: '#FFFFFF' }}/></span>
+            <div className={`${style.metro} ${style.colorBlueCard}`}>
+                <LocationOnIcon style={{ color: '#178FD6', fontSize: 'small' }} /> {props.metro}
+            </div>
+            <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
+            {props.isUserAuth
+                ? (props.isProviderAuth ? <span className={style.icon}><MonetizationOnIcon style={{ color: '#FFFFFF', fontSize: 'small' }}/></span>
+                    : <span className={style.icon}><BookmarkBorderIcon style={{ color: '#FFFFFF' }}/></span>)
+                : <span className={style.iconEmpty}/>}
         </span>
-    </div>);
-}
+    </span>
+</div>)
 export default Card;
