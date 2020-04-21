@@ -18,7 +18,7 @@
 
 .menu > li {
     height: 40px;
-    /*width: 160px;*/
+    width: 16.6%;
     margin-top: -12px;
 
     line-height: 40px;
@@ -37,7 +37,6 @@
     text-decoration: none;
 
     display: block;
-    padding: 0 35px;
     margin: auto;
 }
 
