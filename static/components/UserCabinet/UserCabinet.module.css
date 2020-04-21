@@ -34,7 +34,6 @@
 .menuPoint {
     height: 40px;
     width: 160px;
-    color: #034488;
     margin-top: -12px;
 
     line-height: 40px;
@@ -42,6 +41,15 @@
 }
 
 .menuPoint:hover {
+    background: #178FD6;
+    color: white;
+}
+
+.passiveCategory {
+    color: #034488;
+}
+
+.activeCategory {
     background: #178FD6;
     color: white;
 }
