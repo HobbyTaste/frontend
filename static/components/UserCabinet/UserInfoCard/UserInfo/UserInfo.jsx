@@ -18,7 +18,7 @@ const UserInfo = (props) => {
             { editing
                 ? <div>
                     <ChangeForm name={props.name} metro={props.metro}/>
-                    <button onClick={handleClick} placeholder='Техническая кнопка'/>
+                    <button className={style.buttonChange} onClick={handleClick}>Сохранить</button>
                 </div>
                 : <div>
                     <div className={style.name}>{props.name}</div>
