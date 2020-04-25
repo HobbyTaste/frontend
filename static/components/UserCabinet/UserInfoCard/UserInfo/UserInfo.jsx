@@ -21,11 +21,11 @@ const UserInfo = (props) => {
             </div>
             { editing
                 ? <div className={style.editContainer}>
-                    <ChangeForm name={props.name} metro={props.metro}/>
-                    <button className={style.buttonChange} onClick={handleClick}>Сохранить</button>
+                    <ChangeForm name={props.name} metro={props.metro} handleClick={handleClick}/>
+
                 </div>
                 : <div>
-                    <button className={style.buttonChange} onClick={handleClick}>
+                    <button className={style.editButton} onClick={handleClick}>
                         Редактировать<EditIcon className={style.iconEdit}/>
                     </button>
                 </div>

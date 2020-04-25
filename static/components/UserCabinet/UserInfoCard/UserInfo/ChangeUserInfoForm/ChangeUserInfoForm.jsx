@@ -27,16 +27,6 @@ const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
         mainFile = null;
     };
 
-    // handleInputChange(event) {
-    //     const target = event.target;
-    //     const value = target.name === 'isGoing' ? target.checked : target.value;
-    //     const name = target.name;
-    //
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-
     return (
         <form onSubmit={handleSubmit}>
             <div className={style.inputContainer}>
@@ -46,9 +36,7 @@ const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
             <div>
                 <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
             </div>
-            {/*<div className={style.saveButton}>*/}
-            {/*    <RedButton text={'Сохранить'} label="Submit" onSubmit={handleSubmit} />*/}
-            {/*</div>*/}
+            <button className={style.saveButton} onClick={handleSubmit}>Сохранить</button>
         </form>
     );
 };
@@ -68,6 +56,7 @@ const ChangeForm = (props) => {
             dataToChange.avatar = mainFile;
         }
         props.userEdit(dataToChange);
+        props.handleClick();
     };
     return (
         <div>

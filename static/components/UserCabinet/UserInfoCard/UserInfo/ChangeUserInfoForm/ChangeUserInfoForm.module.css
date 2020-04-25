@@ -45,8 +45,22 @@
 }
 
 .saveButton {
-    height: 60px;
-    margin-top: 20px;
+    width: auto;
+    height: 36px;
+    margin-top: 14px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
     display: flex;
-    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
 }
