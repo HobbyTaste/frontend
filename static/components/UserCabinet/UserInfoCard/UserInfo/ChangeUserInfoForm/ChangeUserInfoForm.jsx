@@ -10,8 +10,8 @@ const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
     const [url, setUrl] = useState('');
     const [file, setFile] = useState(null);
     const [state, setState] = useState({
-        newName: name,
-        newMetro: metro,
+        Name: name,
+        Metro: metro,
     });
     const uploadImage = (e) => {
         const reader = new FileReader();
@@ -37,8 +37,8 @@ const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div className={style.inputContainer}>
-                <input className={style.input} name='Name' value={state.newName} onChange={handleInputChange}/>
-                <br/><input className={style.input} name='Metro' value={state.newMetro} onChange={handleInputChange}/>
+                <input className={style.input} name='Name' value={state.Name} onChange={handleInputChange}/>
+                <br/><input className={style.input} name='Metro' value={state.Metro} onChange={handleInputChange}/>
             </div>
             <div>
                 <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
