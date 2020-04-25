@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import style from './UserInfo.module.css';
-import { AnimatedModalWindow } from '../../../../HOC/AnimatedModalWindow/AnimatedModalWindow';
 import ChangeForm from './ChangeUserInfoForm/ChangeUserInfoForm';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EditIcon from '@material-ui/icons/Edit';
 
 const UserInfo = (props) => {
-    // const Edit = AnimatedModalWindow(ChangeForm, 'Редактировать');
     const [editing, setEditing] = useState(false);
 
     function handleClick(e) {

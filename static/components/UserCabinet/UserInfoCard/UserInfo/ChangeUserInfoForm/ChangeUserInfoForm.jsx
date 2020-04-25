@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { useState } from 'react';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Input } from '../../../../Common/FormsControls/FormsControls';
 import style from './ChangeUserInfoForm.module.css';
-import { RedButton } from '../../../../Common/MaterialsButtons';
 import UploadPhoto from '../../../../Common/UploadFotoBlock/UploadPhoto';
 import { userEdit } from '../../../../../redux/reducers/auth-reducer';
 
@@ -31,14 +29,10 @@ const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
         mainFile = null;
     };
     const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.text;
-        const name = target.name;
-
         setState({
-            [name]: value,
+            [event.target.name]: event.target.text,
         });
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>

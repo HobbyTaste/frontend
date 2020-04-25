@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import style from './UserCabinet.module.css';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
 import { initializeUserCabinet } from '../../redux/reducers/auth-reducer';
-import UserHobbyCard from './UserHobbyCard/UserHobbyCard';
 import Feedback from '../HobbyCard/Feedback/Feedback';
 import UserCabinetHobbies from './UserCabinetHobbies';
 
