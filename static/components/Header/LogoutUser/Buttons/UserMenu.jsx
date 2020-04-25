@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
     button: {
+        display: 'flex',
         border: '1px solid #2F1E0A',
         height: '30px',
         boxShadow: 'none',
@@ -17,7 +18,6 @@ const useStyles = makeStyles(theme => ({
         background: '#EDECE8',
         color: '#034488',
         borderRadius: '4px',
-        width: '94%',
         padding: '0px 10px',
         fontStyle: 'normal',
         fontWeight: '500',
