@@ -39,7 +39,7 @@ class App extends React.Component {
                             <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
                             <Route exact path="/hobby/card" render={() => <Navigation/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation isMainPage={true}/>}/>
-                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation isMainPage={false}/>}/>
+                            <Route exact path="/user/cabinet/hobby" render={() => <UserCabinetNavigation isMainPage={false}/>}/>
                             <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ class App extends React.Component {
                             <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
                             <Route exact path="/hobby/card" render={() => <HobbyCard/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
-                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
+                            <Route exact path="/user/cabinet/hobby" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
                         </div>
                     </div>

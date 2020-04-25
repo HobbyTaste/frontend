@@ -12,18 +12,12 @@ const UserCabinet = (props) => {
         props.initializeUserCabinet();
     }, []);
 
-    const [mainPage, setMainPage] = useState(true);
-
     // if (!props.isAuth) {
     //    return <Redirect to={'/'} />;
     // }
 
-    function chaneScreen(e) {
-        setMainPage(!mainPage);
-    }
-
-    return (mainPage
-        ? <div className={style.background}>
+    return (
+        <div className={style.background}>
             <div className={style.infoContainer}>
                 <UserInfoCard avatar={props.avatar} name={props.name} metro={props.metro}/>
             </div>
@@ -31,14 +25,7 @@ const UserCabinet = (props) => {
             <div className={style.feedbackContainer}>
                 <Feedback isUserAuth={false} isProviderAuth={props.isProviderAuth} />
             </div>
-            <button onClick={chaneScreen} placeholder='Техническая кнопка'/>
-        </div>
-        : <div className={style.background}>
-            <div className={style.hobbyHeader}>Ваши хобби:</div>
-            <UserCabinetHobbies/>
-            <button onClick={chaneScreen} placeholder='Техническая кнопка'/>
-        </div>
-    );
+        </div>);
 };
 
 const mapStateToProps = (state) => ({
