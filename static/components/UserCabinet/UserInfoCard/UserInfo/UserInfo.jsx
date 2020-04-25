@@ -15,16 +15,16 @@ const UserInfo = (props) => {
 
     return (
         <div className={style.infoContainer}>
+            <div className={style.name}>{props.name}</div>
+            <div className={style.metro}>
+                <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
+            </div>
             { editing
-                ? <div>
+                ? <div className={style.editContainer}>
                     <ChangeForm name={props.name} metro={props.metro}/>
                     <button className={style.buttonChange} onClick={handleClick}>Сохранить</button>
                 </div>
                 : <div>
-                    <div className={style.name}>{props.name}</div>
-                    <div className={style.metro}>
-                        <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
-                    </div>
                     <button className={style.buttonChange} onClick={handleClick}>
                         Редактировать<EditIcon className={style.iconEdit}/>
                     </button>
