@@ -1,8 +1,0 @@
-#!/bin/bash
-
-CONTAINER=hobbytaste_mongodb
-
-trap './tasks/cleanup $CONTAINER' EXIT
-
-echo "Running server and tests..." 
-NODE_APP_INSTANCE=secrets NODE_ENV=test NODE_CONFIG_ENV=development TS_NODE_PROJECT='server/tsconfig.json' mocha --exit
