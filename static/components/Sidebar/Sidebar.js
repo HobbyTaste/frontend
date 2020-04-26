@@ -8,7 +8,7 @@ const Sidebar = (props) => {
     return (
         <div className={style.container}>
            {/*<div className={style.calendar}></div>*/}
-            <div className={style.advert}/>
+            <div className={style.advert}></div>
         </div>
     );
 };
