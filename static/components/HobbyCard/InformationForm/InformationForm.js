@@ -5,49 +5,73 @@ import Button from '@material-ui/core/Button';
 import { compose } from 'redux';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { connect } from 'react-redux';
-import HalfRating from '../../Common/FeedbackStatistic';
+import HalfRating from './FeedbackStatistic';
 import { initializeMainPage } from '../../../redux/reducers/mainPage-reducer';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
-class InformationBlock extends React.Component {
+class InformationForm extends React.Component {
     constructor(props) {
         super(props);
+
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
         return (
             <form className={style.form}>
                 <div className={style.nameContainer}>
-                    <h1 className={style.nameHobby}>{this.props.hobbyInfo.label}</h1>
-                    <HalfRating answersArray={this.props.hobbyInfo.comments}/>
+                    <h1 className={style.nameHobby}>{this.props.name}</h1>
+                    <HalfRating isUserAuth = {this.props.isUserAuth}/>
                 </div>
                 <span className={style.metro}>
-                <LocationOnIcon style={{color: '#178fd6'}} /> {this.props.hobbyInfo.metro}
+                <LocationOnIcon style={{color: '#178fd6'}} /> {this.props.metro}
                 </span>
                 <div className={style.description}>
                 <h3>
-                    Адрес: {this.props.hobbyInfo.adress}
+                    Адрес: {this.props.adress}
                 </h3>
                 <h3>
-                    Время занятий: {this.props.hobbyInfo.time}
+                    Время занятий: {this.props.time}
                 </h3>
                     <h3>
-                        Удобства: {this.props.hobbyInfo.comfortable}
+                        Удобства: {this.props.comfortable}
                     </h3>
-                    {this.props.hobbyInfo.equipment && <h3> Экипировка: {this.props.hobbyInfo.equipment} </h3>}
+                    {this.props.equipment && <h3> Экипировка: {this.props.equipment} </h3>}
                     <h3>
-                        Особые условия: {this.props.hobbyInfo.specialConditions}
+                        Особые условия: {this.props.specialConditions}
                     </h3>
                 </div>
             </form>
         );
     }
 }
+//export default InformationForm;
+
+
 const mapStateToProps = (state) => ({
-/*    initializedHobbyPage: state
+/*    initializedHobbyPage: state.
+    providerIsAuth: state.providerCabinet.providerIsAuth,
+
+    isAuthUser: state.auth.isAuth,
+    isAuth: state.auth.isAuth || state.providerCabinet.providerIsAuth,
 */
+
+    isProviderAuth: false,
+    isUserAuth: false,
+    isAuth: false,
 });
 
 
-export default compose(connect(mapStateToProps), withRouter)(InformationBlock);
+export default compose(connect(mapStateToProps), withRouter)(InformationForm);

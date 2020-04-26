@@ -5,8 +5,27 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ButtonProvider from '../Button/ButtonProvider';
 import { connect } from 'react-redux';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import FeedbackFormUser from './FeedbackFormUser';
 import CommentInput from './CommentInput';
-import { addProviderResponse, addUserFeedback } from '../../../redux/actions/hobbyActions';
+
+const anwerInBD=[{
+    userId: 1,
+    userName: 'Азалия',
+    data: '28.12.2020',
+    text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
+    star: 5,
+    answerId:1,
+},
+    {
+        userId: 2,
+        userName: 'Имя',
+        data: '21.10.2020',
+        text:'Текст отзыва. Много много текста мМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текстаМного много текста',
+        star: 3,
+        answerId:2,
+    },
+]
+
 
 
 const useStyles = theme => ({
@@ -29,22 +48,19 @@ class CommentText extends React.Component {
         super(props);
         this.state = {
             isAnswered: false,
-            isOwner: props.isOwner,
             isItAnswerProvider: props.isItAnswerProvider,
             isProviderAuth: props.isProviderAuth,
             text: props.comment.text,
             nameWriter: props.comment.nameWriter,
             date: props.comment.date,
+            isHaveAnswer: props.comment.isHaveAnswer,
             stars: props.comment.stars,
-            isHaveAnswer: props.isHaveAnswer,
-
         };
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(event) {
         this.setState({isAnswered: !this.state.isAnswered});
     }
-
 
     render(){
         const classes = useStyles()
@@ -63,14 +79,14 @@ class CommentText extends React.Component {
                         <p className={style.data}> {this.state.date}</p>
                     </div>
                 </div>
-                {(this.state.isOwner && !this.state.isItAnswerProvider && !this.state.isHaveAnswer) && <ButtonProvider className={style.buttonContainer} onClick={this.handleClick} text="Ответить"/>}
+                {(this.state.isProviderAuth && !this.state.isItAnswerProvider && !this.state.isHaveAnswer) && <ButtonProvider className={style.buttonContainer} onClick={this.handleClick} text="Ответить"/>}
                 </div>
         { !this.state.isItAnswerProvider && <Rating style={classes.stars} size='small' name="half-rating-read" defaultValue={this.state.stars} emptyIcon={<StarBorderIcon fontSize="inherit" />} precision={0.5} readOnly /> }
         <div className={style.text}>
             {this.state.text}
         </div>
             </div>
-                {this.state.isAnswered && <CommentInput onSubmit={this.props.handleSubmit} isAnswer={true}/>}
+                {this.state.isAnswered && <CommentInput isAnswer={true}/>}
             </div>
 
 );
@@ -79,5 +95,3 @@ class CommentText extends React.Component {
 
 
 export default CommentText;
-
-

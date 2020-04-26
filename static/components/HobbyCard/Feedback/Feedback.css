@@ -81,10 +81,6 @@
     border: none;
     min-height: 50px;
 }
-.textAreaError{
-    border: solid red 1px;
-}
-
 .textArea::-webkit-input-placeholder {
     color: #DADADA;
 }
@@ -115,9 +111,6 @@
 .rating{
     display:flex;
     color: #034488;
-}
-.ratingError{
-    color: red;
 }
 
 .labelAnswer{

@@ -1,14 +1,14 @@
 import React from 'react';
 import style from './UploadPhoto.module.css';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CloseIcon from '@material-ui/icons/Close';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 const UploadPhoto = (props) => {
     return (
         <div className={style.uploadBlock}>
             <div>
                 <label htmlFor="file">
-                    <CloudUploadIcon className={style.upload} style={{fontSize: 80}}/>
+                    <AddAPhotoIcon className={style.upload} style={{ fontSize: 50 }}/>
                 </label>
                 <input type="file" name="file" id="file" onChange={props.uploadImage} className={style.input}/>
                 <div>Загрузить фото</div>
