@@ -19,7 +19,7 @@ const FormInput = (props) => {
                     Моя оценка:
                     <Field name="StarsRating" component={StarsRating} validate={[required]}/>
                 </div> : <div></div>}
-                <div className={style.buttonsContainer}><ButtonSend type="submit" /><ButtonCancel type="button" onClick={props.reset}/>
+                <div className={style.buttonsContainer}><ButtonSend type="submit" text="Отправить"/><ButtonCancel type="button" onClick={props.reset}/>
                 </div>
             </div>
         </form>

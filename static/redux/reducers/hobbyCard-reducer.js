@@ -16,9 +16,9 @@ let initialState = {
     description: 'Какое-то описание',
     price: 'цена',
     flag: {
-        isParking: false,
-        isBeginner: false,
-        isRent: false,
+        isParking: true,
+        isBeginner: true,
+        isRent: true,
     },
     contact: {
         mobile: '',

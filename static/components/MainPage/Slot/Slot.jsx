@@ -46,9 +46,12 @@ const comments =  [{
         }
     }]
 
+
+const imageMissing='https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
+
 const Slot = (props) => {
     return (<div className={style.slot}>
-        <img className={style.slotPic} src={props.pic}/>
+        {props.pic ?  <img className={style.slotPic} src={props.pic}/> : <img className={style.slotPic} src={imageMissing}/>}
         <span className={style.slotDescription}>
             <div className={style.slotHeader}>
                 <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>
