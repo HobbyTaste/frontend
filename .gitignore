@@ -3,4 +3,7 @@
 .idea/
 yarn-error.log
 config/default-secrets.yaml
-.balancer
+/ml/enviroment/env/*
+**/__pycache__/**
+**/.ipynb_checkpoints/**
+ml/web-scraper/tests/vk_token.txt

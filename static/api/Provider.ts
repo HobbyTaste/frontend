@@ -1,6 +1,6 @@
 import BaseFetchClass from './BaseFetchClass';
 
-const BASE_URL = '/restapi/provider';
+const BASE_URL = '/provider';
 
 interface IProvider {
     name: string;

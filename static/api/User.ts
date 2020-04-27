@@ -1,6 +1,6 @@
 import BaseFetchClass from './BaseFetchClass';
 
-const BASE_URL = '/restapi/user';
+const BASE_URL = '/user';
 
 interface ILoginError {
     email?: string;
