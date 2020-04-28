@@ -1,14 +1,8 @@
 .info {
-    height: 60%;
-    background-color: white;
-    width: 329px;
-    position: relative;
-    box-shadow: #79827a;
+    position: absolute;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 20px;
 }
-
 
 @media all and (max-device-width: 1000px) {
     .info {

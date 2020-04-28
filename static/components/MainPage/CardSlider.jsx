@@ -38,7 +38,7 @@ const CardSlider = (props) => {
                         <Card name='Вид хобби' metro='Китай-город'
                               address='улица Строителей, дом 15' pic={images[index]}
                               isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                        </div>
+                    </div>
                 })
             }
         </Swiper>
@@ -46,3 +46,4 @@ const CardSlider = (props) => {
 }
 
 export default CardSlider;
+

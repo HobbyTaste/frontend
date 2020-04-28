@@ -46,7 +46,6 @@ const comments =  [{
         }
     }]
 
-
 const imageMissing='https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
 const Slot = (props) => {
@@ -71,5 +70,6 @@ const Slot = (props) => {
         <div className={style.icon}><MoreHorizIcon/></div>
     </div>);
 }
+
 
 export default Slot;
