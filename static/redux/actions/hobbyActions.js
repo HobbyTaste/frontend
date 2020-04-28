@@ -4,6 +4,7 @@ import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import { someFail } from './userActions';
 import {reset} from 'redux-form'
+import { setIsInSearchPage } from './searchActions';
 // Actions:
 const initializedHobbyPage = (initialized) => ({
     type: actionTypes.INITIALIZE_HOBBY_PAGE,
@@ -22,12 +23,15 @@ const setHobbyData = payload =>({
 // теперь какие-то функции....
 //
 const getData = () => new Promise(resolve => {
-    setTimeout(() => resolve( {data: {label: "Название" ,metro: "Новая станция", description:"Описание", contact:{mobile: "+7 999", email: "ааа"}, flag:{isParking: false,
+    setTimeout(() => resolve( {data: {label: "Название" ,metro: "Новая станция", description:"Описание", contact:{mobile: "+7 999", email: "ааа"},
+            flag:{isParking: true,
                 isBeginner: true,
-                isRent: false,}}}), 2000)
+                isRent: true,}}}), 2000)
 })
 
 export const initializeHobbyPage = (hobbyID) => (dispatch) => {
+    dispatch(setIsInSearchPage(false));
+    dispatch(initializedHobbyPage(false));
     console.log("initialize hobby page")
     /*axios.post('http://127.0.0.1:8080/user/subscribe', {
         hobbyId: hobbyID

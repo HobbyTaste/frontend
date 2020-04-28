@@ -10,6 +10,8 @@ const pagesToRender = [
     'user/cabinet',
     'provider/cabinet',
     'hobbies',
+    'hobby/card',
+    'search',
 ];
 
 pagesToRender.forEach(path => indexRouter.get(...renderPage(path)));
@@ -17,7 +19,8 @@ indexRouter.get(['/?',
     '/user/cabinet/?',
     '/provider/cabinet/?',
     '/hobbies/:type/:metro?',
-    '/search/:category',
+    '/search/:category?',
+    '/hobby/card',
 ], (req, res) => {
     res.end(getTemplate());
 });

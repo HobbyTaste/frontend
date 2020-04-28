@@ -5,6 +5,7 @@ import Hobbies from './components/Hobbies/Hobbies'
 import { initializeApp } from './redux/reducers/app-reducer';
 import Navigation from './components/Navigation/Navigation';
 import HobbyCard from './components/HobbyCard/HobbyCard';
+import SearchPage from './components/SearchPage/SearchPage';
 import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProviderHeaderContainer from './components/ProviderHeader/ProviderHeaderContainer';
@@ -36,6 +37,7 @@ class App extends React.Component {
                         </div>
                         <div className={style.appNavigation}>
                             <Route exact path="/" render={() => <Navigation/>}/>
+                            <Route path="/search/:category?" render={() => <Navigation/>}/>
                             <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
                             <Route exact path="/hobby/card" render={() => <Navigation/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>}/>
@@ -54,6 +56,7 @@ class App extends React.Component {
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                             <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
+                            <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
                     </div>
                     <Footer/>

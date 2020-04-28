@@ -1,10 +1,15 @@
+.featureContainer{
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+}
 .advert{
     box-sizing: border-box;
     max-height: 200px;
     width: 100%;
     margin: 0px 0px;
     padding: 0px 5px;
-    margin-top:15px;
+    margin-top:20dp;
 }
 .image{
     border: 1px solid #2F1E0A;
@@ -14,5 +19,7 @@
     height: 100%;
 }
 .container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }

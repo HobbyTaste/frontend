@@ -1,42 +1,29 @@
 import  React, {Component} from 'react'
 import style from '../Search.css';
-import {Link} from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import LogoutUser from '../../LogoutUser/LogoutUser';
-import LoginUser from '../../LoginUser/LoginUser';
 import SearchIcon from '@material-ui/icons/Search';
-
-/*
-*   <ul className={style.list}>
-            {
-                props.items.map(function(item) {
-                    return <li className={style.itemList} data-category={item} key={item}>  <Link to='/' className={style.link} >{item}</Link></li>
-                })
-            }
-        </ul>*/
+import {setSearchWordSuccess } from '../../../../redux/actions/searchActions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 const useStyles = theme => ({
-    button: {
-        margin: '5px 0px',
-        background: '#E9F0C0',
-        color: '#739C3E',
-        borderRadius: '4px',
-        width: '94%',
-        padding: '0',
-        height: '75%',
-        border:'none',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        fontSize: '20px',
-        letterSpacing: '0.16px',
-        textAlign: 'center',
-        textTransform: 'none',
-    },
+    searchButton: {
+    display: 'inline-block',
+    float: 'right',
+    height:'30px',
+    alignItems: 'center',
+    padding: '0px',
+    marginRight: '11px',
+        minWidth: '22px',
+    border: 'none',
+    cursor: 'pointer',
+    color:'#FFFFFF',
+    background: '#EDECE8',
+}
 });
 const StyledMenu = withStyles({
     paper: {
@@ -91,14 +78,28 @@ class FilteredList extends React.Component {
             ],
             items: [],
             anchorEl: null,
-            isShow: false
+            isShow: false,
+            word: '',
+            isSubmit: false,
         };
         this.filterList = this.filterList.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
-
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
+    handleSearch(event) {
+        if (this.state.word != ''){
+            this.props.onSearch(this.state.word);
+            this.setState({word: ''});
+            this.setState({items: null, isShow: false})
+            this.props.history.push('/search');
+        }
+        else {
+            this.setState({word: 'Введите запрос'});
+        }
+
+    }
 
      handleClick(event) {
          this.setState({AnchorEl: event.currentTarget});
@@ -110,33 +111,33 @@ class FilteredList extends React.Component {
     }
 
     filterList(event){
+        this.setState({word: event.target.value});
         let updatedList = this.state.initialItems;
         updatedList = updatedList.filter(function(item){
             return item.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
         });
-        let aa=false;
+        let isShowSet=false;
         if (event.target.value){
-            aa = true;
+            isShowSet = true;
         }
-        this.setState({items: updatedList, isShow: aa});
+        this.setState({items: updatedList, isShow: isShowSet});
     }
 
     componentWillMount(){
         this.setState({items: this.state.initialItems})
     }
     render(){
-
-        const {classes} = this.props;
+        const classes = useStyles();
         return (
             <div className={style.searcher}>
                 <div className={style.withoutList}>
                 <form className={style.form}>
                     <fieldset className={style.fieldSet}>
-                        <input type="text" className={style.inputSearch} placeholder="Search..." id="searchInput" onChange={this.filterList}/>
+                        <input type="text" className={style.inputSearch} placeholder="Search..." id="searchInput" value = {this.state.word} onChange={this.filterList}/>
                     </fieldset>
                 </form>
-                <button className={style.buttonFind} value="" ><SearchIcon style={{ fontSize: 30 }} /></button>
+               <Button style={classes.searchButton} value="" onClick={this.handleSearch}><SearchIcon style={{ fontSize: 30 }} /></Button>
                 </div>
                 <div>
                 { (this.state.isShow) && <List items={this.state.items} handleClose = {this.handleClose}/>
@@ -146,4 +147,9 @@ class FilteredList extends React.Component {
         );
     }
 }
-export default withStyles(useStyles,{withTheme: true})(FilteredList);
+
+const mapDispatchToProps = (dispatch) => ({
+    onSearch: (word) => dispatch(setSearchWordSuccess(word)),
+});
+
+export default compose(connect(null, mapDispatchToProps),(withStyles(useStyles,{withTheme: true})), withRouter)(FilteredList);
