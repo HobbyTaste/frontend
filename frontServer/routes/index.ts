@@ -17,7 +17,7 @@ const pagesToRender = [
 
 pagesToRender.forEach(path => indexRouter.get(...renderPage(path)));
 indexRouter.get(['/?',
-    '/user/cabinet',
+    '/user/cabinet/?',
     '/user/cabinet/hobbies',
     '/provider/cabinet/?',
     '/hobbies/:type/:metro?',
