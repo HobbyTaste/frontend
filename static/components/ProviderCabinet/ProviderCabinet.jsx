@@ -3,7 +3,7 @@ import style from './ProviderCabinet.module.css';
 import {DialogAddHobbyForm} from "./DialogAddHobbyForm/DialogAddHobbyForm";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {initializeProviderCabinet, logoutProvider} from "../../redux/reducers/provider-reducer";
+import {initializeProviderCabinet, logoutProvider} from "../../redux/actions/providerActions";
 import Preloader from "../Common/Preloader/Preloader";
 import {AddHobbyCard} from "./AddHobbyCard/AddHobbyCard";
 import UserAvatar from "../UserCabinet/UserInfoCard/UserAvatar/UserAvatar";

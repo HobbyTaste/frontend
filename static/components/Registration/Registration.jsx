@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Input, PartnerInput} from "../Common/FormsControls/FormsControls";
 import {connect} from "react-redux";
-import {createNewUser} from "../../redux/reducers/auth-reducer";
+import {createNewUser} from "../../redux/actions/userActions";
 import style from ".././Header/LoginUser/SignIn/SignIn.module.css";
 import {RedButton} from "../Common/MaterialsButtons";
 import UploadPhoto from "../Common/UploadFotoBlock/UploadPhoto";

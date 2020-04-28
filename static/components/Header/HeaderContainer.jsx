@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {logout, setIsUserInCabinet} from "../../redux/reducers/auth-reducer";
+import {logout, setIsUserInCabinet} from "../../redux/actions/userActions";
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth || state.providerCabinet.providerIsAuth,

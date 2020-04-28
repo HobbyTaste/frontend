@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {ColorButton} from '../../Common/MaterialsButtons';
 import {PartnerInput} from '../../Common/FormsControls/FormsControls';
-import {loginProvider} from '../../../redux/reducers/provider-reducer';
+import {loginProvider} from '../../../redux/actions/providerActions';
 import style from './ProviderLogin.module.css'
 
 const ProviderLoginForm = ({handleSubmit, error}) => {

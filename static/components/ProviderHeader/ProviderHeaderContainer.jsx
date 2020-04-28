@@ -1,7 +1,7 @@
 import React from 'react';
 import ProviderHeader from "./ProviderHeader";
 import {connect} from "react-redux";
-import {logoutProvider} from "../../redux/reducers/provider-reducer";
+import {logoutProvider} from "../../redux/actions/providerActions";
 
 const mapStateToProps = (state) => {
     return {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Input, PartnerInput, Password} from "../../../Common/FormsControls/FormsControls";
 import {connect} from "react-redux";
-import {login} from "../../../../redux/reducers/auth-reducer";
+import {login} from "../../../../redux/actions/userActions";
 import style from "./SignIn.module.css";
 import {RedButton} from "../../../Common/MaterialsButtons";
 

@@ -1,16 +1,15 @@
-import { setIsUserInCabinet } from '../reducers/auth-reducer';
+import { someFail, setIsUserInCabinet } from './userActions';
 import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import axios from 'axios';
-import { someFail } from './userActions';
 import ProviderApi from '../../api/Provider'
 
 const providerApi=new ProviderApi();
 
 export const setAuthProviderData = (avatar, email, id, info, name, phone, providerIsAuth) =>
-    ({type: SET_PROVIDER_DATA, avatar, email, id, info, name, phone, providerIsAuth});
-export const initializeProvider = (status) => ({type: INITIALIZE_PROVIDER_SUCCESS, status});
-export const setProviderHobbies = (providerHobbies) => ({type: SET_PROVIDER_HOBBIES, providerHobbies});
+    ({type: actionTypes.SET_PROVIDER_DATA, avatar, email, id, info, name, phone, providerIsAuth});
+export const initializeProvider = (status) => ({type: actionTypes.INITIALIZE_PROVIDER_SUCCESS, status});
+export const setProviderHobbies = (providerHobbies) => ({type: actionTypes.SET_PROVIDER_HOBBIES, providerHobbies});
 
 
 const changeProviderHobby=(userHobbies) => ({

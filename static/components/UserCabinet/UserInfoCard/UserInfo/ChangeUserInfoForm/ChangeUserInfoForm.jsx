@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import style from './ChangeUserInfoForm.module.css';
 import UploadPhoto from '../../../../Common/UploadFotoBlock/UploadPhoto';
-import { userEdit } from '../../../../../redux/reducers/auth-reducer';
+import { userEdit } from '../../../../../redux/actions/userActions';
 
 let mainFile = null;
 const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
