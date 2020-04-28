@@ -15,7 +15,7 @@ const Sidebar= (props) => {
                 <h6 className={style.text}>{props.price}</h6>
             </div>
             {props.flag.isParking && <div className={style.flags + ' ' + style.parking}><div>Рядом парковка</div><div className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></div> </div>}
-            {props.flag.isBegginer && <div className={style.flags + ' ' + style.beginner}>Для новичков<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}
+            {props.flag.isBeginner && <div className={style.flags + ' ' + style.beginner}>Для новичков<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}
             {props.flag.isRent && <div className={style.flags + ' ' + style.rent}>Экипировка<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}
 
             <div className={style.container + ' ' + style.contantContainer} >

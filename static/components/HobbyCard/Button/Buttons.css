@@ -29,7 +29,6 @@
     font-size: 18px;
     line-height: 18px;
     display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: 0.16px;
     color: #034488;;
@@ -49,4 +48,8 @@
 }
 .textAddMyHobby{
     font-size: 20px;
+}
+.iconClear{
+    margin: 0px;
+    color:  rgba(0, 0, 0, 0.54);
 }
