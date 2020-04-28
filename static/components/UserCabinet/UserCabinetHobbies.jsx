@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import style from './UserCabinet.module.css';
-import { initializeUserCabinet } from '../../redux/reducers/auth-reducer';
+import { initializeUserCabinet } from '../../redux/actions/userActions';
 import Slot from '../MainPage/Slot/Slot';
 
 const flags = {
@@ -24,28 +24,31 @@ const UserCabinetHobbies = (props) => {
     // add selecting hobbies from props info
     const myHobbies = props.userHobbies.map((c) => <UserHobbyCard {...c} isAuth={props.isAuth}/>);
 
-    return (<div className={style.slotContainer}>
-        <div className="center">
-            <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                  price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                  isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                  isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-            <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                  price={null} priceTime={null} priceCurriculum={null}
-                  isParking={false} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                  isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-            <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                  price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                  isParking={flags.isParking} isBeginner={false} isRent={flags.isRent}
-                  isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-            <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                  price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                  isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={false}
-                  isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-            <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                  price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                  isParking={false} isBeginner={false} isRent={flags.isRent}
-                  isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+    return (<div className={style.background}>
+        <div className={style.hobbyHeader}>Ваши хобби:</div>
+        <div className={style.slotContainer}>
+            <div className="center">
+                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                      price={null} priceTime={null} priceCurriculum={null}
+                      isParking={false} isBeginner={flags.isBeginner} isRent={flags.isRent}
+                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                      isParking={flags.isParking} isBeginner={false} isRent={flags.isRent}
+                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={false}
+                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
+                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
+                      isParking={false} isBeginner={false} isRent={flags.isRent}
+                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+            </div>
         </div>
     </div>);
 };

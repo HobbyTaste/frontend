@@ -4,7 +4,7 @@ import {Input} from "../../../Common/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import style from "./ChangeProviderForm.module.css";
 import {RedButton} from "../../../Common/MaterialsButtons";
-import {providerEdit} from "../../../../redux/reducers/provider-reducer";
+import {providerEdit} from "../../../../redux/actions/providerActions";
 import UploadPhoto from "../../../Common/UploadFotoBlock/UploadPhoto";
 
 let mainFile = null;

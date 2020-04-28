@@ -4,7 +4,7 @@ import {Input} from "../Common/FormsControls/FormsControls";
 import style from "./ProviderRegistration.module.css";
 import {GreenLargeButton} from "../Common/MaterialsButtons";
 import {connect} from "react-redux";
-import {createNewProvider} from "../../redux/reducers/provider-reducer";
+import {createNewProvider} from "../../redux/actions/providerActions";
 import UploadPhoto from "../Common/UploadFotoBlock/UploadPhoto";
 
 let mainFile = null;

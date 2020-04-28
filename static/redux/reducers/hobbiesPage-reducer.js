@@ -1,5 +1,5 @@
 import Hobby from "../../api/Hobby";
-import {setIsUserInCabinet} from "./auth-reducer";
+import {setIsUserInCabinet} from "../actions/userActions";
 
 const SET_HOBBY_CARDS = 'SET-HOBBY-CARDS';
 const INITIALIZE_HOBBIES = 'INITIALIZE_HOBBIES';
