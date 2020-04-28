@@ -77,25 +77,16 @@ export default function SimpleMenu() {
                 onClose={handleClose}
                 className={classes.list}
             >
-                <MenuItem onClick={handleClose}> <Link to='/search/sport' className={style.text} >Subtitle 1</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text} >Subtitle 3</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 2</Link></MenuItem>
-                <MenuItem onClick={handleClose}>  <Link to='/' className={style.text}>Subtitle 3</Link></MenuItem>
-
-
+                <MenuItem onClick={handleClose}> <a href='/search/creativity' className={style.text} >Творчество</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/art' className={style.text} >Рисование</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/music' className={style.text} >Музыка</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/sport' className={style.text}>Спорт</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/sport_game' className={style.text}>Игровые виды спорта</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/sport_wrestling' className={style.text} >Борьба и единоборства</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/sport_winter' className={style.text} >Зимние виды спорта</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/sport_water' className={style.text}>Водные виды спорта</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/dance' className={style.text}>Танцы</a></MenuItem>
+                <MenuItem onClick={handleClose}>  <a href='/search/other' className={style.text} >Другое</a></MenuItem>
             </StyledMenu>
         </div>
     );

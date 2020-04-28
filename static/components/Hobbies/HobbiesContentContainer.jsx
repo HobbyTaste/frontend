@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import HobbiesContent from "./HobbiesContent";
-import {addNewHobby} from "../../redux/reducers/auth-reducer";
+import {addNewHobby} from "../../redux/actions/userActions";
 import {withRouter, Redirect} from 'react-router-dom';
 import {compose} from "redux";
 import {initializeHobbiesPage} from "../../redux/reducers/hobbiesPage-reducer";

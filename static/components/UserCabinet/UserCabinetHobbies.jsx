@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import style from './UserCabinet.module.css';
-import { initializeUserCabinet } from '../../redux/reducers/auth-reducer';
+import { initializeUserCabinet } from '../../redux/actions/userActions';
 import Slot from '../MainPage/Slot/Slot';
 
 const flags = {

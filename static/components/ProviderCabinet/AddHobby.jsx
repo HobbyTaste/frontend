@@ -4,7 +4,7 @@ import {CommonButton} from "../Common/CommonButton";
 import style from "./AddHobby.module.css";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {AddHobbyCard} from './AddHobbyCard/AddHobbyCard'
-import {addNewHobby} from "../../redux/reducers/provider-reducer";
+import {addNewHobby} from "../../redux/actions/providerActions";
 import {connect} from "react-redux";
 
 

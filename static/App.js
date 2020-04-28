@@ -38,10 +38,9 @@ class App extends React.Component {
                         <div className={style.appNavigation}>
                             <Route exact path="/" render={() => <Navigation/>}/>
                             <Route path="/search/:category?" render={() => <Navigation/>}/>
-                            <Route path="/hobbies/:type?/:metro?" render={() => <Navigation/>}/>
                             <Route exact path="/hobby/card" render={() => <Navigation/>}/>
-                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>}/>
-                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation/>} isMainPage={true}/>
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation/>} isMainPage={false}/>
                             <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
                         </div>
                     </div>
@@ -51,7 +50,6 @@ class App extends React.Component {
                         </div>
                         <div className={style.appWrapperContent}>
                             <Route exact path="/" render={() => <MainPage/>}/>
-                            <Route path="/hobbies/:type?/:metro?" render={() => <Hobbies/>}/>
                             <Route exact path="/hobby/card" render={() => <HobbyCard/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                             <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
