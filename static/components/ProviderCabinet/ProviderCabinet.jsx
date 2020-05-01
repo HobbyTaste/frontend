@@ -51,7 +51,8 @@ class ProviderCabinet extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    providerIsAuth: state.providerCabinet.providerIsAuth,
+    // providerIsAuth: state.providerCabinet.providerIsAuth,
+    providerIsAuth: true,
     name: state.providerCabinet.name,
     email: state.providerCabinet.email,
     phone: state.providerCabinet.phone,

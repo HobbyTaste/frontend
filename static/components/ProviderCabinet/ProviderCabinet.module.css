@@ -13,6 +13,47 @@
     z-index: 1;
 }
 
+.navigation {
+    display: flex;
+    justify-content: center;
+    background: #FFFCF6;
+    height: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+.menu {
+    display: flex;
+    width: 71.5%;
+    justify-content: center;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.menuPoint {
+    height: 40px;
+    width: 160px;
+    margin-top: -12px;
+
+    line-height: 40px;
+    text-align: center;
+}
+
+.menuPoint:hover {
+    background: #178FD6;
+    color: white;
+}
+
+.passiveCategory {
+    color: #034488;
+}
+
+.activeCategory {
+    background: #178FD6;
+    color: white;
+}
+
 .info {
     background-color: white;
     width: 329px;

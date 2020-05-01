@@ -18,6 +18,7 @@ import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
 import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
+import ProviderCabinetNavigation from './components/ProviderCabinet/ProviderCabinetNavigation';
 
 class App extends React.Component {
     componentDidMount() {
@@ -39,9 +40,12 @@ class App extends React.Component {
                             <Route exact path="/" render={() => <Navigation/>}/>
                             <Route path="/search/:category?" render={() => <Navigation/>}/>
                             <Route exact path="/hobby/card" render={() => <Navigation/>}/>
-                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation isMainPage={true}/>} />
-                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation isMainPage={false}/>} />
-                            <Route exact path="/provider/cabinet" render={() => <UserCabinetNavigation/>}/>
+                            <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation isActive={0}/>} />
+                            <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation isActive={1}/>} />
+                            <Route exact path="/provider/cabinet" render={() => <ProviderCabinetNavigation isActive={0}/>}/>
+                            <Route exact path="/provider/cabinet/own" render={() => <ProviderCabinetNavigation isActive={1}/>}/>
+                            <Route exact path="/provider/cabinet/monetization" render={() => <ProviderCabinetNavigation isActive={2}/>}/>
+                            <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderCabinetNavigation isActive={3}/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
