@@ -1,0 +1,18 @@
+.monetizationContainer {
+    display: flex;
+}
+
+.oneCell {
+    width: 160px;
+    padding-left: 330px;
+}
+
+.twoCells {
+    width: 320px;
+    padding-left: 170px;
+}
+
+.threeCells {
+    width: 480px;
+    padding-left: 10px;
+}

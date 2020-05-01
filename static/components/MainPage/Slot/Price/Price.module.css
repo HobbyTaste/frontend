@@ -1,7 +1,7 @@
 .priceContainer {
     width: 150px;
     height: 70px;
-    margin-left: 20px;
+    margin-left: 10px;
     padding: 5px;
 
     background: #FFFCF6;
@@ -12,6 +12,7 @@
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
 
     position: relative;
+    float: right;
 }
 
 .centringContainer {

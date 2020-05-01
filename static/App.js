@@ -20,6 +20,8 @@ import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigatio
 import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
 import ProviderCabinetNavigation from './components/ProviderCabinet/ProviderCabinetNavigation';
 import ProviderHobby from "./components/ProviderCabinet/ProviderHobby/ProviderHobby";
+import ProviderOwnHobbies from "./components/ProviderCabinet/ProviderOwn/ProviderOwnHobbies";
+import AddHobby from "./components/ProviderCabinet/AddHobby";
 
 class App extends React.Component {
     componentDidMount() {
@@ -47,6 +49,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/own" render={() => <ProviderCabinetNavigation isActive={1}/>}/>
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderCabinetNavigation isActive={2}/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderCabinetNavigation isActive={3}/>}/>
+                            <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby isActive={4}/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
@@ -59,6 +62,7 @@ class App extends React.Component {
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                             <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
+                            <Route exact path="/provider/cabinet/own" render={() => <ProviderOwnHobbies/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderHobby/>}/>
                             <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
