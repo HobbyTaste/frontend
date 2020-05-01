@@ -19,6 +19,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
 import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
 import ProviderCabinetNavigation from './components/ProviderCabinet/ProviderCabinetNavigation';
+import ProviderHobby from "./components/ProviderCabinet/ProviderHobby/ProviderHobby";
 
 class App extends React.Component {
     componentDidMount() {
@@ -58,6 +59,7 @@ class App extends React.Component {
                             <Route exact path="/user/cabinet" render={() => <UserCabinet/>}/>
                             <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetHobbies/>}/>
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinet/>}/>
+                            <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderHobby/>}/>
                             <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
                     </div>

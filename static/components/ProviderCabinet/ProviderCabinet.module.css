@@ -69,24 +69,6 @@
     margin-bottom: 20px;
 }
 
-.hobbyHeader {
-    height: 70px;
-    font-size: 30px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-}
-
-.slotContainer {
-    display: flex;
-    width: 95%;
-    position: center;
-    background: white;
-
-    flex-wrap: wrap;
-    justify-content: normal;
-}
-
 .infoContainer {
     position: relative;
     display: flex;
