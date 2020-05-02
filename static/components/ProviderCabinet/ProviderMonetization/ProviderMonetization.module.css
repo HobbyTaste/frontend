@@ -72,6 +72,24 @@
     color: rgba(47, 30, 10, 0.8);
 }
 
+.help {
+    position: absolute;
+    float: right;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    margin-right: 10px;
+    padding: 10px 5px;
+    z-index: 100;
+
+    background: #FFFCF6;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 6px 0 6px 6px;
+
+    color: rgba(47, 30, 10, 0.8);
+}
+
 .monetizationContainer {
     display: flex;
     width: 100%;

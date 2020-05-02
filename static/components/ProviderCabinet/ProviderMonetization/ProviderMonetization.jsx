@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
@@ -73,7 +72,7 @@ const ProviderMonetization = (props) => {
     }, []);
 
     const [state, setState] = useState({
-        showHelp: false,
+        showHelp: 0,
         Hobby: null,
         Widget: null,
         Top: null,
@@ -110,13 +109,13 @@ const ProviderMonetization = (props) => {
             <span className={style.monetization}>
                 <div className={style.nameContainer}>
                     <span className={style.name}>Топ поиска</span>
-                    <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
+                    <span className={style.helpIcon} onMouseOver={() => Help(1)} onMouseOut={() => Help(0)}>
                         <HelpOutlineOutlinedIcon/>
                     </span>
-                    {/*<div className={style.explanation} style={{ display: `${state.showHelp ? 'block' : 'none'}` }}>*/}
-                    {/*    Ваше объявление имеет преимущество в ранжировании и находится*/}
-                    {/*    на первых местах при поиске в категории хобби.*/}
-                    {/*</div>*/}
+                </div>
+                <div className={style.help} style={{ display: `${(state.showHelp === 1) ? 'block' : 'none'}` }}>
+                        Ваше объявление имеет преимущество в ранжировании и находится
+                        на первых местах при поиске в категории хобби.
                 </div>
                 <div className={style.centringContainer}>
                     <div className={style.img}
@@ -134,13 +133,13 @@ const ProviderMonetization = (props) => {
             <span className={style.monetization}>
                 <div className={style.nameContainer}>
                     <span className={style.name}>Виджет</span>
-                    <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
+                    <span className={style.helpIcon} onMouseOver={() => Help(2)} onMouseOut={() => Help(0)}>
                         <HelpOutlineOutlinedIcon/>
                     </span>
-                    {/*<div className={style.explanation} style={{ display: `${state.showHelp ? 'block' : 'none'}` }}>*/}
-                    {/*    Ваше объявление имеет преимущество в ранжировании и находится*/}
-                    {/*    на первых местах при поиске в категории хобби.*/}
-                    {/*</div>*/}
+                </div>
+                <div className={style.help} style={{ display: `${(state.showHelp === 2) ? 'block' : 'none'}` }}>
+                        Ваше объявление размещается в виджете главной странице.
+                        Находится по центру и привлекает внимание.
                 </div>
                 <div className={style.centringContainer}>
                     <div className={style.img}
@@ -158,13 +157,13 @@ const ProviderMonetization = (props) => {
             <span className={style.monetization}>
                 <div className={style.nameContainer}>
                     <span className={style.name}>Афиша</span>
-                    <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
+                    <span className={style.helpIcon} onMouseOver={() => Help(3)} onMouseOut={() => Help(0)}>
                         <HelpOutlineOutlinedIcon/>
                     </span>
-                    {/*<div className={style.explanation} style={{ display: `${state.showHelp ? 'block' : 'none'}` }}>*/}
-                    {/*    Ваше объявление имеет преимущество в ранжировании и находится*/}
-                    {/*    на первых местах при поиске в категории хобби.*/}
-                    {/*</div>*/}
+                </div>
+                <div className={style.help} style={{ display: `${(state.showHelp === 3) ? 'block' : 'none'}` }}>
+                        Ваше объявление размещается на специальной афише слева от основной страницы.
+                        Она не смещается при перемотке и всегда видна.
                 </div>
                 <div className={style.centringContainer}>
                     <div className={style.img}
