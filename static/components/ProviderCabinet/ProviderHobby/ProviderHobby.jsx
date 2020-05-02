@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import style from './ProviderHobby.module.css';
 import Slot from '../../MainPage/Slot/Slot';
-import { initializeProviderCabinet } from "../../../redux/actions/providerActions";
+import { initializeProviderCabinet } from '../../../redux/actions/providerActions';
 
 const flags = {
     isParking: true,

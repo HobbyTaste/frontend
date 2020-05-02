@@ -76,7 +76,7 @@ const Slot = (props) => {
                     : <div className={style.icon}><MonetizationOnIcon/></div>)
                 : <div className={style.icon}><BookmarkBorderIcon/></div>)
             : <div className={style.iconEmpty}/>}
-        <div className={style.icon}><MoreHorizIcon/></div>
+        <Link to='/hobby/card' className={style.icon}><MoreHorizIcon/></Link>
     </div>);
 }
 

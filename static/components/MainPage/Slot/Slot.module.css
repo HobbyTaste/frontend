@@ -71,6 +71,7 @@
     margin-right: 12px;
     top: 50%;
     transform: translate(15%, 25%);
+    color: black;
 }
 
 .iconEmpty {
