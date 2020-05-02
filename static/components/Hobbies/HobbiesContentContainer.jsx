@@ -35,8 +35,8 @@ let mapStateToProps = (state) => {
     return {
         hobbies: state.hobbiesPage.hobbyCards,
         initializedHobbiesPage: state.hobbiesPage.initializedHobbiesPage,
-        isAuth: state.auth.isAuth,
-        userId: state.auth.id,
+        isAuth: state.userCabinet.isAuth,
+        userId: state.userCabinet.id,
         addingInProgress: state.hobbiesPage.addingInProgress,
         providerIsAuth: state.providerCabinet.providerIsAuth
     }

@@ -1,4 +1,5 @@
 /*user*/
+export const SET_COMMENTS = 'SET_COMMENTS'
 export const SET_HOBBIES = 'SET_HOBBIES';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const INITIALIZE_USER_SUCCESS = 'INITIALIZE_USER_SUCCESS';

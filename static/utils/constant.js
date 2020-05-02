@@ -31,3 +31,5 @@ export const categories = [{
         label: 'Другое',
         url: 'other'
     }];
+
+export const defaultAvatarUrl = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';

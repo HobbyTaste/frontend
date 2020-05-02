@@ -51,12 +51,12 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    isUserAuth: state.auth.isAuth,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.isProviderAuth,
-    id: state.auth.userId || state.providerCabinet.providerId,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
     hobbyId: state.hobbyPage.id,
     comments: state.hobbyPage.comments,
-    name: state.auth.name || state.providerCabinet.name,
+    name: state.userCabinet.name || state.providerCabinet.name,
 });
 const mapDispatchToProps = (dispatch) => ({
     onUserFeedback: (idHobby, idUser, values) => dispatch(addUserFeedback(idHobby, idUser, values)),

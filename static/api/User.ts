@@ -126,6 +126,10 @@ class User extends BaseFetchClass {
     public async getHobbies(): Promise<Response> {
         return this.get('/hobbies');
     }
+
+    public async getComments(): Promise<Response> {
+        return this.get('/comments');
+    }
 }
 
 export default User;

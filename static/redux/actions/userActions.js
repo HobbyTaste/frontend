@@ -2,11 +2,14 @@ import axios from 'axios';
 import { findHobbies, toggleAddingProgress } from '../reducers/hobbiesPage-reducer';
 import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
-import UserApi from '../../api/User'
+import UserApi from '../../api/User';
 
-const userApi=new UserApi();
+const testLogin = "bob@test.com";
+const testPassword = "bob";
 
-export const setAuthUserData = (id, email, name, avatar, isAuth) => ({
+const userApi = new UserApi();
+
+export const setCurrentUserInfo = (id, email, name, avatar, isAuth) => ({
     type: actionTypes.SET_USER_DATA,
     id,
     email,
@@ -17,6 +20,10 @@ export const setAuthUserData = (id, email, name, avatar, isAuth) => ({
 const setUserHobbies = (userHobbies) => ({
     type: actionTypes.SET_HOBBIES,
     userHobbies
+});
+const setUserComments = (userComments) => ({
+    type: actionTypes.SET_COMMENTS,
+    userComments
 });
 const changeUserHobby=(userHobbies) => ({
     type: actionTypes.CHANGE_HOBBY_USER,
@@ -72,27 +79,33 @@ export const deleteHobbyForUser = (hobbyID, userID) => (dispatch) => {
         })
 }
 
-export const initializeUserCabinet = () => (dispatch) => {
+export const initializeUserCabinet = () => async (dispatch) => {
     dispatch(initializeUser(false));
+    await userApi.login(testLogin, testPassword);
+    await dispatch(getCurrentUserInfo());
+    await dispatch(getUserComments());
+    dispatch(initializeUser(true));
     dispatch(setIsUserInCabinet(true));
-    let promise = dispatch(getAuthUserData());
-    let promise2 = dispatch(getUserHobbies());
-    Promise.all([promise, promise2])
-        .then(() => {
-            dispatch(initializeUser(true));
-        });
+};
+
+export const getUserComments = () => (dispatch) => {
+    userApi.getComments().then((response) => {
+        if (response.ok) {
+            response.json().then(body => {
+                dispatch(setUserComments(body));
+            });
+        }
+    });
 };
 
 export const getUserHobbies = () => (dispatch) => {
-    userApi.getHobbies()
-        .then((response) => {
-            if (response.ok) {
-                response.json()
-                    .then(body => {
-                        dispatch(setUserHobbies(body));
-                    });
-            }
-        });
+    userApi.getHobbies().then((response) => {
+        if (response.ok) {
+            response.json().then(body => {
+                dispatch(setUserHobbies(body));
+            });
+        }
+    });
 };
 
 export const addNewHobby = (hobbyID, type, metro) => (dispatch) => {
@@ -107,11 +120,11 @@ export const addNewHobby = (hobbyID, type, metro) => (dispatch) => {
     dispatch(toggleAddingProgress(false, hobbyID));
 };
 
-export const getAuthUserData = () => (dispatch) => userApi.getInfo()
+export const getCurrentUserInfo = () => (dispatch) => userApi.getInfo()
     .then((response) => {
         if (typeof response === 'object') {
             const { id, name, email, avatar } = response;
-            dispatch(setAuthUserData(id, email, name, avatar, true));
+            dispatch(setCurrentUserInfo(id, email, name, avatar, true));
         }
     });
 
@@ -119,7 +132,7 @@ export const login = (email, password) => (dispatch) => {
     userApi.login(email, password)
         .then((response) => {
             if (response === null) {
-                dispatch(getAuthUserData());
+                dispatch(getCurrentUserInfo());
                 dispatch(getUserHobbies());
             } else if (response.login) {
                 dispatch(stopSubmit('login', { email: 'Неверный email' }));
@@ -139,7 +152,7 @@ export const createNewUser = (email, password, name, avatar) => (dispatch) => {
     userApi.create(obj)
         .then((response) => {
             if (response.ok) {
-                dispatch(getAuthUserData());
+                dispatch(getCurrentUserInfo());
             }
         });
 };
@@ -148,7 +161,7 @@ export const logout = () => (dispatch) => {
     userApi.logout()
         .then((response) => {
             if (response === null) {
-                dispatch(setAuthUserData(null, null, null,
+                dispatch(setCurrentUserInfo(null, null, null,
                     null, false));
                 dispatch(initializeUser(false));
                 dispatch(setIsUserInCabinet(false));
@@ -160,7 +173,7 @@ export const userEdit = (editData) => (dispatch) => {
     userApi.edit(editData)
         .then((response) => {
             if (response.ok) {
-                dispatch(getAuthUserData());
+                dispatch(getCurrentUserInfo());
             } else {
                 response.json()
                     .then(console.log);

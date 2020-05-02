@@ -89,10 +89,10 @@ class HobbyCard extends React.Component {
 
 const mapStateToProps = (state) => ({
     initializedPage: state.hobbyPage.initializedPage,
-    id: state.auth.userId || state.providerCabinet.providerId,
-    isUserAuth: state.auth.isAuth,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
-    hobbiesFollowed: [...state.auth.userHobbies, ...state.providerCabinet.followedHobbies],
+    hobbiesFollowed: [...state.userCabinet.userHobbies, ...state.providerCabinet.followedHobbies],
     hobbiesOwnedProvider: state.providerCabinet.providerHobbies,
 
     isPageInitialized: state.hobbyPage.initialized,

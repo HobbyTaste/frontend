@@ -54,14 +54,14 @@ const UserCabinetHobbies = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    // name: state.auth.name,
+    // name: state.userCabinet.name,
     name: 'Иван Иванов',
-    // metro: state.auth.metro,
+    // metro: state.userCabinet.metro,
     metro: 'Долгопрудная',
-    // avatar: state.auth.avatar,
+    // avatar: state.userCabinet.avatar,
     avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
-    userHobbies: state.auth.userHobbies,
-    // isAuth: state.auth.isAuth,
+    userHobbies: state.userCabinet.userHobbies,
+    // isAuth: state.userCabinet.isAuth,
     isUserAuth: true,
     isProviderAuth: false,
 });

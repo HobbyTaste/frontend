@@ -113,10 +113,10 @@ const mapStateToProps = (state) => ({
     hobbiesShow: state.searchPage.hobbiesShow,
     initializedPage: state.searchPage.initializedSearchPage,
     hobbiesReceived: state.searchPage.hobbiesToSearch,
-    id: state.auth.userId || state.providerCabinet.providerId,
-    isUserAuth: state.auth.isAuth,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
-    hobbiesFollowed: [...state.auth.userHobbies, ...state.providerCabinet.followedHobbies],
+    hobbiesFollowed: [...state.userCabinet.userHobbies, ...state.providerCabinet.followedHobbies],
     hobbiesOwnedProvider: state.providerCabinet.providerHobbies,
 });
 const mapDispatchToProps = (dispatch) => ({
