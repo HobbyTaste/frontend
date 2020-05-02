@@ -1,7 +1,7 @@
 import style from './CategoriesSidebar.css';
 import { Link, withRouter } from 'react-router-dom';
 import React from 'react';
-import { setCategory } from '../../../redux/actions/searchActions';
+import { getLabelByUrlCategory, setCategory } from '../../../redux/actions/searchActions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -13,19 +13,19 @@ class Category extends React.Component {
     }
 
     handleLink(event) {
-        this.props.setCategory( this.props.hobbiesShow, this.props.label);
+        this.props.setCategory( this.props.hobbiesReceived, this.props.url);
     }
 
     render() {
         let classes = style.text;
-        if (this.props.count === 0) {
+        if (this.props.count == 0) {
             classes += ' ' + style.textDisable;
         }
         return (
             <Link to={`/search/${this.props.url}`} onClick={this.handleLink}>
                 <div className={style.option}>
-                    <p className={classes}>{this.props.label}</p><p
-                    className={classes}>{this.props.count ? this.props.count : '0'}</p>
+                    <p className={classes}>{getLabelByUrlCategory(this.props.url)}</p><p
+                    className={classes}>{this.props.count}</p>
                 </div>
             </Link>
         );
@@ -34,7 +34,7 @@ class Category extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    hobbiesShow: state.searchPage.hobbiesShow,
+    hobbiesReceived: state.searchPage.hobbiesToSearch,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
 import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
 import Preloader from '../Common/Preloader/Preloader';
-import { getLabelByUrlCategory, initializeSearchPage, setCategory, setSelector } from '../../redux/actions/searchActions';
+import {
+    getLabelByUrlCategory,
+    initializeSearchPage,
+    setCategory,
+    setSelector,
+    unsetCategory
+} from '../../redux/actions/searchActions';
 import style from './style.css';
 import Content from './Content/Content';
 import Selector from './Selector';
@@ -28,9 +34,7 @@ class SearchPage extends React.PureComponent {
     }
 
     componentDidMount() {
-        const url = this.props.match.params.category;
-        this.props.setNewCategory(this.props.hobbiesShow, getLabelByUrlCategory(url));
-        this.props.initialize(this.props.word);
+        this.props.initialize(this.props.word, this.props.match.params.category);
     }
 
     handleAddMyHobby(event) {
@@ -44,7 +48,7 @@ class SearchPage extends React.PureComponent {
 
     handleCancelCategory(event){
         this.props.history.push('/search');
-        this.props.setNewCategory(this.props.hobbiesShow, 'Все категории');
+        this.props.unsetCategory(this.props.hobbiesReceived);
     }
 
     handleClick(event) {
@@ -72,13 +76,13 @@ class SearchPage extends React.PureComponent {
         }
 
         let isAllCategory = false;
-        const currentCategory = this.props.category;
+        const currentCategory = getLabelByUrlCategory(this.props.category);
         if (currentCategory === 'Все категории') {
             isAllCategory = true;
         }
         let realShow = this.state.countShow;
-        if ( this.props.hobbiesReceived.length < realShow){
-           realShow = this.props.hobbiesReceived.length;
+        if ( this.props.hobbiesShow.length < realShow){
+           realShow = this.props.hobbiesShow.length;
         }
         return (
             <div className={style.container}>
@@ -96,8 +100,8 @@ class SearchPage extends React.PureComponent {
                         <Selector handleChange={this.handleChange}/>
                 </div>
                     <div>
-                        <Content hobbies={this.props.hobbiesReceived.slice(0, realShow)} isUserAurh={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/></div>
-                {(realShow < this.props.hobbiesReceived.length) &&
+                        <Content hobbies={this.props.hobbiesShow.slice(0, realShow)} isUserAurh={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/></div>
+                {(realShow < this.props.hobbiesShow.length) &&
                     <div className={style.buttonMoreContainer}>
                         <ButtonsSend onClick={this.handleClick} type="button" text="Показать больше..."/>
                     </div>
@@ -124,8 +128,8 @@ const mapDispatchToProps = (dispatch) => ({
     onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
     onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
     onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
-    initialize: (idHobby) => dispatch(initializeSearchPage(idHobby)),
-    setNewCategory: (hobbies, category) => dispatch(setCategory(hobbies, category)),
+    initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
+    unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
     setSelector: (hobbies, selector) => dispatch(setSelector(hobbies, selector)),
 });
 

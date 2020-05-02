@@ -4,6 +4,8 @@ import {categories} from '../../utils/constant'
 import style from '../../components/SearchPage/Content/Content.css';
 import Slot from '../../components/MainPage/Slot/Slot';
 import React from 'react';
+import axios from 'axios';
+import { sortByCategory } from '../../utils/functions';
 
 export const setHobbiesToSearch = (hobbiesToSearch) => ({type: actionTypes.SET_HOBBIES_TO_SEARCH, hobbiesToSearch});
 export const initializedSearchPageSuccess = (initialize) => ({type: actionTypes.INITIALIZED_SEARCH_SUCCESS, initialize});
@@ -58,21 +60,28 @@ export const getHobbies = (hobbyType) => (dispatch) => {
             }
         })
 };
-const getHobbiesByWord  = (word) => new Promise(resolve => {
-    setTimeout(() => resolve( {data: [{id: 1, pic: "https://images.wallpaperscraft.com/image/skateboard_skateboarder_hobby_116485_1600x1200.jpg", label: "Название" ,metro: "Новая станция", description:"Описание", contact:{mobile: "+7 999", email: "ааа"}, flag:{isParking: true,
-                isBeginner: true, isChild: true, isRent: true,}},
-            {id: 2, label: "Название2" ,metro: "Новая станция2", description:"Описание", contact:{mobile: "+7 999", email: "ааа"}, flag:{isParking: true,
-                    isBeginner: true,
-                    isRent: false,}},
-        ]}), 1000)
-})
 
+export const setCategory= (hobbies, category) => (dispatch) => {
+    console.log(1);
+    console.log(hobbies);
+    console.log(category);
+    if (!category === undefined) {
+        const new_hobbies = sortByCategory(hobbies, category);
+        dispatch(setHobbiesShow(new_hobbies));
+        dispatch(setCategorySuccess(category));
+    }
+};
 
-export const initializeSearchPage = (searchWord) => (dispatch) => {
+export const initializeSearchPage = (searchWord, category) => (dispatch) => {
     dispatch(initializedSearchPageSuccess(false));
-    getHobbiesByWord(searchWord).then(res => {
+    setHobbiesToSearch([]);
+    setHobbiesShow([]);
+    setCategorySuccess('Все категории');
+    axios.get(`/restapi/hobby/find?label=${searchWord}`).then(res => {
         let promise = dispatch(setHobbiesToSearch(res.data));
-        return (Promise.all([promise]).then(()=> {
+        let promise2 = dispatch(setHobbiesShow(res.data));
+        let promise3= dispatch(setCategory(res.data, category));
+        return (Promise.all([promise, promise2, promise3]).then(()=> {
             dispatch(setIsInSearchPage(true));
             dispatch(initializedSearchPageSuccess(true));
         }))
@@ -84,7 +93,16 @@ export const initializeSearchPage = (searchWord) => (dispatch) => {
 
 
 export const setSearchWord = (searchWord) => (dispatch) => {
-    dispatch(setSearchWordSuccess(searchWord));
+    axios.get(`/restapi/hobby/find?label=${searchWord}`).then(res => {
+        let promise = dispatch(setHobbiesToSearch(res.data));
+        let promise2 = dispatch(setHobbiesShow(res.data));
+        let promise3 = dispatch(setCategorySuccess('Все категории'));
+        return (Promise.all([promise, promise2, promise3]).then(()=> {
+            dispatch(setSearchWordSuccess(searchWord));}))
+    })
+        .catch(err => {
+            dispatch(someFail(err))
+        })
 };
 
 
@@ -95,17 +113,33 @@ export const filterHobby= (hobbies, filter, isChecked) => (dispatch) => {
     dispatch(setHobbiesShow(new_hobbies));
 };
 
-export const setCategory= (hobbies, category) => (dispatch) => {
-    dispatch(setCategorySuccess(category));
-    let new_hobbies = hobbies;
-    /*тут выбираем хобби, по новой категории*/
-    dispatch(setHobbiesShow(new_hobbies));
+
+
+export const unsetCategory= (hobbies) => (dispatch) => {
+    dispatch(setHobbiesShow(hobbies));
+    dispatch(setCategorySuccess('all'));
 };
+
+
+export const setCategoryFromNavigation= (category) => (dispatch) => {
+    console.log(2);
+    axios.get(`/restapi/hobby/all`).then(res => {
+        const new_hobbies = sortByCategory(res.data, category);
+        let promise3 = dispatch(setSearchWordSuccess(''));
+        let promise = dispatch(setHobbiesToSearch(new_hobbies));
+        let promise2 = dispatch(setHobbiesShow(new_hobbies));
+        return (Promise.all([promise, promise2, promise3]).then(()=> {
+            dispatch(setCategorySuccess(category));}))
+    })
+        .catch(err => {
+            dispatch(someFail(err))
+        })
+};
+
 
 export function getLabelByUrlCategory(url_) {
     for (let i in categories){
         if (categories[i].url === url_){
-            console.log('yes');
             return categories[i].label;
         }
     }

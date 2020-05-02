@@ -42,11 +42,8 @@ const getData = () => new Promise(resolve => {
 
 // функции, отпраправляющие запросы....
 /*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-export const addHobbyForUser = (hobbyID, userID) => (dispatch) => {
-  axios.post('/user/subscribes', {
-        hobbyId: hobbyID,
-        userId: userID
-    }).then(res => {
+export const addHobbyForUser = (hobbyID) => (dispatch) => {
+  axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
         console.log("responce add")
         console.log(res)
         dispatch(changeUserHobby(res.data.hobbies));
@@ -58,11 +55,8 @@ export const addHobbyForUser = (hobbyID, userID) => (dispatch) => {
 
 
 /*удалить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-export const deleteHobbyForUser = (hobbyID, userID) => (dispatch) => {
-    axios.post('http://127.0.0.1:8100/user/subscribe', {
-        hobbyId: hobbyID,
-        userId: userID
-    }).then(res => {
+export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
+    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
         console.log("responce delete")
         console.log(res)
         dispatch(changeUserHobby(res.data.hobbies));

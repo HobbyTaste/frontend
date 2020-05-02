@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import LinkCategory from '../LinkCategory';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -77,16 +78,15 @@ export default function SimpleMenu() {
                 onClose={handleClose}
                 className={classes.list}
             >
-                <MenuItem onClick={handleClose}> <a href='/search/creativity' className={style.text} >Творчество</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/art' className={style.text} >Рисование</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/music' className={style.text} >Музыка</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/sport' className={style.text}>Спорт</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/sport_game' className={style.text}>Игровые виды спорта</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/sport_wrestling' className={style.text} >Борьба и единоборства</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/sport_winter' className={style.text} >Зимние виды спорта</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/sport_water' className={style.text}>Водные виды спорта</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/dance' className={style.text}>Танцы</a></MenuItem>
-                <MenuItem onClick={handleClose}>  <a href='/search/other' className={style.text} >Другое</a></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Творчество' className={style.text} url='creativity'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Рисование' className={style.text} url='art'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Музыка' className={style.text} url='music'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Спорт' className={style.text} url='sport'/></MenuItem>
+                <MenuItem onClick={handleClose}>  <LinkCategory label='Игровые виды спорта' className={style.text} url='sport_game'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Единоборства' className={style.text} url='sport_wrestling'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Зимние виды спорта' className={style.text} url='sport_winter'/> </MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Танцы' className={style.text} url='dance'/> </MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label='Другое' className={style.text} url='other'/></MenuItem>
             </StyledMenu>
         </div>
     );
