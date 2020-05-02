@@ -73,12 +73,13 @@ const ProviderMonetization = (props) => {
 
     const [state, setState] = useState({
         showHelp: 0,
-        Hobby: null,
+        showHobby: false,
+        Hobby: false,
         Widget: null,
         Top: null,
         Poster: null,
         Pay: null,
-        disabled: true,
+        Disabled: true,
     });
 
     // if (!props.isAuth) {
@@ -89,7 +90,6 @@ const ProviderMonetization = (props) => {
         setState({
             [event.target.name]: event.target.value,
         });
-        if (state.Pay !== null) setState({ disabled: false });
     };
 
     const Help = (value) => {
@@ -98,13 +98,25 @@ const ProviderMonetization = (props) => {
         });
     };
 
+    const Hobbies = (e) => {
+        setState({
+            showHobby: !state.showHobby,
+        });
+    };
+
     return (<div className={style.background}>
         <div className={style.hobbyContainer}>
             <span className={style.header}>Выберите хобби:</span>
-            <button className={style.hobbyList}>
+            <span className={style.hobbyList}>
                 Список хобби партнёра
-                <span className={style.dropdownIcon}><ArrowDropDownIcon/></span>
-            </button>
+                <span className={style.dropdownIcon} onClick={Hobbies}><ArrowDropDownIcon/></span>
+            </span>
+            <div className={style.list} style={{ display: `${state.showHobby ? 'block' : 'none'}`}}>
+                <div className={style.listItem}>Партнёрка</div>
+                <div className={style.listItem}>Партнёрка</div>
+                <div className={style.listItem}>Партнёрка</div>
+                <div className={style.listItem}>Партнёрка</div>
+            </div>
         </div>
         <div className={style.header}>Выберите тип монетизации:</div>
         <div className={style.monetizationContainer}>
@@ -185,14 +197,14 @@ const ProviderMonetization = (props) => {
         <div className={style.paymentContainer}>
             <span className={style.header}>Оплатить:</span>
             <FormControl component="fieldset">
-                <RadioGroup aria-label="time" name="Poster" onChange={handleChange}>
+                <RadioGroup aria-label="time" name="Pay" onChange={handleChange}>
                     <FormControlLabel value='card' control={<StyledRadio/>} label="Карта Visa/MasterCard" />
                     <FormControlLabel value='online' control={<StyledRadio/>} label="Сбербанк Онлайн" />
                     <FormControlLabel value='debt' control={<StyledRadio/>} label="В долг :)" />
                 </RadioGroup>
             </FormControl>
         </div>
-        <button className={style.payButton} disabled={state.disabled}>Оплатить</button>
+        <button className={style.payButton} disabled={state.Disabled}>Оплатить</button>
     </div>);
 };
 
