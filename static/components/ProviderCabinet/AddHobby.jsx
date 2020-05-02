@@ -1,119 +1,165 @@
-import React, {useState} from 'react';
-import {Input, MaterialsSelect} from "./FormsControlsAddHobby/FormsControls";
-import {CommonButton} from "../Common/CommonButton";
-import style from "./AddHobby.module.css";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import {AddHobbyCard} from './AddHobbyCard/AddHobbyCard'
-import {addNewHobby} from "../../redux/actions/providerActions";
-import {connect} from "react-redux";
-
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import style from './AddHobby.module.css';
+import { addNewHobby } from '../../redux/actions/providerActions';
 
 const AddHobbyForm = (props) => {
-    let [organization, setOrganization] = useState('');
-    let [telephone, setTelephone] = useState('');
-    let [email, setEmail] = useState('');
-    let [metro, setMetro] = useState('');
-    let [address, setAddress] = useState('');
-    let [information, setInformation] = useState('');
-    let [image, setImage] = useState('');
-    let [file, setFile] = useState(null);
-    let [category, setCategory] = useState('');
+    const [organization, setOrganization] = useState('');
+    const [image, setImage] = useState('');
+    const [file, setFile] = useState(null);
+    const [metro, setMetro] = useState('');
+    const [shortAddress, setShortAddress] = useState('');
+    const [fullAddress, setFullAddress] = useState('');
+    const [information, setInformation] = useState('');
+    const [facilities, setFacilities] = useState('');
+    const [special, setSpecial] = useState('');
+    const [telephone, setTelephone] = useState('');
+    const [email, setEmail] = useState('');
+    const [website, setWebsite] = useState('');
+    const [vk, setVk] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [facebook, setFacebook] = useState('');
 
-    let onOrganizationChange = (e) => {
+    const onOrganizationChange = (e) => {
         setOrganization(e.target.value);
     };
-    let onTelChange = (e) => {
-        setTelephone(e.target.value);
-    };
-    let onEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-    let onMetroChange = (e) => {
+    const onMetroChange = (e) => {
         setMetro(e.target.value);
     };
-    let onAddressChange = (e) => {
-        setAddress(e.target.value);
+    const onShortAddressChange = (e) => {
+        setShortAddress(e.target.value);
     };
-    let onInfoChange = (e) => {
+    const onFullAddressChange = (e) => {
+        setFullAddress(e.target.value);
+    };
+    const onInfoChange = (e) => {
         setInformation(e.target.value);
     };
-    let onCategoryChange = (e) => {
-        setCategory(e.target.value);
+    const onFacilitiesChange = (e) => {
+        setFacilities(e.target.value);
     };
-    let uploadImage = (e) => {
-        let reader = new FileReader();
-        let photo_file = e.target.files[0];
+    const onSpecialChange = (e) => {
+        setSpecial(e.target.value);
+    };
+    const onTelChange = (e) => {
+        setTelephone(e.target.value);
+    };
+    const onEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+    const onWebChange = (e) => {
+        setWebsite(e.target.value);
+    };
+    const onVkChange = (e) => {
+        setVk(e.target.value);
+    };
+    const onInstaChange = (e) => {
+        setInstagram(e.target.value);
+    };
+    const onFbChange = (e) => {
+        setFacebook(e.target.value);
+    };
+    const uploadImage = (e) => {
+        const reader = new FileReader();
+        const photoFile = e.target.files[0];
         reader.onloadend = () => {
             setImage(`${reader.result}`);
-            setFile(photo_file);
+            setFile(photoFile);
         };
-        reader.readAsDataURL(photo_file)
+        reader.readAsDataURL(photoFile);
     };
-    let resetForm = () => {
+    const resetForm = () => {
         setOrganization('');
+        setMetro('');
+        setShortAddress('');
+        setFullAddress('');
+        setInformation('');
+        setFacilities('');
+        setSpecial('');
         setTelephone('');
         setEmail('');
-        setMetro('');
-        setAddress('');
-        setInformation('');
+        setWebsite('');
+        setVk('');
+        setInstagram('');
+        setFacebook('');
         setImage('');
         setFile(null);
-        setCategory('');
     };
 
     const onSubmit = () => {
-        props.addNewHobby(organization, telephone, email,
-            address, metro, information, props.id, file, category);
+        props.addNewHobby(organization, metro,
+            shortAddress, fullAddress,
+            information, facilities, special,
+            telephone, email, website, vk, instagram, facebook,
+            props.id, file);
         props.handleClose();
     };
+
+    const avatar = 'https://images.assetsdelivery.com/compings_v2/jenjawin/jenjawin1904/jenjawin190400208.jpg';
+
     return (
-        <div>
-            <div className={style.pageContent}>
-                <div className={style.formContainer}>
-                    <div className={style.hobbyFormContainer}>
-                        <h1>Заполните форму о вашем хобби</h1>
-                        <form action="#" className={style.form}>
-                            <Input name='organization' onChange={onOrganizationChange} value={organization}
-                                   placeholder={"Название хобби"} autoFocus={true}/>
-                            <Input name='telephone' onChange={onTelChange} value={telephone} placeholder={"Телефон *"}
-                                   type="telephone"/>
-                            <Input name='email' onChange={onEmailChange} value={email} placeholder={"Email *"}
-                                   type="email"/>
-                            <Input name='address' onChange={onAddressChange} value={address}
-                                   placeholder={"Точный адресс *"}/>
-                            <Input name='metro' onChange={onMetroChange} value={metro} placeholder={"Станция метро *"}/>
-                            <MaterialsSelect onChange={onCategoryChange} value={category}/>
-                            <Input name='info' onChange={onInfoChange} value={information}
-                                   placeholder={"Краткая информация о хобби *"}/>
-                        </form>
-                        <label htmlFor="file">
-                            <CloudUploadIcon className={style.upload} style={{fontSize: 80}}/>
-                        </label>
-                        <input type="file" name="file" id="file" onChange={uploadImage} className={style.input}/>
-                        <div>Загрузить фото</div>
-                    </div>
-                </div>
-                <div className={style.formContainer}>
-                    <AddHobbyCard organization={organization} telephone={telephone}
-                                  email={email} metro={metro}
-                                  address={address} information={information}
-                                  image={image} category={category}/>
-                    <div className={style.buttonsContainer}>
-                        <CommonButton text="ДОБАВИТЬ" onSubmit={onSubmit}/>
-                        <div onClick={resetForm}>
-                            <CommonButton text="СБРОСИТЬ"/>
+        <div className={style.background}>
+            <div className={style.upperContainer}>
+                <span className={style.avatar}>
+                    <div className={style.imgContainer}>
+                        <div className={style.img}
+                            style={{ backgroundImage: `url("${avatar}")` }}>
                         </div>
                     </div>
-                </div>
+                </span>
+                <span className={style.halfContainer}>
+                    <div className={style.header}>Общая информация о хобби:</div>
+                    <input className={style.input} name='organization' onChange={onOrganizationChange} value={organization}
+                        placeholder={'Название хобби'} autoFocus={true}/>
+                    <input style={{ margin: '10px 0' }} type="file" name="file" id="file" onChange={uploadImage}
+                        placeholder={'Фото'}/>
+                    <input className={style.input} name='metro' onChange={onMetroChange} value={metro}
+                        placeholder={'Станция метро*'}/>
+                    <input className={style.input} name='shortAddress' onChange={onShortAddressChange} value={shortAddress}
+                        placeholder={'Краткий адрес*'}/>
+                    <input className={style.input} name='fullAddress' onChange={onFullAddressChange} value={fullAddress}
+                        placeholder={'Полный адрес*'} style={{ height: '58px' }}/>
+                </span>
+            </div>
+
+            <div className={style.infoContainer}>
+                <input className={style.input} name='facilities' onChange={onFacilitiesChange} value={facilities}
+                    placeholder={'Удобства'}/>
+                <input className={style.input} name='special' onChange={onSpecialChange} value={special}
+                    placeholder={'Особые условия'}/>
+                <input className={style.input} name='info' onChange={onInfoChange} value={information}
+                    placeholder={'Описание'} style={{ height: '97px' }}/>
+            </div>
+
+            <div className={style.upperContainer}>
+                <span className={style.header} style={{ margin: '10px 0 0 0' }}>Контакты:</span>
+                <span className={style.contactContainer}>
+                    <input className={style.input} name='telephone' onChange={onTelChange} value={telephone}
+                        placeholder={'Телефон*'} type="telephone"/>
+                    <input className={style.input} name='email' onChange={onEmailChange} value={email}
+                        placeholder={'Email*'} type="email"/>
+                    <input className={style.input} name='website' onChange={onWebChange} value={website}
+                        placeholder={'Официальный сайт хобби'}/>
+                </span>
+                <span className={style.contactContainer}>
+                    <input className={style.input} name='vk' onChange={onVkChange} value={vk}
+                        placeholder={'VK'}/>
+                    <input className={style.input} name='instagram' onChange={onInstaChange} value={instagram}
+                        placeholder={'Instagram'}/>
+                    <input className={style.input} name='facebook' onChange={onFbChange} value={facebook}
+                        placeholder={'Facebook'}/>
+                </span>
+            </div>
+            <div className={style.upperContainer} style={{ display: 'block' }}>
+                <button className={style.button} onSubmit={onSubmit}>Сохранить</button>
+                <button className={style.button} onClick={resetForm}>Отмена</button>
             </div>
         </div>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        id: state.providerCabinet.providerId
-    }
-};
+const mapStateToProps = (state) => ({
+    id: state.providerCabinet.providerId,
+});
 
-export default connect(mapStateToProps, {addNewHobby})(AddHobbyForm);
+export default connect(mapStateToProps, { addNewHobby })(AddHobbyForm);

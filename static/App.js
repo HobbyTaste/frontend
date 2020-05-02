@@ -50,7 +50,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/own" render={() => <ProviderCabinetNavigation isActive={1}/>}/>
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderCabinetNavigation isActive={2}/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderCabinetNavigation isActive={3}/>}/>
-                            <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby isActive={4}/>}/>
+                            <Route exact path="/provider/cabinet/add_hobby" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
@@ -66,6 +66,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/own" render={() => <ProviderOwnHobbies/>}/>
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderMonetization/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderHobby/>}/>
+                            <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby isActive={4}/>}/>
                             <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
                     </div>

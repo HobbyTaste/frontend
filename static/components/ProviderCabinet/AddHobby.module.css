@@ -1,57 +1,135 @@
+.background {
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    position: center;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px;
+    background: white;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
 .form {
     width: 600px;
     margin: 0 auto;
     padding: 10px;
 }
 
-.formContainer {
-    width: 45%;
-    text-align: center;
-    vertical-align: top;
-   /* border: 1px solid red;*/
+.header {
+    margin-bottom: 10px;
+
+    font-size: 25px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
 }
 
-.hobbyFormContainer {
-    background-color: #FFFFFF;
-    padding: 15px;
-    width: 80%;
-    margin: 10px auto;
-    border-radius: 15px;
-    box-shadow: 0 0 10px 1px rgba(18, 128, 64, 0.54);
+.img {
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
 }
 
-.hobbyFormContainer:hover {
-    box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
+.avatar {
+    width: 370px;
+    height: 325px;
+    object-fit: cover;
+    display: inline-block;
+    /*vertical-align: top;*/
 }
 
-.pageContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
-}
-
-.upload {
-    color: #19B95D;
+.imgContainer {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    display: inline-block;
     cursor: pointer;
-}
-.upload:hover {
-    color: #128040;
+    width: 370px;
+    height: 325px;
 }
 
 .input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+    height: 32px;
+    width: 100%;
+    margin: 10px 0;
+    padding-left: 9px;
+
+    border: 1px solid #034488;
+    border-radius: 3.5px;
+
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
-.buttonsContainer {
-    width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-around;
+.input:focus {
+    color: black;
 }
+
+.inputUpload {
+    margin: 10px 0;
+}
+
+.button {
+    width: 110px;
+    height: 36px;
+    float: right;
+    margin-left: 20px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
+}
+
+.upperContainer {
+    width: 753px;
+    display: flex;
+}
+
+.halfContainer {
+    display: block;
+    position: relative;
+    width: 365px;
+    margin-left: 20px;
+}
+
+.infoContainer {
+    display: block;
+    position: relative;
+    width: 753px;
+}
+
+.contactContainer {
+    display: block;
+    position: relative;
+    width: 295px;
+    margin-left: 20px;
+}
+
+
+
+
