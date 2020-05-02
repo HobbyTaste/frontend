@@ -78,6 +78,7 @@ const ProviderMonetization = (props) => {
         Top: null,
         Poster: null,
         Pay: null,
+        disabled: true,
     });
 
     // if (!props.isAuth) {
@@ -88,6 +89,7 @@ const ProviderMonetization = (props) => {
         setState({
             [event.target.name]: event.target.value,
         });
+        if (state.Pay !== null) setState({ disabled: false });
     };
 
     const Help = (value) => {
@@ -190,7 +192,7 @@ const ProviderMonetization = (props) => {
                 </RadioGroup>
             </FormControl>
         </div>
-        <button className={style.payButton}>Оплатить</button>
+        <button className={style.payButton} disabled={state.disabled}>Оплатить</button>
     </div>);
 };
 
