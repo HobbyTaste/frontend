@@ -8,6 +8,7 @@ const initialState = {
     isAuth: true,
     inUserCabinet: false,
     userInitialized: false,
+    fetchingHobbies: "no hobbies",
 
     userHobbies: []
 };
@@ -41,6 +42,11 @@ const userCabinetReducer = (state = initialState, action) => {
         return {
             ...state,
             userHobbies: action.userHobbies
+        };
+    case actionTypes.SET_FETCHING_HOBBIES:
+        return {
+            ...state,
+            fetchingHobbies: action.status
         };
     case actionTypes.SET_IS_USER_IN_CABINET:
         return {

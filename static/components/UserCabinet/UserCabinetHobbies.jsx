@@ -1,71 +1,66 @@
-import React, { Component, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import style from './UserCabinet.module.css';
-import { initializeUserCabinet } from '../../redux/actions/userActions';
-import Slot from '../MainPage/Slot/Slot';
+import React, { Component, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import style from "./UserCabinet.module.css";
+import { initializeUserHobbies } from "../../redux/actions/userActions";
+import Slot from "../MainPage/Slot/Slot";
+import { defaultAvatarUrl, defaultHobbyImageUrl } from "../../utils/constant";
 
 const flags = {
     isParking: true,
     isBeginner: true,
     isRent: true,
 };
-const image = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
 const UserCabinetHobbies = (props) => {
     useEffect(() => {
-        props.initializeUserCabinet();
+        props.initializeUserHobbies();
     }, []);
 
-    // if (!props.isAuth) {
-    //    return <Redirect to={'/'} />;
-    // }
+    if (!props.isUserAuth) {
+        return <Redirect to={"/"} />;
+    }
 
     // add selecting hobbies from props info
-    const myHobbies = props.userHobbies.map((c) => <UserHobbyCard {...c} isAuth={props.isAuth}/>);
+    const hobbiesToShow = props.userHobbies.map((hobby) => (
+        <Slot
+            {...hobby}
+            isUserAuth={props.isUserAuth}
+            isProviderAuth={props.isProviderAuth}
+            key={hobby.name + hobby.address}
+        />
+    ));
 
-    return (<div className={style.background}>
-        <div className={style.hobbyHeader}>Ваши хобби:</div>
-        <div className={style.slotContainer}>
-            <div className="center">
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price={null} priceTime={null} priceCurriculum={null}
-                      isParking={false} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={false} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={false}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={false} isBeginner={false} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+    return (
+        <div className={style.background}>
+            <div className={style.hobbyHeader}>Ваши хобби:</div>
+            <div className={style.slotContainer}>
+                <div className="center">
+                    {/* <Slot
+                        pic={image}
+                        name="Вид хобби"
+                        metro="Станция метро"
+                        adress="Долгопрудный, Первомайская 32 к2"
+                        price="400 p."
+                        priceTime="за занятие"
+                        priceCurriculum="по будням"
+                        isParking={flags.isParking}
+                        isBeginner={flags.isBeginner}
+                        isRent={flags.isRent}
+                        isUserAuth={props.isUserAuth}
+                        isProviderAuth={props.isProviderAuth}
+                    /> */}
+                    {hobbiesToShow}
+                </div>
             </div>
         </div>
-    </div>);
+    );
 };
 
 const mapStateToProps = (state) => ({
-    // name: state.userCabinet.name,
-    name: 'Иван Иванов',
-    // metro: state.userCabinet.metro,
-    metro: 'Долгопрудная',
-    // avatar: state.userCabinet.avatar,
-    avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
     userHobbies: state.userCabinet.userHobbies,
-    // isAuth: state.userCabinet.isAuth,
-    isUserAuth: true,
-    isProviderAuth: false,
+    isUserAuth: state.userCabinet.isAuth,
+    isProviderAuth: state.providerCabinet.isAuth,
 });
 
-// maybe need own initializer
-export default connect(mapStateToProps, { initializeUserCabinet })(UserCabinetHobbies);
-// export default UserCabinetHobbies;
+export default connect(mapStateToProps, { initializeUserHobbies })(UserCabinetHobbies);
