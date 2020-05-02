@@ -8,6 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { initializeProviderCabinet } from '../../../redux/actions/providerActions';
 import style from './ProviderMonetization.module.css';
 
@@ -97,15 +98,17 @@ const ProviderMonetization = (props) => {
     };
 
     return (<div className={style.background}>
-        <div className={style.header}>
-            Выберите хобби:
+        <div className={style.hobbyContainer}>
+            <span className={style.header}>Выберите хобби:</span>
+            <button className={style.hobbyList}>
+                Список хобби партнёра
+                <span className={style.dropdownIcon}><ArrowDropDownIcon/></span>
+            </button>
         </div>
-        <div className={style.header}>
-            Выберите тип монетизации:
-        </div>
+        <div className={style.header}>Выберите тип монетизации:</div>
         <div className={style.monetizationContainer}>
             <span className={style.monetization}>
-                <div className={style.hobbyContainer}>
+                <div className={style.nameContainer}>
                     <span className={style.name}>Топ поиска</span>
                     <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
                         <HelpOutlineOutlinedIcon/>
@@ -129,13 +132,14 @@ const ProviderMonetization = (props) => {
                 </FormControl>
             </span>
             <span className={style.monetization}>
-                <div className={style.hobbyContainer}>
+                <div className={style.nameContainer}>
                     <span className={style.name}>Виджет</span>
                     <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
                         <HelpOutlineOutlinedIcon/>
                     </span>
                     {/*<div className={style.explanation} style={{ display: `${state.showHelp ? 'block' : 'none'}` }}>*/}
-                    {/*    Ваше объявление размещается в виджете на главной странице.*/}
+                    {/*    Ваше объявление имеет преимущество в ранжировании и находится*/}
+                    {/*    на первых местах при поиске в категории хобби.*/}
                     {/*</div>*/}
                 </div>
                 <div className={style.centringContainer}>
@@ -152,14 +156,14 @@ const ProviderMonetization = (props) => {
                 </FormControl>
             </span>
             <span className={style.monetization}>
-                <div className={style.hobbyContainer}>
+                <div className={style.nameContainer}>
                     <span className={style.name}>Афиша</span>
                     <span className={style.helpIcon} /*onMouseOver={Help(true)} onMouseOut={Help(false)}*/>
                         <HelpOutlineOutlinedIcon/>
                     </span>
                     {/*<div className={style.explanation} style={{ display: `${state.showHelp ? 'block' : 'none'}` }}>*/}
-                    {/*Ваше объявление размещается на афише слева от основной части*/}
-                    {/*сайта, не смещается при перемотке страницы и всегда видна.*/}
+                    {/*    Ваше объявление имеет преимущество в ранжировании и находится*/}
+                    {/*    на первых местах при поиске в категории хобби.*/}
                     {/*</div>*/}
                 </div>
                 <div className={style.centringContainer}>

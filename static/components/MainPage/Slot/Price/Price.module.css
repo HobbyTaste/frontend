@@ -21,7 +21,7 @@
 .price {
     position: absolute;
     width: 150px;
-    top: calc(50% - 24px/2 - 22px);
+    top: calc(50% - 24px/2 - 21px);
     transform: translate(-50%, 0);
     display: inline-block;
 

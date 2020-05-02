@@ -15,6 +15,35 @@
 }
 
 .hobbyContainer {
+    display: flex;
+    width: 100%;
+}
+
+.hobbyList {
+    width: 390px;
+    height: 30px;
+    margin-left: 160px;
+    padding-left: 10px;
+
+    background: #EDECE8;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    display: block;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.dropdownIcon {
+    float: right;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.nameContainer {
     display: block;
     width: 285px;
 }
