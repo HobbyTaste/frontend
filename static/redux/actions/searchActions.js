@@ -65,7 +65,7 @@ export const setCategory= (hobbies, category) => (dispatch) => {
     console.log(1);
     console.log(hobbies);
     console.log(category);
-    if (!category === undefined) {
+    if (!(category === undefined)) {
         const new_hobbies = sortByCategory(hobbies, category);
         dispatch(setHobbiesShow(new_hobbies));
         dispatch(setCategorySuccess(category));
@@ -107,7 +107,7 @@ export const setSearchWord = (searchWord) => (dispatch) => {
 
 
 export const filterHobby= (hobbies, filter, isChecked) => (dispatch) => {
-    /*тут должна быть некоторая логика по фильтрации.*/
+
     let new_hobbies = hobbies;
     console.log(filter);
     dispatch(setHobbiesShow(new_hobbies));
@@ -126,7 +126,7 @@ export const setCategoryFromNavigation= (category) => (dispatch) => {
     axios.get(`/restapi/hobby/all`).then(res => {
         const new_hobbies = sortByCategory(res.data, category);
         let promise3 = dispatch(setSearchWordSuccess(''));
-        let promise = dispatch(setHobbiesToSearch(new_hobbies));
+        let promise = dispatch(setHobbiesToSearch(res.data));
         let promise2 = dispatch(setHobbiesShow(new_hobbies));
         return (Promise.all([promise, promise2, promise3]).then(()=> {
             dispatch(setCategorySuccess(category));}))

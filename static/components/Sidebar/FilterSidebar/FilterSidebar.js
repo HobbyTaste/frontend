@@ -40,19 +40,19 @@ class FilterSidebar extends React.Component {
     }
 
     handleParking(event) {
-        this.props.filteredHobby(this.props.hobbies, 'parking', event.target.checked);
+        this.props.filteredHobby(this.props.hobbiesShow, 'parking', event.target.checked);
     }
 
     handleChild(event) {
-        this.props.filteredHobby(this.props.hobbies, 'child', event.target.checked);
+        this.props.filteredHobby(this.props.hobbiesShow, 'child', event.target.checked);
     }
 
     handleBeginner(event) {
-        this.props.filteredHobby(this.props.hobbies, 'beginner', event.target.checked);
+        this.props.filteredHobby(this.props.hobbiesShow, 'beginner', event.target.checked);
     }
 
     handleEquipment(event) {
-        this.props.filteredHobby(this.props.hobbies, 'equipment', event.target.checked);
+        this.props.filteredHobby(this.props.hobbiesShow, 'equipment', event.target.checked);
     }
 
 
