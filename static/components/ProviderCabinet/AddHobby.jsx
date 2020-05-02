@@ -117,8 +117,8 @@ const AddHobbyForm = (props) => {
                         placeholder={'Станция метро*'}/>
                     <input className={style.input} name='shortAddress' onChange={onShortAddressChange} value={shortAddress}
                         placeholder={'Краткий адрес*'}/>
-                    <input className={style.input} name='fullAddress' onChange={onFullAddressChange} value={fullAddress}
-                        placeholder={'Полный адрес*'} style={{ height: '58px' }}/>
+                    <textarea className={style.input} name='fullAddress' onChange={onFullAddressChange} value={fullAddress}
+                        placeholder={'Полный адрес*'} style={{ height: '58px', padding: '5px 0 0 9px' }}/>
                 </span>
             </div>
 
@@ -127,8 +127,8 @@ const AddHobbyForm = (props) => {
                     placeholder={'Удобства'}/>
                 <input className={style.input} name='special' onChange={onSpecialChange} value={special}
                     placeholder={'Особые условия'}/>
-                <input className={style.input} name='info' onChange={onInfoChange} value={information}
-                    placeholder={'Описание'} style={{ height: '97px' }}/>
+                <textarea className={style.input} name='info' onChange={onInfoChange} value={information}
+                    placeholder={'Описание'} style={{ height: '97px', padding: '5px 0 0 9px' }}/>
             </div>
 
             <div className={style.upperContainer}>

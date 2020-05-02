@@ -14,12 +14,6 @@
     justify-content: normal;
 }
 
-.form {
-    width: 600px;
-    margin: 0 auto;
-    padding: 10px;
-}
-
 .header {
     margin-bottom: 10px;
 
@@ -70,17 +64,14 @@
     border: 1px solid #034488;
     border-radius: 3.5px;
 
+    font-family: Roboto;
+    font-style: normal;
     font-size: 16px;
-    line-height: 24px;
     color: rgba(0, 0, 0, 0.6);
 }
 
 .input:focus {
     color: black;
-}
-
-.inputUpload {
-    margin: 10px 0;
 }
 
 .button {
@@ -98,8 +89,8 @@
     line-height: 18px;
     font-weight: 500;
 
-    display: flex;
-    align-items: center;
+    display: block;
+    text-align: center;
     letter-spacing: 0.16px;
 
     color: #034488;
