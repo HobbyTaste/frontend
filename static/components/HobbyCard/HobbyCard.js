@@ -80,7 +80,7 @@ class HobbyCard extends React.Component {
                 </div>
                 <div className={style.communication}>
                     <p className={feedStyle.labelAnswer}> Отзывы:</p>
-                    <Feedback isOwner = {isOwner}/>
+                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner}/>
 
                 </div>
             </div>
