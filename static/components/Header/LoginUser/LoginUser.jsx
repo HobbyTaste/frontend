@@ -13,6 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
+import LoginUserWindow from './LoginUserWindow';
 
 const useStyles = makeStyles(theme => ({
     buttonEnter: {
@@ -68,9 +69,10 @@ const LoginUser = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
+    /*
     return (<div className={s.buttonsContainer}>
             <Button aria-controls="simple-menu" className={classes.buttonEnter} onClick={handleClickOpen}>Вход</Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth={'xs'}
+            /*<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth={'xs'}
                     className={classes.root}>
                 <DialogTitle id="form-dialog-title" className={classes.dialogTitle}>
                     <Button className={classes.buttonWindow}>Вход партнера</Button>
@@ -101,6 +103,11 @@ const LoginUser = (props) => {
             </Dialog>
         </div>
     );
+
+
+     */
+
+    return (<LoginUserWindow/>);
 };
 
 export default LoginUser;
