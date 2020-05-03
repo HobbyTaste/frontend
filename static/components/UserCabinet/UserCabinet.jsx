@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import style from "./UserCabinet.module.css";
 import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import { initializeUserCabinet } from "../../redux/actions/userActions";
-import Feedback from "../HobbyCard/Feedback/Feedback";
 import { defaultAvatarUrl } from "../../utils/constant";
 import UserComments from "./UserComments";
 

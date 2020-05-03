@@ -18,7 +18,7 @@ const UserComments = ({comments}) => {
             <ul className={style.list}>
                 {comments.map(function(item) {
                     return (
-                        <li key={item.userId} className={style.container}>
+                        <li key={item.userId + item.datetime} className={style.container}>
                             <CommentText
                                 comment={changeNaming(item)}
                                 isProviderAuth={false}

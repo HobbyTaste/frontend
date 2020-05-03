@@ -212,12 +212,7 @@ export const logout = () => (dispatch) => {
     });
 };
 
-export const userEdit = (editData) => (dispatch) => {
-    userApi.edit(editData).then((response) => {
-        if (response.ok) {
-            dispatch(getCurrentUserInfo());
-        } else {
-            response.json().then(console.log);
-        }
-    });
+export const userEdit = (editData) => async (dispatch) => {
+    await userApi.edit(editData);
+    return dispatch(getCurrentUserInfo());
 };
