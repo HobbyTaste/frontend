@@ -127,9 +127,13 @@ class User extends BaseFetchClass {
         return this.get('/hobbies');
     }
 
+    /**
+     * Получает список всех комментариев, оставленных пользователем, и ответов на них.
+     */
     public async getComments(): Promise<Response> {
         return this.get('/comments');
     }
+
 }
 
 export default User;

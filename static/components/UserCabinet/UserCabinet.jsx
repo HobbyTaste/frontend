@@ -6,7 +6,7 @@ import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import { initializeUserCabinet } from "../../redux/actions/userActions";
 import Feedback from "../HobbyCard/Feedback/Feedback";
 import { defaultAvatarUrl } from "../../utils/constant";
-import UserCabinetHobbies from "./UserCabinetHobbies";
+import UserComments from "./UserComments";
 
 const UserCabinet = (props) => {
     useEffect(() => {
@@ -24,7 +24,7 @@ const UserCabinet = (props) => {
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
-                <Feedback isUserAuth={false} isProviderAuth={props.isProviderAuth} />
+                <UserComments/>
             </div>
         </div>
     );
@@ -36,6 +36,7 @@ const mapStateToProps = (state) => ({
     metro: "В модели на бэкенде пока нет метро",
     avatar: state.userCabinet.avatar,
     userHobbies: state.userCabinet.userHobbies,
+    userComments: state.userCabinet.userComments,
     isAuth: state.userCabinet.isAuth,
     isProviderAuth: false,
 });

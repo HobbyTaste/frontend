@@ -36,20 +36,6 @@ const UserCabinetHobbies = (props) => {
             <div className={style.hobbyHeader}>Ваши хобби:</div>
             <div className={style.slotContainer}>
                 <div className="center">
-                    {/* <Slot
-                        pic={image}
-                        name="Вид хобби"
-                        metro="Станция метро"
-                        adress="Долгопрудный, Первомайская 32 к2"
-                        price="400 p."
-                        priceTime="за занятие"
-                        priceCurriculum="по будням"
-                        isParking={flags.isParking}
-                        isBeginner={flags.isBeginner}
-                        isRent={flags.isRent}
-                        isUserAuth={props.isUserAuth}
-                        isProviderAuth={props.isProviderAuth}
-                    /> */}
                     {hobbiesToShow}
                 </div>
             </div>

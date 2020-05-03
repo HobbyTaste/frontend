@@ -3,12 +3,16 @@ import { findHobbies, toggleAddingProgress } from "../reducers/hobbiesPage-reduc
 import { stopSubmit } from "redux-form";
 import * as actionTypes from "./actionsTypes";
 import UserApi from "../../api/User";
-import { defaultHobbyProps } from "../../utils/constant";
+import HobbyApi from "../../api/Hobby";
+import CommentApi from "../../api/Comment";
+import { defaultHobbyProps, comments } from "../../utils/constant";
 
 const testLogin = "bob@test.com";
 const testPassword = "bob";
 
 const userApi = new UserApi();
+const hobbyApi = new HobbyApi();
+const commentApi = new CommentApi();
 
 export const setCurrentUserInfo = (id, email, name, avatar, isAuth) => ({
     type: actionTypes.SET_USER_DATA,
@@ -91,20 +95,29 @@ export const initializeUserCabinet = () => async (dispatch) => {
     dispatch(initializeUser(false));
     await userApi.login(testLogin, testPassword);
     await dispatch(getCurrentUserInfo());
+    await addSomeComments();
     await dispatch(getUserComments());
     dispatch(initializeUser(true));
     dispatch(setIsUserInCabinet(true));
 };
 
-export const getUserComments = () => (dispatch) => {
-    userApi.getComments().then((response) => {
-        if (response.ok) {
-            response.json().then((body) => {
-                dispatch(setUserComments(body));
-            });
-        }
-    });
-};
+async function addSomeComments() {
+    const hobbies = await(await hobbyApi.find("Футбольная секция")).json();
+    const hobbyId = hobbies[0]._id;
+    // | такие штуки приводят к проблемам с асинхронностью, поэтому загружаем комментарии последовательно
+    // v 
+    // return Promise.all(comments.map(comment => commentApi.stupidAddComment(comment, hobbyId))); 
+    for (const comment of comments) {
+        await commentApi.stupidAddComment(comment, hobbyId);
+    }
+}
+
+function getUserComments() {
+    return async dispatch => {
+        const responseBody = await (await userApi.getComments()).json();
+        dispatch(setUserComments(responseBody));
+    };
+}
 
 export const initializeUserHobbies = () => async (dispatch) => {
     dispatch(fetchingHobbies("loading"));
@@ -135,16 +148,13 @@ function truncateHobbyForSlot(hobby) {
     };
 }
 
-export const getUserHobbies = () => (dispatch) => {
-    userApi.getHobbies().then((response) => {
-        if (response.ok) {
-            response.json().then((body) => {
-                const truncatedHobbies = body.map((hobby) => truncateHobbyForSlot(hobby));
-                dispatch(setUserHobbies(truncatedHobbies));
-            });
-        }
-    });
-};
+function getUserHobbies() { 
+    return async dispatch => {
+        const responseBody = await (await userApi.getHobbies()).json();
+        const truncatedHobbies = responseBody.map((hobby) => truncateHobbyForSlot(hobby));
+        dispatch(setUserHobbies(truncatedHobbies));
+    }
+}
 
 export const addNewHobby = (hobbyID, type, metro) => (dispatch) => {
     userApi.addHobby(hobbyID).then((response) => {

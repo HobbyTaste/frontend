@@ -6,6 +6,7 @@ import UploadPhoto from '../../../../Common/UploadFotoBlock/UploadPhoto';
 import { userEdit } from '../../../../../redux/actions/userActions';
 
 let mainFile = null;
+
 const ChangeUserInfoForm = ({ handleSubmit, name, metro, error }) => {
     const [url, setUrl] = useState('');
     const [file, setFile] = useState(null);
