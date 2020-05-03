@@ -1,5 +1,8 @@
 //функция поиска элемента в массиве
 export const isInArray = (idHobby, array) => {
+    if (array === undefined || array.length === 0){
+        return false;
+    }
     if (array.includes(idHobby)) {
         return true;
     } else {

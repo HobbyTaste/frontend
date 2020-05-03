@@ -5,40 +5,23 @@ import { getLabelByUrlCategory, setCategory } from '../../../redux/actions/searc
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-class Category extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.handleLink = this.handleLink.bind(this);
+const Category = (props) => {
+    const handleLink = (event) => {
+        props.onCLick(props.url);
+    };
+    let classes = style.text;
+    if (props.count == 0) {
+        classes += ' ' + style.textDisable;
     }
-
-    handleLink(event) {
-        this.props.setCategory( this.props.hobbiesReceived, this.props.url);
-    }
-
-    render() {
-        let classes = style.text;
-        if (this.props.count == 0) {
-            classes += ' ' + style.textDisable;
-        }
-        return (
-            <Link to={`/search/${this.props.url}`} onClick={this.handleLink}>
-                <div className={style.option}>
-                    <p className={classes}>{getLabelByUrlCategory(this.props.url)}</p><p
-                    className={classes}>{this.props.count}</p>
-                </div>
-            </Link>
-        );
-    }
+    return (
+        <Link to={`/search/${props.url}`} onClick={handleLink}>
+            <div className={style.option}>
+                <p className={classes}>{getLabelByUrlCategory(props.url)}</p><p
+                className={classes}>{props.count}</p>
+            </div>
+        </Link>
+    );
 };
 
 
-const mapStateToProps = (state) => ({
-    hobbiesReceived: state.searchPage.hobbiesToSearch,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    setCategory: (hobbies, category) => dispatch(setCategory(hobbies,category)),
-});
-
-export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(Category);
+export default compose(withRouter)(Category);
