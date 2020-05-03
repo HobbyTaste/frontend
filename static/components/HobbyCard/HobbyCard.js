@@ -49,7 +49,7 @@ class HobbyCard extends React.Component {
         if (!this.props.initializedPage){
             return <Preloader/>
         }
-        const isOwner = isInArray(this.props.hobbyInfo.id, this.props.hobbiesOwnedProvider);
+        const isOwner = (this.props.id === this.props.hobbyInfo.owner);
         return (
             <div>
                 <div className={style.infoContainer}>
@@ -61,7 +61,7 @@ class HobbyCard extends React.Component {
                                 <div className={style.buttonContainer}>
                                     <ButtonAction isProviderAuth={this.props.isProviderAuth} isUserAuth={this.props.isUserAuth}
                                                   hobbyInfoId={this.props.hobbyInfo.id}
-                                                  hobbiesFollowed={this.props.hobbiesFollowed}
+                                                  subscribers = {this.props.hobbyInfo.subscribers} id = {this.props.id}
                                                   isOwner = {isOwner}
                                                   deleteFromMyHobbies={this.handleDeleteMyHobby}
                                                   addInMyHobbies={this.handleAddMyHobby}/>
@@ -93,12 +93,12 @@ const mapStateToProps = (state) => ({
     id: state.auth.userId || state.providerCabinet.providerId,
     isUserAuth: state.auth.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
-    hobbiesFollowed: [...state.auth.userHobbies, ...state.providerCabinet.followedHobbies],
-    hobbiesOwnedProvider: state.providerCabinet.providerHobbies,
 
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
+        subscribers: state.hobbyPage.subscribers,
         photos: state.hobbyPage.photos,
+        owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
         label: state.hobbyPage.label,

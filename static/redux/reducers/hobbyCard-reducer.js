@@ -1,9 +1,9 @@
 import * as actionTypes from '../actions/actionsTypes';
-import photo from '../../components/HobbyCard/Image/photo.png';
 let initialState = {
     initializedPage: false,
     id: 1,
     photos: [],
+    owner: '',
     label: '',
     metro: '',
     timeTable: '',
@@ -13,6 +13,7 @@ let initialState = {
     monetization: '',
     address: '',
     comfortable: '',
+    subscribers : '',
     specialConditions: '',
     description: '',
     price: 'Уточняйте',

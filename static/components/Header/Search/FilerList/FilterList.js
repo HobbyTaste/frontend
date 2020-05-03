@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { setSearchWord, setSearchWordSuccess } from '../../../../redux/actions/searchActions';
+import { setSearchWord, setSearchWordSuccess, updateSearch } from '../../../../redux/actions/searchActions';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -77,10 +77,18 @@ class FilteredList extends React.Component {
 
     handleSearch(event) {
         if (this.state.word != ''){
-            this.props.onSearch(this.state.word);
-            this.setState({word: ''});
-            this.setState({items: null, isShow: false})
-            this.props.history.push('/search');
+            if (this.props.isInSearchPage){
+
+                this.props.updateSearch(this.state.word);
+                this.setState({word: ''});
+                this.setState({items: null, isShow: false})
+            }
+            else{
+                this.props.setSearchWord(this.state.word);
+                this.setState({word: ''});
+                this.setState({items: null, isShow: false})
+                this.props.history.push('/search');
+            }
         }
         else {
             this.setState({word: 'Введите запрос'});
@@ -89,9 +97,13 @@ class FilteredList extends React.Component {
     }
 
      handleClick(event, item) {
-        console.log(item);
          this.setState({AnchorEl: event.currentTarget});
-         this.props.onSearch(item);
+         if (this.props.isInSearchPage){
+                 this.props.updateSearch(item);
+         }
+             else{
+                 this.props.setSearchWord(item);
+             }
 
     }
 
@@ -152,8 +164,13 @@ class FilteredList extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    onSearch: (word) => dispatch(setSearchWord(word)),
+const mapStateToProps = (store) => ({
+    isInSearchPage: store.searchPage.isInSearchPage,
 });
 
-export default compose(connect(null, mapDispatchToProps),(withStyles(useStyles,{withTheme: true})), withRouter)(FilteredList);
+const mapDispatchToProps = (dispatch) => ({
+    updateSearch: (word) => dispatch(updateSearch(word)),
+    setSearchWord: (word) => dispatch(setSearchWordSuccess(word)),
+});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps),(withStyles(useStyles,{withTheme: true})), withRouter)(FilteredList);

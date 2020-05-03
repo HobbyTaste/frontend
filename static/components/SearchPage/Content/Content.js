@@ -15,9 +15,9 @@ const Content = (props) => {
             {
                 props.hobbies.map(function (item) {
                     return <li key={item._id} className={style.container}>
-                        <Slot id = {item._id} pic={item.avatar} name={item.label} metro={item.metroStation} adress={item.address} price={item.price}
+                        <Slot id = {item._id} owner={item.owner} subscribers={item.subscribers} idUser={props.idUser} pic={item.avatar} name={item.label} metro={item.metroStation} adress={item.address} price={item.price}
                               isUserAuth={isUserAuth} isProviderAuth={isProviderAuth} isBeginner={item.novice}
-                              isRent={item.equipment} isChild={item.children} isParking = {item.parking} priceTime={item.priceTime}
+                              isRent={item.equipment} isChild={item.children} isParking = {item.parking} priceTime={item.priceTime} isOwner={(props.idUser === item.owner)}
                               priceCurriculate={item.priceCurriculate}/>
                     </li>;
                 })

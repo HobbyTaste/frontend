@@ -84,3 +84,16 @@
 .colorBlackSlot {
     color: rgba(0, 0, 0, 0.87);
 }
+
+.buttonContainer{
+    width: 48px;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    display: flex;
+    margin-top: -15px;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
