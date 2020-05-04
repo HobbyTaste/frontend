@@ -20,6 +20,10 @@ const setHobbyData = payload =>({
     payload,
 })
 
+export const changeProviderHobby = (userHobbies) => ({
+    type: actionTypes.CHANGE_HOBBY_PROVIDER,
+    userHobbies
+})
 const changeUserHobby=(userHobbies) => ({
     type: actionTypes.CHANGE_HOBBY_USER,
     userHobbies
