@@ -1,23 +1,28 @@
-import React, { Component , PureComponent} from 'react';
+import React, { Component, PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
 import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
 import Preloader from '../Common/Preloader/Preloader';
-import { getLabelByUrlCategory, initializeSearchPage, setCategory, setSelector } from '../../redux/actions/searchActions';
+import {
+    getLabelByUrlCategory,
+    initializeSearchPage,
+    unsetCategory
+} from '../../redux/actions/searchActions';
 import style from './style.css';
 import Content from './Content/Content';
 import Selector from './Selector';
 import ButtonsSend from '../HobbyCard/Button/ButtonsSend';
 import ClearIcon from '@material-ui/icons/Clear';
 import { compose } from 'redux';
-import Button from '@material-ui/core/Button';
+
 
 class SearchPage extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             countShow: 10,
+            selector: 'data',
             lengthHobbies: this.props.hobbiesReceived.length,
         };
         this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
@@ -28,42 +33,40 @@ class SearchPage extends React.PureComponent {
     }
 
     componentDidMount() {
-        const url = this.props.match.params.category;
-        this.props.setNewCategory(this.props.hobbiesShow, getLabelByUrlCategory(url));
-        this.props.initialize(this.props.word);
+        this.props.initialize(this.props.word, this.props.match.params.category);
     }
 
-    handleAddMyHobby(event) {
+    handleAddMyHobby(event, hobbyId) {
         console.log('addHobby');
         if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onAddUserHobby(hobbyId);
         } else {
-            this.props.onAddProviderHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onAddProviderHobby(hobbyId);
         }
     }
 
-    handleCancelCategory(event){
+    handleCancelCategory(event) {
         this.props.history.push('/search');
-        this.props.setNewCategory(this.props.hobbiesShow, 'Все категории');
+        this.props.unsetCategory(this.props.hobbiesReceived);
     }
 
     handleClick(event) {
         const new_value = this.state.countShow + 10;
-        this.setState({countShow: new_value});
+        this.setState({ countShow: new_value });
     }
 
-    handleDeleteMyHobby(event) {
+    handleDeleteMyHobby(event, hobbyId) {
         console.log('delete hobby');
         if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onDeleteUserHobby(hobbyId);
         } else {
-            this.props.onDeleteProviderHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onDeleteProviderHobby(hobbyId);
         }
     }
 
     handleChange(event) {
+        this.setState({ selector: event.target.value });
         //selector data distance rating
-        this.props.setSelector(this.props.hobbiesShow, event.target.value);
     }
 
     render() {
@@ -71,36 +74,48 @@ class SearchPage extends React.PureComponent {
             return <Preloader/>;
         }
 
+        const categoriesConcrete = ['creativity', 'art', 'dance', 'sport', 'music', 'sport_wrestling', 'sport_water', 'sport_winter', 'sport_game'];
         let isAllCategory = false;
-        const currentCategory = this.props.category;
+        const currentCategory = getLabelByUrlCategory(this.props.category);
         if (currentCategory === 'Все категории') {
             isAllCategory = true;
         }
         let realShow = this.state.countShow;
-        if ( this.props.hobbiesReceived.length < realShow){
-           realShow = this.props.hobbiesReceived.length;
+        if (this.props.hobbiesReceived.length < realShow) {
+            realShow = this.props.hobbiesReceived.length;
         }
+        let filteredHobbyies = this.props.hobbiesReceived.filter(n => (
+            (this.props.category === 'Все категории' || n.category === this.props.category ||
+                (this.props.category === 'other' && !(categoriesConcrete.includes(`${n.category}`)))) &&
+            (!this.props.filtersArray.length || (n.parking && this.props.filtersArray.includes('parking')) ||
+                (n.children && this.props.filtersArray.includes('child')) ||
+                (n.novice && this.props.filtersArray.includes('beginner')) ||
+                (n.equipment && this.props.filtersArray.includes('equipment')))
+        ));
         return (
             <div className={style.container}>
-                <div className={style.headerContainer}><p className={style.header}>Результаты поиска по запросу:
-                    "{this.props.word}"</p>
+                <div className={style.headerContainer}>{this.props.word !== '' ? <p className={style.header}>Результаты поиска по запросу:
+                    "{this.props.word}"</p> : <p className={style.header}>Результаты:</p> }
                 </div>
                 <div className={style.settingsContainer}>
                     <div className={style.categoryContainer}>
                         <p className={style.categoryText}>Категории: &nbsp;</p>
                         <div className={style.category}>
                             <p className={style.categoryName}>{currentCategory}</p>
-                            {(!isAllCategory) && <button className={style.iconClear} onClick={this.handleCancelCategory}><ClearIcon fontSize={'small'}/></button>}
+                            {(!isAllCategory) &&
+                            <button className={style.iconClear} onClick={this.handleCancelCategory}><ClearIcon
+                                fontSize={'small'}/></button>}
                         </div>
                     </div>
-                        <Selector handleChange={this.handleChange}/>
+                    <Selector handleChange={this.handleChange}/>
                 </div>
-                    <div>
-                        <Content hobbies={this.props.hobbiesReceived.slice(0, realShow)} isUserAurh={this.props.isUserAuth} isProviderAuth={this.props.isProviderAuth}/></div>
-                {(realShow < this.props.hobbiesReceived.length) &&
-                    <div className={style.buttonMoreContainer}>
-                        <ButtonsSend onClick={this.handleClick} type="button" text="Показать больше..."/>
-                    </div>
+                <div>
+                    <Content hobbies={filteredHobbyies.slice(0, realShow)} isUserAuth={this.props.isUserAuth}
+                             isProviderAuth={this.props.isProviderAuth} idUser={this.props.id}/></div>
+                {(realShow < filteredHobbyies.length) &&
+                <div className={style.buttonMoreContainer}>
+                    <ButtonsSend onClick={this.handleClick} type="button" text="Показать больше..."/>
+                </div>
                 }
             </div>
         );
@@ -110,23 +125,20 @@ class SearchPage extends React.PureComponent {
 const mapStateToProps = (state) => ({
     word: state.searchPage.word,
     category: state.searchPage.category,
-    hobbiesShow: state.searchPage.hobbiesShow,
+    filtersArray: state.searchPage.filter,
     initializedPage: state.searchPage.initializedSearchPage,
     hobbiesReceived: state.searchPage.hobbiesToSearch,
     id: state.userCabinet.userId || state.providerCabinet.providerId,
     isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
-    hobbiesFollowed: [...state.userCabinet.userHobbies, ...state.providerCabinet.followedHobbies],
-    hobbiesOwnedProvider: state.providerCabinet.providerHobbies,
 });
 const mapDispatchToProps = (dispatch) => ({
     onAddUserHobby: (idHobby, idUser) => dispatch(addHobbyForUser(idHobby, idUser)),
     onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
     onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
     onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
-    initialize: (idHobby) => dispatch(initializeSearchPage(idHobby)),
-    setNewCategory: (hobbies, category) => dispatch(setCategory(hobbies, category)),
-    setSelector: (hobbies, selector) => dispatch(setSelector(hobbies, selector)),
+    initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
+    unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
 });
 
 

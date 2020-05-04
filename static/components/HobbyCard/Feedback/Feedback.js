@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CommentText from './CommentText';
 import CommentInput from './CommentInput';
 import { addProviderResponse, addUserFeedback } from '../../../redux/actions/hobbyActions';
-
+import CommentsList from './CommentsList';
 
 class Feedback extends React.Component {
     constructor(props) {
@@ -14,11 +14,7 @@ class Feedback extends React.Component {
 
     handleSubmit = (values) => {
         console.log(values);
-        if (this.props.isUserAuth) {
-            this.props.onUserFeedback(this.props.hobbyId, this.props.id, values);
-        } else {
-            this.props.onProviderResponse(this.props.hobbyId, this.props.id, values);
-        }
+        this.props.onUserFeedback(this.props.hobbyId, this.props.id, values);
     };
 
     render() {
@@ -27,21 +23,7 @@ class Feedback extends React.Component {
         const onSubmit = this.handleSubmit
         return (
             <div>
-                <ul className={style.list}>
-                    {
-                        this.props.comments.map(function (item) {
-                            let isHaveAnswer = true;
-                            if ((item.answer) == null){
-                                isHaveAnswer = false;
-                            }
-                            return <li key={item.idComment} className={style.container}>
-                                <CommentText comment={item} handleSubmit={onSubmit} isProviderAuth={isProvider} isHaveAnswer= {isHaveAnswer} isOwner = {isOwner} isItAnswerProvider={false}/>
-                                {item.answer &&
-                                <CommentText comment={item.answer} isProviderAuth={isProvider} isItAnswerProvider={true}/>}
-                            </li>;
-                        })
-                    }
-                </ul>
+                <CommentsList isProvider={isProvider} isOwner = {isOwner} comments ={this.props.comments}/>
                 {this.props.isUserAuth &&
                 <div><p className={style.labelAnswer}> Добавить отзыв:</p>
                     <CommentInput onSubmit={onSubmit} isAnswer={false} name={this.props.name}/></div>}
@@ -55,12 +37,10 @@ const mapStateToProps = (state) => ({
     isProviderAuth: state.providerCabinet.isProviderAuth,
     id: state.userCabinet.userId || state.providerCabinet.providerId,
     hobbyId: state.hobbyPage.id,
-    comments: state.hobbyPage.comments,
-    name: state.userCabinet.name || state.providerCabinet.name,
+    name: state.auth.name || state.providerCabinet.name,
 });
 const mapDispatchToProps = (dispatch) => ({
     onUserFeedback: (idHobby, idUser, values) => dispatch(addUserFeedback(idHobby, idUser, values)),
-    onProviderResponse: (idHobby, idUser, values) => dispatch(addProviderResponse(idHobby, idUser, values)),
 });
 
 

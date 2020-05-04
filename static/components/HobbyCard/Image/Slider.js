@@ -21,6 +21,7 @@ const tile = {
 }
 
 
+
 const SimpleSwiperWithParams = (props) => {
     const params = {
         pagination: {
@@ -37,10 +38,19 @@ const SimpleSwiperWithParams = (props) => {
     }
     const classes = useStyles();
 
+    const imageMissing=['https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg'];
+    let images=[];
+    if (props.images.length ){
+        images = props.images;
+    }
+    else{
+        images= imageMissing;
+    }
+
     return(
         <Swiper {...params}>
             {
-                props.images.map(function(im, index) {
+                images.map(function(im, index) {
                     return <div key={index}><img className={style.image} src={im}/>
                         <GridListTileBar className={classes.bar}
                         />

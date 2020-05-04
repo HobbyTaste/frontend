@@ -7,7 +7,10 @@ import Price from './Price/Price';
 import Tag from './Tags/Tag';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import { isInArray } from '../../../utils/functions';
+import Button from '@material-ui/core/Button';
 /*времено, чтобы передалвался массив комментариев*/
 const comments =  [{
     idComment: 1,
@@ -48,12 +51,13 @@ const comments =  [{
 
 const imageMissing='https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
-const Slot = (props) => {
+const
+    Slot = (props) => {
     return (<div className={style.slot}>
         {props.pic ?  <img className={style.slotPic} src={props.pic}/> : <img className={style.slotPic} src={imageMissing}/>}
         <span className={style.slotDescription}>
             <div className={style.slotHeader}>
-                <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>
+                <Link to={`/hobby/card/${props.id}`} className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</Link>
                 <HalfRating answersArray={comments}/>
             </div>
             <div className={`${style.metro} ${style.colorBlueSlot}`}>
@@ -63,13 +67,14 @@ const Slot = (props) => {
         </span>
         <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
         <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
-        {props.isUserAuth
-            ? (props.isProviderAuth ? <div className={style.icon}><MonetizationOnIcon/></div>
-                : <div className={style.icon}><BookmarkBorderIcon/></div>)
+
+
+        {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? <Link to="/" style={{color: 'black', display: 'flex', top: '50%'}}> <div className={style.icon}><MonetizationOnIcon/></div></Link>
+                : (isInArray(props.idUser, props.subscribers) ? <button className={style.buttonContainer}><div className={style.icon}><BookmarkIcon/></div></button>:
+                <button className={style.buttonContainer}><div className={style.icon}><BookmarkBorderIcon/></div></button>))
             : <div className={style.iconEmpty}/>}
-        <div className={style.icon}><MoreHorizIcon/></div>
+       <div className={style.icon}><MoreHorizIcon/></div>
     </div>);
 }
-
 
 export default Slot;

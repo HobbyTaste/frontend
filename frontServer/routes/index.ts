@@ -22,7 +22,7 @@ indexRouter.get(['/?',
     '/provider/cabinet/?',
     '/hobbies/:type/:metro?',
     '/search/:category?',
-    '/hobby/card',
+    '/hobby/card/:id',
 ], (req, res) => {
     res.end(getTemplate());
 });
