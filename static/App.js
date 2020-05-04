@@ -65,10 +65,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    initialized: state.app.initialized,
-    providerIsAuth: state.providerCabinet.providerIsAuth,
-    isAuth: state.auth.isAuth,
-    inUserCabinet: state.auth.inUserCabinet
+    initialized: state.app.initialized
 });
 
 export default compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);

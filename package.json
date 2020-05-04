@@ -18,6 +18,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.9.6",
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.47",
@@ -61,6 +62,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@sullenor/eslint-config-partner": "^1.1.2",

@@ -33,9 +33,9 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    isUserAuth: state.auth.isAuth,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.isProviderAuth,
-    id: state.auth.userId || state.providerCabinet.providerId,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
     hobbyId: state.hobbyPage.id,
     name: state.auth.name || state.providerCabinet.name,
 });

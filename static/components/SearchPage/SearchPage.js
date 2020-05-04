@@ -128,8 +128,8 @@ const mapStateToProps = (state) => ({
     filtersArray: state.searchPage.filter,
     initializedPage: state.searchPage.initializedSearchPage,
     hobbiesReceived: state.searchPage.hobbiesToSearch,
-    id: state.auth.userId || state.providerCabinet.providerId,
-    isUserAuth: state.auth.isAuth,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
 });
 const mapDispatchToProps = (dispatch) => ({
