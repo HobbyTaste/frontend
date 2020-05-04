@@ -6,6 +6,7 @@ import UserInfoCard from './UserInfoCard/UserInfoCard';
 import { initializeUserCabinet } from '../../redux/actions/userActions';
 import Feedback from '../HobbyCard/Feedback/Feedback';
 import UserCabinetHobbies from './UserCabinetHobbies';
+import CommentsList from '../HobbyCard/Feedback/CommentsList';
 
 const UserCabinet = (props) => {
     useEffect(() => {
@@ -23,7 +24,7 @@ const UserCabinet = (props) => {
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
-                <Feedback isUserAuth={false} isProviderAuth={props.isProviderAuth} />
+                <CommentsList isProvider={props.isProvider} isOwner = {false} comments ={[]}/>
             </div>
         </div>);
 };

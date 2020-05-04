@@ -20,10 +20,7 @@ const changeProviderHobby=(userHobbies) => ({
 /*добавить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок*/
 export const addHobbyForProvider = (hobbyID, userID) => (dispatch) => {
     console.log("provider add")
-    axios.post('http://127.0.0.1:8100/user/subscribe', {
-        hobbyId: hobbyID,
-        userId: userID
-    }).then(res => {
+    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
         console.log("responce add")
         console.log(res)
         dispatch(changeProviderHobby(res.data.hobbies));
@@ -34,10 +31,7 @@ export const addHobbyForProvider = (hobbyID, userID) => (dispatch) => {
 }
 /*удалить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок*/
 export const deleteHobbyForProvider = (hobbyID, providerID) => (dispatch) => {
-    axios.post('http://127.0.0.1:8100/user/subscribe', {
-        hobbyId: hobbyID,
-        providerId: providerID
-    }).then(res => {
+    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
         console.log("responce delete")
         console.log(res)
         dispatch(changeProviderHobby(res.data.hobbies));
