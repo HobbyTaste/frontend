@@ -2,11 +2,12 @@ import * as actionTypes from '../actions/actionsTypes'
 
 let initialState = {
     hobbiesToSearch: [],
-    hobbiesShow: [],
+    filter: [],
     category: 'Все категории',
     initializedSearchPage: false,
     word: '',
     isInSearchPage: false,
+    selector: 'data',
 };
 
 const searchPageReducer = (state = initialState, action) => {
@@ -18,6 +19,10 @@ const searchPageReducer = (state = initialState, action) => {
     case actionTypes.SET_CATEGORY:
         return {
             ...state, category: action.category,
+        };
+    case actionTypes.SET_FILTER:
+        return {
+            ...state, filter: action.filter,
         };
     case actionTypes.SET_IN_SEARCH_PAGE:
         return {
@@ -31,11 +36,11 @@ const searchPageReducer = (state = initialState, action) => {
         return {
             ...state, initializedSearchPage: action.initialize
         };
-
-    case actionTypes.SET_HOBBY_SHOW:
-        return {
-            ...state, hobbiesShow: action.hobbiesShow
+    case actionTypes.SET_SELECTOR:
+        return{
+            ...state, selector: action.selector,
         };
+
     default:
         return state;
     }
