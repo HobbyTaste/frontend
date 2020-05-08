@@ -1,0 +1,145 @@
+.formContainerRegistration {
+    width: 320px;
+    height: 360px;
+    background-color: #FFFFFF;
+}
+
+.formContainerSign {
+    width: 320px;
+    height: 296px;
+    background-color: #FFFFFF;
+}
+
+.formHeader {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.formMain {
+
+}
+
+.enterButton {
+    width: 50%;
+    height: 40px;
+    background-color: #178FD6;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13px;
+    color: #FFFCF6;
+    border: none;
+    text-align: center;
+    align-items: center;
+
+}
+
+.UserPartnerButton {
+    box-sizing: border-box;
+    width: 160px;
+    height: 40px;
+    font-family: Roboto;
+    background-color: #FFFCF6;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13px;
+    color: #034488;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+.UserPartnerButtonActive {
+    border: 2px solid #034488;
+
+}
+
+.formH3 {
+    margin: 20px auto;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #034488;
+}
+
+.formH3Sign {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.formInput {
+    box-sizing: border-box;
+    width: 230px;
+    outline: none;
+    height: 34.5px;
+    border: 1.5px solid #034488;
+    border-radius: 3.5px;
+    padding-left: 10px;
+    margin-bottom: 22px;
+    margin-left: 29px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.formContainerPassword {
+    display: flex;
+    width: 230px;
+    height: 34.5px;
+    border-radius: 3.5px;
+    border: 1px solid #034488;
+    padding: 0;
+    margin-bottom: 22px;
+    margin-left: 29px;
+}
+
+.icon {
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.formInputPassword {
+    box-sizing: border-box;
+    width: 90%;
+    outline: none;
+    height: 100%;
+    padding-left: 10px;
+    border: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.registrationButton {
+    margin-top: 11px;
+    margin-left: 105px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: right;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: #034488;
+    background-color: #FFFFFF;
+    border: none;
+}

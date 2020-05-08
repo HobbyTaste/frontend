@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import style from './Header.module.css';
 import Logo from "./Logo/Logo";
-import FilterList from './Search/FilerList/FilterList';
-import LoginUser from "./LoginUser/LoginUser";
 import LogoutUser from "./LogoutUser/LogoutUser";
 import {Link} from 'react-router-dom';
 import FilteredList from './Search/FilerList/FilterList';
+import LoginUserWindow from './LoginUser/LoginUserWindow';
 
 const Header = (props) => {
     return (
@@ -20,7 +19,7 @@ const Header = (props) => {
             </div>
           { props.isAuth
                 ? <div className={style.buttonContainer}><LogoutUser logout={props.logout} name= {props.name} /></div>
-                : <div className={style.buttonContainer}><LoginUser/></div> }
+                : <div className={style.buttonContainer}><LoginUserWindow/></div> }
 
         </header>);
 };
