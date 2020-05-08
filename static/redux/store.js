@@ -1,7 +1,7 @@
 import {applyMiddleware,createStore, compose, combineReducers} from "redux"
 import mainPageReducer from "./reducers/mainPage-reducer";
 import hobbyPageReducer from "./reducers/hobbyCard-reducer";
-import authReducer from "./reducers/auth-reducer";
+import userCabinetReducer from "./reducers/user-reducer";
 import searchPageReducer from './reducers/search-reducer';
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
@@ -12,7 +12,7 @@ let reducers = combineReducers({
     mainPage: mainPageReducer,
     hobbyPage: hobbyPageReducer,
     searchPage: searchPageReducer,
-    auth: authReducer,
+    userCabinet: userCabinetReducer,
     form: formReducer,
     app: appReducer,
     providerCabinet: ProviderCabinetReducer,

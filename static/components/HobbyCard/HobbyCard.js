@@ -80,7 +80,7 @@ class HobbyCard extends React.Component {
                 </div>
                 <div className={style.communication}>
                     <p className={feedStyle.labelAnswer}> Отзывы:</p>
-                    <Feedback isOwner = {isOwner}/>
+                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner}/>
 
                 </div>
             </div>
@@ -90,8 +90,8 @@ class HobbyCard extends React.Component {
 
 const mapStateToProps = (state) => ({
     initializedPage: state.hobbyPage.initializedPage,
-    id: state.auth.userId || state.providerCabinet.providerId,
-    isUserAuth: state.auth.isAuth,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
 
     isPageInitialized: state.hobbyPage.initialized,

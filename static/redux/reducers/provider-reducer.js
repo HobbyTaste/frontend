@@ -1,7 +1,6 @@
 import Provider from "../../api/Provider";
 import Hobby from "../../api/Hobby";
 import {stopSubmit} from "redux-form";
-import {setIsUserInCabinet} from "./auth-reducer";
 import * as actionTypes from '../actions/actionsTypes'
 const providerApi = new Provider();
 const hobbyApi = new Hobby();
