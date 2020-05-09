@@ -28,13 +28,13 @@ export const InputPassword = () => {
                 <div className={style.formContainerPassword} >
                     <Input className={style.formInputPassword} name={'password'} type={'text'} placeholder={'Пароль'}
                            disableUnderline={true} autoFocus={true} />
-                        <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityIcon/></p></Button>
+                        <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityOffIcon/></p></Button>
                 </div>
 :
     <div className={style.formContainerPassword} >
         <Input className={style.formInputPassword} name={'password'} type={'password'} placeholder={'Пароль'}
                disableUnderline={true} autoFocus={true}/>
-            <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityOffIcon/></p></Button>
+            <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityIcon/></p></Button>
     </div>
 
 }</div>)
