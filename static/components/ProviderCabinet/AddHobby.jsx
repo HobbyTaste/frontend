@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import style from './AddHobby.module.css';
 import { addNewHobby } from '../../redux/actions/providerActions';
 
 const AddHobbyForm = (props) => {
+    const [state, setState] = useState({
+        Parking: false,
+        Beginners: false,
+        Kids: false,
+        Equipment: false,
+        Disabled: true,
+    });
+
     const [organization, setOrganization] = useState('');
     const [image, setImage] = useState('');
     const [file, setFile] = useState(null);
@@ -19,6 +28,13 @@ const AddHobbyForm = (props) => {
     const [vk, setVk] = useState('');
     const [instagram, setInstagram] = useState('');
     const [facebook, setFacebook] = useState('');
+    const [exactDates, setExactDates] = useState('');
+    const [price, setPrice] = useState('');
+
+    const [parking, setParking] = useState(null);
+    const [beginner, setBeginner] = useState(null);
+    const [kids, setKids] = useState(null);
+    const [equipment, setEquipment] = useState(null);
 
     const onOrganizationChange = (e) => {
         setOrganization(e.target.value);
@@ -59,6 +75,38 @@ const AddHobbyForm = (props) => {
     const onFbChange = (e) => {
         setFacebook(e.target.value);
     };
+    const onExDatChange = (e) => {
+        setExactDates(e.target.value);
+    };
+    const onPriceChange = (e) => {
+        setPrice(e.target.value);
+    };
+
+    const onParkingChange = (val) => {
+        setState({
+            Parking: false,
+        });
+        setParking(val);
+    };
+    const onBeginnerChange = (val) => {
+        setState({
+            Beginners: false,
+        });
+        setBeginner(val);
+    };
+    const onKidsChange = (val) => {
+        setState({
+            Kids: false,
+        });
+        setKids(val);
+    };
+    const onEquipmentChange = (val) => {
+        setState({
+            Equipment: false,
+        });
+        setEquipment(val);
+    };
+
     const uploadImage = (e) => {
         const reader = new FileReader();
         const photoFile = e.target.files[0];
@@ -82,8 +130,14 @@ const AddHobbyForm = (props) => {
         setVk('');
         setInstagram('');
         setFacebook('');
+        setExactDates('');
+        setPrice('');
         setImage('');
         setFile(null);
+        setParking(null);
+        setBeginner(null);
+        setKids(null);
+        setEquipment(null);
     };
 
     const onSubmit = () => {
@@ -91,11 +145,70 @@ const AddHobbyForm = (props) => {
             shortAddress, fullAddress,
             information, facilities, special,
             telephone, email, website, vk, instagram, facebook,
+            exactDates, price,
+            parking, beginner, kids, equipment,
             props.id, file);
         props.handleClose();
     };
 
     const avatar = 'https://images.assetsdelivery.com/compings_v2/jenjawin/jenjawin1904/jenjawin190400208.jpg';
+
+    const showParking = (e) => {
+        setState({
+            Parking: !state.Parking,
+        });
+    };
+    const showBeginners = (e) => {
+        setState({
+            Beginners: !state.Beginners,
+        });
+    };
+    const showKids = (e) => {
+        setState({
+            Kids: !state.Kids,
+        });
+    };
+    const showEquipment = (e) => {
+        setState({
+            Equipment: !state.Equipment,
+        });
+    };
+
+    const tagValueToText = (val) => {
+        if (val === true) return 'Да';
+        if (val === false) return 'Нет';
+        return 'Не указано';
+    };
+
+    const weekDay = (day) => (
+        <div className={style.weekDayContainer}>
+            {day}.:
+            <span className={style.weekTimeContainer}>
+                <input className={style.smallInput} disabled={!state.Disabled}/>
+            </span>
+            <span className={style.weekTimeContainer}>
+                <input className={style.smallInput} disabled={!state.Disabled}/>
+            </span>
+        </div>
+    );
+
+    const chooseTag = (tagState, showTag, changeTag, listState) => (
+        <span>
+            <span className={style.chooseButton}>
+                {tagValueToText(tagState)}
+                <span className={style.dropdownIcon} onClick={showTag}>
+                    <ArrowDropDownIcon/>
+                </span>
+            </span>
+            <div className={style.list} style={{ display: `${listState ? 'block' : 'none'}` }}>
+                <div className={style.listItem}
+                    onClick={(e) => changeTag(null)}>Не указано</div>
+                <div className={style.listItem}
+                    onClick={(e) => changeTag(true)}>Да</div>
+                <div className={style.listItem}
+                    onClick={(e) => changeTag(false)}>Нет</div>
+            </div>
+        </span>);
 
     return (
         <div className={style.background}>
@@ -134,78 +247,26 @@ const AddHobbyForm = (props) => {
             <div className={style.upperContainer}>
                 <span className={style.timeContainer}>
                     <div className={style.header}>Время работы:</div>
-                    <div className={style.weekDayContainer}>
-                        пн.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        вт.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        ср.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        чт.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        пт.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        сб.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
-                    <div className={style.weekDayContainer}>
-                        вс.:
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                        <span className={style.weekTimeContainer}>
-                            <input className={style.smallInput}/>
-                        </span>
-                    </div>
+                    {weekDay('пн')}
+                    {weekDay('вт')}
+                    {weekDay('ср')}
+                    {weekDay('чт')}
+                    {weekDay('пт')}
+                    {weekDay('сб')}
+                    {weekDay('вс')}
                 </span>
                 <span className={style.priceContainer}>
                     <div style={{ display: 'flex' }}>
-                        <input type="radio" className="form-check-input"/>
+                        <input type="checkbox" onClick={() => { setState({ Disabled: !state.Disabled }); }}/>
                         <span className={style.smallHeader}>Только в определённые даты</span>
                     </div>
-                    <input className={style.input} style={{ margin: '10px 0 20px 20px' }} placeholder={'Введите даты'}/>
+                    <input className={style.input} style={{ margin: '10px 0 20px 20px' }}
+                        name='ecaxtDates' onChange={onExDatChange} value={exactDates}
+                        placeholder={'Введите даты'} disabled={state.Disabled}/>
                     <div className={style.header}>Цены:</div>
-                    <textarea className={style.input} style={{ margin: '2px 0 4px 20px', height: '115px' }}
+                    <textarea className={style.input}
+                        style={{ margin: '2px 0 4px 20px', height: '115px', padding: '5px 0 0 9px' }}
+                        name='price' onChange={onPriceChange} value={price}
                         placeholder={'Цены'}/>
                 </span>
             </div>
@@ -235,19 +296,19 @@ const AddHobbyForm = (props) => {
                 <span className={style.tagContainer}>
                     <div className={style.chooseTag}>
                         Есть ли рядом с Вашим хобби парковка для гостей?
-                        <span className={style.chooseButton}>Не указано</span>
+                        {chooseTag(parking, showParking, onParkingChange, state.Parking)}
                     </div>
                     <div className={style.chooseTag}>
                         Предназначено ли Ваше хобби для детей?
-                        <span className={style.chooseButton}>Не указано</span>
+                        {chooseTag(kids, showKids, onKidsChange, state.Kids)}
                     </div>
                     <div className={style.chooseTag}>
                         Предназначено ли ваше хобби для новичков?
-                        <span className={style.chooseButton}>Не указано</span>
+                        {chooseTag(beginner, showBeginners, onBeginnerChange, state.Beginners)}
                     </div>
                     <div className={style.chooseTag}>
                         Предоставляете ли Вы необходимую экипировку?
-                        <span className={style.chooseButton}>Не указано</span>
+                        {chooseTag(equipment, showEquipment, onEquipmentChange, state.Equipment)}
                     </div>
                 </span>
             </div>

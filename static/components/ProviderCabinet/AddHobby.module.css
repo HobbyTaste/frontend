@@ -135,7 +135,12 @@
     position: relative;
     width: 245px;
     margin-left: 20px;
-    text-align: center;
+
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
 }
 
 .weekTimeContainer {
@@ -205,6 +210,37 @@
     letter-spacing: 0.15px;
 
     color: rgba(0, 0, 0, 0.6);
+}
+
+.list {
+    position: relative;
+    width: 155px;
+    margin-left: 417px;
+    margin-top: 10px;
+    z-index: 100;
+
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 6px 0 6px 6px;
+
+    display: block;
+}
+
+.listItem {
+    height: 16px;
+    width: 100%;
+    padding-left: 10px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.dropdownIcon {
+    float: right;
+    margin-top: 3px;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 
