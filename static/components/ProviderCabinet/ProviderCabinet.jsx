@@ -34,9 +34,9 @@ class ProviderCabinet extends React.Component {
                 <ProviderInfo avatar={this.props.avatar} name={this.props.name} metro={this.props.metro}/>
             </div>
             <div className={style.feedbackHeader}>Отзывы на ваши хобби и ваши ответы на них:</div>
-            <div className={style.feedbackContainer}>
-                <Feedback isUserAuth={false} isProviderAuth={this.props.isProviderAuth} />
-            </div>
+            {/*<div className={style.feedbackContainer}>*/}
+            {/*    <Feedback isUserAuth={false} isProviderAuth={this.props.isProviderAuth} />*/}
+            {/*</div>*/}
         </div>);
     }
 }
