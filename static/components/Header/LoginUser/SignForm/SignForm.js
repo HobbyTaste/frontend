@@ -1,8 +1,6 @@
 import React from 'react';
 import RegistrationNew from '../../../Registration/RegistrationNew';
 import LoginNew from '../SignIn/SignInNew';
-import Registration from '../../../Registration/Registration';
-
 
 const SignForm =(props) => {
     const [isRegistration, setRegistration] = React.useState(false);

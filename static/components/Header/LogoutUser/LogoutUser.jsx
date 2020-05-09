@@ -4,7 +4,6 @@ import UserCabinetButton from "./Buttons/UserCabinetButton";
 import UserMenu from "./Buttons/UserMenu";
 import Avatar from "./Avatar/Avatar";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 
 
 

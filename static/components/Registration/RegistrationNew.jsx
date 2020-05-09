@@ -3,7 +3,6 @@ import style from './RegistrationNew.css';
 import { connect } from 'react-redux';
 import { createNewUser } from '../../redux/actions/userActions';
 import { Field, reduxForm } from 'redux-form';
-import { Input } from '@material-ui/core';
 import ButtonReg from './ButtonRegistration';
 import { InputPassword, InputSign } from './InputPassword';
 import { createNewProvider } from '../../redux/actions/providerActions';
