@@ -132,6 +132,85 @@ const AddHobbyForm = (props) => {
             </div>
 
             <div className={style.upperContainer}>
+                <span className={style.timeContainer}>
+                    <div className={style.header}>Время работы:</div>
+                    <div className={style.weekDayContainer}>
+                        пн.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        вт.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        ср.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        чт.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        пт.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        сб.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                    <div className={style.weekDayContainer}>
+                        вс.:
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                        <span className={style.weekTimeContainer}>
+                            <input className={style.smallInput}/>
+                        </span>
+                    </div>
+                </span>
+                <span className={style.priceContainer}>
+                    <div style={{ display: 'flex' }}>
+                        <input type="radio" className="form-check-input"/>
+                        <span className={style.smallHeader}>Только в определённые даты</span>
+                    </div>
+                    <input className={style.input} style={{ margin: '10px 0 20px 20px' }} placeholder={'Введите даты'}/>
+                    <div className={style.header}>Цены:</div>
+                    <textarea className={style.input} style={{ margin: '2px 0 4px 20px', height: '115px' }}
+                        placeholder={'Цены'}/>
+                </span>
+            </div>
+
+            <div className={style.upperContainer}>
                 <span className={style.header} style={{ margin: '10px 0 0 0' }}>Контакты:</span>
                 <span className={style.contactContainer}>
                     <input className={style.input} name='telephone' onChange={onTelChange} value={telephone}
@@ -150,7 +229,30 @@ const AddHobbyForm = (props) => {
                         placeholder={'Facebook'}/>
                 </span>
             </div>
-            <div className={style.upperContainer} style={{ display: 'block' }}>
+
+            <div className={style.tagUpperContainer}>
+                <span className={style.header} style={{ margin: '10px 20px 0 0' }}>Метки:</span>
+                <span className={style.tagContainer}>
+                    <div className={style.chooseTag}>
+                        Есть ли рядом с Вашим хобби парковка для гостей?
+                        <span className={style.chooseButton}>Не указано</span>
+                    </div>
+                    <div className={style.chooseTag}>
+                        Предназначено ли Ваше хобби для детей?
+                        <span className={style.chooseButton}>Не указано</span>
+                    </div>
+                    <div className={style.chooseTag}>
+                        Предназначено ли ваше хобби для новичков?
+                        <span className={style.chooseButton}>Не указано</span>
+                    </div>
+                    <div className={style.chooseTag}>
+                        Предоставляете ли Вы необходимую экипировку?
+                        <span className={style.chooseButton}>Не указано</span>
+                    </div>
+                </span>
+            </div>
+
+            <div style={{ display: 'block', width: '768px' }}>
                 <button className={style.button} onSubmit={onSubmit}>Сохранить</button>
                 <button className={style.button} onClick={resetForm}>Отмена</button>
             </div>
