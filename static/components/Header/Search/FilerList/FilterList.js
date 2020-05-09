@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import {setSearchWordSuccess } from '../../../../redux/actions/searchActions';
+import { setSearchWord, setSearchWordSuccess, updateSearch } from '../../../../redux/actions/searchActions';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -28,7 +28,6 @@ const useStyles = theme => ({
 const StyledMenu = withStyles({
     paper: {
         marginTop: '5px',
-        maxHeight: '484px',
         background: '#fff',
         width: '135px',
         boxShadow: '0px 5px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14)',
@@ -50,18 +49,6 @@ const StyledMenu = withStyles({
     />
 ));
 
-const List = (props) => {
-    return (
-        <ul className={style.list}>
-            {
-                props.items.map(function(item) {
-                    return <li className={style.itemList} data-category={item} key={item} onClick={props.handleClose}>  <Link to='/search/sport' className={style.link} >{item}</Link></li>
-                })
-            }
-        </ul>
-            )
-};
-
 class FilteredList extends React.Component {
     constructor(props) {
         super(props);
@@ -74,7 +61,7 @@ class FilteredList extends React.Component {
                 "Верховая езда",
                 "Музыка",
                 "Пение",
-                "Рисование"
+                "Рисование", "Футбол", "Волейбол"
             ],
             items: [],
             anchorEl: null,
@@ -90,10 +77,18 @@ class FilteredList extends React.Component {
 
     handleSearch(event) {
         if (this.state.word != ''){
-            this.props.onSearch(this.state.word);
-            this.setState({word: ''});
-            this.setState({items: null, isShow: false})
-            this.props.history.push('/search');
+            if (this.props.isInSearchPage){
+
+                this.props.updateSearch(this.state.word);
+                this.setState({word: ''});
+                this.setState({items: null, isShow: false})
+            }
+            else{
+                this.props.setSearchWord(this.state.word);
+                this.setState({word: ''});
+                this.setState({items: null, isShow: false})
+                this.props.history.push('/search');
+            }
         }
         else {
             this.setState({word: 'Введите запрос'});
@@ -101,13 +96,21 @@ class FilteredList extends React.Component {
 
     }
 
-     handleClick(event) {
+     handleClick(event, item) {
          this.setState({AnchorEl: event.currentTarget});
+         if (this.props.isInSearchPage){
+                 this.props.updateSearch(item);
+         }
+             else{
+                 this.props.setSearchWord(item);
+             }
+
     }
 
-    handleClose () {
+    handleClose (event) {
         this.setState({isShow: false});
         this.setState({AnchorEl: null});
+        this.setState({word: ''});
     }
 
     filterList(event){
@@ -128,6 +131,8 @@ class FilteredList extends React.Component {
         this.setState({items: this.state.initialItems})
     }
     render(){
+        const onClick_= this.handleClick;
+        const onClose = this.handleClose;
         const classes = useStyles();
         return (
             <div className={style.searcher}>
@@ -137,10 +142,21 @@ class FilteredList extends React.Component {
                         <input type="text" className={style.inputSearch} placeholder="Search..." id="searchInput" value = {this.state.word} onChange={this.filterList}/>
                     </fieldset>
                 </form>
-               <Button style={classes.searchButton} value="" onClick={this.handleSearch}><SearchIcon style={{ fontSize: 30 }} /></Button>
+               <Button style={classes.searchButton} value="" onClick={this.handleSearch}>
+                   <SearchIcon style={{ fontSize: 30 }} /></Button>
                 </div>
                 <div>
-                { (this.state.isShow) && <List items={this.state.items} handleClose = {this.handleClose}/>
+                { (this.state.isShow) &&
+                    <ul className={style.list}>
+                    {
+                        this.state.items.map(function(item) {
+                            return <li className={style.itemList} data-category={item} key={item} onClick={onClose}>
+                                <Link to='/search' className={style.link} onClick={(e) => onClick_(e, item)} >
+                                {item}</Link></li>
+                        })
+                    }
+                    </ul>
+
                 }
                 </div>
             </div>
@@ -148,8 +164,13 @@ class FilteredList extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    onSearch: (word) => dispatch(setSearchWordSuccess(word)),
+const mapStateToProps = (store) => ({
+    isInSearchPage: store.searchPage.isInSearchPage,
 });
 
-export default compose(connect(null, mapDispatchToProps),(withStyles(useStyles,{withTheme: true})), withRouter)(FilteredList);
+const mapDispatchToProps = (dispatch) => ({
+    updateSearch: (word) => dispatch(updateSearch(word)),
+    setSearchWord: (word) => dispatch(setSearchWordSuccess(word)),
+});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps),(withStyles(useStyles,{withTheme: true})), withRouter)(FilteredList);

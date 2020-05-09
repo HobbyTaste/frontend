@@ -4,40 +4,48 @@ import { connect } from 'react-redux';
 import style from './UserCabinet.module.css';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
 import { initializeUserCabinet } from '../../redux/actions/userActions';
-import Feedback from '../HobbyCard/Feedback/Feedback';
-import UserCabinetHobbies from './UserCabinetHobbies';
+import CommentsList from '../HobbyCard/Feedback/CommentsList';
+import { defaultAvatarUrl } from "../../utils/constant";
+
+function changeNaming(comments) {
+    return comments.map(comment => ({
+        nameWriter: comment.name,
+        date: comment.datetime,
+        stars: comment.evaluation,
+        text: comment.text
+    }))
+}
 
 const UserCabinet = (props) => {
     useEffect(() => {
         props.initializeUserCabinet();
     }, []);
 
-    // if (!props.isAuth) {
-    //    return <Redirect to={'/'} />;
-    // }
+    if (!props.isAuth) {
+        return <Redirect to={"/"} />;
+    }
 
     return (
         <div className={style.background}>
             <div className={style.infoContainer}>
-                <UserInfoCard avatar={props.avatar} name={props.name} metro={props.metro}/>
+                <UserInfoCard avatar={props.avatar || defaultAvatarUrl} name={props.name} metro={props.metro} />
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
-                <Feedback isUserAuth={false} isProviderAuth={props.isProviderAuth} />
+                <CommentsList isProvider={false} isOwner={false} comments={changeNaming(props.userComments || [])}/>
             </div>
-        </div>);
+        </div>
+    );
 };
 
 const mapStateToProps = (state) => ({
-    // name: state.auth.name,
-    name: 'Иван Иванов',
-    // metro: state.auth.metro,
-    metro: 'Долгопрудная',
-    // avatar: state.auth.avatar,
-    avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
-    userHobbies: state.auth.userHobbies,
-    // isAuth: state.auth.isAuth,
-    isUserAuth: true,
+    name: state.userCabinet.name,
+    //metro: state.userCabinet.metro,
+    metro: "В модели на бэкенде пока нет метро",
+    avatar: state.userCabinet.avatar,
+    userHobbies: state.userCabinet.userHobbies,
+    userComments: state.userCabinet.userComments,
+    isAuth: state.userCabinet.isAuth,
     isProviderAuth: false,
 });
 

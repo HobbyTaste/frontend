@@ -1,4 +1,3 @@
-import path from 'path';
 import {merge} from 'lodash';
 
 interface IRequestOpts extends RequestInit {

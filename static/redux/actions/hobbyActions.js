@@ -20,25 +20,21 @@ const setHobbyData = payload =>({
     payload,
 })
 
-// теперь какие-то функции....
-//
-const getData = () => new Promise(resolve => {
-    setTimeout(() => resolve( {data: {label: "Название" ,metro: "Новая станция", description:"Описание", contact:{mobile: "+7 999", email: "ааа"},
-            flag:{isParking: true,
-                isBeginner: true,
-                isRent: true,}}}), 2000)
+export const changeProviderHobby = (userHobbies) => ({
+    type: actionTypes.CHANGE_HOBBY_PROVIDER,
+    userHobbies
+})
+const changeUserHobby=(userHobbies) => ({
+    type: actionTypes.CHANGE_HOBBY_USER,
+    userHobbies
 })
 
-export const initializeHobbyPage = (hobbyID) => (dispatch) => {
+
+export const initializeHobbyPage = (Id) => (dispatch) => {
     dispatch(setIsInSearchPage(false));
     dispatch(initializedHobbyPage(false));
-    console.log("initialize hobby page")
-    /*axios.post('http://127.0.0.1:8080/user/subscribe', {
-        hobbyId: hobbyID
-    })
-     */
-    //запрос к серверу вместо этой функции getData
-    getData().then(res => {
+    axios.get(`/restapi/hobby/info?id=${Id}`).then(res => {
+        console.log(res);
         let promise = dispatch(setHobbyData(res.data));
         return (Promise.all([promise]).then(()=> {
             dispatch(initializedHobbyPage(true));
@@ -52,10 +48,9 @@ export const initializeHobbyPage = (hobbyID) => (dispatch) => {
 
 /*добавить отзыв. Отправляем is пользователя, id хобби, для которого этот отзыв.
 Хотим, чтобы в бд автоматически сохранилась текущая дата к этому отзыву. Вернуть обновленный массив отзывов.*/
-export const addUserFeedback = (hobbyID, userID, values) => (dispatch) => {
+export const addUserFeedback = (hobbyID, values) => (dispatch) => {
     console.log("addUserFeedback")
-    axios.post('http://127.0.0.1:8080/user/subscribe', {
-        hobbyId: hobbyID,
+    axios.post(`/restapi/hobby/edit?=${hobbyID}`, {
         text: values.TextFeedback,
         stars: values.StarsRating,
     }).then(res => {

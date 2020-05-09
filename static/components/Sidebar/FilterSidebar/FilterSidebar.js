@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import style from './FilterSidebar.css';
 import { connect } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
-import { categoryHobby, filterHobby } from '../../../redux/actions/searchActions';
+import { setFilter} from '../../../redux/actions/searchActions';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = theme => ({
     root: {
@@ -23,7 +25,8 @@ const LabelFilter = (props) => {
     const classes = useStyles();
     return (
         <div className={style.option}>
-            <p className={style.flag}>{props.label}</p><Checkbox onChange={props.onChange} style={classes.root} size={'small'} inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}/>
+            <p className={style.flag}>{props.label}</p>
+            <Checkbox onChange={props.onChange} style={classes.root} size={'small'} inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}/>
         </div>
     )
 };
@@ -32,49 +35,48 @@ const LabelFilter = (props) => {
 class FilterSidebar extends React.Component {
     constructor(props) {
         super(props);
-        this.handleParking = this.handleParking.bind(this);
-        this.handleBeginner = this.handleBeginner.bind(this);
-        this.handleChild = this.handleChild.bind(this);
-        this.handleEquipment = this.handleEquipment.bind(this);
 
+        this.handleFlag = this.handleFlag.bind(this);
     }
 
-    handleParking(event) {
-        this.props.filteredHobby(this.props.hobbies, 'parking', event.target.checked);
-    }
+    handleFlag(event, flag) {
 
-    handleChild(event) {
-        this.props.filteredHobby(this.props.hobbies, 'child', event.target.checked);
+        const a = this.props.filtersArray;
+        if (event.target.checked){
+            const newArray =[...a, flag];
+            this.props.filteredHobby(newArray);
+        }
+        else{
+            const index = a.indexOf(flag);
+            let newArray = a.slice();
+            newArray.splice(index, 1);
+            this.props.filteredHobby(newArray);
+        }
     }
-
-    handleBeginner(event) {
-        this.props.filteredHobby(this.props.hobbies, 'beginner', event.target.checked);
-    }
-
-    handleEquipment(event) {
-        this.props.filteredHobby(this.props.hobbies, 'equipment', event.target.checked);
-    }
-
 
     render() {
+        if (!this.props.initialized) {
+            return (<div></div>)
+        }
         return (
             <div className={style.container}>
                 <p className={style.label}>Фильтры:</p>
-               <LabelFilter label={"Парковка"}  onChange={this.handleParking} />
-                <LabelFilter label={"Новичкам"} onChange={this.handleBeginner}/>
-                <LabelFilter label={"Детям"} onChange={this.handleChild}/>
-                <LabelFilter label={"Экипировка"} onChange={this.handleEquipment}/>
+                <LabelFilter label={"Парковка"}  onChange={(e) => this.handleFlag(e, 'parking')} />
+                <LabelFilter label={"Новичкам"} onChange={(e) => this.handleFlag(e, 'beginner')}/>
+                <LabelFilter label={"Детям"} onChange={(e) => this.handleFlag(e, 'child')}/>
+                <LabelFilter label={"Экипировка"} onChange={(e) => this.handleFlag(e, 'equipment')}/>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    hobbiesShow: state.searchPage.hobbiesShow,
+    initialized: state.searchPage.initializedSearchPage,
+    filtersArray: state.searchPage.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    filteredHobby: (hobbies, filter, isChecked) => dispatch(filterHobby(hobbies, filter, isChecked)),
+    filteredHobby: (filtersArray) => dispatch(setFilter(filtersArray)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterSidebar);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(FilterSidebar);

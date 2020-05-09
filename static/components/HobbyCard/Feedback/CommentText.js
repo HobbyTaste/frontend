@@ -40,14 +40,20 @@ class CommentText extends React.Component {
 
         };
         this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleClick(event) {
         this.setState({isAnswered: !this.state.isAnswered});
     }
 
 
+    handleSubmit = (values) => {
+        console.log(values);
+           this.props.onProviderResponse(this.props.hobbyId, values);
+    };
+
     render(){
-        const classes = useStyles()
+        const classes = useStyles();
         let classContainer = style.containerComment;
         if (this.state.isItAnswerProvider) {
             classContainer += (' ' + style.containerAnswer);
@@ -77,7 +83,10 @@ class CommentText extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    onProviderResponse: (idHobby, idUser, values) => dispatch(addProviderResponse(idHobby, idUser, values)),
+});
 
-export default CommentText;
+export default connect(null, mapDispatchToProps)(CommentText);
 
 

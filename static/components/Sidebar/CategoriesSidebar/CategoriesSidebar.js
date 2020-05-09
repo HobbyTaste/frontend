@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import Category from './Category';
 import {categories} from '../../../utils/constant';
+import { countHobbyIn } from '../../../utils/functions';
+import { setCategory } from '../../../redux/actions/searchActions';
 
 const useStyles = theme => ({
     button: {
@@ -30,17 +32,27 @@ class CategoriesSidebar extends React.Component {
     }
 
     render() {
+        if (!this.props.initialized){
+        return <div></div>
+        }
         const classes = useStyles();
-       const onLink=this.handleLink;
+        const countDict = countHobbyIn(this.props.hobbiesRecieved);
+        let sortedCategories = Object.keys(countDict).map(function(key) {
+            return [key, countDict[key]];
+        });
+        sortedCategories.sort(function(first, second) {
+            return second[1] - first[1];
+        });
+        const onClick = this.props.setCategory;
         return (
             <div className={style.container}>
                 <p className={style.label}>Категории:</p>
                 <ul className={style.list}>
                     {
-                        categories.slice(0, this.state.countShow)
+                        sortedCategories.slice(0, this.state.countShow)
                             .map(function (item, index) {
                                 return <li key={index}>
-                                    <Category label={item.label} action={onLink} url={item.url} count={1}/>
+                                    <Category onCLick = {onClick} url={item[0]} count={[item[1]]}/>
                                 </li>;
                             })
                     }
@@ -53,11 +65,16 @@ class CategoriesSidebar extends React.Component {
                 </ul>
             </div>
         );
-    }
+}
 }
 
 const mapStateToProps = (state) => ({
-    hobbiesShow: state.searchPage.hobbiesShow,
+    hobbiesRecieved: state.searchPage.hobbiesToSearch,
+    initialized: state.searchPage.initializedSearchPage,
+});
+const mapDispatchToProps = (dispatch) => ({
+    setCategory: (category) => dispatch(setCategory(category)),
 });
 
-export default compose(connect(mapStateToProps, null), withRouter)(CategoriesSidebar);
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(CategoriesSidebar);

@@ -3,16 +3,17 @@ import * as actionTypes from '../actions/actionsTypes';
 const initialState = {
     userId: null,
     email: null,
-    name: 'Имя временно',
+    name: 'initial',
     avatar: null,
     isAuth: true,
     inUserCabinet: false,
     userInitialized: false,
+    fetchingHobbies: "no hobbies",
 
     userHobbies: []
 };
 
-const authReducer = (state = initialState, action) => {
+const userCabinetReducer = (state = initialState, action) => {
     switch (action.type) {
     case actionTypes.INITIALIZE_USER_SUCCESS: {
         return {
@@ -32,10 +33,20 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.CHANGE_HOBBY_USER:
         return { ...state,
             userHobbies: action.userHobbies};
+    case actionTypes.SET_COMMENTS:
+        return {
+            ...state,
+            userComments: action.userComments
+        };
     case actionTypes.SET_HOBBIES:
         return {
             ...state,
             userHobbies: action.userHobbies
+        };
+    case actionTypes.SET_FETCHING_HOBBIES:
+        return {
+            ...state,
+            fetchingHobbies: action.status
         };
     case actionTypes.SET_IS_USER_IN_CABINET:
         return {
@@ -47,4 +58,4 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-export default authReducer;
+export default userCabinetReducer;

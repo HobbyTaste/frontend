@@ -8,6 +8,7 @@ import Tag from './Tags/Tag';
 import Monetization from './Price/Monetization';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import EditIcon from "@material-ui/icons/Edit";
 /*времено, чтобы передалвался массив комментариев*/
@@ -50,12 +51,13 @@ const comments =  [{
 
 const imageMissing='https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
-const Slot = (props) => {
+const
+    Slot = (props) => {
     return (<div className={style.slot}>
         {props.pic ? <img className={style.slotPic} src={props.pic}/> : <img className={style.slotPic} src={imageMissing}/>}
         <span className={style.slotDescription}>
             <div className={style.slotHeader}>
-                <span className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</span>
+                <Link to={`/hobby/card/${props.id}`} className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</Link>
                 <HalfRating answersArray={comments}/>
             </div>
             <div className={`${style.metro} ${style.colorBlueSlot}`}>
@@ -79,6 +81,5 @@ const Slot = (props) => {
         <Link to='/hobby/card' className={style.icon}><MoreHorizIcon/></Link>
     </div>);
 }
-
 
 export default Slot;

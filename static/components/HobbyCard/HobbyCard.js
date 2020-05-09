@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from './HobbyCard.css';
 import feedStyle from './Feedback/Feedback.css';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Feedback from './Feedback/Feedback';
@@ -14,6 +14,7 @@ import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions
 import { isInArray } from '../../utils/functions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
 import Preloader from '../Common/Preloader/Preloader';
+import { compose } from 'redux';
 
 
 class HobbyCard extends React.Component {
@@ -23,24 +24,24 @@ class HobbyCard extends React.Component {
         this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
     }
     componentDidMount() {
-        this.props.initialize(this.props.hobbyInfo.id);
+        this.props.initialize(this.props.match.params.id);
     }
 
     handleAddMyHobby(event) {
         console.log('addHobby');
         if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onAddUserHobby(this.props.match.params.id);
         } else {
-            this.props.onAddProviderHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onAddProviderHobby(this.props.match.params.id);
         }
     }
 
     handleDeleteMyHobby(event) {
         console.log('delete hobby');
         if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onDeleteUserHobby(this.props.match.params.id);
         } else {
-            this.props.onDeleteProviderHobby(this.props.hobbyInfo.id, this.props.id);
+            this.props.onDeleteProviderHobby(this.props.match.params.id);
         }
     }
 
@@ -48,7 +49,7 @@ class HobbyCard extends React.Component {
         if (!this.props.initializedPage){
             return <Preloader/>
         }
-        const isOwner = isInArray(this.props.hobbyInfo.id, this.props.hobbiesOwnedProvider);
+        const isOwner = (this.props.id === this.props.hobbyInfo.owner);
         return (
             <div>
                 <div className={style.infoContainer}>
@@ -60,7 +61,7 @@ class HobbyCard extends React.Component {
                                 <div className={style.buttonContainer}>
                                     <ButtonAction isProviderAuth={this.props.isProviderAuth} isUserAuth={this.props.isUserAuth}
                                                   hobbyInfoId={this.props.hobbyInfo.id}
-                                                  hobbiesFollowed={this.props.hobbiesFollowed}
+                                                  subscribers = {this.props.hobbyInfo.subscribers} id = {this.props.id}
                                                   isOwner = {isOwner}
                                                   deleteFromMyHobbies={this.handleDeleteMyHobby}
                                                   addInMyHobbies={this.handleAddMyHobby}/>
@@ -79,7 +80,7 @@ class HobbyCard extends React.Component {
                 </div>
                 <div className={style.communication}>
                     <p className={feedStyle.labelAnswer}> Отзывы:</p>
-                    <Feedback isOwner = {isOwner}/>
+                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner}/>
 
                 </div>
             </div>
@@ -89,15 +90,15 @@ class HobbyCard extends React.Component {
 
 const mapStateToProps = (state) => ({
     initializedPage: state.hobbyPage.initializedPage,
-    id: state.auth.userId || state.providerCabinet.providerId,
-    isUserAuth: state.auth.isAuth,
+    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
-    hobbiesFollowed: [...state.auth.userHobbies, ...state.providerCabinet.followedHobbies],
-    hobbiesOwnedProvider: state.providerCabinet.providerHobbies,
 
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
+        subscribers: state.hobbyPage.subscribers,
         photos: state.hobbyPage.photos,
+        owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
         label: state.hobbyPage.label,
@@ -115,11 +116,12 @@ const mapStateToProps = (state) => ({
     },
 });
 const mapDispatchToProps = (dispatch) => ({
-    onAddUserHobby: (idHobby, idUser) => dispatch(addHobbyForUser(idHobby, idUser)),
-    onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
-    onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
-    onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
+    onAddUserHobby: (idHobby) => dispatch(addHobbyForUser(idHobby)),
+    onDeleteUserHobby: (idHobby) => dispatch(deleteHobbyForUser(idHobby)),
+    onAddProviderHobby: (idHobby) => dispatch(addHobbyForProvider(idHobby)),
+    onDeleteProviderHobby: (idHobby) => dispatch(deleteHobbyForProvider(idHobby)),
     initialize: (idHobby) => dispatch(initializeHobbyPage(idHobby)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HobbyCard);
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(HobbyCard);
