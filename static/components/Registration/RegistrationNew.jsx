@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './RegistrationNew.css';
 import { connect } from 'react-redux';
 import { createNewUser } from '../../redux/actions/userActions';
 import { Field, reduxForm } from 'redux-form';
 import { Input } from '@material-ui/core';
 import ButtonReg from './ButtonRegistration';
-import { InputPassword } from './InputPassword';
+import { InputPassword, InputSign } from './InputPassword';
 import { createNewProvider } from '../../redux/actions/providerActions';
+
+
+let mainFile = null;
 
 const FormHeader = (props) => {
     return (
@@ -47,13 +50,13 @@ const FormMain = ({handleSubmit, isProvider, onClickUserReg, onClickProviderReg,
             <h3 className={style.formH3}>{text}</h3>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div><Field component={Input} name={"name"} className={style.formInput} disableUnderline={true} placeholder={placeholder} autoFocus={true}/></div>
+                    <div><Field component={InputSign} name={"name"} disableUnderline={true} placeholder={placeholder} autoFocus={true}/></div>
                 </div>
                 <div >
-                    <Field component={Input} className={style.formInput} name={"login"} placeholder={"Логин"} disableUnderline={true} autoFocus={true}/>
+                    <Field component={InputSign} name={"email"} placeholder={"Логин"} disableUnderline={true} autoFocus={true}/>
                 </div>
                 <div>
-                    <Field component={InputPassword}/>
+                    <Field component={InputPassword} name={"password"}/>
                 </div>
                 <div>
                     <ButtonReg label="Submit" onSubmit={handleSubmit} text={"Зарегистрироваться"}/>
@@ -70,10 +73,10 @@ const RegistrationNew = (props) => {
 
     const onSubmit = (formData) => {
         if (props.isProvider){
-            props.createNewProvider(formData.email, formData.password, formData.name);
+            props.createNewProvider(formData.name, formData.password, formData.email, mainFile);
         }
         else {
-            props.createNewUser(formData.email, formData.password, formData.name);
+            props.createNewUser(formData.email, formData.password, formData.name, mainFile);
         }
     };
     return(

@@ -84,7 +84,7 @@ export const getProviderHobbies = () => (dispatch) => {
 
 export const createNewProvider = (name, password, email, avatar, phone, info) => (dispatch) => {
     const providerData = {
-        name: name, password: password, email: email, avatar: avatar, phone: phone, info: info
+        name: name, password: password, email: email, avatar: avatar, phone: '+79884445657', info: info
     };
     providerApi.create(providerData).then((response) => {
         if (response.ok) {

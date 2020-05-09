@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionsTypes';
 const initialState = {
     id: null,
     email: null,
-    name: 'initial',
+    name: '',
     avatar: null,
     isAuth: false,
     inUserCabinet: false,
