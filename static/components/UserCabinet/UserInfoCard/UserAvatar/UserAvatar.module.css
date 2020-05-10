@@ -27,15 +27,4 @@
     cursor: pointer;
     width: 370px;
     height: 325px;
-
-}
-
-.imgContainer:hover .img,
-.imgContainer:focus .img
-{
-    -ms-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
 }

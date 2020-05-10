@@ -1,16 +1,59 @@
 .background {
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.1)), url("./../../assets/images/provider_my_back.jpeg") no-repeat center center fixed;
-    background-size: cover;
     min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
+    width: 90%;
     height: auto;
-    position: fixed;
+    position: center;
+    display: block;
     top: 0;
     left: 0;
     z-index: 1;
+    padding: 20px;
+    background: white;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    background: #FFFCF6;
+    height: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+.menu {
+    display: flex;
+    width: 71.5%;
+    justify-content: center;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.menuPoint {
+    height: 40px;
+    width: 160px;
+    margin-top: -12px;
+
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.menuPoint:hover {
+    background: #178FD6;
+    color: white;
+}
+
+.passiveCategory {
+    color: #034488;
+}
+
+.activeCategory {
+    background: #178FD6;
+    color: white;
 }
 
 .info {
@@ -27,20 +70,23 @@
     margin-bottom: 20px;
 }
 
-.layout {
+.infoContainer {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 100px;
-    justify-content: center;
 }
 
-.hobbiesBlock {
-    display: flex;
-    flex-wrap: wrap;
+.feedbackHeader {
+    margin-top: 345px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.feedbackContainer {
     position: relative;
-    width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
+    display: flex;
 }
 
 @media all and (max-device-width: 1540px) {

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
-import style from './AddHobby.module.css';
+import Link from '@material-ui/core/Link';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { addNewHobby } from '../../redux/actions/providerActions';
+import style from './AddHobby.module.css';
 
 const helpText = ['',
     'Почтовый адрес здания, в котором располагается хобби: улица и номер дома',
@@ -11,7 +14,7 @@ const helpText = ['',
     'Здесь вы можете написать про душевые, раздевалки, полотенца и другие приятные мелочи, которыми Вы обеспечиваете посетителей',
     'Опишите условия, которые бы Вы хотел подчеркнуть: например, то, что Ваше хобби ведёт набор до определённого числа или принимает лиц одного пола'];
 
-const AddHobbyForm = (props) => {
+const EditHobbyForm = (props) => {
     const [state, setState] = useState({
         showHelp: 0,
         Parking: false,
@@ -21,28 +24,28 @@ const AddHobbyForm = (props) => {
         Disabled: 0,
     });
 
-    const [organization, setOrganization] = useState('');
-    const [image, setImage] = useState('');
+    const [organization, setOrganization] = useState(props.organization);
+    const [image, setImage] = useState(props.image);
     const [file, setFile] = useState(null);
-    const [metro, setMetro] = useState('');
-    const [shortAddress, setShortAddress] = useState('');
-    const [fullAddress, setFullAddress] = useState('');
-    const [information, setInformation] = useState('');
-    const [facilities, setFacilities] = useState('');
-    const [special, setSpecial] = useState('');
-    const [telephone, setTelephone] = useState('');
-    const [email, setEmail] = useState('');
-    const [website, setWebsite] = useState('');
-    const [vk, setVk] = useState('');
-    const [instagram, setInstagram] = useState('');
-    const [facebook, setFacebook] = useState('');
-    const [exactDates, setExactDates] = useState('');
-    const [price, setPrice] = useState('');
+    const [metro, setMetro] = useState(props.metro);
+    const [shortAddress, setShortAddress] = useState(props.shortAddress);
+    const [fullAddress, setFullAddress] = useState(props.fullAddress);
+    const [information, setInformation] = useState(props.information);
+    const [facilities, setFacilities] = useState(props.facilities);
+    const [special, setSpecial] = useState(props.special);
+    const [telephone, setTelephone] = useState(props.telephone);
+    const [email, setEmail] = useState(props.email);
+    const [website, setWebsite] = useState(props.website);
+    const [vk, setVk] = useState(props.vk);
+    const [instagram, setInstagram] = useState(props.instagram);
+    const [facebook, setFacebook] = useState(props.facebook);
+    const [exactDates, setExactDates] = useState(props.exactDates);
+    const [price, setPrice] = useState(props.price);
 
-    const [parking, setParking] = useState(null);
-    const [beginner, setBeginner] = useState(null);
-    const [kids, setKids] = useState(null);
-    const [equipment, setEquipment] = useState(null);
+    const [parking, setParking] = useState(props.parking);
+    const [beginner, setBeginner] = useState(props.beginner);
+    const [kids, setKids] = useState(props.kids);
+    const [equipment, setEquipment] = useState(props.equipment);
 
     const onOrganizationChange = (e) => {
         setOrganization(e.target.value);
@@ -125,27 +128,28 @@ const AddHobbyForm = (props) => {
         reader.readAsDataURL(photoFile);
     };
     const resetForm = () => {
-        setOrganization('');
-        setMetro('');
-        setShortAddress('');
-        setFullAddress('');
-        setInformation('');
-        setFacilities('');
-        setSpecial('');
-        setTelephone('');
-        setEmail('');
-        setWebsite('');
-        setVk('');
-        setInstagram('');
-        setFacebook('');
-        setExactDates('');
-        setPrice('');
-        setImage('');
+        setOrganization(props.organization);
+        setImage(props.image);
         setFile(null);
-        setParking(null);
-        setBeginner(null);
-        setKids(null);
-        setEquipment(null);
+        setMetro(props.metro);
+        setShortAddress(props.shortAddress);
+        setFullAddress(props.fullAddress);
+        setInformation(props.information);
+        setFacilities(props.facilities);
+        setSpecial(props.special);
+        setTelephone(props.telephone);
+        setEmail(props.email);
+        setWebsite(props.website);
+        setVk(props.vk);
+        setInstagram(props.instagram);
+        setFacebook(props.facebook);
+        setExactDates(props.exactDates);
+        setPrice(props.price);
+
+        setParking(props.parking);
+        setBeginner(props.beginner);
+        setKids(props.kids);
+        setEquipment(props.equipment);
     };
 
     const onSubmit = () => {
@@ -359,6 +363,11 @@ const AddHobbyForm = (props) => {
             </div>
 
             <div style={{ display: 'block', width: '768px' }}>
+                <button className={style.deleteButton} onClick={resetForm}>
+                    <Link to='/provider/cabinet/own' className={style.deleteLink}
+                        style={{ color: '#034488' }}>Удалить хобби</Link>
+                    <DeleteIcon className={style.trashIcon}/>
+                </button>
                 <button className={style.button} onSubmit={onSubmit}>Сохранить</button>
                 <button className={style.button} onClick={resetForm}>Отмена</button>
             </div>
@@ -370,4 +379,4 @@ const mapStateToProps = (state) => ({
     id: state.providerCabinet.providerId,
 });
 
-export default connect(mapStateToProps, { addNewHobby })(AddHobbyForm);
+export default connect(mapStateToProps, { addNewHobby })(EditHobbyForm);
