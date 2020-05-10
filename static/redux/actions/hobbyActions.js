@@ -34,7 +34,6 @@ export const initializeHobbyPage = (Id) => (dispatch) => {
     dispatch(setIsInSearchPage(false));
     dispatch(initializedHobbyPage(false));
     axios.get(`/restapi/hobby/info?id=${Id}`).then(res => {
-        console.log(res);
         let promise = dispatch(setHobbyData(res.data));
         return (Promise.all([promise]).then(()=> {
             dispatch(initializedHobbyPage(true));
@@ -76,4 +75,38 @@ export const addProviderResponse = (hobbyID, providerID, values) => (dispatch) =
         .catch(err => {
             dispatch(someFail(err))
         })
+}
+
+// функции, отпраправляющие запросы....
+/*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
+export const changeHobbyForUser = (hobbyID) => (dispatch) => {
+    axios.get(`/restapi/user/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/info?id=${hobbyID}`)
+                .then(res => {
+                    console.log(res.data)
+                        dispatch(setHobbyData(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
+};
+
+
+/*добавить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок*/
+export const changeHobbyForProvider = (hobbyID) => (dispatch) => {
+    axios.get(`/restapi/provider/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/info?id=${hobbyID}`)
+                .then(res => {
+                    console.log(res.data);
+                        dispatch(setHobbyData(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
 }

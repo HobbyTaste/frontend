@@ -9,7 +9,12 @@ import Sidebar from './Sidebar/Sidebar';
 import Slider from './Image/Slider';
 import ButtonAction from './ActionButton';
 import InformationBlock from './InformationForm/InformationForm';
-import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
+import {
+    addHobbyForUser,
+    changeHobbyForProvider,
+    changeHobbyForUser,
+    deleteHobbyForUser
+} from '../../redux/actions/hobbyActions';
 import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
 import { isInArray } from '../../utils/functions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
@@ -20,32 +25,24 @@ import { compose } from 'redux';
 class HobbyCard extends React.Component {
     constructor(props) {
         super(props);
-        this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
-        this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
+        this.handleChangeMyHobby = this.handleChangeMyHobby.bind(this);
     }
     componentDidMount() {
         this.props.initialize(this.props.match.params.id);
     }
 
-    handleAddMyHobby(event) {
-        console.log('addHobby');
+    handleChangeMyHobby(event) {
         if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(this.props.match.params.id);
+            this.props.onChangeUserHobby(this.props.match.params.id);
         } else {
-            this.props.onAddProviderHobby(this.props.match.params.id);
+            this.props.onChangeProviderHobby(this.props.match.params.id);
         }
     }
 
-    handleDeleteMyHobby(event) {
-        console.log('delete hobby');
-        if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(this.props.match.params.id);
-        } else {
-            this.props.onDeleteProviderHobby(this.props.match.params.id);
-        }
-    }
 
     render() {
+        console.log("id");
+        console.log(this.props.id);
         if (!this.props.initializedPage){
             return <Preloader/>
         }
@@ -63,8 +60,7 @@ class HobbyCard extends React.Component {
                                                   hobbyInfoId={this.props.hobbyInfo.id}
                                                   subscribers = {this.props.hobbyInfo.subscribers} id = {this.props.id}
                                                   isOwner = {isOwner}
-                                                  deleteFromMyHobbies={this.handleDeleteMyHobby}
-                                                  addInMyHobbies={this.handleAddMyHobby}/>
+                                                  handleChangeMyHobby={this.handleChangeMyHobby}/>
                                 </div>
                             </div>
                         </div>
@@ -90,13 +86,13 @@ class HobbyCard extends React.Component {
 
 const mapStateToProps = (state) => ({
     initializedPage: state.hobbyPage.initializedPage,
-    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    id: state.userCabinet.id || state.providerCabinet.providerId,
     isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
 
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
-        subscribers: state.hobbyPage.subscribers,
+        subscribers: state.hobbyPage.subscribers.concat(state.hobbyPage.providerSubscribers),
         photos: state.hobbyPage.photos,
         owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
@@ -116,10 +112,8 @@ const mapStateToProps = (state) => ({
     },
 });
 const mapDispatchToProps = (dispatch) => ({
-    onAddUserHobby: (idHobby) => dispatch(addHobbyForUser(idHobby)),
-    onDeleteUserHobby: (idHobby) => dispatch(deleteHobbyForUser(idHobby)),
-    onAddProviderHobby: (idHobby) => dispatch(addHobbyForProvider(idHobby)),
-    onDeleteProviderHobby: (idHobby) => dispatch(deleteHobbyForProvider(idHobby)),
+    onChangeUserHobby: (idHobby) => dispatch(changeHobbyForUser(idHobby)),
+    onChangeProviderHobby: (idHobby) => dispatch(changeHobbyForProvider(idHobby)),
     initialize: (idHobby) => dispatch(initializeHobbyPage(idHobby)),
 });
 

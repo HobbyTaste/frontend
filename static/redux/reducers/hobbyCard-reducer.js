@@ -13,6 +13,7 @@ let initialState = {
     monetization: '',
     address: '',
     comfortable: '',
+    providerSubscribers: '',
     subscribers : '',
     specialConditions: '',
     description: '',
@@ -68,6 +69,7 @@ const hobbyPageReducer = (state = initialState, action) => {
                     isChild: action.payload.children,
                 },
                 subscribers: action.payload.subscribers,
+                providerSubscribers: action.payload.providerSubscribers,
                 contact: {
                     mobile: action.payload.phone,
                     email: action.payload.email,
