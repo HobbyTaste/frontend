@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 import style from './AddHobby.module.css';
 import { addNewHobby } from '../../redux/actions/providerActions';
 
+const helpText = ['',
+    'Почтовый адрес здания, в котором располагается хобби: улица и номер дома',
+    'Распишите всё, что может помочь найти местоположение Вашего хобби: адрес, этаж, проход, ориентиры на местности',
+    'Здесь вы можете написать про душевые, раздевалки, полотенца и другие приятные мелочи, которыми Вы обеспечиваете посетителей',
+    'Опишите условия, которые бы Вы хотел подчеркнуть: например, то, что Ваше хобби ведёт набор до определённого числа или принимает лиц одного пола'];
+
 const AddHobbyForm = (props) => {
     const [state, setState] = useState({
+        showHelp: 0,
         Parking: false,
         Beginners: false,
         Kids: false,
@@ -180,6 +188,22 @@ const AddHobbyForm = (props) => {
         return 'Не указано';
     };
 
+    const Help = (value) => {
+        setState({
+            showHelp: value,
+        });
+    };
+
+    const help = (helpSection) => (<div>
+        <div className={style.helpIcon} onMouseOver={() => Help(helpSection)} onMouseOut={() => Help(0)}>
+            <HelpOutlineOutlinedIcon/>
+        </div>
+        <div className={style.help} style={{ display: `${(state.showHelp === helpSection) ? 'block' : 'none'}` }}>
+            {helpText[helpSection]}
+        </div>
+    </div>
+    );
+
     const weekDay = (day) => (
         <div className={style.weekDayContainer}>
             {day}.:
@@ -232,16 +256,27 @@ const AddHobbyForm = (props) => {
                         placeholder={'Краткий адрес*'}/>
                     <textarea className={style.input} name='fullAddress' onChange={onFullAddressChange} value={fullAddress}
                         placeholder={'Полный адрес*'} style={{ height: '58px', padding: '5px 0 0 9px' }}/>
+
+                </span>
+                <span style={{ margin: '203px 0 0 20px', display: 'block' }}>
+                    {help(1)}
+                    {help(2)}
                 </span>
             </div>
 
-            <div className={style.infoContainer}>
-                <input className={style.input} name='facilities' onChange={onFacilitiesChange} value={facilities}
-                    placeholder={'Удобства'}/>
-                <input className={style.input} name='special' onChange={onSpecialChange} value={special}
-                    placeholder={'Особые условия'}/>
-                <textarea className={style.input} name='info' onChange={onInfoChange} value={information}
-                    placeholder={'Описание'} style={{ height: '97px', padding: '5px 0 0 9px' }}/>
+            <div className={style.upperContainer}>
+                <div className={style.infoContainer}>
+                    <input className={style.input} name='facilities' onChange={onFacilitiesChange} value={facilities}
+                        placeholder={'Удобства'}/>
+                    <input className={style.input} name='special' onChange={onSpecialChange} value={special}
+                        placeholder={'Особые условия'}/>
+                    <textarea className={style.input} name='info' onChange={onInfoChange} value={information}
+                        placeholder={'Описание'} style={{ height: '97px', padding: '5px 0 0 9px' }}/>
+                </div>
+                <span style={{ margin: '15px 0 0 20px', display: 'block' }}>
+                    {help(3)}
+                    {help(4)}
+                </span>
             </div>
 
             <div className={style.upperContainer}>
@@ -261,7 +296,7 @@ const AddHobbyForm = (props) => {
                         <span className={style.smallHeader}>Только в определённые даты</span>
                     </div>
                     <input className={style.input} style={{ margin: '10px 0 20px 20px' }}
-                        name='ecaxtDates' onChange={onExDatChange} value={exactDates}
+                        name='exactDates' onChange={onExDatChange} value={exactDates}
                         placeholder={'Введите даты'} disabled={state.Disabled}/>
                     <div className={style.header}>Цены:</div>
                     <textarea className={style.input}
@@ -271,7 +306,7 @@ const AddHobbyForm = (props) => {
                 </span>
             </div>
 
-            <div className={style.upperContainer}>
+            <div className={style.upperContainer} style={{ width: '753px' }}>
                 <span className={style.header} style={{ margin: '10px 0 0 0' }}>Контакты:</span>
                 <span className={style.contactContainer}>
                     <input className={style.input} name='telephone' onChange={onTelChange} value={telephone}
