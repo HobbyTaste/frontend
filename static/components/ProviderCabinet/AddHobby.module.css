@@ -96,10 +96,9 @@
     font-size: 16px;
     line-height: 16px;
     letter-spacing: 0.4px;
-    margin-right: 300px;
     margin-top: 20px;
     padding: 10px 5px;
-    z-index: 100;
+    z-index: 99999999;
 
     background: #FFFCF6;
     border: 1px solid #2F1E0A;

@@ -18,7 +18,7 @@ const AddHobbyForm = (props) => {
         Beginners: false,
         Kids: false,
         Equipment: false,
-        Disabled: true,
+        Disabled: 0,
     });
 
     const [organization, setOrganization] = useState('');
@@ -194,7 +194,13 @@ const AddHobbyForm = (props) => {
         });
     };
 
-    const help = (helpSection) => (<div>
+    const handleCheckbox = (value) => {
+        setState({
+            Disabled: value,
+        });
+    };
+
+    const help = (helpSection) => (<div style={{ display: 'block' }}>
         <div className={style.helpIcon} onMouseOver={() => Help(helpSection)} onMouseOut={() => Help(0)}>
             <HelpOutlineOutlinedIcon/>
         </div>
@@ -208,10 +214,10 @@ const AddHobbyForm = (props) => {
         <div className={style.weekDayContainer}>
             {day}.:
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={!state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled}/>
             </span>
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={!state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled}/>
             </span>
         </div>
     );
@@ -292,12 +298,12 @@ const AddHobbyForm = (props) => {
                 </span>
                 <span className={style.priceContainer}>
                     <div style={{ display: 'flex' }}>
-                        <input type="checkbox" onClick={() => { setState({ Disabled: !state.Disabled }); }}/>
+                        <input type="checkbox" onClick={ () => handleCheckbox(!state.Disabled) }/>
                         <span className={style.smallHeader}>Только в определённые даты</span>
                     </div>
                     <input className={style.input} style={{ margin: '10px 0 20px 20px' }}
                         name='exactDates' onChange={onExDatChange} value={exactDates}
-                        placeholder={'Введите даты'} disabled={state.Disabled}/>
+                        placeholder={'Введите даты'} disabled={!state.Disabled}/>
                     <div className={style.header}>Цены:</div>
                     <textarea className={style.input}
                         style={{ margin: '2px 0 4px 20px', height: '115px', padding: '5px 0 0 9px' }}
