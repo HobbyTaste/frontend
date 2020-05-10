@@ -79,7 +79,7 @@ const ProviderMonetization = (props) => {
         Top: null,
         Poster: null,
         Pay: null,
-        Disabled: true,
+        Disabled: false,
     });
 
     // if (!props.isAuth) {
@@ -101,6 +101,12 @@ const ProviderMonetization = (props) => {
     const Hobbies = (e) => {
         setState({
             showHobby: !state.showHobby,
+        });
+    };
+
+    const handleToPay = (value) => {
+        setState({
+            Disabled: value,
         });
     };
 
@@ -197,7 +203,7 @@ const ProviderMonetization = (props) => {
         <div className={style.paymentContainer}>
             <span className={style.header}>Оплатить:</span>
             <FormControl component="fieldset">
-                <RadioGroup aria-label="time" name="Pay" onChange={handleChange}>
+                <RadioGroup aria-label="time" name="Pay" onChange={(e) => { handleToPay(!state.Disabled); handleChange(e) }}>
                     <FormControlLabel value='card' control={<StyledRadio/>} label="Карта Visa/MasterCard" />
                     <FormControlLabel value='online' control={<StyledRadio/>} label="Сбербанк Онлайн" />
                     <FormControlLabel value='debt' control={<StyledRadio/>} label="В долг :)" />

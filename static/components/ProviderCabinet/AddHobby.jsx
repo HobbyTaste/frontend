@@ -204,7 +204,11 @@ const AddHobbyForm = (props) => {
         <div className={style.helpIcon} onMouseOver={() => Help(helpSection)} onMouseOut={() => Help(0)}>
             <HelpOutlineOutlinedIcon/>
         </div>
-        <div className={style.help} style={{ display: `${(state.showHelp === helpSection) ? 'block' : 'none'}` }}>
+        <div className={style.help}
+            style={{
+                display: `${(state.showHelp === helpSection) ? 'block' : 'none'}`,
+                margin: `${(helpSection % 2 === 0) ? '58px 100px 0 25px' : '3px 100px 0 25px'}`,
+            }}>
             {helpText[helpSection]}
         </div>
     </div>
