@@ -12,7 +12,7 @@ const Sidebar= (props) => {
         <div>
             <div className={style.container}>
                 <h5 className={style.headerPrice}>Цена</h5>
-                <h6 className={style.text}>{props.price}</h6>
+                <h6 className={style.text}>{props.price.priceList}</h6>
             </div>
             {props.flag.isParking && <div className={style.flags + ' ' + style.parking}><div>Рядом парковка</div><div className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></div> </div>}
             {props.flag.isBeginner && <div className={style.flags + ' ' + style.beginner}>Для новичков<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}

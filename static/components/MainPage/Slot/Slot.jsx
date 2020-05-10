@@ -66,7 +66,6 @@ const
             <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
         </span>
         <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
-        <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
 
 
         {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? <Link to="/" style={{color: 'black', display: 'flex', top: '50%'}}> <div className={style.icon}><MonetizationOnIcon/></div></Link>
@@ -78,3 +77,4 @@ const
 }
 
 export default Slot;
+//<Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>

@@ -37,7 +37,7 @@ const mapStateToProps = (state) => ({
     isProviderAuth: state.providerCabinet.isProviderAuth,
     id: state.userCabinet.userId || state.providerCabinet.providerId,
     hobbyId: state.hobbyPage.id,
-    name: state.auth.name || state.providerCabinet.name,
+    name: state.userCabinet.name || state.providerCabinet.name,
 });
 const mapDispatchToProps = (dispatch) => ({
     onUserFeedback: (idHobby, idUser, values) => dispatch(addUserFeedback(idHobby, idUser, values)),

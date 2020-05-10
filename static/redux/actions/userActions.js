@@ -66,14 +66,6 @@ export const addHobbyForUser = (hobbyID) => (dispatch) => {
     })
         .catch(err => {
             dispatch(someFail(err))
-        })
-        .then((res) => {
-            console.log("responce add");
-            console.log(res);
-            dispatch(changeUserHobby(res.data.hobbies));
-        })
-        .catch((err) => {
-            dispatch(someFail(err));
         });
 };
 
@@ -86,14 +78,6 @@ export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
     })
         .catch(err => {
             dispatch(someFail(err))
-        })
-        .then((res) => {
-            console.log("responce delete");
-            console.log(res);
-            dispatch(changeUserHobby(res.data.hobbies));
-        })
-        .catch((err) => {
-            dispatch(someFail(err));
         });
 };
 
@@ -111,8 +95,8 @@ async function addSomeComments() {
     const hobbies = await(await hobbyApi.find("Футбольная секция")).json();
     const hobbyId = hobbies[0]._id;
     // | такие штуки приводят к проблемам с асинхронностью, поэтому загружаем комментарии последовательно
-    // v 
-    // return Promise.all(comments.map(comment => commentApi.stupidAddComment(comment, hobbyId))); 
+    // v
+    // return Promise.all(comments.map(comment => commentApi.stupidAddComment(comment, hobbyId)));
     for (const comment of comments) {
         await commentApi.stupidAddComment(comment, hobbyId);
     }
@@ -154,7 +138,7 @@ function truncateHobbyForSlot(hobby) {
     };
 }
 
-function getUserHobbies() { 
+function getUserHobbies() {
     return async dispatch => {
         const responseBody = await (await userApi.getHobbies()).json();
         const truncatedHobbies = responseBody.map((hobby) => truncateHobbyForSlot(hobby));
