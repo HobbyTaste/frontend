@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import MainPage from './components/MainPage/MainPage';
-import Hobbies from './components/Hobbies/Hobbies'
+import Hobbies from './components/Hobbies/Hobbies';
 import { initializeApp } from './redux/reducers/app-reducer';
 import Navigation from './components/Navigation/Navigation';
 import HobbyCard from './components/HobbyCard/HobbyCard';
@@ -10,8 +12,6 @@ import ProviderCabinet from './components/ProviderCabinet/ProviderCabinet';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProviderHeaderContainer from './components/ProviderHeader/ProviderHeaderContainer';
 import Preloader from './components/Common/Preloader/Preloader';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import UserCabinet from './components/UserCabinet/UserCabinet';
 import style from './App.module.css';
 import Footer from './components/Footer/Footer';
@@ -19,10 +19,11 @@ import Sidebar from './components/Sidebar/Sidebar';
 import UserCabinetNavigation from './components/UserCabinet/UserCabinetNavigation';
 import UserCabinetHobbies from './components/UserCabinet/UserCabinetHobbies';
 import ProviderCabinetNavigation from './components/ProviderCabinet/ProviderCabinetNavigation';
-import ProviderHobby from "./components/ProviderCabinet/ProviderHobby/ProviderHobby";
-import ProviderOwnHobbies from "./components/ProviderCabinet/ProviderOwn/ProviderOwnHobbies";
-import AddHobby from "./components/ProviderCabinet/AddHobby";
-import ProviderMonetization from "./components/ProviderCabinet/ProviderMonetization/ProviderMonetization";
+import ProviderHobby from './components/ProviderCabinet/ProviderHobby/ProviderHobby';
+import ProviderOwnHobbies from './components/ProviderCabinet/ProviderOwn/ProviderOwnHobbies';
+import AddHobby from './components/ProviderCabinet/AddHobby';
+import ProviderMonetization from './components/ProviderCabinet/ProviderMonetization/ProviderMonetization';
+import EditHobby from './components/ProviderCabinet/EditHobby';
 
 class App extends React.Component {
     componentDidMount() {
@@ -31,7 +32,7 @@ class App extends React.Component {
 
     render() {
         if (!this.props.initialized) {
-            return <Preloader/>
+            return <Preloader/>;
         }
         return (
             <div className={style.appBackground}>
@@ -51,6 +52,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderCabinetNavigation isActive={2}/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderCabinetNavigation isActive={3}/>}/>
                             <Route exact path="/provider/cabinet/add_hobby" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
+                            <Route exact path="/provider/cabinet/edit_hobby" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
@@ -66,7 +68,8 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/own" render={() => <ProviderOwnHobbies/>}/>
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderMonetization/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderHobby/>}/>
-                            <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby isActive={4}/>}/>
+                            <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby/>}/>
+                            <Route exact path="/provider/cabinet/edit_hobby" render={() => <EditHobby/>}/>
                             <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
                     </div>
@@ -78,7 +81,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
 });
 
-export default compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);
+export default compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);

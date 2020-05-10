@@ -265,5 +265,33 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
+.trashIcon {
+    float: right;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.deleteButton {
+    display: flex;
+    width: auto;
+    height: 36px;
+    float: left;
+    margin: 10px 0 20px 0;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.deleteLink {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500;
+    letter-spacing: 0.16px;
+}
+
+
+
 
 
