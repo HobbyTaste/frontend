@@ -13,27 +13,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const InputPassword = ({ input, label, ...custom }) => {
+export const InputPassword = ({ input, label, meta, ...custom }) => {
     const classes = useStyles();
     const [isVisible, setVisible] = React.useState(false);
     const handleClick = () => {
         setVisible(!isVisible);
     };
+    const hasError = meta.touched && meta.error;
     return (
         <div>
         {
             isVisible ?
-                <div className={style.formContainerPassword} >
+                <div className={style.formContainerPassword + " " + (hasError ? style.formError : "")} >
                     <Input className={style.formInputPassword } name={'password'} type={'text'} placeholder={'Пароль'}
-                           disableUnderline={true} autoFocus={true} label={custom.fieldName}
+                           disableUnderline={true} label={custom.fieldName}
                            {...input}
                            {...custom}/>
                         <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityOffIcon/></p></Button>
                 </div>
 :
-    <div className={style.formContainerPassword} >
+    <div className={style.formContainerPassword + " " + (hasError ? style.formError : "")}>
         <Input className={style.formInputPassword } name={'password'} type={'password'} placeholder={'Пароль'}
-               disableUnderline={true} autoFocus={true} label={custom.fieldName}
+               disableUnderline={true} label={custom.fieldName}
             {...input}
             {...custom}/>
             <Button className={classes.root} onClick={handleClick}><p className={style.icon}><VisibilityIcon/></p></Button>
@@ -43,13 +44,14 @@ export const InputPassword = ({ input, label, ...custom }) => {
 
 };
 
-export const InputSign = ({ input, label, ...custom }) => {
+export const InputSign = ({ input, label, meta, ...custom }) => {
+    const hasError = meta.touched && meta.error;
     return (
         <Input
             id="outlined-input"
             label={custom.fieldName}
             type={custom.type}
-            className={style.formInput}
+            className={style.formInput + " " + (hasError ? style.formError : "")}
             variant="outlined"
             {...input}
             {...custom}

@@ -127,7 +127,9 @@
     letter-spacing: 0.15px;
     color: rgba(0, 0, 0, 0.6);
 }
-
+.formError{
+    border: 1px solid red;
+}
 .registrationButton {
     margin-top: 11px;
     margin-left: 105px;

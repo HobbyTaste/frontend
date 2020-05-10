@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import ButtonReg from './ButtonRegistration';
 import { InputPassword, InputSign } from './InputPassword';
 import { createNewProvider } from '../../redux/actions/providerActions';
-
+import { required, email, minLengthCreator } from '../../utils/validators/validators';
 
 let mainFile = null;
 
@@ -49,13 +49,13 @@ const FormMain = ({handleSubmit, isProvider, onClickUserReg, onClickProviderReg,
             <h3 className={style.formH3}>{text}</h3>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div><Field component={InputSign} name={"name"} disableUnderline={true} placeholder={placeholder} autoFocus={true}/></div>
+                    <div><Field component={InputSign} name={"name"} disableUnderline={true} placeholder={placeholder} validate={[required]}/></div>
                 </div>
                 <div >
-                    <Field component={InputSign} name={"email"} placeholder={"Логин"} disableUnderline={true} autoFocus={true}/>
+                    <Field component={InputSign} name={"email"} placeholder={"Email"} disableUnderline={true} validate={[required, email]}/>
                 </div>
                 <div>
-                    <Field component={InputPassword} name={"password"}/>
+                    <Field component={InputPassword} name={"password"} validate={[required]}/>
                 </div>
                 <div>
                     <ButtonReg label="Submit" onSubmit={handleSubmit} text={"Зарегистрироваться"}/>
