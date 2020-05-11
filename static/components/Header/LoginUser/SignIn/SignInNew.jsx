@@ -25,14 +25,16 @@ const FormHeader = (props) => {
     );
 };
 
-const FormMain =({handleSubmit, isProvider,  error})=> {
+const FormMain =({handleSubmit, isProvider, ...props})=> {
     let text = "Вход пользователя"
     if (isProvider){
         text = "Вход партнера";
     }
+    (props.submitFailed)
     return (
         <div className={style.formMain}>
-            <h3 className={style.formH3 + ' ' + style.formH3Sign}>{text}</h3>
+            {(props.submitFailed) ? <h3 className={style.formH3 + ' '+ style.formH3Sign+' ' + style.formErrorH3}>Неверный email или пароль</h3> :
+                <h3 className={style.formH3 + ' ' + style.formH3Sign}>{text}</h3>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <Field component={InputSign} name={'email'} placeholder={'Email'}

@@ -23,7 +23,7 @@ const FormHeader = (props) => {
     );
 };
 
-const FormMain = ({handleSubmit, isProvider, onClickUserReg, onClickProviderReg, error}) => {
+const FormMain = ({handleSubmit, isProvider, onClickUserReg, onClickProviderReg, ...props}) => {
     let styleProvider = style.UserPartnerButton;
     let styleUser = style.UserPartnerButton;
     let text = "Регистрация пользователя";
@@ -46,7 +46,8 @@ const FormMain = ({handleSubmit, isProvider, onClickUserReg, onClickProviderReg,
                     Партнер
                 </button>
             </div>
-            <h3 className={style.formH3}>{text}</h3>
+            {(props.submitFailed) ? <h3 className={style.formH3 + ' ' + style.formErrorH3}>Пользователь уже существует</h3> :
+                <h3 className={style.formH3}>{text}</h3>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <div><Field component={InputSign} name={"name"} disableUnderline={true} placeholder={placeholder} validate={[required]}/></div>

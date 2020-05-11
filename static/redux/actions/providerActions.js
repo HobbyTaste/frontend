@@ -84,13 +84,15 @@ export const getProviderHobbies = () => (dispatch) => {
 
 export const createNewProvider = (name, password, email, avatar, phone, info) => (dispatch) => {
     const providerData = {
-        name: name, password: password, email: email, avatar: avatar, phone: '+79884445657', info: info
+        name: name, password: password, email: email, avatar: avatar, info: info
     };
     providerApi.create(providerData).then((response) => {
         if (response.ok) {
             dispatch(getAuthProviderData());
-        } else {
-            response.json().then(console.log);
+        }
+
+        else  {
+            dispatch(stopSubmit("registration", { error: "Пользователь уже существует" }));
         }
     })
 };
@@ -100,21 +102,9 @@ export const loginProvider = (email, password) => (dispatch) => {
         if (response.ok) {
             dispatch(getAuthProviderData());
         }
-        else {
-            response.json().then(
-                body => {
-                    if(body.login) {
-                        dispatch(stopSubmit("providerLogin", {email: "Неверный email"}));
-                    }
-                    else if(body.password) {
-                        dispatch(stopSubmit("providerLogin", {password: "Неверный пароль"}));
-                    }
-                    else {
-                        console.log(body);
-                    }
-                }
-            );
-        }
+        else  {
+                dispatch(stopSubmit("login", { email: "Неверный email или пароль" }));
+            }
     })
 };
 
