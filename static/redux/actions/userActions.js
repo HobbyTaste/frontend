@@ -97,26 +97,14 @@ export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
         });
 };
 
-export const initializeUserCabinet = () => async (dispatch) => {
+export const initializeUserCabinet = () => async dispatch => {
     dispatch(initializeUser(false));
     await userApi.login(testLogin, testPassword);
     await dispatch(getCurrentUserInfo());
-    await addSomeComments();
     await dispatch(getUserComments());
     dispatch(initializeUser(true));
     dispatch(setIsUserInCabinet(true));
 };
-
-async function addSomeComments() {
-    const hobbies = await(await hobbyApi.find("Футбольная секция")).json();
-    const hobbyId = hobbies[0]._id;
-    // | такие штуки приводят к проблемам с асинхронностью, поэтому загружаем комментарии последовательно
-    // v 
-    // return Promise.all(comments.map(comment => commentApi.stupidAddComment(comment, hobbyId))); 
-    for (const comment of comments) {
-        await commentApi.stupidAddComment(comment, hobbyId);
-    }
-}
 
 function getUserComments() {
     return async dispatch => {
@@ -220,5 +208,6 @@ export const logout = () => (dispatch) => {
 
 export const userEdit = (editData) => async (dispatch) => {
     await userApi.edit(editData);
-    return dispatch(getCurrentUserInfo());
+    await dispatch(getCurrentUserInfo());
+    return dispatch(getUserComments());
 };
