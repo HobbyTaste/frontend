@@ -4,6 +4,7 @@ import Select from 'react-select';
 import s from '../../MainPage/SearchContent/Search/Search.module.css';
 import TextField from "@material-ui/core/TextField";
 
+
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
@@ -14,6 +15,27 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         width: '100%',
+    },
+    containerReg:{
+        display: 'flex',
+        flexWrap: 'wrap',
+        height: '34.5px',
+    },
+    registrationTextField:{
+        boxSizing: 'border-box',
+        width: '100%',
+        height: '34.5px',
+        border: '1px solid #034488',
+        borderRadius: '3.5px',
+        paddingLeft: '10px',
+        marginBottom: '22px',
+        marginLeft: '29px',
+
+        fontStyle: 'normal',
+        fontSize: '16px',
+        lineHeight: '24px',
+        letterSpacing: '0.15px',
+        color: 'rgba(0, 0, 0, 0.6)',
     },
     partnerTextField: {
         backgroundColor: 'white',
@@ -105,7 +127,6 @@ export const PartnerInput = ({input, label, meta: {error}, ...custom}) => {
         </div>
     );
 };
-
 
 export const MySelect = (props) => {
     const {input, options, placeholder} = props;

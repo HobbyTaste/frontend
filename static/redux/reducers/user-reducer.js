@@ -1,11 +1,11 @@
 import * as actionTypes from '../actions/actionsTypes';
 
 const initialState = {
-    userId: null,
+    id: null,
     email: null,
-    name: 'initial',
+    name: '',
     avatar: null,
-    isAuth: true,
+    isAuth: false,
     inUserCabinet: false,
     userInitialized: false,
     fetchingHobbies: "no hobbies",

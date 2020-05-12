@@ -1,57 +1,297 @@
-.form {
-    width: 600px;
-    margin: 0 auto;
-    padding: 10px;
-}
+.background {
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    position: center;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px;
+    background: white;
 
-.formContainer {
-    width: 45%;
-    text-align: center;
-    vertical-align: top;
-   /* border: 1px solid red;*/
-}
-
-.hobbyFormContainer {
-    background-color: #FFFFFF;
-    padding: 15px;
-    width: 80%;
-    margin: 10px auto;
-    border-radius: 15px;
-    box-shadow: 0 0 10px 1px rgba(18, 128, 64, 0.54);
-}
-
-.hobbyFormContainer:hover {
-    box-shadow: 0 0 10px 3px rgba(18, 128, 64, 1);
-}
-
-.pageContent {
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
+    justify-content: normal;
 }
 
-.upload {
-    color: #19B95D;
-    cursor: pointer;
+.header {
+    margin-bottom: 10px;
+
+    font-size: 25px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
 }
-.upload:hover {
-    color: #128040;
+
+.smallHeader {
+    margin-bottom: 10px;
+
+    font-size: 19px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.avatar {
+    width: 370px;
+    height: 325px;
+    object-fit: cover;
+    display: inline-block;
+    /*vertical-align: top;*/
+}
+
+.imgContainer {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    display: inline-block;
+    cursor: pointer;
+    width: 370px;
+    height: 325px;
 }
 
 .input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+    height: 32px;
+    width: 100%;
+    margin: 10px 0;
+    padding-left: 9px;
+
+    border: 1px solid #034488;
+    border-radius: 3.5px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
-.buttonsContainer {
-    width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-around;
+.input:focus {
+    color: black;
 }
+
+.helpIcon {
+    float: right;
+    color: #034488;
+    margin-bottom: 25px;
+}
+
+.help {
+    position: absolute;
+    float: right;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    padding: 10px 5px;
+
+    background: #FFFCF6;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 0 6px 6px 6px;
+
+    color: rgba(47, 30, 10, 0.8);
+}
+
+.button {
+    width: 110px;
+    height: 36px;
+    float: right;
+    margin: 10px 0 20px 20px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
+    display: block;
+    text-align: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
+}
+
+.upperContainer {
+    width: 100%;
+    display: flex;
+}
+
+.halfContainer {
+    display: block;
+    position: relative;
+    width: 365px;
+    margin-left: 20px;
+}
+
+.infoContainer {
+    display: block;
+    position: relative;
+    width: 753px;
+}
+
+.timeContainer {
+    display: block;
+    position: relative;
+    width: 437px;
+}
+
+.weekDayContainer {
+    display: flex;
+    position: relative;
+    width: 245px;
+    margin-left: 20px;
+
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
+}
+
+.weekTimeContainer {
+    display: block;
+    position: relative;
+    width: 88px;
+    margin-left: 10px;
+}
+
+.smallInput {
+    height: 20px;
+    width: 100%;
+    margin: 4px 0 4px 10px;
+    text-align: center;
+
+    border: 1px solid #034488;
+    border-radius: 3.5px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.priceContainer {
+    display: block;
+    position: relative;
+    width: 295px;
+}
+
+.contactContainer {
+    display: block;
+    position: relative;
+    margin-left: 20px;
+}
+
+.tagUpperContainer {
+    width: 677px;
+    display: flex;
+}
+
+.tagContainer {
+    display: block;
+    position: relative;
+    width: 753px;
+}
+
+.chooseTag {
+    width: 574px;
+    height: 27px;
+    margin: 10px 0;
+    position: relative;
+    display: block;
+}
+
+.chooseButton {
+    width: 146px;
+    height: 27px;
+    float: right;
+    padding-left: 9px;
+
+    background: white;
+    border: 1px solid #034488;
+    border-radius: 3.5px;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.list {
+    position: relative;
+    width: 155px;
+    margin-left: 417px;
+    margin-top: 10px;
+    z-index: 100;
+
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 6px 0 6px 6px;
+
+    display: block;
+}
+
+.listItem {
+    height: 16px;
+    width: 100%;
+    padding-left: 10px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.dropdownIcon {
+    float: right;
+    margin-top: 3px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.trashIcon {
+    float: right;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.deleteButton {
+    display: flex;
+    width: auto;
+    height: 36px;
+    float: left;
+    margin: 10px 0 20px 0;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.deleteLink {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500;
+    letter-spacing: 0.16px;
+}
+
+
+
+
+

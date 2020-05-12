@@ -1,0 +1,207 @@
+.background {
+    min-height: 100%;
+    width: 90%;
+    height: auto;
+    position: center;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px;
+    background: white;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.hobbyContainer {
+    display: flex;
+    width: 100%;
+}
+
+.hobbyList {
+    width: 390px;
+    height: 30px;
+    margin-left: 160px;
+    padding-left: 10px;
+
+    background: #EDECE8;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    display: block;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.list {
+    position: absolute;
+    width: 400px;
+    margin-left: 365px;
+    margin-top: 30px;
+    z-index: 100;
+
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 4px;
+
+    display: block;
+}
+
+.listItem {
+    height: 48px;
+    width: 400px;
+    padding-left: 10px;
+
+    font-size: 16px;
+    line-height: 42px;
+    letter-spacing: 0.4px;
+
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.dropdownIcon {
+    float: right;
+    margin-top: 3px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.nameContainer {
+    display: block;
+    width: 285px;
+}
+
+.header {
+    height: 40px;
+    margin-right: 10px;
+    font-size: 25px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.helpIcon {
+    float: right;
+    color: #034488;
+}
+
+.explanation {
+    display: flex;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+
+    color: rgba(47, 30, 10, 0.8);
+}
+
+.help {
+    position: absolute;
+    float: right;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    margin-right: 10px;
+    padding: 10px 5px;
+    z-index: 100;
+
+    background: #FFFCF6;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 6px 0 6px 6px;
+
+    color: rgba(47, 30, 10, 0.8);
+}
+
+.monetizationContainer {
+    display: flex;
+    width: 100%;
+    height: 335px;
+    margin: 20px 0 5px;
+}
+
+.monetization {
+    width: 305px;
+    height: 325px;
+    margin-right: 20px;
+    padding: 10px;
+
+    background: #FFFCF6;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 6px;
+
+    position: relative;
+    float: left;
+}
+
+.name {
+    margin-left: 10px;
+
+    font-size: 25px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
+}
+
+.centringContainer {
+    width: 305px;
+    text-align: center;
+}
+
+.img {
+    margin: 15px;
+    width: 250px;
+    height: 100px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.time {
+    margin-left: 10px;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: #034488;
+}
+
+.paymentContainer {
+    display: flex;
+    width: 100%;
+    height: 135px;
+    margin-top: 20px;
+}
+
+.payButton {
+    width: auto;
+    height: 36px;
+    margin-left: 130px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
+}
+
+.payButton:disabled {
+    opacity: 0.7;
+}

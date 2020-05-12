@@ -97,26 +97,14 @@ export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
         });
 };
 
-export const initializeUserCabinet = () => async (dispatch) => {
+export const initializeUserCabinet = () => async dispatch => {
     dispatch(initializeUser(false));
     await userApi.login(testLogin, testPassword);
     await dispatch(getCurrentUserInfo());
-    await addSomeComments();
     await dispatch(getUserComments());
     dispatch(initializeUser(true));
     dispatch(setIsUserInCabinet(true));
 };
-
-async function addSomeComments() {
-    const hobbies = await(await hobbyApi.find("Футбольная секция")).json();
-    const hobbyId = hobbies[0]._id;
-    // | такие штуки приводят к проблемам с асинхронностью, поэтому загружаем комментарии последовательно
-    // v 
-    // return Promise.all(comments.map(comment => commentApi.stupidAddComment(comment, hobbyId))); 
-    for (const comment of comments) {
-        await commentApi.stupidAddComment(comment, hobbyId);
-    }
-}
 
 function getUserComments() {
     return async dispatch => {
@@ -154,7 +142,7 @@ function truncateHobbyForSlot(hobby) {
     };
 }
 
-function getUserHobbies() { 
+function getUserHobbies() {
     return async dispatch => {
         const responseBody = await (await userApi.getHobbies()).json();
         const truncatedHobbies = responseBody.map((hobby) => truncateHobbyForSlot(hobby));
@@ -186,10 +174,8 @@ export const login = (email, password) => (dispatch) => {
         if (response === null) {
             dispatch(getCurrentUserInfo());
             dispatch(getUserHobbies());
-        } else if (response.login) {
-            dispatch(stopSubmit("login", { email: "Неверный email" }));
-        } else if (response.password) {
-            dispatch(stopSubmit("login", { password: "Неверный пароль" }));
+        } else {
+            dispatch(stopSubmit("login", { error: "Неверный email или пароль" }));
         }
     });
 };
@@ -204,7 +190,10 @@ export const createNewUser = (email, password, name, avatar) => (dispatch) => {
     userApi.create(obj).then((response) => {
         if (response.ok) {
             dispatch(getCurrentUserInfo());
+        } else  {
+            dispatch(stopSubmit("registration", { error: "Пользователь уже сущеcтвует" }));
         }
+
     });
 };
 
@@ -220,5 +209,6 @@ export const logout = () => (dispatch) => {
 
 export const userEdit = (editData) => async (dispatch) => {
     await userApi.edit(editData);
-    return dispatch(getCurrentUserInfo());
+    await dispatch(getCurrentUserInfo());
+    return dispatch(getUserComments());
 };

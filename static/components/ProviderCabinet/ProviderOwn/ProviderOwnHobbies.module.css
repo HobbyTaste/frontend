@@ -1,0 +1,64 @@
+.background {
+    min-height: 100%;
+    width: 90%;
+    height: auto;
+    position: center;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px;
+    background: white;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.headerContainer {
+    display: flex;
+}
+
+.hobbyHeader {
+    height: 70px;
+    font-size: 30px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.addButton {
+    width: 150px;
+    height: 36px;
+    padding-left: 8px;
+    margin-left: 538px;
+    margin-top: 20px;
+
+    background: #EDECE8;
+    border: 1px solid #2F1E0A;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.16px;
+
+    color: #034488;
+}
+
+.iconAdd {
+    margin-left: 25px;
+}
+
+.slotContainer {
+    display: flex;
+    width: 95%;
+    position: center;
+    background: white;
+
+    flex-wrap: wrap;
+    justify-content: normal;
+}

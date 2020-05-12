@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import {useSpring, animated} from 'react-spring/web.cjs';
-import {GreenButton} from "../../components/Common/MaterialsButtons";
-import s from "../../components/Header/HeaderButtons.module.css"; // web.cjs is required for IE 11 support
+import { useSpring, animated } from 'react-spring/web.cjs';
+import { GreenButton } from '../../components/Common/MaterialsButtons';
+import s from '../../components/Header/Header.module.css'
+import Button from '@material-ui/core/Button'; // web.cjs is required for IE 11 support
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -15,18 +16,34 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        borderRadius: '15px'
-    }
+    },
+    button: {
+        boxSizing: 'border-box',
+        border: '1px solid #2F1E0A',
+        height: '30px',
+        boxShadow: 'none',
+        margin: '5px 0px',
+        background: '#EDECE8',
+        color: '#034488',
+        borderRadius: '4px',
+        width: '94%',
+        padding: '0px 22px',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        fontSize: '20px',
+        letterSpacing: '0.16px',
+        textAlign: 'center',
+        lineHeight: '18px',
+        textTransform: 'none',
+    },
+
 }));
 
 const Fade = React.forwardRef(function Fade(props, ref) {
-    const {in: open, children, onEnter, onExited, ...other} = props;
+    const { in: open, children, onEnter, onExited, ...other } = props;
     const style = useSpring({
-        from: {opacity: 0},
-        to: {opacity: open ? 1 : 0},
+        from: { opacity: 0 },
+        to: { opacity: open ? 1 : 0 },
         onStart: () => {
             if (open && onEnter) {
                 onEnter();
@@ -66,11 +83,11 @@ export const AnimatedModalWindow = (Component, text, hobbyProps, isHeader) => {
             setOpen(false);
         };
         return (
-            <div>
-                <div onClick={handleOpen}>
-                    {isHeader ? <button type="button" className={s.headerButtons}>
+            <div >
+                <div className={s.buttonSignIn} onClick={handleOpen}>
+                    {isHeader ? <Button aria-controls="simple-menu" className={classes.button} >
                         {text}
-                    </button> : <GreenButton text={text} type="button"/>}
+                    </Button> : <GreenButton text={text} type="button"/>}
                 </div>
                 <Modal
                     aria-labelledby="spring-modal-title"
