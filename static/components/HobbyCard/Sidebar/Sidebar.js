@@ -20,7 +20,7 @@ const Sidebar= (props) => {
 
             <div className={style.container + ' ' + style.contantContainer} >
                 <h5 className={style.contact}>  КОНТАКТЫ:</h5>
-                <h5 className={style.contact + ' '+ style.mobile}>ТЕЛ: {props.mobile}</h5>
+                <h5 className={style.contact + ' '+ style.mobile}>ТЕЛ: {props.contacts.mobile}</h5>
                 <div className={style.contact}> <LaunchIcon /> <EmailIcon /></div>
 
             </div>

@@ -15,8 +15,6 @@ import {
     changeHobbyForUser,
     deleteHobbyForUser
 } from '../../redux/actions/hobbyActions';
-import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
-import { isInArray } from '../../utils/functions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
 import Preloader from '../Common/Preloader/Preloader';
 import { compose } from 'redux';
@@ -41,8 +39,6 @@ class HobbyCard extends React.Component {
 
 
     render() {
-        console.log("id");
-        console.log(this.props.id);
         if (!this.props.initializedPage){
             return <Preloader/>
         }
@@ -52,7 +48,7 @@ class HobbyCard extends React.Component {
                 <div className={style.infoContainer}>
                     <div className={style.mainContainer}>
                         <div className={style.mainBlock}>
-                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.photos}/></div>
+                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.avatar}/></div>
                             <div className={style.textContainer}>
                                 <InformationBlock hobbyInfo={this.props.hobbyInfo}/>
                                 <div className={style.buttonContainer}>
@@ -70,8 +66,7 @@ class HobbyCard extends React.Component {
                         </h4>
                     </div>
                     <div className={style.panel}>
-                        <Sidebar price={this.props.hobbyInfo.price} mobile={this.props.hobbyInfo.contact.mobile}
-                                 website={this.props.hobbyInfo.contact.website} flag={this.props.hobbyInfo.flag}/>
+                        <Sidebar price={this.props.hobbyInfo.price} contacts={this.props.hobbyInfo.contacts} flag={this.props.hobbyInfo.flag}/>
                     </div>
                 </div>
                 <div className={style.communication}>
@@ -93,21 +88,22 @@ const mapStateToProps = (state) => ({
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
         subscribers: state.hobbyPage.subscribers.concat(state.hobbyPage.providerSubscribers),
-        photos: state.hobbyPage.photos,
+      //  photos: state.hobbyPage.photos,
         owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,
+        avatar: [state.hobbyPage.avatar],
         timeTable: state.hobbyPage.timeTable,
-        equipment: state.hobbyPage.equipment,
+        facilities: state.hobbyPage.facilities,
         address: state.hobbyPage.address,
-        comfortable: state.hobbyPage.comfortable,
-        specialConditions: state.hobbyPage.specialConditions,
+        special: state.hobbyPage.special,
         description: state.hobbyPage.description,
         price: state.hobbyPage.price,
         flag: state.hobbyPage.flag,
-        contact: state.hobbyPage.contact,
+        location: state.hobbyPage.location,
+        contacts: state.hobbyPage.contacts,
         category: state.hobbyPage.category,
     },
 });

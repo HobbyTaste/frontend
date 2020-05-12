@@ -1,21 +1,23 @@
 import * as actionTypes from '../actions/actionsTypes';
 let initialState = {
     initializedPage: false,
-    id: 1,
+    id: '',
+    commentsId: [],
+    comments: [],
     photos: [],
+    avatar: '',
+    imageUrl: '',
     owner: '',
     label: '',
     metro: '',
     timeTable: '',
-    equipment: '',
     facilities: '',
     special: '',
     monetization: '',
     address: '',
-    comfortable: '',
+    location: '',
     providerSubscribers: '',
     subscribers : '',
-    specialConditions: '',
     description: '',
     price: 'Уточняйте',
     flag: {
@@ -24,10 +26,12 @@ let initialState = {
         isRent: false,
         isChild: false,
     },
-    contact: {
+    contacts: {
         mobile: '',
         website: '',
         email: '',
+        instagram: '',
+        vk: '',
     },
     category: '',
 };
@@ -45,15 +49,20 @@ const hobbyPageReducer = (state = initialState, action) => {
                     ...state.comments, action.comment
                 ]
             };
+        case actionTypes.SET_HOBBY_COMMENTS:
+            return {
+                ...state,
+                comments: action.comments
+            };
         case actionTypes.SET_HOBBY_DATA:
             return {
                 ...state,
+                id: action.payload._id,
                 label: action.payload.label,
                 metro: action.payload.metroStation,
                 metroId: action.payload.metroId,
-                email: action.payload.email,
                 address: action.payload.address,
-                specialConditions: action.payload.specialConditions,
+                location: action.payload.location,
                 description: action.payload.description,
                 shortDescription: action.payload.shortDescription,
                 price: action.payload.price,
@@ -62,6 +71,8 @@ const hobbyPageReducer = (state = initialState, action) => {
                 timeTable: action.payload.workTime,
                 monetization: action.payload.monetization,
                 owner: action.payload.owner,
+                imageUrl: action.payload.imageUrl,
+                avatar: action.payload.avatar,
                 flag: {
                     isParking: action.payload.parking,
                     isBeginner: action.payload.novice,
@@ -70,12 +81,15 @@ const hobbyPageReducer = (state = initialState, action) => {
                 },
                 subscribers: action.payload.subscribers,
                 providerSubscribers: action.payload.providerSubscribers,
-                contact: {
+                contacts: {
                     mobile: action.payload.phone,
                     email: action.payload.email,
+                    vk: action.payload.contacts.vk,
+                    instagram: action.payload.contacts.instagram,
+                    website: action.payload.website,
                 },
                 category: action.payload.category,
-                comments: action.payload.comments,
+                commentsId: action.payload.comments,
             };
         default:
             return state;
