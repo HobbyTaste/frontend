@@ -18,7 +18,7 @@
 
 .slotDescription {
     margin-left: 20px;
-    width: 440px;
+    width: 270px;
 }
 
 .slotHeader {
@@ -60,11 +60,18 @@
     letter-spacing: 0.25px;
 }
 
+.addInfoContainer {
+    width: 320px;
+    display: flex;
+    padding-left: 170px;
+}
+
 .icon {
     margin-left: 12px;
     margin-right: 12px;
     top: 50%;
     transform: translate(15%, 25%);
+    color: black;
 }
 
 .iconEmpty {

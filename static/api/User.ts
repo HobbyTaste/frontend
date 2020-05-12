@@ -36,7 +36,7 @@ class User extends BaseFetchClass {
         if (response.status === 200) {
             return null;
         }
-        return response.json();
+        return response;
     }
 
     /**

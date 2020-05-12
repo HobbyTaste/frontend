@@ -6,7 +6,7 @@ export const AddHobbyCard = (props) => {
         <div className={style.card}>
             <div className={style.hobbyName}>{props.organization}</div>
             {props.image ? <img src={`${props.image}`} alt=" " className={style.hobbyImage}/>
-            : <div />}
+                : <div />}
             <div className={style.hobbyInfo}>
                 <h1 className={style.title}>Контактные данные</h1>
                 <ul>

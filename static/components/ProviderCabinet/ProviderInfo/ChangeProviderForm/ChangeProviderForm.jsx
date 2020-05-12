@@ -1,79 +1,70 @@
-import React, {useState} from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {Input} from "../../../Common/FormsControls/FormsControls";
-import {connect} from "react-redux";
-import style from "./ChangeProviderForm.module.css";
-import {RedButton} from "../../../Common/MaterialsButtons";
-import {providerEdit} from "../../../../redux/actions/providerActions";
-import UploadPhoto from "../../../Common/UploadFotoBlock/UploadPhoto";
+import React, { useState } from 'react';
+import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import style from './ChangeProviderForm.module.css';
+import UploadPhoto from '../../../Common/UploadFotoBlock/UploadPhoto';
+import { userEdit } from '../../../../redux/actions/userActions';
 
 let mainFile = null;
-const ChangeProviderForm = ({handleSubmit, error}) => {
-    let [url, setUrl] = useState('');
-    let [file, setFile] = useState(null);
-    let uploadImage = (e) => {
-        let reader = new FileReader();
-        let photo_file = e.target.files[0];
+const ChangeProviderForm = ({ handleSubmit, name, error }) => {
+    const [url, setUrl] = useState('');
+    const [file, setFile] = useState(null);
+    const [state, setState] = useState({
+        Name: name,
+    });
+    const uploadImage = (e) => {
+        const reader = new FileReader();
+        const photoFile = e.target.files[0];
         reader.onloadend = () => {
             setUrl(`${reader.result}`);
-            setFile(photo_file);
-            mainFile = photo_file;
+            setFile(photoFile);
+            mainFile = photoFile;
         };
-        reader.readAsDataURL(photo_file)
+        reader.readAsDataURL(photoFile);
     };
     const deleteUrl = () => {
         setUrl('');
         setFile(null);
         mainFile = null;
     };
+    const handleInputChange = (event) => {
+        setState({
+            [event.target.name]: event.target.text,
+        });
+    };
 
     return (
         <form onSubmit={handleSubmit}>
-            <div><Field component={Input} name={"newName"} placeholder={"Новое имя"} autoFocus={true} type={"text"} fieldName={"Новое имя"}/></div>
-            <div><Field component={Input} name={"newEmail"} placeholder={"Новый email"} type={"email"} fieldName={"Новый email"}/></div>
-            {/*<div><Field component={Input} name={"oldPassword"} placeholder={"Старый пароль"} type={"password"} fieldName={"Старый пароль"}/></div>*/}
-            <div><Field component={Input} name={"newPassword"} placeholder={"Новый пароль"} type={"password"} fieldName={"Новый пароль"}/></div>
-            <div><Field component={Input} name={"newPhone"} placeholder={"Новый номер телефона"} type={"telephone"} fieldName={"Новый номер телефона"}/></div>
-            <div><Field component={Input} name={"newInfo"} placeholder={"Информация о вас"} type={"text"} fieldName={"Информация о вас"}/></div>
-            <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
-            <div className={style.saveButton}>
-                <RedButton text={"СОХРАНИТЬ"} label="Submit" onSubmit={handleSubmit} />
+            <div className={style.inputContainer}>
+                <input className={style.input} name='Name' value={state.Name} onChange={handleInputChange}/>
             </div>
+            <div>
+                <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
+            </div>
+            <button className={style.saveButton} onClick={handleSubmit}>Сохранить</button>
         </form>
     );
 };
 
-const ChangeProviderReduxForm = reduxForm({ form: 'changeProvider' })(ChangeProviderForm);
+const ChangeReduxForm = reduxForm({ form: 'change' })(ChangeProviderForm);
 
-const ChangeFormProvider = (props) => {
+const ChangeForm = (props) => {
     const onSubmit = (formData) => {
-        let dataToChange = {};
-        if(formData.newName !== undefined) {
-            dataToChange['name'] = formData.newName;
+        const dataToChange = {};
+        if (formData.name !== undefined) {
+            dataToChange.name = formData.name;
         }
-        if(formData.newPassword !== undefined) {
-            dataToChange['password'] = formData.newPassword;
+        if (mainFile !== null) {
+            dataToChange.avatar = mainFile;
         }
-        if(formData.newEmail !== undefined) {
-            dataToChange['email'] = formData.newEmail;
-        }
-        if(formData.newPhone !== undefined) {
-            dataToChange['phone'] = formData.newPhone;
-        }
-        if(formData.newInfo !== undefined) {
-            dataToChange['info'] = formData.newInfo;
-        }
-        if(mainFile !== null) {
-            dataToChange['avatar'] = mainFile;
-        }
-        props.providerEdit(dataToChange);
+        props.userEdit(dataToChange);
+        props.handleClick();
     };
-    return(
+    return (
         <div>
-            <h1 className={style.label}>Настройка профиля</h1>
-            <ChangeProviderReduxForm onSubmit={onSubmit} />
+            <ChangeReduxForm onSubmit={onSubmit} name={props.name} metro={props.metro} />
         </div>
     );
 };
 
-export default connect(null, {providerEdit})(ChangeFormProvider);
+export default connect(null, { userEdit })(ChangeForm);

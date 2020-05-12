@@ -1,6 +1,7 @@
 .tagContainer {
     margin-left: 5px;
-    width: 150px;
+    margin-right: 10px;
+    width: 160px;
     height: 70px;
 
     flex-wrap: wrap;
