@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN ["yarn"]
+RUN ["yarn", "install", "--network-timeout", "1000000"]
 
 COPY . .
 
