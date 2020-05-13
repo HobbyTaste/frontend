@@ -1,8 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
-import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
+
 import Preloader from '../Common/Preloader/Preloader';
 import {
     getLabelByUrlCategory,
@@ -25,8 +24,6 @@ class SearchPage extends React.PureComponent {
             selector: 'data',
             lengthHobbies: this.props.hobbiesReceived.length,
         };
-        this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
-        this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleCancelCategory = this.handleCancelCategory.bind(this);
@@ -34,15 +31,6 @@ class SearchPage extends React.PureComponent {
 
     componentDidMount() {
         this.props.initialize(this.props.word, this.props.match.params.category);
-    }
-
-    handleAddMyHobby(event, hobbyId) {
-        console.log('addHobby');
-        if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(hobbyId);
-        } else {
-            this.props.onAddProviderHobby(hobbyId);
-        }
     }
 
     handleCancelCategory(event) {
@@ -53,15 +41,6 @@ class SearchPage extends React.PureComponent {
     handleClick(event) {
         const new_value = this.state.countShow + 10;
         this.setState({ countShow: new_value });
-    }
-
-    handleDeleteMyHobby(event, hobbyId) {
-        console.log('delete hobby');
-        if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(hobbyId);
-        } else {
-            this.props.onDeleteProviderHobby(hobbyId);
-        }
     }
 
     handleChange(event) {
@@ -133,10 +112,6 @@ const mapStateToProps = (state) => ({
     isProviderAuth: state.providerCabinet.providerIsAuth,
 });
 const mapDispatchToProps = (dispatch) => ({
-    onAddUserHobby: (idHobby, idUser) => dispatch(addHobbyForUser(idHobby, idUser)),
-    onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
-    onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
-    onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
     initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
     unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
 });
