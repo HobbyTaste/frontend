@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import style from './Card.module.css';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import HalfRating from '../../Common/FeedbackStatistic';
@@ -53,7 +53,7 @@ const Card = (props) => {
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
                     <HalfRating answersArray={comments}/>
                 </div>
-                <span className={style.icon}><MoreHorizIcon style={{ color: '#FFFFFF' }}/></span>
+                <span className={style.icon}><NavLink to={`hobby/card/${props.id}`}><MoreHorizIcon style={{ color: '#FFFFFF' }}/></NavLink></span>
                 <div className={`${style.metro} ${style.colorBlueCard}`}>
                     <LocationOnIcon style={{ color: '#178FD6', fontSize: 'small' }} /> {props.metro}
                 </div>

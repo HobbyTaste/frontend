@@ -1,7 +1,8 @@
 import {getMetroStations} from "../../api/Geo";
 import Hobby from "../../api/Hobby";
-import {setIsUserInCabinet} from "../actions/userActions";
-import { setIsInSearchPage } from '../actions/searchActions';
+import { setIsUserInCabinet, someFail } from '../actions/userActions';
+import { setCategorySuccess, setHobbiesToSearch, setIsInSearchPage, setSearchWordSuccess } from '../actions/searchActions';
+import axios from 'axios';
 
 const SET_HOBBIES_TOP = 'SET_HOBBIES_TOP';
 const SET_HOBBIES_WIDGET = 'SET_HOBBIES_WIDGET';
@@ -89,26 +90,19 @@ function removeDuplicates(arr) {
     return result;
 }
 
-export const getHobbies = () => (dispatch) => {
-    return hobbyApi.getAll()
-        .then((response) => {
-            if (response.ok) {
-                response.json().then(body => {
-                    dispatch(setHobbiesTop(body));
-                    dispatch(setHobbiesWidget(body));
-                    dispatch(setHobbiesPoster(body));
-                });
-            }
-        })
-};
 
 export const initializeMainPage = () => (dispatch) => {
     dispatch(initializedMainPageSuccess(false));
     dispatch(setIsUserInCabinet(false));
     dispatch(setIsInSearchPage(false));
-    let promise = dispatch(getHobbies());
-    Promise.all([promise])
-        .then(() => {
-            dispatch(initializedMainPageSuccess(true));
-        });
+    axios.get(`/restapi/hobby/all`).then(res => {
+        let promise = dispatch(setHobbiesTop(res.data));
+        let promise2 = dispatch(setHobbiesWidget(res.data));
+        let promise3 =dispatch(setHobbiesPoster(res.data));
+        return (Promise.all([promise,promise2, promise3]).then(()=> {
+            dispatch(initializedMainPageSuccess(true));}))
+    })
+        .catch(err => {
+            dispatch(someFail(err))
+        })
 };

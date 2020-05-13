@@ -11,6 +11,9 @@ import Tag from './Tags/Tag';
 import Price from './Price/Price';
 import HalfRating from '../../Common/FeedbackStatistic';
 import style from './Slot.module.css';
+import Preloader from '../../Common/Preloader/Preloader';
+import CardSlider from '../CardSlider';
+import Content from '../../SearchPage/Content/Content';
 /* времено, чтобы передалвался массив комментариев */
 const comments = [{
     idComment: 1,
@@ -52,36 +55,42 @@ const comments = [{
 
 const imageMissing = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
-const
-    Slot = (props) => (<div className={style.slot}>
-        {props.pic ? <img className={style.slotPic} src={props.pic}/> : <img className={style.slotPic} src={imageMissing}/>}
-        <span className={style.slotDescription}>
+
+class Slot extends React.Component {
+    render() {
+        return (<div className={style.slot}>
+            {this.props.pic ? <img className={style.slotPic} src={this.props.pic}/> : <img className={style.slotPic} src={imageMissing}/>}
+            <span className={style.slotDescription}>
             <div className={style.slotHeader}>
-                <Link to={`/hobby/card/${props.id}`} className={`${style.name} ${style.colorBlackSlot}`}>{props.name}</Link>
+                <Link to={`/hobby/card/${this.props.id}`} className={`${style.name} ${style.colorBlackSlot}`}>{this.props.name}</Link>
                 <HalfRating answersArray={comments}/>
             </div>
             <div className={`${style.metro} ${style.colorBlueSlot}`}>
-                <LocationOnIcon style={{ color: '#034488', fontSize: 'small' }} /> {props.metro}
+                <LocationOnIcon style={{
+                    color: '#034488',
+                    fontSize: 'small'
+                }}/> {this.props.metro}
             </div>
-            <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
+            <div className={`${style.address} ${style.colorGraySlot}`}>{this.props.adress}</div>
         </span>
-        {props.isOwn
-            ? <Monetization Widget={props.Widget} Top={props.Top} Poster={props.Poster}/>
-            : <span className={style.addInfoContainer}>
-                <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
-                <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
+            {this.props.isOwn
+                ? <Monetization Widget={this.props.Widget} Top={this.props.Top} Poster={this.props.Poster}/>
+                : <span className={style.addInfoContainer}>
+                <Tag isParking={this.props.isParking} isBeginner={this.props.isBeginner} isRent={this.props.isRent} isChild={this.props.isChild}/>
+                <Price price={this.props.price} priceTime={this.props.priceTime} priceCurriculum={this.props.priceCurriculum}/>
             </span>}
-        {props.isUserAuth
-            ? (props.isProviderAuth
-                ? (props.isOwn
-                    ? <div className={style.icon}>
-                        <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>
-                    </div>
-                    : <div className={style.icon}><MonetizationOnIcon/></div>)
-                : <div className={style.icon}><BookmarkBorderIcon/></div>)
-            : <div className={style.iconEmpty}/>}
-        <Link to='/hobby/card' className={style.icon}><MoreHorizIcon/></Link>
-    </div>);
-
+            {this.props.isUserAuth
+                ? (this.props.isProviderAuth
+                    ? (this.props.isOwn
+                        ? <div className={style.icon}>
+                            <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>
+                        </div>
+                        : <div className={style.icon}><MonetizationOnIcon/></div>)
+                    : <div className={style.icon}><BookmarkBorderIcon/></div>)
+                : <div className={style.iconEmpty}/>}
+            <Link to={`/hobby/card/${this.props.id}`} className={style.icon}><MoreHorizIcon/></Link>
+        </div>);
+    }
+}
 export default Slot;
 //<Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
