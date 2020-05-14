@@ -20,6 +20,9 @@
     line-height: 16px;
     letter-spacing: 0.4px;
 }
+.time{
+    margin: 8px;
+}
 .nameHobby{
     display:flex;
 
