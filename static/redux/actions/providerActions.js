@@ -20,30 +20,6 @@ const changeProviderHobby = (userHobbies) => ({
     userHobbies,
 });
 
-/* добавить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок */
-export const addHobbyForProvider = (hobbyID, userID) => (dispatch) => {
-    console.log('provider add');
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then((res) => {
-        console.log('responce add');
-        console.log(res);
-        dispatch(changeProviderHobby(res.data.hobbies));
-    })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
-/* удалить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок */
-export const deleteHobbyForProvider = (hobbyID, providerID) => (dispatch) => {
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then((res) => {
-        console.log('responce delete');
-        console.log(res);
-        dispatch(changeProviderHobby(res.data.hobbies));
-    })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
-
 // дальше идут старые, которые скорее всего поменяются
 
 export const getAuthProviderData = () => (dispatch) => providerApi.getInfo()
@@ -82,9 +58,9 @@ export const initializeProviderCabinet = () => (dispatch) => {
         });
 };
 
-export const createNewProvider = (name, password, email, avatar, phone, info) => (dispatch) => {
+export const createNewProvider = (name, password, email) => (dispatch) => {
     const providerData = {
-        name: name, password: password, email: email, avatar: avatar, info: info
+        name: name, password: password, email: email
     };
     providerApi.create(providerData).then((response) => {
         if (response.ok) {

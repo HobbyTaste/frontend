@@ -5,14 +5,14 @@ import CommentText from './CommentText';
 const CommentsList = (props) => {
     return (<ul className={style.list}>
             {
-                props.comments.map(function (item) {
+                props.comments.map(function (item, index) {
                     let isHaveAnswer = true;
                     if ((item.answer) == null){
                         isHaveAnswer = false;
                     }
-                    return <li key={item.idComment} className={style.container}>
+                    return <li key={index} className={style.container}>
                         <CommentText comment={item} isProviderAuth={props.isProvider} isHaveAnswer= {isHaveAnswer}
-                                     isOwner = {props.isOwner} isItAnswerProvider={false}/>
+                                     isOwner = {props.isOwner} isItAnswerProvider={false} relatedIndex={index}/>
                         {item.answer &&
                         <CommentText comment={item.answer} isProviderAuth={props.isProvider} isItAnswerProvider={true}/>}
                     </li>;

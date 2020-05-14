@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
 export default function HalfRating(props) {
     const classes = useStyles();
     const rating = avarageStars(props.answersArray);
-    return (
+    return (<div></div>)/*
+
         <div className={classes.root}>
                 <Rating className={classes.stars} size='small' name="half-rating-read" defaultValue={rating} precision={0.5}
                           emptyIcon={<StarBorderIcon fontSize="inherit"/>} readOnly/>
             <span className={classes.countStars}> {props.answersArray.length}</span>
         </div>
-    );
+    );*/
 }

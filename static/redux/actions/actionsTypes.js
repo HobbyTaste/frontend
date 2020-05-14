@@ -13,6 +13,7 @@ export const SOME_FAIL = 'SOME_FAIL';
 export const INITIALIZE_HOBBY_PAGE = 'INITIALIZE_HOBBY_PAGE';
 export const ADD_RESPONSE = 'ADD_RESPONSE';
 export const SET_HOBBY_DATA = 'SET_HOBBY_DATA';
+export const SET_HOBBY_COMMENTS = 'SET_HOBBY_COMMENTS';
 
 /*provider*/
 

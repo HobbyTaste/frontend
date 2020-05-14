@@ -27,17 +27,18 @@ class InformationBlock extends React.Component {
                 </span>
                 <div className={style.description}>
                 <h3>
-                    Адрес: {this.props.hobbyInfo.adress}
+                    Адрес: {this.props.hobbyInfo.address}
                 </h3>
                 <h3>
-                    Время занятий: {this.props.hobbyInfo.time}
+                    Время занятий: {this.props.hobbyInfo.timeTable.map(function(time_) {
+                    return <p className={style.time}>{time_}</p>;
+                })}
                 </h3>
                     <h3>
-                        Удобства: {this.props.hobbyInfo.comfortable}
+                        Удобства: {this.props.hobbyInfo.facilities}
                     </h3>
-                    {this.props.hobbyInfo.equipment && <h3> Экипировка: {this.props.hobbyInfo.equipment} </h3>}
                     <h3>
-                        Особые условия: {this.props.hobbyInfo.specialConditions}
+                        Особые условия: {this.props.hobbyInfo.special}
                     </h3>
                 </div>
             </form>

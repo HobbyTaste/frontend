@@ -1,14 +1,14 @@
-import axios from "axios";
-import { findHobbies, toggleAddingProgress } from "../reducers/hobbiesPage-reducer";
-import { stopSubmit } from "redux-form";
-import * as actionTypes from "./actionsTypes";
-import UserApi from "../../api/User";
-import HobbyApi from "../../api/Hobby";
-import CommentApi from "../../api/Comment";
-import { defaultHobbyProps, comments } from "../../utils/constant";
+import axios from 'axios';
+import { findHobbies, toggleAddingProgress } from '../reducers/hobbiesPage-reducer';
+import { stopSubmit } from 'redux-form';
+import * as actionTypes from './actionsTypes';
+import UserApi from '../../api/User';
+import HobbyApi from '../../api/Hobby';
+import CommentApi from '../../api/Comment';
+import { defaultHobbyProps, comments } from '../../utils/constant';
 
-const testLogin = "bob@test.com";
-const testPassword = "bob";
+const testLogin = 'bob@test.com';
+const testPassword = 'bob';
 
 const userApi = new UserApi();
 const hobbyApi = new HobbyApi();
@@ -56,46 +56,6 @@ const getData = () =>
         setTimeout(() => resolve({ data: { hobbies: [1, 2] } }), 1000);
     });
 
-// функции, отпраправляющие запросы....
-/*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-export const addHobbyForUser = (hobbyID) => (dispatch) => {
-  axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
-        console.log("responce add")
-        console.log(res)
-        dispatch(changeUserHobby(res.data.hobbies));
-    })
-        .catch(err => {
-            dispatch(someFail(err))
-        })
-        .then((res) => {
-            console.log("responce add");
-            console.log(res);
-            dispatch(changeUserHobby(res.data.hobbies));
-        })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
-
-/*удалить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
-        console.log("responce delete")
-        console.log(res)
-        dispatch(changeUserHobby(res.data.hobbies));
-    })
-        .catch(err => {
-            dispatch(someFail(err))
-        })
-        .then((res) => {
-            console.log("responce delete");
-            console.log(res);
-            dispatch(changeUserHobby(res.data.hobbies));
-        })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
 
 export const initializeUserCabinet = () => async dispatch => {
     dispatch(initializeUser(false));
@@ -106,6 +66,7 @@ export const initializeUserCabinet = () => async dispatch => {
     dispatch(setIsUserInCabinet(true));
 };
 
+
 function getUserComments() {
     return async dispatch => {
         const responseBody = await (await userApi.getComments()).json();
@@ -114,16 +75,16 @@ function getUserComments() {
 }
 
 export const initializeUserHobbies = () => async (dispatch) => {
-    dispatch(fetchingHobbies("loading"));
+    dispatch(fetchingHobbies('loading'));
     await dispatch(getUserHobbies());
-    dispatch(fetchingHobbies("success"));
+    dispatch(fetchingHobbies('success'));
 };
 
 function firstLettersToUpperCase(text) {
     return text
-        .split(" ")
+        .split(' ')
         .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(" ");
+        .join(' ');
 }
 
 function truncateHobbyForSlot(hobby) {
@@ -147,27 +108,29 @@ function getUserHobbies() {
         const responseBody = await (await userApi.getHobbies()).json();
         const truncatedHobbies = responseBody.map((hobby) => truncateHobbyForSlot(hobby));
         dispatch(setUserHobbies(truncatedHobbies));
-    }
+    };
 }
 
 export const addNewHobby = (hobbyID, type, metro) => (dispatch) => {
-    userApi.addHobby(hobbyID).then((response) => {
-        dispatch(toggleAddingProgress(true, hobbyID));
-        if (response.ok) {
-            dispatch(getUserHobbies());
-            dispatch(findHobbies(type, metro));
-        }
-    });
+    userApi.addHobby(hobbyID)
+        .then((response) => {
+            dispatch(toggleAddingProgress(true, hobbyID));
+            if (response.ok) {
+                dispatch(getUserHobbies());
+                dispatch(findHobbies(type, metro));
+            }
+        });
     dispatch(toggleAddingProgress(false, hobbyID));
 };
 
 export const getCurrentUserInfo = () => (dispatch) =>
-    userApi.getInfo().then((response) => {
-        if (typeof response === "object") {
-            const { id, name, email, avatar } = response;
-            dispatch(setCurrentUserInfo(id, email, name, avatar, true));
-        }
-    });
+    userApi.getInfo()
+        .then((response) => {
+            if (typeof response === 'object') {
+                const { id, name, email, avatar } = response;
+                dispatch(setCurrentUserInfo(id, email, name, avatar, true));
+            }
+        });
 
 export const login = (email, password) => (dispatch) => {
     userApi.login(email, password).then((response) => {
@@ -198,13 +161,14 @@ export const createNewUser = (email, password, name, avatar) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-    userApi.logout().then((response) => {
-        if (response === null) {
-            dispatch(setCurrentUserInfo(null, null, null, null, false));
-            dispatch(initializeUser(false));
-            dispatch(setIsUserInCabinet(false));
-        }
-    });
+    userApi.logout()
+        .then((response) => {
+            if (response === null) {
+                dispatch(setCurrentUserInfo(null, null, null, null, false));
+                dispatch(initializeUser(false));
+                dispatch(setIsUserInCabinet(false));
+            }
+        });
 };
 
 export const userEdit = (editData) => async (dispatch) => {
