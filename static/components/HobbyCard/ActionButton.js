@@ -11,9 +11,9 @@ const ButtonAction = (props) => {
         return <NavLink to={'/provider/cabinet'}><ButtonProvider text="Редактировать"/> </NavLink>;
     } else if (props.isProviderAuth || props.isUserAuth) {
         if (isInArray(props.id, props.subscribers)) {
-            return <ButtonDeleteMyHobby onClick={props.deleteFromMyHobbies}/>;
+            return <ButtonDeleteMyHobby onClick={props.handleChangeMyHobby}/>;
         } else {
-            return <ButtonAddMyHobby onClick={props.addInMyHobbies} />;
+            return <ButtonAddMyHobby onClick={props.handleChangeMyHobby} />;
         }
     }
     return <div></div>;

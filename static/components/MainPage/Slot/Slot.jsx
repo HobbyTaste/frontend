@@ -84,3 +84,4 @@ const
     </div>);
 
 export default Slot;
+//<Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>

@@ -25,7 +25,7 @@ class CommentInput extends React.Component {
 
         const {handleSubmit, reset} = this.props;
 
-        var today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+       let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
 
         let classContainer = style.container +' '+ style.containerComment;
         if (this.state.isAnswer) {
@@ -46,10 +46,10 @@ class CommentInput extends React.Component {
         )
     }
 }
-/*const afterSubmit = (result, dispatch) =>
-    dispatch(reset('addFeedback'));
-*/
-CommentInput = reduxForm({ form: 'addFeedback',})(CommentInput);
+
+const afterSubmit = (result, dispatch) =>{
+    dispatch(reset('addFeedback'));}
+
+CommentInput = reduxForm({ form: 'addFeedback', onSubmitSuccess: afterSubmit})(CommentInput);
 
 export default CommentInput;
-//onSubmitSuccess: afterSubmit

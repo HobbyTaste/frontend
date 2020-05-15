@@ -40,7 +40,7 @@ const SimpleSwiperWithParams = (props) => {
 
     const imageMissing=['https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg'];
     let images=[];
-    if (props.images.length ){
+    if (props.images[0]!== ""){
         images = props.images;
     }
     else{

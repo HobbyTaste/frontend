@@ -9,9 +9,12 @@ import Sidebar from './Sidebar/Sidebar';
 import Slider from './Image/Slider';
 import ButtonAction from './ActionButton';
 import InformationBlock from './InformationForm/InformationForm';
-import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
-import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
-import { isInArray } from '../../utils/functions';
+import {
+    addHobbyForUser,
+    changeHobbyForProvider,
+    changeHobbyForUser,
+    deleteHobbyForUser
+} from '../../redux/actions/hobbyActions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
 import Preloader from '../Common/Preloader/Preloader';
 import { compose } from 'redux';
@@ -20,30 +23,20 @@ import { compose } from 'redux';
 class HobbyCard extends React.Component {
     constructor(props) {
         super(props);
-        this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
-        this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
+        this.handleChangeMyHobby = this.handleChangeMyHobby.bind(this);
     }
     componentDidMount() {
         this.props.initialize(this.props.match.params.id);
     }
 
-    handleAddMyHobby(event) {
-        console.log('addHobby');
+    handleChangeMyHobby(event) {
         if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(this.props.match.params.id);
+            this.props.onChangeUserHobby(this.props.match.params.id);
         } else {
-            this.props.onAddProviderHobby(this.props.match.params.id);
+            this.props.onChangeProviderHobby(this.props.match.params.id);
         }
     }
 
-    handleDeleteMyHobby(event) {
-        console.log('delete hobby');
-        if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(this.props.match.params.id);
-        } else {
-            this.props.onDeleteProviderHobby(this.props.match.params.id);
-        }
-    }
 
     render() {
         if (!this.props.initializedPage){
@@ -55,7 +48,7 @@ class HobbyCard extends React.Component {
                 <div className={style.infoContainer}>
                     <div className={style.mainContainer}>
                         <div className={style.mainBlock}>
-                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.photos}/></div>
+                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.avatar}/></div>
                             <div className={style.textContainer}>
                                 <InformationBlock hobbyInfo={this.props.hobbyInfo}/>
                                 <div className={style.buttonContainer}>
@@ -63,8 +56,7 @@ class HobbyCard extends React.Component {
                                                   hobbyInfoId={this.props.hobbyInfo.id}
                                                   subscribers = {this.props.hobbyInfo.subscribers} id = {this.props.id}
                                                   isOwner = {isOwner}
-                                                  deleteFromMyHobbies={this.handleDeleteMyHobby}
-                                                  addInMyHobbies={this.handleAddMyHobby}/>
+                                                  handleChangeMyHobby={this.handleChangeMyHobby}/>
                                 </div>
                             </div>
                         </div>
@@ -74,8 +66,7 @@ class HobbyCard extends React.Component {
                         </h4>
                     </div>
                     <div className={style.panel}>
-                        <Sidebar price={this.props.hobbyInfo.price} mobile={this.props.hobbyInfo.contact.mobile}
-                                 website={this.props.hobbyInfo.contact.website} flag={this.props.hobbyInfo.flag}/>
+                        <Sidebar price={this.props.hobbyInfo.price} contacts={this.props.hobbyInfo.contacts} flag={this.props.hobbyInfo.flag}/>
                     </div>
                 </div>
                 <div className={style.communication}>
@@ -96,30 +87,29 @@ const mapStateToProps = (state) => ({
 
     isPageInitialized: state.hobbyPage.initialized,
     hobbyInfo: {
-        subscribers: state.hobbyPage.subscribers,
-        photos: state.hobbyPage.photos,
+        subscribers: state.hobbyPage.subscribers.concat(state.hobbyPage.providerSubscribers),
+      //  photos: state.hobbyPage.photos,
         owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,
+        avatar: [state.hobbyPage.avatar],
         timeTable: state.hobbyPage.timeTable,
-        equipment: state.hobbyPage.equipment,
+        facilities: state.hobbyPage.facilities,
         address: state.hobbyPage.address,
-        comfortable: state.hobbyPage.comfortable,
-        specialConditions: state.hobbyPage.specialConditions,
+        special: state.hobbyPage.special,
         description: state.hobbyPage.description,
         price: state.hobbyPage.price,
         flag: state.hobbyPage.flag,
-        contact: state.hobbyPage.contact,
+        location: state.hobbyPage.location,
+        contacts: state.hobbyPage.contacts,
         category: state.hobbyPage.category,
     },
 });
 const mapDispatchToProps = (dispatch) => ({
-    onAddUserHobby: (idHobby) => dispatch(addHobbyForUser(idHobby)),
-    onDeleteUserHobby: (idHobby) => dispatch(deleteHobbyForUser(idHobby)),
-    onAddProviderHobby: (idHobby) => dispatch(addHobbyForProvider(idHobby)),
-    onDeleteProviderHobby: (idHobby) => dispatch(deleteHobbyForProvider(idHobby)),
+    onChangeUserHobby: (idHobby) => dispatch(changeHobbyForUser(idHobby)),
+    onChangeProviderHobby: (idHobby) => dispatch(changeHobbyForProvider(idHobby)),
     initialize: (idHobby) => dispatch(initializeHobbyPage(idHobby)),
 });
 
