@@ -79,7 +79,8 @@ export const initializeSearchPage = (searchWord, category) => (dispatch) => {
     setFilterSuccess([]);
     axios.get(`/restapi/hobby/find?label=${searchWord}`).then(res => {
         let promise = dispatch(setHobbiesToSearch(res.data));
-        let promise3 =   setCategorySuccess('Все категории');
+        console.log(res.data);
+        let promise3 =  setCategorySuccess('Все категории');
         if (category !== undefined) {promise3 = dispatch(setCategorySuccess(category))}
         return (Promise.all([promise, promise3]).then(()=> {
             dispatch(setIsInSearchPage(true));

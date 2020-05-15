@@ -44,7 +44,7 @@ class App extends React.Component {
                         <div className={style.appNavigation}>
                             <Route exact path="/" render={() => <Navigation/>}/>
                             <Route path="/search/:category?" render={() => <Navigation/>}/>
-                            <Route exact path="/hobby/card" render={() => <Navigation/>}/>
+                            <Route exact path="/hobby/card/:id?" render={() => <Navigation/>}/>
                             <Route exact path="/user/cabinet" render={() => <UserCabinetNavigation isActive={0}/>} />
                             <Route exact path="/user/cabinet/hobbies" render={() => <UserCabinetNavigation isActive={1}/>} />
                             <Route exact path="/provider/cabinet" render={() => <ProviderCabinetNavigation isActive={0}/>}/>

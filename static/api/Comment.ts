@@ -24,6 +24,10 @@ class Comment extends BaseFetchClass {
     public async stupidAddComment(comment: IComment, hobbyId: string): Promise<Response> {
         return this.post(`/create?hobbyId=${hobbyId}`, comment);
     }
+
+    public async providerAddAnswer(comment: IComment, hobbyId: string, relatedId: string): Promise<Response> {
+        return this.post(`/create?hobbyId=${hobbyId}?relatedId=${relatedId}`, comment);
+    }
 }
 
 export default Comment;

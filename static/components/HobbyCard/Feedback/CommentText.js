@@ -36,8 +36,12 @@ class CommentText extends React.Component {
     }
 
     handleSubmit = (values) => {
-        console.log(values);
-        this.props.onProviderResponse(this.props.hobbyId, values);
+        let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+        const body={
+            text: values.TextFeedback,
+            datetime: dataNow,
+        }
+        this.props.onProviderResponse(this.props.hobbyId, body, this.props.commentsId[this.props.relatedIndex]);
     };
 
     render() {
@@ -52,11 +56,11 @@ class CommentText extends React.Component {
                     <div className={style.info}>
                         <div className={style.containerInfo}>
                             <p className={style.icon}>
-                                <AccountCircleIcon style={{ fontSize: 40 }} />
+                                <AccountCircleIcon style={{ fontSize: 40 }}/>
                             </p>
                             <div className={style.infoData}>
-                                <p className={style.userName}>{this.props.comment.nameWriter}</p>
-                                <p className={style.data}> {this.props.comment.date}</p>
+                                <p className={style.userName}>{this.props.comment.name}</p>
+                                <p className={style.data}> {this.props.comment.datetime}</p>
                             </div>
                         </div>
                         {this.props.isOwner && !this.props.isItAnswerProvider && !this.props.isHaveAnswer && (
@@ -72,7 +76,7 @@ class CommentText extends React.Component {
                             style={classes.stars}
                             size="small"
                             name="half-rating-read"
-                            defaultValue={this.props.comment.stars}
+                            defaultValue={this.props.comment.evaluation}
                             emptyIcon={<StarBorderIcon fontSize="inherit" />}
                             precision={0.5}
                             readOnly
@@ -86,8 +90,13 @@ class CommentText extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    onProviderResponse: (idHobby, idUser, values) => dispatch(addProviderResponse(idHobby, idUser, values)),
+
+const mapStateToProps = (state) => ({
+    commentsId: state.hobbyPage.commentsId,
 });
 
-export default connect(null, mapDispatchToProps)(CommentText);
+const mapDispatchToProps = (dispatch) => ({
+    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentText);

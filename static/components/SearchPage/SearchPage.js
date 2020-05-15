@@ -87,10 +87,10 @@ class SearchPage extends React.PureComponent {
         let filteredHobbyies = this.props.hobbiesReceived.filter(n => (
             (this.props.category === 'Все категории' || n.category === this.props.category ||
                 (this.props.category === 'other' && !(categoriesConcrete.includes(`${n.category}`)))) &&
-            (!this.props.filtersArray.length || (n.parking && this.props.filtersArray.includes('parking')) ||
-                (n.children && this.props.filtersArray.includes('child')) ||
-                (n.novice && this.props.filtersArray.includes('beginner')) ||
-                (n.equipment && this.props.filtersArray.includes('equipment')))
+            (!this.props.filtersArray.length || ((!this.props.filtersArray.includes('parking') || n.parking) &&
+                (!this.props.filtersArray.includes('child') || n.children) &&
+                (!this.props.filtersArray.includes('beginner') || n.novice) &&
+                (!this.props.filtersArray.includes('equipment') || n.equipment)))
         ));
         return (
             <div className={style.container}>
