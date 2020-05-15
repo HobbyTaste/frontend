@@ -128,7 +128,7 @@ const mapStateToProps = (state) => ({
     filtersArray: state.searchPage.filter,
     initializedPage: state.searchPage.initializedSearchPage,
     hobbiesReceived: state.searchPage.hobbiesToSearch,
-    id: state.userCabinet.userId || state.providerCabinet.providerId,
+    id: state.userCabinet.id || state.providerCabinet.id,
     isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.providerIsAuth,
 });

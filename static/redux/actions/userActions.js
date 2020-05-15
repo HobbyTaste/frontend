@@ -23,11 +23,11 @@ export const setCurrentUserInfo = (id, email, name, avatar, isAuth) => ({
     isAuth,
 });
 const setUserHobbies = (userHobbies) => ({
-    type: actionTypes.SET_HOBBIES,
+    type: actionTypes.SET_USER_HOBBIES,
     userHobbies,
 });
 const setUserComments = (userComments) => ({
-    type: actionTypes.SET_COMMENTS,
+    type: actionTypes.SET_USER_COMMENTS,
     userComments,
 });
 const changeUserHobby = (userHobbies) => ({
@@ -40,7 +40,7 @@ const initializeUser = (initialize) => ({
     initialize,
 });
 const fetchingHobbies = (status) => ({
-    type: actionTypes.SET_FETCHING_HOBBIES,
+    type: actionTypes.SET_FETCHING_USER_HOBBIES,
     status,
 });
 export const setIsUserInCabinet = (status) => ({

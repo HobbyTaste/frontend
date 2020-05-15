@@ -71,7 +71,7 @@ const
                 <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}/>
                 <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
             </span>}
-        {props.isUserAuth
+        {props.isUserAuth || props.isProviderAuth
             ? (props.isProviderAuth
                 ? (props.isOwn
                     ? <div className={style.icon}>

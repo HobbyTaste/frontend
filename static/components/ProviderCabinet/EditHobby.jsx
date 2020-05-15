@@ -376,7 +376,7 @@ const EditHobbyForm = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    id: state.providerCabinet.providerId,
+    id: state.providerCabinet.id,
 });
 
 export default connect(mapStateToProps, { addNewHobby })(EditHobbyForm);

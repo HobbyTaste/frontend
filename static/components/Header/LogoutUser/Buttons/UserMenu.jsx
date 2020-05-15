@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -81,7 +82,7 @@ const StyledMenu = withStyles({
     />
 ));
 
-export default function UserMenu(props) {
+function UserMenu(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -92,6 +93,9 @@ export default function UserMenu(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const cabinet = props.isUserAuth ? "/user/cabinet" : props.isProviderAuth ? "/provider/cabinet" : "/";
+    const hobbies = props.isUserAuth ? "/user/cabinet/hobbies" : props.isProviderAuth ? "/provider/cabinet/own": "/";
 
     return (
         <div className={style.nameContainer}>
@@ -104,10 +108,17 @@ export default function UserMenu(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose} className={classes.menuItem}> <Link to='/user/cabinet' className={classes.content} >Кабинет</Link></MenuItem>
-                <MenuItem onClick={handleClose} className={classes.menuItem}>  <Link to='/user/cabinet/hobbies' className={classes.content} >Мои хобби</Link></MenuItem>
+                <MenuItem onClick={handleClose} className={classes.menuItem}> <Link to={cabinet} className={classes.content} >Кабинет</Link></MenuItem>
+                <MenuItem onClick={handleClose} className={classes.menuItem}>  <Link to={hobbies} className={classes.content} >Мои хобби</Link></MenuItem>
                 <MenuItem onClick={handleClose} className={classes.menuItemExit}>  <Button onClick={props.logout} className={classes.buttonExit +' '+ classes.content}>Выход</Button></MenuItem>
             </StyledMenu>
         </div>
     );
 }
+
+const mapStateToProps = (state) => ({
+    isProviderAuth: state.providerCabinet.providerIsAuth,
+    isUserAuth: state.userCabinet.isAuth,
+});
+
+export default connect(mapStateToProps)(UserMenu);
