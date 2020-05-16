@@ -105,6 +105,39 @@ export const updateSearch = (searchWord) => (dispatch) => {
         })
 };
 
+export const changeSearchForUser = (hobbyID, searchWord) => (dispatch) => {
+    axios.get(`/restapi/user/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/find?label=${searchWord}`)
+                .then(res => {
+                    console.log(res);
+                        dispatch(setHobbiesToSearch(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
+};
+
+
+export const changeSearchForProvider = (hobbyID, searchWord) => (dispatch) => {
+    axios.get(`/restapi/provider/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/find?label=${searchWord}`)
+                .then(res => {
+                        console.log(res);
+                        dispatch(setHobbiesToSearch(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
+};
+
+
+
 
 export const unsetCategory= () => (dispatch) => {
     dispatch(setCategorySuccess('Все категории'));

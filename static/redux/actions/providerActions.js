@@ -86,7 +86,7 @@ export const initializeProviderCabinet = () => async dispatch => {
     // Сначала нужно влить соответствующие изменения на бэкенде
     // await dispatch(getProviderComments());
     dispatch(initializeProvider(true));
-        
+
 };
 
 export const initializeProviderHobbies = () => async dispatch => {
@@ -97,9 +97,10 @@ export const initializeProviderHobbies = () => async dispatch => {
 
 export const createNewProvider = (name, password, email) => (dispatch) => {
     const providerData = {
-        name, password, email, avatar, phone, info
+        name, password, email
     };
     providerApi.create(providerData).then((response) => {
+        console.log(response);
         if (response.ok) {
             dispatch(getCurrentProviderInfo());
         }

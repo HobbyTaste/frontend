@@ -3,17 +3,14 @@ import style from './HobbyCard.css';
 import feedStyle from './Feedback/Feedback.css';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Feedback from './Feedback/Feedback';
 import Sidebar from './Sidebar/Sidebar';
 import Slider from './Image/Slider';
 import ButtonAction from './ActionButton';
 import InformationBlock from './InformationForm/InformationForm';
 import {
-    addHobbyForUser,
     changeHobbyForProvider,
     changeHobbyForUser,
-    deleteHobbyForUser
 } from '../../redux/actions/hobbyActions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
 import Preloader from '../Common/Preloader/Preloader';

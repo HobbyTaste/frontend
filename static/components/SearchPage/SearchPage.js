@@ -1,10 +1,11 @@
 import React, { Component, PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addHobbyForUser, deleteHobbyForUser } from '../../redux/actions/userActions';
-import { addHobbyForProvider, deleteHobbyForProvider } from '../../redux/actions/providerActions';
+
 import Preloader from '../Common/Preloader/Preloader';
 import {
+    changeSearchForProvider,
+    changeSearchForUser,
     getLabelByUrlCategory,
     initializeSearchPage,
     unsetCategory
@@ -25,26 +26,26 @@ class SearchPage extends React.PureComponent {
             selector: 'data',
             lengthHobbies: this.props.hobbiesReceived.length,
         };
-        this.handleAddMyHobby = this.handleAddMyHobby.bind(this);
-        this.handleDeleteMyHobby = this.handleDeleteMyHobby.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleCancelCategory = this.handleCancelCategory.bind(this);
+        this.handleChangeSubscribes = this.handleChangeSubscribes.bind(this);
+
     }
 
     componentDidMount() {
         this.props.initialize(this.props.word, this.props.match.params.category);
     }
 
-    handleAddMyHobby(event, hobbyId) {
-        console.log('addHobby');
-        if (this.props.isUserAuth) {
-            this.props.onAddUserHobby(hobbyId);
-        } else {
-            this.props.onAddProviderHobby(hobbyId);
+    handleChangeSubscribes(event, idHobby){
+        if (this.props.isUserAuth){
+            this.props.changeSearchForUser(idHobby, this.props.word);
         }
-    }
+        else{
+            this.props.changeSearchForProvider(idHobby, this.props.word);
+        }
 
+}
     handleCancelCategory(event) {
         this.props.history.push('/search');
         this.props.unsetCategory(this.props.hobbiesReceived);
@@ -53,15 +54,6 @@ class SearchPage extends React.PureComponent {
     handleClick(event) {
         const new_value = this.state.countShow + 10;
         this.setState({ countShow: new_value });
-    }
-
-    handleDeleteMyHobby(event, hobbyId) {
-        console.log('delete hobby');
-        if (this.props.isUserAuth) {
-            this.props.onDeleteUserHobby(hobbyId);
-        } else {
-            this.props.onDeleteProviderHobby(hobbyId);
-        }
     }
 
     handleChange(event) {
@@ -111,7 +103,7 @@ class SearchPage extends React.PureComponent {
                 </div>
                 <div>
                     <Content hobbies={filteredHobbyies.slice(0, realShow)} isUserAuth={this.props.isUserAuth}
-                             isProviderAuth={this.props.isProviderAuth} idUser={this.props.id}/></div>
+                             isProviderAuth={this.props.isProviderAuth} idUser={this.props.id} onClick={this.handleChangeSubscribes}/></div>
                 {(realShow < filteredHobbyies.length) &&
                 <div className={style.buttonMoreContainer}>
                     <ButtonsSend onClick={this.handleClick} type="button" text="Показать больше..."/>
@@ -133,12 +125,11 @@ const mapStateToProps = (state) => ({
     isProviderAuth: state.providerCabinet.providerIsAuth,
 });
 const mapDispatchToProps = (dispatch) => ({
-    onAddUserHobby: (idHobby, idUser) => dispatch(addHobbyForUser(idHobby, idUser)),
-    onDeleteUserHobby: (idHobby, idUser) => dispatch(deleteHobbyForUser(idHobby, idUser)),
-    onAddProviderHobby: (idHobby, idProvider) => dispatch(addHobbyForProvider(idHobby, idProvider)),
-    onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
     initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
     unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
+    changeSearchForUser: (hobbies, word) => dispatch(changeSearchForUser(hobbies, word)),
+    changeSearchForProvider: (hobbies, word) => dispatch(changeSearchForProvider(hobbies, word)),
+
 });
 
 
