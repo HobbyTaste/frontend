@@ -6,11 +6,6 @@ import { initializeUserHobbies } from "../../redux/actions/userActions";
 import Slot from "../MainPage/Slot/Slot";
 import { defaultAvatarUrl, defaultHobbyImageUrl } from "../../utils/constant";
 
-const flags = {
-    isParking: true,
-    isBeginner: true,
-    isRent: true,
-};
 
 const UserCabinetHobbies = (props) => {
     useEffect(() => {

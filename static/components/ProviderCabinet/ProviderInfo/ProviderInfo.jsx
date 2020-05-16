@@ -3,6 +3,7 @@ import style from './ProviderInfo.module.css';
 import ChangeForm from './ChangeProviderForm/ChangeProviderForm';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EditIcon from '@material-ui/icons/Edit';
+import { defaultAvatarUrl } from '../../../utils/constant';
 
 const ProviderInfo = (props) => {
     const [editing, setEditing] = useState(false);
@@ -11,18 +12,11 @@ const ProviderInfo = (props) => {
         setEditing(!editing);
     }
 
-    let avatar;
-    if (props.avatar === 'null') {
-        avatar = 'https://images.assetsdelivery.com/compings_v2/jenjawin/jenjawin1904/jenjawin190400208.jpg';
-    } else {
-        avatar = props.avatar;
-    }
-
     return (<div className={style.info}>
         <div className={style.avatar}>
             <div className={style.imgContainer}>
                 <div className={style.img}
-                    style={{ backgroundImage: `url("${avatar}")` }}>
+                    style={{ backgroundImage: `url("${props.avatar || defaultAvatarUrl}")` }}>
                 </div>
             </div>
         </div>

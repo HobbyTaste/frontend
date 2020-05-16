@@ -33,17 +33,17 @@ const userCabinetReducer = (state = initialState, action) => {
     case actionTypes.CHANGE_HOBBY_USER:
         return { ...state,
             userHobbies: action.userHobbies};
-    case actionTypes.SET_COMMENTS:
+    case actionTypes.SET_USER_COMMENTS:
         return {
             ...state,
             userComments: action.userComments
         };
-    case actionTypes.SET_HOBBIES:
+    case actionTypes.SET_USER_HOBBIES:
         return {
             ...state,
             userHobbies: action.userHobbies
         };
-    case actionTypes.SET_FETCHING_HOBBIES:
+    case actionTypes.SET_FETCHING_USER_HOBBIES:
         return {
             ...state,
             fetchingHobbies: action.status
