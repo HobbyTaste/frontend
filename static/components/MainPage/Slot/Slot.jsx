@@ -7,7 +7,7 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import EditIcon from '@material-ui/icons/Edit';
 import Monetization from './Price/Monetization';
-import Tag from './Tags/Tag';
+import TagSidebar from './Tags/TagSidebar';
 import Price from './Price/Price';
 import HalfRating from '../../Common/FeedbackStatistic';
 import style from './Slot.module.css';
@@ -39,8 +39,8 @@ const Slot = (props) =>{
             {props.isOwn
                 ? <Monetization Widget={props.Widget} Top={props.Top} Poster={props.Poster}/>
                 : <span className={style.addInfoContainer}>
-                <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}
-                     isChild={props.isChild}/>
+                <TagSidebar isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}
+                            isChild={props.isChild}/>
                 <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
             </span>}
             { (props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? (props.isOwn ?
