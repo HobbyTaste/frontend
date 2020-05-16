@@ -68,7 +68,7 @@ class HobbyCard extends React.Component {
                 </div>
                 <div className={style.communication}>
                     <p className={feedStyle.labelAnswer}> Отзывы:</p>
-                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner}/>
+                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner} hobbyId={this.props.hobbyInfo.id}/>
 
                 </div>
             </div>
@@ -89,6 +89,7 @@ const mapStateToProps = (state) => ({
         owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
+        rating: state.hobbyPage.rating,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,
         avatar: [state.hobbyPage.avatar],

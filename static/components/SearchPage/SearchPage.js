@@ -99,7 +99,7 @@ class SearchPage extends React.PureComponent {
                                 fontSize={'small'}/></button>}
                         </div>
                     </div>
-                    <Selector handleChange={this.handleChange}/>
+                    {false && <Selector handleChange={this.handleChange}/>}
                 </div>
                 <div>
                     <Content hobbies={filteredHobbyies.slice(0, realShow)} isUserAuth={this.props.isUserAuth}

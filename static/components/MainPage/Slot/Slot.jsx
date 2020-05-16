@@ -40,7 +40,7 @@ const Slot = (props) =>{
                 ? <Monetization Widget={props.Widget} Top={props.Top} Poster={props.Poster}/>
                 : <span className={style.addInfoContainer}>
                 <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}
-                     isChild={props.isChild}/>
+                            isChild={props.isChild}/>
                 <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
             </span>}
             { (props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? (props.isOwn ?

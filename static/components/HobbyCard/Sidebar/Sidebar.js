@@ -5,8 +5,6 @@ import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import EmailIcon from '@material-ui/icons/Email';
 import LaunchIcon from '@material-ui/icons/Launch';
 
-
-
 const Sidebar= (props) => {
     return (
         <div>
@@ -14,6 +12,7 @@ const Sidebar= (props) => {
                 <h5 className={style.headerPrice}>Цена</h5>
                 <h6 className={style.text}>{props.price.priceList}</h6>
             </div>
+
             {props.flag.isParking && <div className={style.flags + ' ' + style.parking}><div>Рядом парковка</div><div className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></div> </div>}
             {props.flag.isBeginner && <div className={style.flags + ' ' + style.beginner}>Для новичков<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}
             {props.flag.isRent && <div className={style.flags + ' ' + style.rent}>Экипировка<p className={style.icon}><DoneOutlineIcon style={{ fontSize: 15}} /></p> </div>}

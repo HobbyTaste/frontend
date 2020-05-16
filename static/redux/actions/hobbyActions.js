@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { findHobbies, toggleAddingProgress } from '../reducers/hobbiesPage-reducer';
-import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import { someFail } from './userActions';
-import {reset} from 'redux-form'
 import { setIsInSearchPage } from './searchActions';
 import CommentApi from '../../api/Comment';
 
@@ -35,6 +32,7 @@ export const initializeHobbyPage = (Id) => (dispatch) => {
         let promise = dispatch(setHobbyData(res.data));
         axios.get(`/restapi/hobby/comments?id=${Id}`)
             .then(res => {
+                console.log(res.data);
                 let promise2 = dispatch(setHobbyComments(res.data));
                 return (Promise.all([promise, promise2]).then(()=> {
                     dispatch(initializedHobbyPage(true));
@@ -71,10 +69,11 @@ export const addProviderResponse = (hobbyId, body, relatedId) => (dispatch) => {
     console.log("addProviderResponse")
     const obj = {
         text: body.text,
-        datetime: body.datetime,
+        datetime: body.datetime
     };
     commentApi.providerAddAnswer(obj, hobbyId, relatedId)
         .then(res =>{
+            console.log(res)
             if(res.ok){
                 axios.get(`/restapi/hobby/comments?id=${hobbyId}`)
                     .then(res => {
