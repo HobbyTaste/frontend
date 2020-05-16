@@ -33,7 +33,6 @@ class CommentText extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleClick(event) {
-        console.log(this.state.isAnswered);
         this.setState({ isAnswered: !this.state.isAnswered });
     }
 
