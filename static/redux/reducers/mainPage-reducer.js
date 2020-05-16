@@ -3,6 +3,7 @@ import Hobby from "../../api/Hobby";
 import { setIsUserInCabinet, someFail } from '../actions/userActions';
 import { setCategorySuccess, setHobbiesToSearch, setIsInSearchPage, setSearchWordSuccess } from '../actions/searchActions';
 import axios from 'axios';
+import { sortByTypeMonitization } from '../../utils/functions';
 
 const SET_HOBBIES_TOP = 'SET_HOBBIES_TOP';
 const SET_HOBBIES_WIDGET = 'SET_HOBBIES_WIDGET';
@@ -91,18 +92,3 @@ function removeDuplicates(arr) {
 }
 
 
-export const initializeMainPage = () => (dispatch) => {
-    dispatch(initializedMainPageSuccess(false));
-    dispatch(setIsUserInCabinet(false));
-    dispatch(setIsInSearchPage(false));
-    axios.get(`/restapi/hobby/all`).then(res => {
-        let promise = dispatch(setHobbiesTop(res.data));
-        let promise2 = dispatch(setHobbiesWidget(res.data));
-        let promise3 =dispatch(setHobbiesPoster(res.data));
-        return (Promise.all([promise,promise2, promise3]).then(()=> {
-            dispatch(initializedMainPageSuccess(true));}))
-    })
-        .catch(err => {
-            dispatch(someFail(err))
-        })
-};

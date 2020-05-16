@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import Preloader from '../Common/Preloader/Preloader';
 import {
+    changeSearchForProvider,
+    changeSearchForUser,
     getLabelByUrlCategory,
     initializeSearchPage,
     unsetCategory
@@ -27,12 +29,23 @@ class SearchPage extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleCancelCategory = this.handleCancelCategory.bind(this);
+        this.handleChangeSubscribes = this.handleChangeSubscribes.bind(this);
+
     }
 
     componentDidMount() {
         this.props.initialize(this.props.word, this.props.match.params.category);
     }
 
+    handleChangeSubscribes(event, idHobby){
+        if (this.props.isUserAuth){
+            this.props.changeSearchForUser(idHobby, this.props.word);
+        }
+        else{
+            this.props.changeSearchForProvider(idHobby, this.props.word);
+        }
+
+}
     handleCancelCategory(event) {
         this.props.history.push('/search');
         this.props.unsetCategory(this.props.hobbiesReceived);
@@ -90,7 +103,7 @@ class SearchPage extends React.PureComponent {
                 </div>
                 <div>
                     <Content hobbies={filteredHobbyies.slice(0, realShow)} isUserAuth={this.props.isUserAuth}
-                             isProviderAuth={this.props.isProviderAuth} idUser={this.props.id}/></div>
+                             isProviderAuth={this.props.isProviderAuth} idUser={this.props.id} onClick={this.handleChangeSubscribes}/></div>
                 {(realShow < filteredHobbyies.length) &&
                 <div className={style.buttonMoreContainer}>
                     <ButtonsSend onClick={this.handleClick} type="button" text="Показать больше..."/>
@@ -114,6 +127,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
     unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
+    changeSearchForUser: (hobbies, word) => dispatch(changeSearchForUser(hobbies, word)),
+    changeSearchForProvider: (hobbies, word) => dispatch(changeSearchForProvider(hobbies, word)),
+
 });
 
 

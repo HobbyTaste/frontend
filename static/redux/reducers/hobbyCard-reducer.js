@@ -19,6 +19,7 @@ let initialState = {
     providerSubscribers: '',
     subscribers : '',
     description: '',
+    rating: '',
     price: 'Уточняйте',
     flag: {
         isParking: false,
@@ -66,6 +67,7 @@ const hobbyPageReducer = (state = initialState, action) => {
                 description: action.payload.description,
                 shortDescription: action.payload.shortDescription,
                 price: action.payload.price,
+                rating: action.payload.rating,
                 facilities: action.payload.facilities,
                 special: action.payload.special,
                 timeTable: action.payload.workTime,

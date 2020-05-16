@@ -19,9 +19,9 @@ const CardSlider = (props) => {
             {
                 props.hobbies.map(function(im, index) {
                     return <div key={index}>
-                        <Card name={im.label} metro={im.metroStation}
-                              address={im.address} pic={im.avatar} id={im._id}
-                              isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+                        <Card name={im.label} metro={im.metroStation} isOwner={im.owner === props.idPerson}
+                              rating={im.rating} address={im.address} pic={im.avatar} id={im._id} subscribers={im.subscribers.concat(im.providerSubscribers)}
+                              isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth} onClick={props.onClick} idUser = {props.idPerson}/>
                     </div>
                 })
             }

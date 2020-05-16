@@ -9,6 +9,20 @@
     flex-wrap: wrap;
     justify-content: normal;
 }
+.buttonContainer{
+    float: right;
+    margin-right: 20px;
+   margin-top: 8px;
+    transform: translate(50%, -80%);
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
 
 .image{
     object-fit: cover;
@@ -71,6 +85,14 @@
     margin-right: 20px;
     top: 50%;
     transform: translate(50%, -80%);
+}
+.iconMonetization{
+    color: #FFFFFF;
+    float: right;
+    margin-right: 20px;
+    top: 50%;
+    transform: translate(50%, -80%);
+    width: 10px;
 }
 
 .iconEmpty {

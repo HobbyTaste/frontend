@@ -1,6 +1,6 @@
 //функция поиска элемента в массиве
 export const isInArray = (idHobby, array) => {
-    if (array === undefined || array.length === 0){
+    if (array === undefined || array.length === 0) {
         return false;
     }
     if (array.includes(idHobby)) {
@@ -38,3 +38,28 @@ export const countHobbyIn = (hobbies) => {
     });
     return dict;
 };
+/*Фильтрация по типу монетизации*/
+export const sortByTypeMonitization = (hobbies, type) => {
+    let filtered = [];
+    hobbies.forEach(function (hobby) {
+        hobby.monetization.forEach(function (item) {
+            if (item.tariff === type) {
+                filtered.push(hobby);
+            }
+        });
+    });
+    return filtered;
+};
+
+export const DayToString = (day) => {
+    const mod = day % 10;
+    if (mod === 1) {
+        return 'день';
+    } else if (mod === 2 || mod === 3 || mod === 4) {
+        return 'дня';
+    } else {
+        return 'дней';
+    }
+};
+
+

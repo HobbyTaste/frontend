@@ -100,6 +100,7 @@ export const createNewProvider = (name, password, email) => (dispatch) => {
         name, password, email
     };
     providerApi.create(providerData).then((response) => {
+        console.log(response);
         if (response.ok) {
             dispatch(getCurrentProviderInfo());
         }
