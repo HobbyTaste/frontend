@@ -6,13 +6,12 @@ const providerApi = new Provider();
 const hobbyApi = new Hobby();
 
 let initialState = {
-    providerId: '',
+    id: '',
     name: '',
+    phone: '',
     email: '',
     avatar: '',
-    phone: '',
     info: '',
-    category: '',
     providerIsAuth: false,
     providerInitialized: false,
     providerHobbies: [],
@@ -23,7 +22,7 @@ const ProviderCabinetReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_PROVIDER_DATA: {
             return {
-                ...state, providerId: action.id,
+                ...state, id: action.id,
                 name: action.name,
                 email: action.email,
                 avatar: action.avatar,
@@ -37,12 +36,23 @@ const ProviderCabinetReducer = (state = initialState, action) => {
                 ...state, providerInitialized: action.status
             }
         }
-    case actionTypes.CHANGE_HOBBY_FOLLOWED: {
-        return {
-            ...state,
-            followedHobbies: action.followedHobbies
+        case actionTypes.CHANGE_HOBBY_FOLLOWED: {
+            return {
+                ...state,
+                followedHobbies: action.followedHobbies
+            }
         }
-    }
+        case actionTypes.SET_PROVIDER_COMMENTS: {
+            return {
+                ...state,
+                comments: action.providerComments
+            };
+        }
+        case actionTypes.SET_FETCHING_PROVIDER_HOBBIES:
+            return {
+                ...state,
+                fetchingHobbies: action.status
+            };
         case actionTypes.SET_PROVIDER_HOBBIES:
             return {
               ...state, providerHobbies: action.providerHobbies

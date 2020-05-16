@@ -96,7 +96,6 @@ class Slot extends React.Component {
                      isChild={this.props.isChild}/>
                 <Price price={this.props.price} priceTime={this.props.priceTime} priceCurriculum={this.props.priceCurriculum}/>
             </span>}
-
             { (this.props.isProviderAuth || this.props.isUserAuth) ? (this.props.isOwner ? (this.props.isOwn ?
                 <div className={style.icon}>
                     <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>

@@ -28,15 +28,11 @@ class Hobby extends BaseFetchClass{
 
     /**
      * Добавляет хобби
-     * @param{{owner: *, address: *, phone: *, description: *, label: *, shortDescription: *, avatar: *, category: *, email: *, metroStation: *}} hobbyState
-     * @return {Promise<IHobby>}
+     * @param hobbyState
+     * @return {Promise<Response>}
      */
-    public async add(hobbyState: IHobby): Promise<Response> {
-        const formData = new FormData();
-        for (const key in hobbyState) {
-            formData.append(key, hobbyState[key]);
-        }
-        const response = await this.post('/add', formData, {isFormData: true});
+    public async add(hobbyState: any): Promise<Response> {
+        const response = await this.post('/add', hobbyState);
         if (!response.ok) {
             console.error(response);
         }

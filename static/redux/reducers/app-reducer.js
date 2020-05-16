@@ -1,6 +1,6 @@
 import {setIsUserInCabinet, getCurrentUserInfo} from "../actions/userActions";
 import {getMetro} from "./mainPage-reducer";
-import {getAuthProviderData} from "../actions/providerActions";
+import {getCurrentProviderInfo} from "../actions/providerActions";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
@@ -25,7 +25,7 @@ export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 export const initializeApp = () => (dispatch) => {
     dispatch(setIsUserInCabinet(false));
     let promise = dispatch(getCurrentUserInfo());
-    let promise2 = dispatch(getAuthProviderData());
+    let promise2 = dispatch(getCurrentProviderInfo());
     Promise.all([promise, promise2])
         .then(() => {
             dispatch(initializedSuccess());
