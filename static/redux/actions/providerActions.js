@@ -92,6 +92,12 @@ export const initializeProviderCabinet = () => async dispatch => {
     dispatch(setIsProviderInCabinet(true));
 };
 
+export const initializeOwnHobbies = () => async dispatch => {
+    dispatch(setFetchingOwnHobbies("loading"));
+    await dispatch(getOwnHobbies());
+    dispatch(setFetchingOwnHobbies("success"));
+};
+
 export const initializeFollowedHobbies = () => async dispatch => {
     dispatch(setFetchingFollowedHobbies("loading"));
     await dispatch(getFollowedHobbies());
