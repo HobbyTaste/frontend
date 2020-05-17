@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         alignItems: 'top',
-        marginRight:'5px',
+        marginRight: '5px',
         color: '#178FD6',
     },
     stars: {
@@ -36,9 +36,9 @@ function HalfRating(props) {
     const rating = props.rating;
     return (
         <div className={classes.root}>
-     <Rating className={classes.stars} size={'small'} name="half-rating-read"
-                                                 defaultValue={rating} precision={0.2}
-                                                 emptyIcon={<span className={classes.span}> <StarBorderIcon fontSize="inherit"/> </span>} readOnly/>
+            <Rating className={classes.stars} size={'small'} name="half-rating-read"
+                    defaultValue={rating} precision={0.2}
+                    emptyIcon={<span className={classes.span}> <StarBorderIcon fontSize="inherit"/> </span>} readOnly/>
         </div>
     );
 }
@@ -46,42 +46,47 @@ function HalfRating(props) {
 
 const Card = (props) => {
     return (<div>
-        <span className={style.card}>
+            <div className={style.card}>
             <span className={style.cardDescription}>
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
-                    <HalfRating rating={props.rating}/>
-                </div>
-                <span className={style.icon}><NavLink to={`hobby/card/${props.id}`}><MoreHorizIcon
-                    style={{ color: '#FFFFFF' }}/></NavLink></span>
-                <div className={`${style.metro} ${style.colorBlueCard}`}>
+                    <div className={`${style.metro} ${style.colorBlueCard}`}>
                     <LocationOnIcon style={{
                         color: '#178FD6',
                         fontSize: 'small'
                     }}/> {props.metro}
+                     </div>
+                     <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
                 </div>
-                <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
-                {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ?
-                        <Link to="/provider/cabinet/monetization" style={{
-                            color: 'black',
-                            display: 'flex',
-                            top: '50%',
-                            float: 'right',
-                            marginRight: '20px',
-                            transform: 'translate(50%, -80%)',
-                            marginTop: '8px',
-                        }}>
-                            <span className={style.iconMonetization}><MonetizationOnIcon/></span>
-                        </Link>
-                        : (isInArray(props.idUser, props.subscribers) ? <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
-                                <span className={style.icon}><BookmarkIcon style={{ color: '#FFFFFF' }}/></span>
-                            </button> :
-                            <button className={style.buttonContainer}  onClick={(e) => props.onClick(e, props.id)}>
-                                <span className={style.icon}><BookmarkBorderIcon style={{ color: '#FFFFFF' }}/></span>
-                            </button>)
-                ) : <div className={style.iconEmpty}/>}
-            </span>
-        </span>
-    </div>);
+                <div className={style.cardFunction}>
+                       <HalfRating rating={props.rating}/>
+                        <span className={style.icon}>
+                            <span className={style.iconMore}>
+                            <NavLink to={`hobby/card/${props.id}`}><MoreHorizIcon
+                                style={{ color: '#FFFFFF' }} /></NavLink>
+                                </span>
+                    {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ?
+                            <Link to="/provider/cabinet/monetization" style={{
+                                display: 'flex',
+                                width: '50%',
+                                justifyContent: 'center',
+                            }}>
+                                <span className={style.iconMonetization}><MonetizationOnIcon/></span>
+                            </Link>
+                            : (isInArray(props.idUser, props.subscribers) ?
+                                <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
+                                    <span className={style.icon}><BookmarkIcon style={{ color: '#FFFFFF' }}/></span>
+                                </button> :
+                                <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
+                                    <span className={style.icon}><BookmarkBorderIcon style={{ color: '#FFFFFF' }}/></span>
+                                </button>)
+                    ) : <div className={style.iconEmpty}></div>}
+                    </span>
+        </div>
+    </span>
+            </div>
+        </div>
+    )
+        ;
 };
 export default Card;

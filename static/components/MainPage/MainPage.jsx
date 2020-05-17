@@ -65,7 +65,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     initializeMainPage: () => dispatch(initializeMainPage()),
     changeHobbyForUser: (hobbies) => dispatch(changeHobbyForUser(hobbies)),
-    changeHobbyForProvider: (hobbies) => dispatch( changeHobbyForProvider(hobbies)),
+    changeHobbyForProvider: (hobbies) => dispatch(changeHobbyForProvider(hobbies)),
 
 });
 export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(MainPage);
