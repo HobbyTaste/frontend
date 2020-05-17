@@ -44,14 +44,11 @@ const ChangeUserInfoForm = ({handleSubmit, name, metro}) => {
 
 const ChangeReduxForm = reduxForm({ form: "change" })(ChangeUserInfoForm);
 
-const ChangeForm = ({handleClick, name, metro, userEdit}) => {
+const ChangeForm = ({handleClick, name, userEdit}) => {
     const handleSubmit = async (formData) => {
         const dataToChange = {};
         if (formData.name !== undefined) {
             dataToChange.name = formData.name;
-        }
-        if (formData.metro !== undefined) {
-            dataToChange.metro = formData.metro;
         }
         if (mainFile !== null) {
             dataToChange.avatar = mainFile;
@@ -62,7 +59,7 @@ const ChangeForm = ({handleClick, name, metro, userEdit}) => {
 
     return (
         <div>
-            <ChangeReduxForm onSubmit={handleSubmit} name={name} metro={metro} />
+            <ChangeReduxForm onSubmit={handleSubmit} name={name}/>
         </div>
     );
 };

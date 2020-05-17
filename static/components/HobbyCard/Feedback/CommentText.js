@@ -37,7 +37,7 @@ class CommentText extends React.Component {
     }
 
     handleSubmit = (values) => {
-        let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+        let today = new Date(), dataNow = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + ' ' + today.getHours() + ' ' + today.getMinutes();
         const body={
             text: values.TextFeedback,
             datetime: dataNow,
@@ -94,11 +94,14 @@ class CommentText extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    commentsId: state.hobbyPage.commentsId,
+    commentsId: state.providerCabinet.isProviderInCabinet ? 
+                state.providerCabinet.comments.commentsIds : 
+                state.hobbyPage.commentsId,
+    name: state.providerCabinet.name || state.userCabinet.name
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId)),
+    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentText);

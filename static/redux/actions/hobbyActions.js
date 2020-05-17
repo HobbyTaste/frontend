@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as actionTypes from './actionsTypes';
 import { someFail } from './userActions';
 import { setIsInSearchPage } from './searchActions';
+import { getProviderComments } from './providerActions';
 import CommentApi from '../../api/Comment';
 
 const commentApi = new CommentApi();

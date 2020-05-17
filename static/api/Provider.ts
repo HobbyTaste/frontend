@@ -72,7 +72,7 @@ class Provider extends BaseFetchClass {
     }
 
     /**
-     * Меняет дланные для залогиненного партнера
+     * Меняет данные для залогиненного партнера
      */
     public async edit(nextData: Partial<IProvider>): Promise<Response> {
         const formData = new FormData();
@@ -82,8 +82,18 @@ class Provider extends BaseFetchClass {
         return this.post('/edit', formData, {isFormData: true});
     }
 
-    public async getHobbies(): Promise<Response> {
+    /**
+     * Получает список тех хобби, для которых текущий партнёр является владельцем
+     */
+    public async getOwnHobbies(): Promise<Response> {
         return this.get('/hobbies');
+    }
+
+    /**
+     * Получает список хобби, на которые партнёр подписан
+     */
+    public async getFollowedHobbies(): Promise<Response> {
+        return this.get('/followed');
     }
 
     /**

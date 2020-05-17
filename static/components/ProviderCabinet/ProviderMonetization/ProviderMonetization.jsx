@@ -224,7 +224,7 @@ const mapStateToProps = (state) => ({
     // avatar: state.providerCabinet.avatar,
     password: state.providerCabinet.password,
     providerInitialized: state.providerCabinet.providerInitialized,
-    providerHobbies: state.providerCabinet.providerHobbies,
+    providerHobbies: state.providerCabinet.ownHobbies,
 
     name: 'Контора "Рога и копыта"',
     avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',

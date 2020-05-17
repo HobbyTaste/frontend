@@ -8,7 +8,8 @@ import {
     changeSearchForUser,
     getLabelByUrlCategory,
     initializeSearchPage,
-    unsetCategory
+    unsetCategory,
+    setIsInSearchPage
 } from '../../redux/actions/searchActions';
 import style from './style.css';
 import Content from './Content/Content';
@@ -37,6 +38,11 @@ class SearchPage extends React.PureComponent {
         this.props.initialize(this.props.word, this.props.match.params.category);
     }
 
+    componentWillUnmount() {
+        this.props.setIsInSearchPage(false);
+    }
+
+
     handleChangeSubscribes(event, idHobby){
         if (this.props.isUserAuth){
             this.props.changeSearchForUser(idHobby, this.props.word);
@@ -44,8 +50,8 @@ class SearchPage extends React.PureComponent {
         else{
             this.props.changeSearchForProvider(idHobby, this.props.word);
         }
-
 }
+          
     handleCancelCategory(event) {
         this.props.history.push('/search');
         this.props.unsetCategory(this.props.hobbiesReceived);
@@ -127,9 +133,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
     unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
+    setIsInSearchPage: (status) => dispatch(setIsInSearchPage(status)),
     changeSearchForUser: (hobbies, word) => dispatch(changeSearchForUser(hobbies, word)),
     changeSearchForProvider: (hobbies, word) => dispatch(changeSearchForProvider(hobbies, word)),
-
 });
 
 

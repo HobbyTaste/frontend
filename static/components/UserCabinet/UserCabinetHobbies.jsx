@@ -5,6 +5,15 @@ import style from "./UserCabinet.module.css";
 import { initializeUserHobbies } from "../../redux/actions/userActions";
 import Slot from "../MainPage/Slot/Slot";
 import { defaultAvatarUrl, defaultHobbyImageUrl } from "../../utils/constant";
+import Preloader from "../Common/Preloader/Preloader";
+
+
+function firstLettersToUpperCase(text) {
+    return text
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(' ');
+}
 
 
 const UserCabinetHobbies = (props) => {
@@ -16,13 +25,30 @@ const UserCabinetHobbies = (props) => {
         return <Redirect to={"/"} />;
     }
 
+    if (props.fetchingHobbies !== "success") {
+        return <Preloader/>;
+    }
+
     // add selecting hobbies from props info
     const hobbiesToShow = props.userHobbies.map((hobby) => (
         <Slot
-            {...hobby}
-            isUserAuth={props.isUserAuth}
-            isProviderAuth={props.isProviderAuth}
-            key={hobby.name + hobby.address}
+            key={hobby._id}
+            id={hobby._id}
+            owner={hobby.owner}
+            subscribers={hobby.subscribers}
+            pic={hobby.avatar}
+            name={hobby.label}
+            metro={firstLettersToUpperCase(hobby.metroStation)}
+            adress={hobby.address}
+            price={hobby.price.title}
+            isUserAuth={true}
+            isProviderAuth={false}
+            isBeginner={hobby.novice}
+            isRent={hobby.equipment}
+            isChild={hobby.children}
+            isParking={hobby.parking}
+            isOwn={false}
+            priceTime={"За занятие"}
         />
     ));
 
@@ -40,6 +66,7 @@ const UserCabinetHobbies = (props) => {
 
 const mapStateToProps = (state) => ({
     userHobbies: state.userCabinet.userHobbies,
+    fetchingHobbies: state.userCabinet.fetchingHobbies,
     isUserAuth: state.userCabinet.isAuth,
     isProviderAuth: state.providerCabinet.isAuth,
 });
