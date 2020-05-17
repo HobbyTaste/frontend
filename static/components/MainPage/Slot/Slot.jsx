@@ -15,9 +15,9 @@ import { isInArray } from '../../../utils/functions';
 
 const imageMissing = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
-const Slot = (props) =>{
-        return (<div className={style.slot}>
-            <div className={style.leftContainer}>
+const Slot = (props) => {
+    return (<div className={style.slot}>
+        <div className={style.leftContainer}>
             {props.pic ? <img className={style.slotPic} src={props.pic}/> :
                 <img className={style.slotPic} src={imageMissing}/>}
             <span className={style.slotDescription}>
@@ -32,39 +32,40 @@ const Slot = (props) =>{
                     fontSize: 'small'
                 }}/> {props.metro}
             </div>
-            <div className={`${style.address} ${style.colorGraySlot}`}>{props.adress}</div>
+            <div className={`${style.address} ${style.colorGraySlot}`}>{props.address}</div>
         </span>
-            </div>
-            <span className={style.rightContainer}>
+        </div>
+        <span className={style.rightContainer}>
             {props.isOwn
                 ? <Monetization Widget={props.Widget} Top={props.Top} Poster={props.Poster}/>
                 : <span className={style.addInfoContainer}>
                 <Tag isParking={props.isParking} isBeginner={props.isBeginner} isRent={props.isRent}
-                            isChild={props.isChild}/>
+                     isChild={props.isChild}/>
                 <Price price={props.price} priceTime={props.priceTime} priceCurriculum={props.priceCurriculum}/>
             </span>}
-            { (props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? (props.isOwn ?
-                <div className={style.icon}>
-                    <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>
-                </div>
-                : <Link to="/provider/cabinet" style={{
-                    color: 'black',
-                    display: 'flex',
-                    top: '50%'
-                }}>
-                    <div className={style.icon}><MonetizationOnIcon/></div>
-                </Link>)
-                : (isInArray(props.idUser, props.subscribers) ? <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
-                        <div className={style.icon}><BookmarkIcon/></div>
-                    </button> :
-                    <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
-                        <div className={style.icon}><BookmarkBorderIcon/></div>
-                    </button>)
-            ): <div className={style.iconEmpty}/>}
+            {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? (props.isOwn ?
+                    <div className={style.icon}>
+                        <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>
+                    </div>
+                    : <Link to="/provider/cabinet" style={{
+                        color: 'black',
+                        display: 'flex',
+                        top: '50%'
+                    }}>
+                        <div className={style.icon}><MonetizationOnIcon/></div>
+                    </Link>)
+                    : (isInArray(props.idUser, props.subscribers) ?
+                        <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
+                            <div className={style.icon}><BookmarkIcon/></div>
+                        </button> :
+                        <button className={style.buttonContainer} onClick={(e) => props.onClick(e, props.id)}>
+                            <div className={style.icon}><BookmarkBorderIcon/></div>
+                        </button>)
+            ) : <div className={style.iconEmpty}/>}
             <Link to={`/hobby/card/${props.id}`} className={style.icon}><MoreHorizIcon/></Link>
             </span>
-        </div>);
-}
+    </div>);
+};
 
 
 export default (withRouter)(Slot);

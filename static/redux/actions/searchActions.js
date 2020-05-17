@@ -79,7 +79,6 @@ export const initializeSearchPage = (searchWord, category) => (dispatch) => {
     setFilterSuccess([]);
     axios.get(`/restapi/hobby/find?label=${searchWord}`).then(res => {
         let promise = dispatch(setHobbiesToSearch(res.data));
-        console.log(res.data);
         let promise3 =  setCategorySuccess('Все категории');
         if (category !== undefined) {promise3 = dispatch(setCategorySuccess(category))}
         return (Promise.all([promise, promise3]).then(()=> {
@@ -110,7 +109,6 @@ export const changeSearchForUser = (hobbyID, searchWord) => (dispatch) => {
         .then(res => {
             axios.get(`/restapi/hobby/find?label=${searchWord}`)
                 .then(res => {
-                    console.log(res);
                         dispatch(setHobbiesToSearch(res.data));
                     }
                 );
@@ -126,7 +124,6 @@ export const changeSearchForProvider = (hobbyID, searchWord) => (dispatch) => {
         .then(res => {
             axios.get(`/restapi/hobby/find?label=${searchWord}`)
                 .then(res => {
-                        console.log(res);
                         dispatch(setHobbiesToSearch(res.data));
                     }
                 );

@@ -88,6 +88,7 @@ const hobbyPageReducer = (state = initialState, action) => {
                     email: action.payload.email,
                     vk: action.payload.contacts.vk,
                     instagram: action.payload.contacts.instagram,
+                    facebook: action.payload.contacts.facebook,
                     website: action.payload.website,
                 },
                 category: action.payload.category,
