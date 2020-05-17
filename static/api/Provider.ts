@@ -85,6 +85,13 @@ class Provider extends BaseFetchClass {
     public async getHobbies(): Promise<Response> {
         return this.get('/hobbies');
     }
+
+    /**
+     * Получает список всех комментариев, оставленных к хобби партнёра, и ответов на них.
+     */
+    public async getComments(): Promise<Response> {
+        return this.get('/comments');
+    }
 }
 
 export default Provider;

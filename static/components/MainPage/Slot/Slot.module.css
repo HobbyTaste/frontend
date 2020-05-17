@@ -1,7 +1,6 @@
 .slot {
     display: flex;
     width: 965px;
-    height: 70px;
     position: center;
     padding: 5px;
 }
