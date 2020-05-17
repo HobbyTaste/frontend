@@ -2,10 +2,6 @@ import BaseFetchClass from './BaseFetchClass';
 
 const BASE_URL = '/restapi/user';
 
-interface ILoginError {
-    email?: string;
-    password?: string;
-}
 
 interface IUser {
     id: string;
@@ -31,7 +27,7 @@ class User extends BaseFetchClass {
      * В случае ошибки озвращает объект с ошибками
      * {login: loginError, password: passwordError}, где записаны ошибки
      */
-    public async login(email: string, password: string): Promise<ILoginError | null> {
+    public async login(email: string, password: string): Promise<Response | null> {
         const response = await this.post('/login', {email, password});
         if (response.status === 200) {
             return null;

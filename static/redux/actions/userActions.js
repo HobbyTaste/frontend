@@ -57,9 +57,50 @@ const getData = () =>
     });
 
 
+// функции, отпраправляющие запросы....
+/*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
+export const addHobbyForUser = (hobbyID) => (dispatch) => {
+    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
+          console.log("responce add")
+          console.log(res)
+          dispatch(changeUserHobby(res.data.hobbies));
+      })
+          .catch(err => {
+              dispatch(someFail(err))
+          })
+          .then((res) => {
+              console.log("responce add");
+              console.log(res);
+              dispatch(changeUserHobby(res.data.hobbies));
+          })
+          .catch((err) => {
+              dispatch(someFail(err));
+          });
+  };
+  
+  /*удалить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
+  export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
+      axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
+          console.log("responce delete")
+          console.log(res)
+          dispatch(changeUserHobby(res.data.hobbies));
+      })
+          .catch(err => {
+              dispatch(someFail(err))
+          })
+          .then((res) => {
+              console.log("responce delete");
+              console.log(res);
+              dispatch(changeUserHobby(res.data.hobbies));
+          })
+          .catch((err) => {
+              dispatch(someFail(err));
+          });
+  };
+
+
 export const initializeUserCabinet = () => async dispatch => {
     dispatch(initializeUser(false));
-    await userApi.login(testLogin, testPassword);
     await dispatch(getCurrentUserInfo());
     await dispatch(getUserComments());
     dispatch(initializeUser(true));
@@ -80,34 +121,10 @@ export const initializeUserHobbies = () => async (dispatch) => {
     dispatch(fetchingHobbies('success'));
 };
 
-function firstLettersToUpperCase(text) {
-    return text
-        .split(' ')
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(' ');
-}
-
-function truncateHobbyForSlot(hobby) {
-    return {
-        pic: hobby.avatar || defaultHobbyProps.imageUrl,
-        name: hobby.label,
-        metro: firstLettersToUpperCase(hobby.metroStation),
-        address: hobby.address,
-        price: hobby.price ? hobby.price.title : defaultHobbyProps.price,
-        // Не очень понятно, где это на бэкенде
-        priceTime: defaultHobbyProps.priceTIme,
-        priceCurriculum: defaultHobbyProps.priceCurriculum,
-        isParking: hobby.parking,
-        isBeginner: hobby.novice,
-        isRent: hobby.equipment,
-    };
-}
-
 function getUserHobbies() {
     return async dispatch => {
         const responseBody = await (await userApi.getHobbies()).json();
-        const truncatedHobbies = responseBody.map((hobby) => truncateHobbyForSlot(hobby));
-        dispatch(setUserHobbies(truncatedHobbies));
+        dispatch(setUserHobbies(responseBody));
     };
 }
 

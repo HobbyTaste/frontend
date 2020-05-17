@@ -1,71 +1,76 @@
-import React, { Component, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import style from './ProviderHobby.module.css';
-import Slot from '../../MainPage/Slot/Slot';
-import { initializeProviderCabinet } from '../../../redux/actions/providerActions';
+import React, { Component, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import style from "./ProviderHobby.module.css";
+import Slot from "../../MainPage/Slot/Slot";
+import { initializeFollowedHobbies } from "../../../redux/actions/providerActions";
+import AddIcon from "@material-ui/icons/Add";
+import Monetization from "../../MainPage/Slot/Price/Monetization";
+import Preloader from "../../Common/Preloader/Preloader";
 
-const flags = {
-    isParking: true,
-    isBeginner: true,
-    isRent: true,
-};
-const image = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
-const ProviderHobby = (props) => {
+function firstLettersToUpperCase(text) {
+    return text
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+
+const ProviderFollowedHobbies = (props) => {
     useEffect(() => {
-        props.initializeProviderCabinet();
+        props.initializeFollowedHobbies();
     }, []);
 
-    // if (!props.isAuth) {
-    //    return <Redirect to={'/'} />;
-    // }
+    if (!props.providerIsAuth) {
+        return <Redirect to={"/"} />;
+    }
 
-    return (<div className={style.background}>
-        <div className={style.hobbyHeader}>Ваши хобби:</div>
-        <div className={style.slotContainer}>
-            <div className="center">
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price={null} priceTime={null} priceCurriculum={null}
-                      isParking={false} isBeginner={flags.isBeginner} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={false} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={flags.isParking} isBeginner={flags.isBeginner} isRent={false}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
-                <Slot pic={image} name='Вид хобби' metro='Станция метро' adress="Долгопрудный, Первомайская 32 к2"
-                      price='400 p.' priceTime='за занятие' priceCurriculum='по будням'
-                      isParking={false} isBeginner={false} isRent={flags.isRent}
-                      isUserAuth={props.isUserAuth} isProviderAuth={props.isProviderAuth}/>
+    if (props.fetchedFollowedHobbies !== "success") {
+        return <Preloader/>;
+    }
+
+    const hobbiesToShow = props.followedHobbies.map((hobby) => (
+        <Slot
+            key={hobby._id}
+            id={hobby._id}
+            owner={hobby.owner}
+            subscribers={hobby.subscribers}
+            pic={hobby.avatar}
+            name={hobby.label}
+            metro={firstLettersToUpperCase(hobby.metroStation)}
+            adress={hobby.address}
+            price={hobby.price.title}
+            isUserAuth={false}
+            isProviderAuth={true}
+            isBeginner={hobby.novice}
+            isRent={hobby.equipment}
+            isChild={hobby.children}
+            isParking={hobby.parking}
+            isOwn={false}
+            priceTime={"За занятие"}
+        />
+    ));
+
+    return (
+        <div className={style.background}>
+            <div className={style.headerContainer}>
+                <span className={style.hobbyHeader}>Ваши хобби:</span>
+            </div>
+            <div className={style.slotContainer}>
+                {hobbiesToShow}
             </div>
         </div>
-    </div>);
+    );
 };
 
 const mapStateToProps = (state) => ({
-    // providerIsAuth: state.providerCabinet.providerIsAuth,
-    providerIsAuth: true,
-    // name: state.providerCabinet.name,
-    email: state.providerCabinet.email,
-    phone: state.providerCabinet.phone,
-    info: state.providerCabinet.info,
-    // avatar: state.providerCabinet.avatar,
-    password: state.providerCabinet.password,
-    providerInitialized: state.providerCabinet.providerInitialized,
-    providerHobbies: state.providerCabinet.providerHobbies,
-
-    name: 'Контора "Рога и копыта"',
-    avatar: 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg',
+    providerIsAuth: state.providerCabinet.providerIsAuth,
+    fetchedFollowedHobbies: state.providerCabinet.fetchedFollowedHobbies,
+    followedHobbies: state.providerCabinet.followedHobbies,
 });
 
 // maybe need own initializer
-export default connect(mapStateToProps, { initializeProviderCabinet })(ProviderHobby);
+export default connect(mapStateToProps, { initializeFollowedHobbies })(ProviderFollowedHobbies);
 // export default UserCabinetHobbies;

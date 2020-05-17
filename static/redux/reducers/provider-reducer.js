@@ -14,7 +14,9 @@ let initialState = {
     info: '',
     providerIsAuth: false,
     providerInitialized: false,
-    providerHobbies: [],
+    fetchedOwnHobbies: "no information",
+    fetchedFollowedHobbies: "no information",
+    ownHobbies: [],
     followedHobbies: [],
 };
 
@@ -36,7 +38,7 @@ const ProviderCabinetReducer = (state = initialState, action) => {
                 ...state, providerInitialized: action.status
             }
         }
-        case actionTypes.CHANGE_HOBBY_FOLLOWED: {
+        case actionTypes.SET_FOLLOWED_HOBBIES: {
             return {
                 ...state,
                 followedHobbies: action.followedHobbies
@@ -48,14 +50,24 @@ const ProviderCabinetReducer = (state = initialState, action) => {
                 comments: action.providerComments
             };
         }
-        case actionTypes.SET_FETCHING_PROVIDER_HOBBIES:
+        case actionTypes.SET_FETCHING_FOLLOWED_HOBBIES:
             return {
                 ...state,
-                fetchingHobbies: action.status
+                fetchedFollowedHobbies: action.status
             };
-        case actionTypes.SET_PROVIDER_HOBBIES:
+        case actionTypes.SET_FETCHING_OWN_HOBBIES:
             return {
-              ...state, providerHobbies: action.providerHobbies
+                ...state,
+                fetchedOwnHobbies: action.status
+            }
+        case actionTypes.SET_IS_PROVIDER_IN_CABINET:
+            return {
+                ...state,
+                isProviderInCabinet: action.status
+            }
+        case actionTypes.SET_OWN_HOBBIES:
+            return {
+              ...state, ownHobbies: action.providerHobbies
             };
         default:
             return state;

@@ -26,7 +26,7 @@ class Comment extends BaseFetchClass {
     }
 
     public async providerAddAnswer(comment: IComment, hobbyId: string, relatedId: string): Promise<Response> {
-        return this.post(`/create?hobbyId=${hobbyId}?relatedId=${relatedId}`, comment);
+        return this.post(`/create?hobbyId=${hobbyId}&relatedId=${relatedId}`, comment);
     }
 }
 

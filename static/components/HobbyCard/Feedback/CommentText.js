@@ -36,12 +36,18 @@ class CommentText extends React.Component {
     }
 
     handleSubmit = (values) => {
-        let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+        let today = new Date(), dataNow = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + ' ' + today.getHours() + ' ' + today.getMinutes();
         const body={
             text: values.TextFeedback,
             datetime: dataNow,
         }
-        this.props.onProviderResponse(this.props.hobbyId, body, this.props.commentsId[this.props.relatedIndex]);
+        let hobbyId = this.props.hobbyId;
+        let relatedId = this.props.commentsId[this.props.relatedIndex];
+        if (this.props.commentsId[0].selfId) {
+            hobbyId = this.props.commentsId[this.props.relatedIndex].hobbyId;
+            relatedId = this.props.commentsId[this.props.relatedIndex].selfId;
+        }
+        this.props.onProviderResponse(hobbyId, body, relatedId);
     };
 
     render() {
@@ -84,7 +90,7 @@ class CommentText extends React.Component {
                     )}
                     <div className={style.text}>{this.props.comment.text}</div>
                 </div>
-                {this.props.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true} />}
+                {this.state.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true} name={this.props.name}/>}
             </div>
         );
     }
@@ -92,11 +98,14 @@ class CommentText extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    commentsId: state.hobbyPage.commentsId,
+    commentsId: state.providerCabinet.isProviderInCabinet ? 
+                state.providerCabinet.comments.commentsIds : 
+                state.hobbyPage.commentsId,
+    name: state.providerCabinet.name || state.userCabinet.name
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId)),
+    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentText);

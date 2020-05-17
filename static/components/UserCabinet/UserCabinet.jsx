@@ -7,14 +7,6 @@ import { initializeUserCabinet } from '../../redux/actions/userActions';
 import CommentsList from '../HobbyCard/Feedback/CommentsList';
 import { defaultAvatarUrl } from "../../utils/constant";
 
-function changeNaming(comments) {
-    return comments.map(comment => ({
-        nameWriter: comment.name,
-        date: comment.datetime,
-        stars: comment.evaluation,
-        text: comment.text
-    }))
-}
 
 const UserCabinet = (props) => {
     useEffect(() => {
@@ -32,7 +24,7 @@ const UserCabinet = (props) => {
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
-                <CommentsList isProvider={false} isOwner={false} comments={changeNaming(props.userComments || [])}/>
+                <CommentsList isProvider={false} isOwner={false} comments={props.userComments || []}/>
             </div>
         </div>
     );

@@ -7,7 +7,8 @@ import Preloader from '../Common/Preloader/Preloader';
 import {
     getLabelByUrlCategory,
     initializeSearchPage,
-    unsetCategory
+    unsetCategory,
+    setIsInSearchPage
 } from '../../redux/actions/searchActions';
 import style from './style.css';
 import Content from './Content/Content';
@@ -34,6 +35,10 @@ class SearchPage extends React.PureComponent {
 
     componentDidMount() {
         this.props.initialize(this.props.word, this.props.match.params.category);
+    }
+
+    componentWillUnmount() {
+        this.props.setIsInSearchPage(false);
     }
 
     handleAddMyHobby(event, hobbyId) {
@@ -139,6 +144,7 @@ const mapDispatchToProps = (dispatch) => ({
     onDeleteProviderHobby: (idHobby, idProvider) => dispatch(deleteHobbyForProvider(idHobby, idProvider)),
     initialize: (word, category) => dispatch(initializeSearchPage(word, category)),
     unsetCategory: (hobbies) => dispatch(unsetCategory(hobbies)),
+    setIsInSearchPage: (status) => dispatch(setIsInSearchPage(status))
 });
 
 

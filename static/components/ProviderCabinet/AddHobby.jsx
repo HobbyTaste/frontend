@@ -102,6 +102,15 @@ const AddHobbyForm = (props) => {
     const onCategoryChange = (e) => {
         setCategory(e.target.value);
     };
+    // const onDaysChange = (e) => {
+    //     let [day, number] = e.target.id.split('+');
+    //     console.log(day, number);
+    //     number = Number(number);
+    //     console.log(workTime);
+    //     setWorkTime(workTime => {
+    //         return {...workTime, [day]: {[number]: e.target.value, [1 - number]: workTime[day][1 - number]}};
+    //     });
+    // }
 
 
     const onParkingChange = (val) => {
@@ -163,11 +172,16 @@ const AddHobbyForm = (props) => {
     };
 
     const onSubmit = async () => {
+        // const prettyWorkTime = [];
+        // for (day in workTime) {
+        //     prettyWorkTime.push(`${day} ${workTime[day][0]} — ${workTime[day][1]} \n`);
+        // }
+        // console.log(prettyWorkTime);
         const newHobby = {label, metroStation: metro,
             address, location, category,
             description, facilities, special,
-            phone, email, website, contacts: {vk, instagram, facebook},
-            workTime: exactDates, price: {title: price.title, priceList: price.priceList},
+            phone, email, website, contacts: JSON.stringify({vk, instagram, facebook}),
+            workTime: JSON.stringify([exactDates]), price: JSON.stringify({title: price.title, priceList: price.priceList}),
             parking: Boolean(parking), novice: Boolean(beginner), children: Boolean(kids), equipment: Boolean(equipment), avatar: file
         }
         const requestResult = await props.addNewHobby(newHobby);
@@ -235,10 +249,10 @@ const AddHobbyForm = (props) => {
         <div className={style.weekDayContainer}>
             {day}:
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+0`}/>
             </span>
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+1`}/>
             </span>
         </div>
     );

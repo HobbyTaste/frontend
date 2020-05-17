@@ -4,17 +4,31 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from "./ProviderOwnHobbies.module.css";
 import Slot from "../../MainPage/Slot/Slot";
-import { initializeProviderHobbies } from "../../../redux/actions/providerActions";
+import { initializeOwnHobbies } from "../../../redux/actions/providerActions";
 import AddIcon from "@material-ui/icons/Add";
 import Monetization from "../../MainPage/Slot/Price/Monetization";
+import Preloader from "../../Common/Preloader/Preloader";
+
+
+function firstLettersToUpperCase(text) {
+    return text
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
 
 const ProviderOwnHobbies = (props) => {
     useEffect(() => {
-        props.initializeProviderHobbies();
+        props.initializeOwnHobbies();
     }, []);
 
     if (!props.providerIsAuth) {
         return <Redirect to={"/"} />;
+    }
+
+    if (props.fetchedOwnHobbies !== "success") {
+        return <Preloader/>;
     }
 
     const hobbiesToShow = props.providerHobbies.map((hobby) => (
@@ -25,7 +39,7 @@ const ProviderOwnHobbies = (props) => {
             subscribers={hobby.subscribers}
             pic={hobby.avatar}
             name={hobby.label}
-            metro={hobby.metroStation}
+            metro={firstLettersToUpperCase(hobby.metroStation)}
             adress={hobby.address}
             price={hobby.price.title}
             isUserAuth={false}
@@ -59,15 +73,10 @@ const ProviderOwnHobbies = (props) => {
 
 const mapStateToProps = (state) => ({
     providerIsAuth: state.providerCabinet.providerIsAuth,
-    name: state.providerCabinet.name,
-    email: state.providerCabinet.email,
-    phone: state.providerCabinet.phone,
-    info: state.providerCabinet.info,
-    avatar: state.providerCabinet.avatar,
-    providerInitialized: state.providerCabinet.providerInitialized,
-    providerHobbies: state.providerCabinet.providerHobbies,
+    fetchedOwnHobbies: state.providerCabinet.fetchedOwnHobbies,
+    providerHobbies: state.providerCabinet.ownHobbies,
 });
 
 // maybe need own initializer
-export default connect(mapStateToProps, { initializeProviderHobbies })(ProviderOwnHobbies);
+export default connect(mapStateToProps, { initializeOwnHobbies })(ProviderOwnHobbies);
 // export default UserCabinetHobbies;

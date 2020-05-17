@@ -32,7 +32,11 @@ class Hobby extends BaseFetchClass{
      * @return {Promise<Response>}
      */
     public async add(hobbyState: any): Promise<Response> {
-        const response = await this.post('/add', hobbyState);
+        const formData = new FormData();
+        for (const key in hobbyState) {
+            formData.append(key, hobbyState[key]);
+        }
+        const response = await this.post('/add', formData, {isFormData: true});
         if (!response.ok) {
             console.error(response);
         }

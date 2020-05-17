@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import style from './ChangeProviderForm.module.css';
-import UploadPhoto from '../../../Common/UploadFotoBlock/UploadPhoto';
-import { userEdit } from '../../../../redux/actions/userActions';
+import React, { useState } from "react";
+import { reduxForm, Field } from "redux-form";
+import { connect } from "react-redux";
+import style from "./ChangeProviderForm.module.css";
+import { providerEdit } from "../../../../redux/actions/providerActions";
+import UploadPhoto from "../../../Common/UploadFotoBlock/UploadPhoto";
 
 let mainFile = null;
-const ChangeProviderForm = ({ handleSubmit, name, error }) => {
-    const [url, setUrl] = useState('');
+
+const ChangeProviderForm = ({handleSubmit, name, metro}) => {
+    const [url, setUrl] = useState("");
     const [file, setFile] = useState(null);
-    const [state, setState] = useState({
-        Name: name,
-    });
+
     const uploadImage = (e) => {
         const reader = new FileReader();
         const photoFile = e.target.files[0];
@@ -23,33 +22,30 @@ const ChangeProviderForm = ({ handleSubmit, name, error }) => {
         reader.readAsDataURL(photoFile);
     };
     const deleteUrl = () => {
-        setUrl('');
+        setUrl("");
         setFile(null);
         mainFile = null;
-    };
-    const handleInputChange = (event) => {
-        setState({
-            [event.target.name]: event.target.text,
-        });
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <div className={style.inputContainer}>
-                <input className={style.input} name='Name' value={state.Name} onChange={handleInputChange}/>
+                <Field component="input" className={style.input} name="name" placeholder={name} />
             </div>
             <div>
-                <UploadPhoto uploadImage={uploadImage} deleteUrl={deleteUrl} url={url}/>
+                <Field component={UploadPhoto} name="Photo" uploadImage={uploadImage} deleteUrl={deleteUrl} url={url} />
             </div>
-            <button className={style.saveButton} onClick={handleSubmit}>Сохранить</button>
+            <button className={style.saveButton} type='submit'>
+                Сохранить
+            </button>
         </form>
     );
 };
 
-const ChangeReduxForm = reduxForm({ form: 'change' })(ChangeProviderForm);
+const ChangeReduxForm = reduxForm({ form: "change" })(ChangeProviderForm);
 
-const ChangeForm = (props) => {
-    const onSubmit = (formData) => {
+const ChangeForm = ({handleClick, name, providerEdit}) => {
+    const handleSubmit = async (formData) => {
         const dataToChange = {};
         if (formData.name !== undefined) {
             dataToChange.name = formData.name;
@@ -57,14 +53,15 @@ const ChangeForm = (props) => {
         if (mainFile !== null) {
             dataToChange.avatar = mainFile;
         }
-        props.userEdit(dataToChange);
-        props.handleClick();
+        await providerEdit(dataToChange);
+        handleClick();
     };
+
     return (
         <div>
-            <ChangeReduxForm onSubmit={onSubmit} name={props.name} metro={props.metro} />
+            <ChangeReduxForm onSubmit={handleSubmit} name={name} />
         </div>
     );
 };
 
-export default connect(null, { userEdit })(ChangeForm);
+export default connect(null, { providerEdit })(ChangeForm);
