@@ -4,7 +4,7 @@
 ## Содержание
 1. [Настройка окружения и установка необходмых пакетов для разработки (Linux, MacOS)](#settings-env)
 2. [Локальная разраборка](#dev-rules)
-2. [Frontend](#frontend)
+3. [Frontend](#frontend)
 
 <a name="settings-env"></a>
 

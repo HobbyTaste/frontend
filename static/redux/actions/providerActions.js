@@ -1,6 +1,4 @@
 import { stopSubmit } from 'redux-form';
-import axios from 'axios';
-import { someFail, setIsUserInCabinet } from './userActions';
 import * as actionTypes from './actionsTypes';
 import ProviderApi from '../../api/Provider.ts';
 import HobbyApi from '../../api/Hobby.ts';
@@ -25,35 +23,6 @@ export function getProviderComments() {
         dispatch(setProviderComments(responseBody));
     };
 }
-
-const changeProviderHobby = (userHobbies) => ({
-    type: actionTypes.CHANGE_HOBBY_USER,
-    userHobbies,
-});
-
-/* добавить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок */
-export const addHobbyForProvider = (hobbyID, userID) => (dispatch) => {
-    console.log('provider add');
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then((res) => {
-        console.log('responce add');
-        console.log(res);
-        dispatch(changeProviderHobby(res.data.hobbies));
-    })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
-/* удалить хобби. Отправляем id хобби и провайдера, если успех, хотим получить обновленный массив подписок */
-export const deleteHobbyForProvider = (hobbyID, providerID) => (dispatch) => {
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then((res) => {
-        console.log('responce delete');
-        console.log(res);
-        dispatch(changeProviderHobby(res.data.hobbies));
-    })
-        .catch((err) => {
-            dispatch(someFail(err));
-        });
-};
 
 export const getCurrentProviderInfo = () => async dispatch => {
     const response = await providerApi.getInfo();
@@ -104,7 +73,7 @@ export const initializeFollowedHobbies = () => async dispatch => {
     dispatch(setFetchingFollowedHobbies("success"));
 };
 
-export const createNewProvider = (name, password, email) => (dispatch) => {
+export const createNewProvider = (name, password, email, avatar, phone, info) => (dispatch) => {
     const providerData = {
         name, password, email
     };
