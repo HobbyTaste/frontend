@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import CommentInput from "./CommentInput";
 import { addProviderResponse, addUserFeedback } from "../../../redux/actions/hobbyActions";
+import { comments } from '../../../utils/constant';
 
 const useStyles = (theme) => ({
     root: {
@@ -41,13 +42,8 @@ class CommentText extends React.Component {
             text: values.TextFeedback,
             datetime: dataNow,
         }
-        let hobbyId = this.props.hobbyId;
-        let relatedId = this.props.commentsId[this.props.relatedIndex];
-        if (this.props.commentsId[0].selfId) {
-            hobbyId = this.props.commentsId[this.props.relatedIndex].hobbyId;
-            relatedId = this.props.commentsId[this.props.relatedIndex].selfId;
-        }
-        this.props.onProviderResponse(hobbyId, body, relatedId);
+        this.props.onProviderResponse(this.props.hobbyId, body, this.props.comment.id);
+        this.setState({ isAnswered: false });
     };
 
     render() {
@@ -90,7 +86,7 @@ class CommentText extends React.Component {
                     )}
                     <div className={style.text}>{this.props.comment.text}</div>
                 </div>
-                {this.state.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true} name={this.props.name}/>}
+                {this.state.isAnswered && <CommentInput onSubmit={this.handleSubmit} isAnswer={true} name={this.props.name} />}
             </div>
         );
     }

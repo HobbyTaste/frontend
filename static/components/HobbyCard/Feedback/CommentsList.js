@@ -11,8 +11,8 @@ const CommentsList = (props) => {
                         isHaveAnswer = false;
                     }
                     return <li key={index} className={style.container}>
-                        <CommentText comment={item} isProviderAuth={props.isProvider} isHaveAnswer= {isHaveAnswer}
-                                     isOwner = {props.isOwner} isItAnswerProvider={false} relatedIndex={index}/>
+                        <CommentText comment={item} isProviderAuth={props.isProvider} isHaveAnswer= {isHaveAnswer} name={props.name}
+                                     isOwner = {props.isOwner} isItAnswerProvider={false} relatedIndex={index} hobbyId={props.hobbyId}/>
                         {item.answer &&
                         <CommentText comment={item.answer} isProviderAuth={props.isProvider} isItAnswerProvider={true}/>}
                     </li>;

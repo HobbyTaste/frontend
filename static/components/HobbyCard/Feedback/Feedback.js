@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import style from './Feedback.css';
 import { connect } from 'react-redux';
-import CommentText from './CommentText';
 import CommentInput from './CommentInput';
-import { addProviderResponse, addUserFeedback } from '../../../redux/actions/hobbyActions';
+import {addUserFeedback } from '../../../redux/actions/hobbyActions';
 import CommentsList from './CommentsList';
 
 class Feedback extends React.Component {
@@ -28,7 +27,7 @@ class Feedback extends React.Component {
         const onSubmit = this.handleSubmit
         return (
             <div>
-                <CommentsList isProvider={isProvider} isOwner = {isOwner} comments ={this.props.comments}/>
+                <CommentsList hobbyId = {this.props.hobbyId} isProvider={isProvider} isOwner = {isOwner} comments ={this.props.comments}  name={this.props.name}/>
                 {this.props.isUserAuth &&
                 <div><p className={style.labelAnswer}> Добавить отзыв:</p>
                     <CommentInput onSubmit={onSubmit} isAnswer={false} name={this.props.name}/></div>}

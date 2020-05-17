@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { findHobbies, toggleAddingProgress } from '../reducers/hobbiesPage-reducer';
-import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import { someFail } from './userActions';
-import {reset} from 'redux-form'
 import { setIsInSearchPage } from './searchActions';
 import { getProviderComments } from './providerActions';
 import CommentApi from '../../api/Comment';
@@ -61,7 +58,6 @@ export const addUserFeedback = (hobbyId, body) => (dispatch) => {
             if(res.ok){
             axios.get(`/restapi/hobby/comments?id=${hobbyId}`)
             .then(res => {
-                console.log(res.data)
                dispatch(setHobbyComments(res.data));
                })}
             })
@@ -69,17 +65,15 @@ export const addUserFeedback = (hobbyId, body) => (dispatch) => {
 
 /*Добавить ответ провайдера на отзыв. Отправляем id провайдера, хобби. Хотим, чтобы вернулся обновленный массив отзывов и ответов.*/
 export const addProviderResponse = (hobbyId, body, relatedId) => (dispatch) => {
-    console.log("addProviderResponse")
     const obj = {
         text: body.text,
-        datetime: body.datetime,
+        datetime: body.datetime
     };
     commentApi.providerAddAnswer(obj, hobbyId, relatedId)
         .then(res =>{
             if(res.ok){
                 axios.get(`/restapi/hobby/comments?id=${hobbyId}`)
                     .then(res => {
-                        console.log(res.data)
                         dispatch(setHobbyComments(res.data));
                     })}
         })
@@ -92,7 +86,6 @@ export const changeHobbyForUser = (hobbyID) => (dispatch) => {
         .then(res => {
             axios.get(`/restapi/hobby/info?id=${hobbyID}`)
                 .then(res => {
-                    console.log(res.data)
                         dispatch(setHobbyData(res.data));
                     }
                 );
@@ -109,7 +102,6 @@ export const changeHobbyForProvider = (hobbyID) => (dispatch) => {
         .then(res => {
             axios.get(`/restapi/hobby/info?id=${hobbyID}`)
                 .then(res => {
-                    console.log(res.data);
                         dispatch(setHobbyData(res.data));
                     }
                 );

@@ -92,12 +92,6 @@ export const initializeProviderCabinet = () => async dispatch => {
     dispatch(setIsProviderInCabinet(true));
 };
 
-export const initializeOwnHobbies = () => async dispatch => {
-    dispatch(setFetchingOwnHobbies("loading"));
-    await dispatch(getOwnHobbies());
-    dispatch(setFetchingOwnHobbies("success"));
-};
-
 export const initializeFollowedHobbies = () => async dispatch => {
     dispatch(setFetchingFollowedHobbies("loading"));
     await dispatch(getFollowedHobbies());
@@ -106,9 +100,10 @@ export const initializeFollowedHobbies = () => async dispatch => {
 
 export const createNewProvider = (name, password, email) => (dispatch) => {
     const providerData = {
-        name, password, email, avatar, phone, info
+        name, password, email
     };
     providerApi.create(providerData).then((response) => {
+        console.log(response);
         if (response.ok) {
             dispatch(getCurrentProviderInfo());
         }

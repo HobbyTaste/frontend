@@ -10,7 +10,20 @@
     justify-content: normal;
 }
 
-.image{
+.buttonContainer {
+    box-sizing: border-box;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    display: flex;
+    cursor: pointer;
+    width: 50%;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.image {
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -19,10 +32,20 @@
 .cardHeader {
     position: center;
     display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
+.cardFunction {
+    dislpay: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .cardDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 220px;
     width: 321px;
     height: 105px;
@@ -50,7 +73,8 @@
     height: 16px;
     margin-top: 4px;
     font-size: 10px;
-    line-height: 16px;letter-spacing: 0.4px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
 }
 
 .metro {
@@ -67,10 +91,20 @@
 }
 
 .icon {
-    float: right;
-    margin-right: 20px;
-    top: 50%;
-    transform: translate(50%, -80%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+}
+.iconMore{
+    padding-right: 12px;
+
+}
+.iconMonetization {
+    color: #FFFFFF;
+    width: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .iconEmpty {

@@ -9,7 +9,7 @@ const Price = (props) => (<span className={style.priceContainer}>
             : <div className={style.price}>{props.price}</div> }
     </div>
     <div className={style.centringContainer}>
-        { !(props.price)
+        { !(props.price) || !(props.priceTime)
             ? <div className={style.priceTime}>уточняйте</div>
             : <div className={style.priceTime}>{props.priceTime}</div> }
     </div>

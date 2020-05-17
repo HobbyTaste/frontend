@@ -1,8 +1,9 @@
 .slot {
     display: flex;
-    width: 965px;
+    justify-content: space-between;
     position: center;
     padding: 5px;
+    width: 100%;
 }
 
 .slotPic {
@@ -10,19 +11,22 @@
     height: 60px;
     margin-left: 16px;
     object-fit: cover;
-
     box-sizing: border-box;
     border-radius: 30px;
 }
 
 .slotDescription {
+    display: flex;
+    flex-direction: column;
     margin-left: 20px;
-    width: 270px;
 }
 
 .slotHeader {
-    position: center;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-shrink: inherit;
+    position: center;
 }
 
 .name {
@@ -60,11 +64,16 @@
 }
 
 .addInfoContainer {
-    width: 320px;
     display: flex;
-    padding-left: 170px;
 }
+.rightContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+.leftContainer{
+    display: flex;
 
+}
 .icon {
     margin-left: 12px;
     margin-right: 12px;

@@ -1,35 +1,37 @@
 import {getMetroStations} from "../../api/Geo";
 import Hobby from "../../api/Hobby";
-import {setIsUserInCabinet} from "../actions/userActions";
-import { setIsInSearchPage } from '../actions/searchActions';
+import { setIsUserInCabinet, someFail } from '../actions/userActions';
+import { setCategorySuccess, setHobbiesToSearch, setIsInSearchPage, setSearchWordSuccess } from '../actions/searchActions';
+import axios from 'axios';
+import { sortByTypeMonitization } from '../../utils/functions';
 
-const SET_HOBBIES_TO_SELECT = 'SET_HOBBIES_TO_SELECT';
-const SET_METRO_STATIONS = 'SET-METRO-STATIONS';
-const SET_STATIONS_TO_SELECT = 'SET-STATIONS-TO-SELECT';
+const SET_HOBBIES_TOP = 'SET_HOBBIES_TOP';
+const SET_HOBBIES_WIDGET = 'SET_HOBBIES_WIDGET';
+const SET_HOBBIES_POSTER = 'SET_HOBBIES_POSTER';
 const INITIALIZED_MAIN_PAGE_SUCCESS = 'INITIALIZED_MAIN_PAGE_SUCCESS';
 
 const hobbyApi = new Hobby();
 
 let initialState = {
-    hobbiesToSelect: [],
-    metroStations: [],
-    metroStationsToSelect: [],
+    hobbiesTop: [],
+    hobbiesWidget: [],
+    hobbiesPoster: [],
     initializedMainPage: false
 };
 
 const mainPageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_HOBBIES_TO_SELECT:
+        case SET_HOBBIES_TOP:
             return {
-                ...state, hobbiesToSelect: action.hobbiesToSelect
+                ...state, hobbiesTop: action.hobbiesTop
             };
-        case SET_METRO_STATIONS:
+        case SET_HOBBIES_WIDGET:
             return {
-                ...state, metroStations: action.stations,
+                ...state, hobbiesWidget: action.hobbiesWidget,
             };
-        case SET_STATIONS_TO_SELECT:
+        case SET_HOBBIES_POSTER:
             return {
-                ...state, metroStationsToSelect: action.stationsToSelect
+                ...state,  hobbiesPoster: action.hobbiesPoster
             };
         case INITIALIZED_MAIN_PAGE_SUCCESS:
             return {
@@ -40,9 +42,9 @@ const mainPageReducer = (state = initialState, action) => {
     }
 };
 
-export const setHobbiesToSelect = (hobbiesToSelect) => ({type: SET_HOBBIES_TO_SELECT, hobbiesToSelect});
-export const setMetroStations = (stations) => ({type: SET_METRO_STATIONS, stations});
-export const setStationsToSelect = (stationsToSelect) => ({type: SET_STATIONS_TO_SELECT, stationsToSelect});
+export const setHobbiesTop = (hobbiesTop) => ({type: SET_HOBBIES_TOP, hobbiesTop});
+export const setHobbiesWidget = (hobbiesWidget) => ({type: SET_HOBBIES_WIDGET, hobbiesWidget});
+export const setHobbiesPoster = (hobbiesPoster) => ({type: SET_HOBBIES_POSTER, hobbiesPoster});
 export const initializedMainPageSuccess = (initialize) => ({type: INITIALIZED_MAIN_PAGE_SUCCESS, initialize});
 export default mainPageReducer;
 
@@ -89,33 +91,4 @@ function removeDuplicates(arr) {
     return result;
 }
 
-export const getHobbies = (hobbyType) => (dispatch) => {
-    const obj = {category: hobbyType};
-    return hobbyApi.getWithFilter(obj)
-        .then((response) => {
-            if (response.ok) {
-                response.json().then(body => {
-                    let ans = body.map(hobby => ({
-                        label: hobby.label,
-                        value: hobby.label
-                    }));
-                    const filteredLabels = removeDuplicates(ans);
-                    dispatch(setHobbiesToSelect(filteredLabels));
-                });
-            } else {
-                response.json().then(console.log);
-            }
-        })
-};
 
-export const initializeMainPage = (hobbyType) => (dispatch) => {
-    dispatch(initializedMainPageSuccess(false));
-    dispatch(setIsUserInCabinet(false));
-    dispatch(setIsInSearchPage(false));
-    let promise = dispatch(getMetro());
-    let promise2 = dispatch(getHobbies(hobbyType));
-    Promise.all([promise, promise2])
-        .then(() => {
-            dispatch(initializedMainPageSuccess(true));
-        });
-};

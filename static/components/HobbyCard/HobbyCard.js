@@ -3,17 +3,14 @@ import style from './HobbyCard.css';
 import feedStyle from './Feedback/Feedback.css';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Feedback from './Feedback/Feedback';
 import Sidebar from './Sidebar/Sidebar';
 import Slider from './Image/Slider';
 import ButtonAction from './ActionButton';
 import InformationBlock from './InformationForm/InformationForm';
 import {
-    addHobbyForUser,
     changeHobbyForProvider,
     changeHobbyForUser,
-    deleteHobbyForUser
 } from '../../redux/actions/hobbyActions';
 import { initializeHobbyPage } from '../../redux/actions/hobbyActions';
 import Preloader from '../Common/Preloader/Preloader';
@@ -71,7 +68,7 @@ class HobbyCard extends React.Component {
                 </div>
                 <div className={style.communication}>
                     <p className={feedStyle.labelAnswer}> Отзывы:</p>
-                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner}/>
+                    <Feedback comments = {this.props.hobbyInfo.comments} isOwner = {isOwner} hobbyId={this.props.hobbyInfo.id}/>
 
                 </div>
             </div>
@@ -92,6 +89,7 @@ const mapStateToProps = (state) => ({
         owner: state.hobbyPage.owner,
         comments: state.hobbyPage.comments,
         id: state.hobbyPage.id,
+        rating: state.hobbyPage.rating,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,
         avatar: [state.hobbyPage.avatar],

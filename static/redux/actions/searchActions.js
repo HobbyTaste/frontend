@@ -79,7 +79,6 @@ export const initializeSearchPage = (searchWord, category) => (dispatch) => {
     setFilterSuccess([]);
     axios.get(`/restapi/hobby/find?label=${searchWord}`).then(res => {
         let promise = dispatch(setHobbiesToSearch(res.data));
-        console.log(res.data);
         let promise3 =  setCategorySuccess('Все категории');
         if (category !== undefined) {promise3 = dispatch(setCategorySuccess(category))}
         return (Promise.all([promise, promise3]).then(()=> {
@@ -104,6 +103,37 @@ export const updateSearch = (searchWord) => (dispatch) => {
             dispatch(someFail(err))
         })
 };
+
+export const changeSearchForUser = (hobbyID, searchWord) => (dispatch) => {
+    axios.get(`/restapi/user/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/find?label=${searchWord}`)
+                .then(res => {
+                        dispatch(setHobbiesToSearch(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
+};
+
+
+export const changeSearchForProvider = (hobbyID, searchWord) => (dispatch) => {
+    axios.get(`/restapi/provider/subscribe?id=${hobbyID}`)
+        .then(res => {
+            axios.get(`/restapi/hobby/find?label=${searchWord}`)
+                .then(res => {
+                        dispatch(setHobbiesToSearch(res.data));
+                    }
+                );
+        })
+        .catch(err => {
+            dispatch(someFail(err));
+        });
+};
+
+
 
 
 export const unsetCategory= () => (dispatch) => {

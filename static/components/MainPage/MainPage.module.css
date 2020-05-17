@@ -1,6 +1,5 @@
 .background {
     min-height: 100%;
-    width: 90%;
     height: auto;
     position: center;
     display: flex;
@@ -38,7 +37,7 @@
 
 .slotContainer {
     display: flex;
-    width: 95%;
+    width: 100%;
     position: center;
     background: white;
 
