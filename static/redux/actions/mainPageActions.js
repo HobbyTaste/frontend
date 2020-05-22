@@ -7,7 +7,7 @@ import { sortByTypeMonitization } from '../../utils/functions';
 export const getHobbies = () => (dispatch) => {
     axios.get(`/restapi/hobby/all`).then(res => {
         let hobbies = sortByTypeMonitization(res.data, 0);
-        if (hobbies.length === 0) {
+        if (hobbies.length < 3) {
             hobbies = res.data.slice(0, 10);
         }
         let promise = dispatch(setHobbiesTop(hobbies));
