@@ -14,6 +14,7 @@ const Sidebar= (props) => {
         <div>
             <div className={style.container}>
                 <h5 className={style.headerPrice}>Цена</h5>
+                <h6 className={style.headerPrice}>{props.price.title}</h6>
                 <h6 className={style.text}>{props.price.priceList}</h6>
             </div>
 
@@ -25,11 +26,11 @@ const Sidebar= (props) => {
                 <h5 className={style.contact}>  КОНТАКТЫ:</h5>
                 <h5 className={style.contact + ' '+ style.mobile}>ТЕЛ: {props.contacts.mobile}</h5>
                 <div className={style.contact}>
-                   <span> {props.contacts.website && <a href={`https://${props.contacts.website}`}><LaunchIcon /></a>}</span>
+                   <span> {props.contacts.website && <a href={`${props.contacts.website}`} className={style.sites}><LaunchIcon /></a>}</span>
                    <div className={style.sites}>
-                    {props.contacts.vk && <a href={`https://${props.contacts.vk}`} className={style.sites}><img src={vk}/></a> }
-                    {props.contacts.instagram && <a href={`https://${props.contacts.instagram}`} className={style.sites}><img src={instagram}/></a> }
-                    {props.contacts.facebook && <a href={`https://${props.contacts.facebook}`} className={style.sites}><img src={facebook}/></a>}
+                    {props.contacts.vk && <a href={`${props.contacts.vk}`} className={style.sites}><img src={vk}/></a> }
+                    {props.contacts.instagram && <a href={`${props.contacts.instagram}`} className={style.sites}><img src={instagram}/></a> }
+                    {props.contacts.facebook && <a href={`${props.contacts.facebook}`} className={style.sites}><img src={facebook}/></a>}
                    </div>
                 </div>
             </div>

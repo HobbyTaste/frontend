@@ -1,4 +1,4 @@
-.buttonContainer{
+.buttonContainer {
     width: 9.5%;
     display: flex;
     justify-content: center;
@@ -16,6 +16,6 @@
     line-height: 24px;
     letter-spacing: 0.15px;
     color: rgba(0, 0, 0, 0.87);
-width: 100%;
+    width: 100%;
     text-align: left;
 }

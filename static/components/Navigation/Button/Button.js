@@ -82,9 +82,9 @@ export default function SimpleMenu() {
                 <MenuItem onClick={handleClose}> <LinkCategory label='Рисование' className={style.text} url='art'/></MenuItem>
                 <MenuItem onClick={handleClose}> <LinkCategory label='Музыка' className={style.text} url='music'/></MenuItem>
                 <MenuItem onClick={handleClose}> <LinkCategory label='Спорт' className={style.text} url='sport'/></MenuItem>
-                <MenuItem onClick={handleClose}>  <LinkCategory label='Игровые виды спорта' className={style.text} url='sport_game'/></MenuItem>
-                <MenuItem onClick={handleClose}> <LinkCategory label='Единоборства' className={style.text} url='sport_wrestling'/></MenuItem>
-                <MenuItem onClick={handleClose}> <LinkCategory label='Зимние виды спорта' className={style.text} url='sport_winter'/> </MenuItem>
+                <MenuItem onClick={handleClose}>  <LinkCategory label="Игровой спорт" className={style.text} url='sport_game'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label="Единоборства" className={style.text} url='sport_wrestling'/></MenuItem>
+                <MenuItem onClick={handleClose}> <LinkCategory label="Зимний спорт" className={style.text} url='sport_winter'/> </MenuItem>
                 <MenuItem onClick={handleClose}> <LinkCategory label='Танцы' className={style.text} url='dance'/> </MenuItem>
                 <MenuItem onClick={handleClose}> <LinkCategory label='Другое' className={style.text} url='other'/></MenuItem>
             </StyledMenu>

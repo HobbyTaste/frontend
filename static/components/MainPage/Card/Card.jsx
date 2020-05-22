@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'top',
         marginRight: '5px',
+        margin: '10px',
         color: '#178FD6',
     },
     stars: {
@@ -51,10 +52,12 @@ const Card = (props) => {
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
                     <div className={`${style.metro} ${style.colorBlueCard}`}>
-                    <LocationOnIcon style={{
+                        { props.metro && <LocationOnIcon style={{
                         color: '#178FD6',
                         fontSize: 'small'
-                    }}/> {props.metro}
+                    }}/>}
+                    {props.metro}
+
                      </div>
                      <div className={`${style.address} ${style.colorGrayCard}`}>{props.address}</div>
                 </div>
