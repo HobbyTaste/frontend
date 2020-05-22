@@ -73,7 +73,7 @@ export const initializeFollowedHobbies = () => async dispatch => {
     dispatch(setFetchingFollowedHobbies("success"));
 };
 
-export const createNewProvider = (name, password, email, avatar, phone, info) => (dispatch) => {
+export const createNewProvider = (name, password, email) => (dispatch) => {
     const providerData = {
         name, password, email
     };
