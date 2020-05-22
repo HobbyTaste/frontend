@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import FilteredList from './Search/FilerList/FilterList';
 import LoginUserWindow from './LoginUser/LoginUserWindow';
 
-//Комментарий, чтобы сделать пулреквест
-
 const Header = (props) => {
     let isAuth = false;
     let logoutF = props.logout;
