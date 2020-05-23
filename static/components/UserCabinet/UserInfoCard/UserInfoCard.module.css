@@ -1,7 +1,6 @@
 .info {
-    position: absolute;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 0;
 }
 
 @media all and (max-device-width: 1000px) {

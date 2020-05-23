@@ -20,7 +20,7 @@ const UserCabinet = (props) => {
     return (
         <div className={style.background}>
             <div className={style.infoContainer}>
-                <UserInfoCard avatar={props.avatar || defaultAvatarUrl} name={props.name} metro={props.metro} />
+                <UserInfoCard avatar={props.avatar || defaultAvatarUrl} name={props.name} email={props.email} />
             </div>
             <div className={style.feedbackHeader}>Ваши отзывы и ответы на них:</div>
             <div className={style.feedbackContainer}>
@@ -33,7 +33,7 @@ const UserCabinet = (props) => {
 const mapStateToProps = (state) => ({
     name: state.userCabinet.name,
     //metro: state.userCabinet.metro,
-    metro: "В модели на бэкенде пока нет метро",
+    email: state.userCabinet.email,
     avatar: state.userCabinet.avatar,
     userHobbies: state.userCabinet.userHobbies,
     userComments: state.userCabinet.userComments,

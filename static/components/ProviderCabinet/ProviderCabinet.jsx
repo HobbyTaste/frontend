@@ -31,7 +31,7 @@ class ProviderCabinet extends React.Component {
         return (
             <div className={style.background}>
                 <div className={style.infoContainer}>
-                    <ProviderInfo avatar={this.props.avatar} name={this.props.name} metro={this.props.metro} />
+                    <ProviderInfo avatar={this.props.avatar} name={this.props.name} email={this.props.email} phone={this.props.phone}/>
                 </div>
                 <div className={style.feedbackHeader}>Отзывы на ваши хобби и ваши ответы на них:</div>
                 <CommentsList comments={this.props.comments.commentsInfo || []} isProvider={true} isOwner={true}/>

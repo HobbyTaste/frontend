@@ -102,6 +102,14 @@ class Provider extends BaseFetchClass {
     public async getComments(): Promise<Response> {
         return this.get('/comments');
     }
+
+    /**
+     * Подписывает партнёра на хобби. При повторном отправлении запроса — отписывает.
+     * @param hobbyId 
+     */
+    public async subscribe(hobbyId: string): Promise<Response> {
+        return this.get(`/subscribe?id=${hobbyId}`);
+    }
 }
 
 export default Provider;

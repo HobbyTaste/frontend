@@ -130,6 +130,14 @@ class User extends BaseFetchClass {
         return this.get('/comments');
     }
 
+    /**
+     * Подписывает пользователя на хобби. При повторном отправлении запроса — отписывает.
+     * @param hobbyId 
+     */
+    public async subscribe(hobbyId: string): Promise<Response> {
+        return this.get(`/subscribe?id=${hobbyId}`);
+    }
+
 }
 
 export default User;

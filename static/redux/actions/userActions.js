@@ -3,16 +3,9 @@ import { findHobbies, toggleAddingProgress } from '../reducers/hobbiesPage-reduc
 import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import UserApi from '../../api/User';
-import HobbyApi from '../../api/Hobby';
-import CommentApi from '../../api/Comment';
-import { defaultHobbyProps, comments } from '../../utils/constant';
-
-const testLogin = 'bob@test.com';
-const testPassword = 'bob';
+import { HTTP_STATUS } from '../../utils/constant';
 
 const userApi = new UserApi();
-const hobbyApi = new HobbyApi();
-const commentApi = new CommentApi();
 
 export const setCurrentUserInfo = (id, email, name, avatar, isAuth) => ({
     type: actionTypes.SET_USER_DATA,
@@ -57,46 +50,10 @@ const getData = () =>
     });
 
 
-// функции, отпраправляющие запросы....
-/*добавить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-export const addHobbyForUser = (hobbyID) => (dispatch) => {
-    axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
-          console.log("responce add")
-          console.log(res)
-          dispatch(changeUserHobby(res.data.hobbies));
-      })
-          .catch(err => {
-              dispatch(someFail(err))
-          })
-          .then((res) => {
-              console.log("responce add");
-              console.log(res);
-              dispatch(changeUserHobby(res.data.hobbies));
-          })
-          .catch((err) => {
-              dispatch(someFail(err));
-          });
-  };
-  
-  /*удалить хобби. Отправляем id хобби и юзера, если успех, хотим получить обновленный массив подписок*/
-  export const deleteHobbyForUser = (hobbyID) => (dispatch) => {
-      axios.get(`/restapi/hobby/subscribe?id=${hobbyID}`).then(res => {
-          console.log("responce delete")
-          console.log(res)
-          dispatch(changeUserHobby(res.data.hobbies));
-      })
-          .catch(err => {
-              dispatch(someFail(err))
-          })
-          .then((res) => {
-              console.log("responce delete");
-              console.log(res);
-              dispatch(changeUserHobby(res.data.hobbies));
-          })
-          .catch((err) => {
-              dispatch(someFail(err));
-          });
-  };
+export const subscribeForHobby = (hobbyId) => async (dispatch) => {
+    await userApi.subscribe(hobbyId);
+    await dispatch(initializeUserHobbies());
+};
 
 
 export const initializeUserCabinet = () => async dispatch => {
@@ -189,7 +146,13 @@ export const logout = () => (dispatch) => {
 };
 
 export const userEdit = (editData) => async (dispatch) => {
-    await userApi.edit(editData);
-    await dispatch(getCurrentUserInfo());
-    return dispatch(getUserComments());
+    const response = await userApi.edit(editData);
+    if (response.ok) {
+        await dispatch(getCurrentUserInfo());
+        return "ok";
+    }
+    if (response.status === HTTP_STATUS.BAD_REQUEST) {
+        return "non-unique email";
+    }
+    return "uncaught server error";
 };

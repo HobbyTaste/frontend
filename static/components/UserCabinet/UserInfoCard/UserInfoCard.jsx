@@ -6,7 +6,7 @@ import UserInfo from './UserInfo/UserInfo';
 const UserInfoCard = (props) => (
     <div className={style.info}>
         <UserAvatar url={props.avatar}/>
-        <UserInfo name={props.name} metro={props.metro}/>
+        <UserInfo name={props.name} email={props.email}/>
     </div>
 );
 
