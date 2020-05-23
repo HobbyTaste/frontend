@@ -9,6 +9,7 @@
 .slotPic {
     width: 60px;
     height: 60px;
+    flex: 0 0 auto;
     margin-left: 16px;
     object-fit: cover;
     box-sizing: border-box;
