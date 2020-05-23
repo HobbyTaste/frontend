@@ -3,7 +3,8 @@
     width: 90%;
     height: auto;
     position: center;
-    display: block;
+    display: flex;
+    flex-direction: column;
     top: 0;
     left: 0;
     z-index: 1;
@@ -80,7 +81,7 @@
 }
 
 .feedbackHeader {
-    margin-top: 345px;
+    margin-top: 20px;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.15px;

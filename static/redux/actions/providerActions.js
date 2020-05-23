@@ -2,6 +2,7 @@ import { stopSubmit } from 'redux-form';
 import * as actionTypes from './actionsTypes';
 import ProviderApi from '../../api/Provider.ts';
 import HobbyApi from '../../api/Hobby.ts';
+import { HTTP_STATUS } from '../../utils/constant';
 
 const providerApi = new ProviderApi();
 const hobbyApi = new HobbyApi();
@@ -16,6 +17,11 @@ export const setProviderComments = (providerComments) => ({ type: actionTypes.SE
 export const setIsProviderInCabinet = (status) => ({ type: actionTypes.SET_IS_PROVIDER_IN_CABINET, status});
 const setFetchingOwnHobbies = (status) => ({ type: actionTypes.SET_FETCHING_OWN_HOBBIES, status});
 const setFetchingFollowedHobbies = (status) => ({ type: actionTypes.SET_FETCHING_FOLLOWED_HOBBIES, status});
+
+export const subscribeForHobby = (hobbyId) => async (dispatch) => {
+    await providerApi.subscribe(hobbyId);
+    await dispatch(initializeFollowedHobbies());
+};
 
 export function getProviderComments() {
     return async dispatch => {
@@ -119,12 +125,14 @@ export const addNewHobby = (hobbyData) => async (dispatch) => {
     else return Promise.reject(response);
 };
 
-export const providerEdit = (editData) => (dispatch) => {
-    providerApi.edit(editData).then((response) => {
-        if (response.ok) {
-            dispatch(getCurrentProviderInfo());
-        } else {
-            response.json().then(console.log);
-        }
-    });
+export const providerEdit = (editData) => async (dispatch) => {
+    const response = await providerApi.edit(editData);
+    if (response.ok) {
+        await dispatch(getCurrentProviderInfo());
+        return "ok";
+    }
+    if (response.status === HTTP_STATUS.BAD_REQUEST) {
+        return "non-unique data";
+    }
+    return "uncaught server error";
 };

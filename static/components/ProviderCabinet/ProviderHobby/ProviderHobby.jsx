@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from "./ProviderHobby.module.css";
 import Slot from "../../MainPage/Slot/Slot";
-import { initializeFollowedHobbies } from "../../../redux/actions/providerActions";
+import { initializeFollowedHobbies, subscribeForHobby } from "../../../redux/actions/providerActions";
 import AddIcon from "@material-ui/icons/Add";
 import Monetization from "../../MainPage/Slot/Price/Monetization";
 import Preloader from "../../Common/Preloader/Preloader";
@@ -31,25 +31,32 @@ const ProviderFollowedHobbies = (props) => {
         return <Preloader/>;
     }
 
+    async function handleHobbyClick(event, hobbyId) {
+        await props.subscribeForHobby(hobbyId);
+    }
+
     const hobbiesToShow = props.followedHobbies.map((hobby) => (
         <Slot
             key={hobby._id}
-            id={hobby._id}
-            owner={hobby.owner}
-            subscribers={hobby.subscribers}
             pic={hobby.avatar}
+            id={hobby._id}
             name={hobby.label}
+            rating={hobby.rating}
             metro={firstLettersToUpperCase(hobby.metroStation)}
             adress={hobby.address}
-            price={hobby.price.title}
-            isUserAuth={false}
-            isProviderAuth={true}
+            isOwn={false}
             isBeginner={hobby.novice}
             isRent={hobby.equipment}
             isChild={hobby.children}
             isParking={hobby.parking}
-            isOwn={false}
-            priceTime={"За занятие"}
+            price={hobby.price.title}
+            priceTime={"Уточняйте"}
+            isUserAuth={true}
+            isProviderAuth={false}
+            isOwner={false}
+            idUser={props.id}
+            subscribers={hobby.subscribers}
+            onClick={handleHobbyClick}
         />
     ));
 
@@ -66,11 +73,12 @@ const ProviderFollowedHobbies = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+    id: state.providerCabinet.id,
     providerIsAuth: state.providerCabinet.providerIsAuth,
     fetchedFollowedHobbies: state.providerCabinet.fetchedFollowedHobbies,
     followedHobbies: state.providerCabinet.followedHobbies,
 });
 
 // maybe need own initializer
-export default connect(mapStateToProps, { initializeFollowedHobbies })(ProviderFollowedHobbies);
+export default connect(mapStateToProps, { initializeFollowedHobbies, subscribeForHobby })(ProviderFollowedHobbies);
 // export default UserCabinetHobbies;

@@ -10,7 +10,7 @@ const ProviderCabinetNavigation = (props) => {
             <ul className={style.menu}>
                 <Link className={`${style.menuPoint} ${props.isActive === 0 ? style.activeCategory : style.passiveCategory}`} to="/provider/cabinet">ПРОФИЛЬ</Link>
                 <Link className={`${style.menuPoint} ${props.isActive === 1 ? style.activeCategory : style.passiveCategory}`} to="/provider/cabinet/own">МОИ ХОББИ</Link>
-                <Link className={`${style.menuPoint} ${props.isActive === 2 ? style.activeCategory : style.passiveCategory}`} to="/provider/cabinet/monetization">МОНЕТИЗАЦИЯ</Link>
+                {/* <Link className={`${style.menuPoint} ${props.isActive === 2 ? style.activeCategory : style.passiveCategory}`} to="/provider/cabinet/monetization">МОНЕТИЗАЦИЯ</Link> */}
                 <Link className={`${style.menuPoint} ${props.isActive === 3 ? style.activeCategory : style.passiveCategory}`} to="/provider/cabinet/hobbies">ИЗБРАННОЕ</Link>
             </ul>
         </nav>

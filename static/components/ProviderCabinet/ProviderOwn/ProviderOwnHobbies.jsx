@@ -17,6 +17,9 @@ function firstLettersToUpperCase(text) {
         .join(' ');
 }
 
+function checkTariffType(hobby, type) {
+    return hobby.monetization.some(tariff => tariff.tariff === type);
+}
 
 const ProviderOwnHobbies = (props) => {
     useEffect(() => {
@@ -34,22 +37,19 @@ const ProviderOwnHobbies = (props) => {
     const hobbiesToShow = props.providerHobbies.map((hobby) => (
         <Slot
             key={hobby._id}
-            id={hobby._id}
-            owner={hobby.owner}
-            subscribers={hobby.subscribers}
             pic={hobby.avatar}
+            id={hobby._id}
             name={hobby.label}
+            rating={hobby.rating}
             metro={firstLettersToUpperCase(hobby.metroStation)}
             adress={hobby.address}
-            price={hobby.price.title}
+            isOwn={true}
             isUserAuth={false}
             isProviderAuth={true}
-            isBeginner={hobby.novice}
-            isRent={hobby.equipment}
-            isChild={hobby.children}
-            isParking={hobby.parking}
-            isOwn={true}
-            priceTime={"За занятие"}
+            isOwner={true}
+            Widget={checkTariffType(hobby, 0)}
+            Top={checkTariffType(hobby, 1)}
+            Poster={checkTariffType(hobby, 2)}
         />
     ));
 

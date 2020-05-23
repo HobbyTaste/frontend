@@ -17,9 +17,12 @@ const UserInfo = (props) => {
         {/* <div className={style.metro}>
             <LocationOnIcon style={{ color: '#178FD6' }} /> {props.metro}
         </div> */}
+        <div className={style.metro}>
+            {props.email}
+        </div>
         { editing
             ? <div className={style.editContainer}>
-                <ChangeForm name={props.name} metro={props.metro} handleClick={handleClick}/>
+                <ChangeForm name={props.name} email={props.email} handleClick={handleClick}/>
             </div>
             : <div>
                 <button className={style.editButton} onClick={handleClick}>
