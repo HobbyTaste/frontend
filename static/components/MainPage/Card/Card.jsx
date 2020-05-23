@@ -46,8 +46,10 @@ function HalfRating(props) {
 
 
 const Card = (props) => {
+   const missingImage ="https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg";
+   let image = (props.pic ? props.pic : missingImage);
     return (<div>
-            <div className={style.card}>
+            <div className={style.card} style={{ backgroundImage: `url(${image})`}}>
             <span className={style.cardDescription}>
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
