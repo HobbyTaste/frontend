@@ -14,6 +14,7 @@
     object-fit: cover;
     box-sizing: border-box;
     border-radius: 30px;
+    background-color: #178fd642;
 }
 
 .slotDescription {
@@ -49,7 +50,8 @@
     height: 16px;
     margin-top: 4px;
     font-size: 10px;
-    line-height: 16px;letter-spacing: 0.4px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
 }
 
 .metro {
