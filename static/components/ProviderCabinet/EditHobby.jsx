@@ -27,6 +27,15 @@ const initialWorkTime = {
     "вс": {0: "", 1: ""},
 }
 
+function firstLettersToUpperCase(text) {
+    return text.trim().length > 0
+    ? text
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(' ')
+    : text;
+}
+
 const AddHobbyForm = (props) => {
     // это не ошибка, просто async функцию нельзя передавать в useEffect
     useEffect(() => {
@@ -348,7 +357,7 @@ const AddHobbyForm = (props) => {
                         </select>
                     </div>
                     <input className={style.input} name='metro' onChange={onMetroChange} value={metro}
-                        placeholder={hobby.metroStation || 'Станция метро*'}/>
+                        placeholder={hobby.metroStation ? firstLettersToUpperCase(hobby.metroStation) : 'Станция метро*'}/>
                     <input className={style.input} name='address' onChange={onAddressChange} value={address}
                         placeholder={hobby.address || 'Краткий адрес*'}/>
                     <textarea className={style.input} name='location' onChange={onLocationChange} value={location}
