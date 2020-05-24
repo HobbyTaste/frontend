@@ -11,10 +11,12 @@ import Preloader from "../../Common/Preloader/Preloader";
 
 
 function firstLettersToUpperCase(text) {
-    return text
-        .split(' ')
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(' ');
+    return text.trim().length > 0
+        ? text
+            .split(' ')
+            .map((word) => word[0].toUpperCase() + word.slice(1))
+            .join(' ')
+        : text;
 }
 
 function checkTariffType(hobby, type) {
