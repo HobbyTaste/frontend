@@ -39,7 +39,7 @@ const SimpleSwiperWithParams = (props) => {
     const classes = useStyles();
 
     const imageMissing=['https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg'];
-    let images = [props.images];
+    let images = props.images;
     if (props.images === undefined || props.images === null || props.images[0] === null || props.images[0] === ""){
         images = imageMissing;
     }

@@ -8,7 +8,7 @@ import { isInArray } from '../../utils/functions';
 
 const ButtonAction = (props) => {
     if (props.isProviderAuth && props.isOwner) {
-        return <NavLink to={'/provider/cabinet'}><ButtonProvider text="Редактировать"/> </NavLink>;
+        return <NavLink to={`/provider/cabinet/edit_hobby/${props.hobbyInfoId}`}><ButtonProvider text="Редактировать"/> </NavLink>;
     } else if (props.isProviderAuth || props.isUserAuth) {
         if (isInArray(props.id, props.subscribers)) {
             return <ButtonDeleteMyHobby onClick={props.handleChangeMyHobby}/>;
