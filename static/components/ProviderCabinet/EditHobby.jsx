@@ -1,20 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
-import Link from '@material-ui/core/Link';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { addNewHobby } from '../../redux/actions/providerActions';
 import style from './AddHobby.module.css';
+import { hobbyEdit, initializeEditHobbyPage } from '../../redux/actions/providerActions';
+import { defaultHobbyProps, defaultAvatarUrl } from '../../utils/constant';
+import { Redirect, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
 const helpText = ['',
     'Почтовый адрес здания, в котором располагается хобби: улица и номер дома',
     'Распишите всё, что может помочь найти местоположение Вашего хобби: адрес, этаж, проход, ориентиры на местности',
     'Здесь вы можете написать про душевые, раздевалки, полотенца и другие приятные мелочи, которыми Вы обеспечиваете посетителей',
-    'Опишите условия, которые бы Вы хотел подчеркнуть: например, то, что Ваше хобби ведёт набор до определённого числа или принимает лиц одного пола'];
+    'Опишите условия, которые бы Вы хотели подчеркнуть: например, то, что Ваше хобби ведёт набор до определённого числа или принимает лиц одного пола',
+    'Это большая надпись, которая будет располагаться напротив названия в списке хобби. Здесь можно указать, например, цену самого популярного варианта. Пример: "500", "Бесплатно"',
+    'Это пояснение, располагающееся под основной надписью. Здесь можно указать, например, что основная надпись означает. Пример: "за занятие", "за неделю".'
+];
 
-const EditHobbyForm = (props) => {
+const initialWorkTime = {
+    "пн": {0: "", 1: ""},
+    "вт": {0: "", 1: ""},
+    "ср": {0: "", 1: ""},
+    "чт": {0: "", 1: ""},
+    "пт": {0: "", 1: ""},
+    "сб": {0: "", 1: ""},
+    "вс": {0: "", 1: ""},
+}
+
+const AddHobbyForm = (props) => {
+    // это не ошибка, просто async функцию нельзя передавать в useEffect
+    useEffect(() => {
+        const init = async () => { 
+            await props.initializeEditHobbyPage(props.match.params.id);
+        }
+        init();
+    }, [])
+
     const [state, setState] = useState({
         showHelp: 0,
         Parking: false,
@@ -24,43 +45,48 @@ const EditHobbyForm = (props) => {
         Disabled: 0,
     });
 
-    const [organization, setOrganization] = useState(props.organization);
-    const [image, setImage] = useState(props.image);
+    const hobby = props.hobbyForEditing || {};
+
+    const [label, setLabel] = useState('');
+    const [image, setImage] = useState(defaultAvatarUrl);
     const [file, setFile] = useState(null);
-    const [metro, setMetro] = useState(props.metro);
-    const [shortAddress, setShortAddress] = useState(props.shortAddress);
-    const [fullAddress, setFullAddress] = useState(props.fullAddress);
-    const [information, setInformation] = useState(props.information);
-    const [facilities, setFacilities] = useState(props.facilities);
-    const [special, setSpecial] = useState(props.special);
-    const [telephone, setTelephone] = useState(props.telephone);
-    const [email, setEmail] = useState(props.email);
-    const [website, setWebsite] = useState(props.website);
-    const [vk, setVk] = useState(props.vk);
-    const [instagram, setInstagram] = useState(props.instagram);
-    const [facebook, setFacebook] = useState(props.facebook);
-    const [exactDates, setExactDates] = useState(props.exactDates);
-    const [price, setPrice] = useState(props.price);
+    const [metro, setMetro] = useState('');
+    const [address, setAddress] = useState('');
+    const [location, setLocation] = useState('');
+    const [description, setDescription] = useState('');
+    const [facilities, setFacilities] = useState('');
+    const [special, setSpecial] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [website, setWebsite] = useState('');
+    const [vk, setVk] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [exactDates, setExactDates] = useState('');
+    const [price, setPrice] = useState({title: '', priceList: ''});
+    const [category, setCategory] = useState('');
+    const [workTime, setWorkTime] = useState(initialWorkTime)
 
-    const [parking, setParking] = useState(props.parking);
-    const [beginner, setBeginner] = useState(props.beginner);
-    const [kids, setKids] = useState(props.kids);
-    const [equipment, setEquipment] = useState(props.equipment);
+    const [parking, setParking] = useState(null);
+    const [beginner, setBeginner] = useState(null);
+    const [kids, setKids] = useState(null);
+    const [equipment, setEquipment] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
-    const onOrganizationChange = (e) => {
-        setOrganization(e.target.value);
+    const onLabelChange = (e) => {
+        setLabel(e.target.value);
     };
     const onMetroChange = (e) => {
         setMetro(e.target.value);
     };
-    const onShortAddressChange = (e) => {
-        setShortAddress(e.target.value);
+    const onAddressChange = (e) => {
+        setAddress(e.target.value);
     };
-    const onFullAddressChange = (e) => {
-        setFullAddress(e.target.value);
+    const onLocationChange = (e) => {
+        setLocation(e.target.value);
     };
     const onInfoChange = (e) => {
-        setInformation(e.target.value);
+        setDescription(e.target.value);
     };
     const onFacilitiesChange = (e) => {
         setFacilities(e.target.value);
@@ -69,7 +95,7 @@ const EditHobbyForm = (props) => {
         setSpecial(e.target.value);
     };
     const onTelChange = (e) => {
-        setTelephone(e.target.value);
+        setPhone(e.target.value);
     };
     const onEmailChange = (e) => {
         setEmail(e.target.value);
@@ -89,9 +115,24 @@ const EditHobbyForm = (props) => {
     const onExDatChange = (e) => {
         setExactDates(e.target.value);
     };
-    const onPriceChange = (e) => {
-        setPrice(e.target.value);
+    const onPriceTitleChange = (e) => {
+        setPrice({title: e.target.value, priceList: price.priceList});
     };
+    const onPriceListChange = (e) => {
+        setPrice({title: price.title, priceList: e.target.value});
+    };
+    const onCategoryChange = (e) => {
+        setCategory(e.target.value);
+    };
+    const onDaysChange = (e) => {
+        e.persist();
+        let [day, number] = e.target.id.split('+');
+        number = Number(number);
+        setWorkTime(workTime => {
+            return {...workTime, [day]: {[number]: e.target.value, [1 - number]: workTime[day][1 - number]}};
+        });
+    }
+
 
     const onParkingChange = (val) => {
         setState({
@@ -128,42 +169,68 @@ const EditHobbyForm = (props) => {
         reader.readAsDataURL(photoFile);
     };
     const resetForm = () => {
-        setOrganization(props.organization);
-        setImage(props.image);
+        setLabel('');
+        setMetro('');
+        setAddress('');
+        setLocation('');
+        setDescription('');
+        setFacilities('');
+        setSpecial('');
+        setPhone('');
+        setEmail('');
+        setWebsite('');
+        setVk('');
+        setInstagram('');
+        setFacebook('');
+        setExactDates('');
+        setPrice('');
+        setImage('');
         setFile(null);
-        setMetro(props.metro);
-        setShortAddress(props.shortAddress);
-        setFullAddress(props.fullAddress);
-        setInformation(props.information);
-        setFacilities(props.facilities);
-        setSpecial(props.special);
-        setTelephone(props.telephone);
-        setEmail(props.email);
-        setWebsite(props.website);
-        setVk(props.vk);
-        setInstagram(props.instagram);
-        setFacebook(props.facebook);
-        setExactDates(props.exactDates);
-        setPrice(props.price);
-
-        setParking(props.parking);
-        setBeginner(props.beginner);
-        setKids(props.kids);
-        setEquipment(props.equipment);
+        setParking(null);
+        setBeginner(null);
+        setKids(null);
+        setEquipment(null);
     };
 
-    const onSubmit = () => {
-        props.addNewHobby(organization, metro,
-            shortAddress, fullAddress,
-            information, facilities, special,
-            telephone, email, website, vk, instagram, facebook,
-            exactDates, price,
-            parking, beginner, kids, equipment,
-            props.id, file);
-        props.handleClose();
+    const onSubmit = async () => {
+        const prettyWorkTime = [];
+        for (let day in workTime) {
+            if (workTime[day][0] || workTime[day][1])
+            prettyWorkTime.push(`${day} ${workTime[day][0]} — ${workTime[day][1]} \n`);
+        }
+        const newHobby = {
+            label: label || hobby.label, 
+            metroStation: metro || hobby.metroStation,
+            address: address || hobby.address,
+            location: location || hobby.location,
+            category: category || hobby.category,
+            description: description || hobby.description,
+            facilities: facilities || hobby.facilities,
+            special: special || hobby.special,
+            phone: phone || hobby.phone,
+            email: email || hobby.email,
+            website: website || hobby.website, 
+            contacts: {
+                vk: vk || hobby.contacts.vk,
+                instagram: instagram || hobby.contacts.instagram,
+                facebook: facebook || hobby.contacts.facebook
+            },
+            workTime: (prettyWorkTime.length > 0 || exactDates !== '') ? prettyWorkTime.concat([exactDates]) : hobby.workTime,
+            price: {
+                title: price.title || hobby.price.title,
+                priceList: price.priceList || hobby.price.priceList
+            },
+            parking: parking === null ? hobby.parking : Boolean(parking),
+            novice: beginner === null ? hobby.novice : Boolean(beginner),
+            children: kids === null ? hobby.children : Boolean(kids),
+            equipment: equipment === null ? hobby.equipment : Boolean(equipment),
+            avatar: file
+        }
+        const requestResult = await hobbyEdit(props.match.params.id, newHobby);
+        if (requestResult === "ok") {
+            setSubmitted(true);
+        }
     };
-
-    const avatar = 'https://images.assetsdelivery.com/compings_v2/jenjawin/jenjawin1904/jenjawin190400208.jpg';
 
     const showParking = (e) => {
         setState({
@@ -204,14 +271,16 @@ const EditHobbyForm = (props) => {
         });
     };
 
-    const help = (helpSection) => (<div style={{ display: 'block' }}>
+    if (submitted) return <Redirect to="/provider/cabinet/own"/>
+
+    const help = (helpSection) => (<div style={{ display: 'block', position: 'relative' }}>
         <div className={style.helpIcon} onMouseOver={() => Help(helpSection)} onMouseOut={() => Help(0)}>
             <HelpOutlineOutlinedIcon/>
         </div>
         <div className={style.help}
             style={{
                 display: `${(state.showHelp === helpSection) ? 'block' : 'none'}`,
-                margin: `${(helpSection % 2 === 0) ? '58px 100px 0 25px' : '3px 100px 0 25px'}`,
+                margin: `${(helpSection % 2 === 0) ? '53px 100px 0 25px' : '3px 100px 0 25px'}`,
             }}>
             {helpText[helpSection]}
         </div>
@@ -222,10 +291,10 @@ const EditHobbyForm = (props) => {
         <div className={style.weekDayContainer}>
             {day}:
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+0`} onChange={onDaysChange} value={workTime[day][0]}/>
             </span>
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+1`} onChange={onDaysChange} value={workTime[day][1]}/>
             </span>
         </div>
     );
@@ -254,25 +323,39 @@ const EditHobbyForm = (props) => {
                 <span className={style.avatar}>
                     <div className={style.imgContainer}>
                         <div className={style.img}
-                            style={{ backgroundImage: `url("${avatar}")` }}>
+                            style={{ backgroundImage: `url("${image || defaultHobbyProps.imageUrl}")` }}>
                         </div>
                     </div>
                 </span>
                 <span className={style.halfContainer}>
                     <div className={style.header}>Общая информация о хобби:</div>
-                    <input className={style.input} name='organization' onChange={onOrganizationChange} value={organization}
-                        placeholder={'Название хобби'} autoFocus={true}/>
-                    <input style={{ margin: '10px 0' }} type="file" name="file" id="file" onChange={uploadImage}
-                        placeholder={'Фото'}/>
+                    <input className={style.input} name='label' onChange={onLabelChange} value={label}
+                        placeholder={hobby.label || 'Название хобби'} autoFocus={true}/>
+                    <div>
+                        <input style={{ margin: '10px 0' }} type="file" name="file" id="file" onChange={uploadImage}
+                            placeholder={'Фото'}/>
+                        <select required style={{ marginBottom: "4px"}} onChange={onCategoryChange}>
+                            <option defaultValue value="other">Категория</option>
+                            <option value="sport">Спорт</option>
+                            <option value="music">Музыка</option>
+                            <option value="creativity">Творчество</option>
+                            <option value="art">Рисование</option>
+                            <option value="sport_game">Игровые виды спорта</option>
+                            <option value="sport_wrestling">Единоборства</option>
+                            <option value="sport_winter">Зимние виды спорта</option>
+                            <option value="dance">Танцы</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
                     <input className={style.input} name='metro' onChange={onMetroChange} value={metro}
-                        placeholder={'Станция метро*'}/>
-                    <input className={style.input} name='shortAddress' onChange={onShortAddressChange} value={shortAddress}
-                        placeholder={'Краткий адрес*'}/>
-                    <textarea className={style.input} name='fullAddress' onChange={onFullAddressChange} value={fullAddress}
-                        placeholder={'Полный адрес*'} style={{ height: '58px', padding: '5px 0 0 9px' }}/>
+                        placeholder={hobby.metroStation || 'Станция метро*'}/>
+                    <input className={style.input} name='address' onChange={onAddressChange} value={address}
+                        placeholder={hobby.address || 'Краткий адрес*'}/>
+                    <textarea className={style.input} name='location' onChange={onLocationChange} value={location}
+                        placeholder={hobby.location || 'Полный адрес*'} style={{ height: '58px', padding: '5px 0 0 9px' }}/>
 
                 </span>
-                <span style={{ margin: '203px 0 0 20px', display: 'block' }}>
+                <span style={{ margin: '190px 0 0 20px', display: 'block' }}>
                     {help(1)}
                     {help(2)}
                 </span>
@@ -281,11 +364,11 @@ const EditHobbyForm = (props) => {
             <div className={style.upperContainer}>
                 <div className={style.infoContainer}>
                     <input className={style.input} name='facilities' onChange={onFacilitiesChange} value={facilities}
-                        placeholder={'Удобства'}/>
+                        placeholder={hobby.facilities || 'Удобства'}/>
                     <input className={style.input} name='special' onChange={onSpecialChange} value={special}
-                        placeholder={'Особые условия'}/>
-                    <textarea className={style.input} name='info' onChange={onInfoChange} value={information}
-                        placeholder={'Описание'} style={{ height: '97px', padding: '5px 0 0 9px' }}/>
+                        placeholder={hobby.special || 'Особые условия'}/>
+                    <textarea className={style.input} name='info' onChange={onInfoChange} value={description}
+                        placeholder={hobby.description || 'Описание'} style={{ height: '97px', padding: '5px 0 0 9px' }}/>
                 </div>
                 <span style={{ margin: '15px 0 0 20px', display: 'block' }}>
                     {help(3)}
@@ -313,30 +396,37 @@ const EditHobbyForm = (props) => {
                         name='exactDates' onChange={onExDatChange} value={exactDates}
                         placeholder={'Введите даты'} disabled={!state.Disabled}/>
                     <div className={style.header}>Цены:</div>
+                    <input className={style.input} style={{ margin: '2px 0 4px 20px' }} name='price.title'
+                        onChange={onPriceTitleChange} value={price.title}
+                        placeholder={hobby.price ? hobby.price.title : 'Заголовок'}/>
                     <textarea className={style.input}
-                        style={{ margin: '2px 0 4px 20px', height: '115px', padding: '5px 0 0 9px' }}
-                        name='price' onChange={onPriceChange} value={price}
-                        placeholder={'Цены'}/>
+                        style={{ margin: '2px 0 4px 20px', padding: '5px 0 0 9px', height:"70px" }}
+                        name='price' onChange={onPriceListChange} value={price.priceList}
+                        placeholder={hobby.price ? hobby.price.priceList : 'Опции*'}/>
+                </span>
+                <span style={{ margin: '140px 0 0 40px', display: 'block' }}>
+                    {help(5)}
+                    {help(6)}
                 </span>
             </div>
 
             <div className={style.upperContainer} style={{ width: '753px' }}>
                 <span className={style.header} style={{ margin: '10px 0 0 0' }}>Контакты:</span>
                 <span className={style.contactContainer}>
-                    <input className={style.input} name='telephone' onChange={onTelChange} value={telephone}
-                        placeholder={'Телефон*'} type="telephone"/>
+                    <input className={style.input} name='phone' onChange={onTelChange} value={phone}
+                        placeholder={hobby.phone || 'Телефон*'} type="telephone"/>
                     <input className={style.input} name='email' onChange={onEmailChange} value={email}
-                        placeholder={'Email*'} type="email"/>
+                        placeholder={hobby.email || 'Email*'} type="email"/>
                     <input className={style.input} name='website' onChange={onWebChange} value={website}
-                        placeholder={'Официальный сайт хобби'}/>
+                        placeholder={hobby.website || 'Официальный сайт хобби'}/>
                 </span>
                 <span className={style.contactContainer}>
                     <input className={style.input} name='vk' onChange={onVkChange} value={vk}
-                        placeholder={'VK'}/>
+                        placeholder={hobby.contacts ? hobby.contacts.vk : 'VK'}/>
                     <input className={style.input} name='instagram' onChange={onInstaChange} value={instagram}
-                        placeholder={'Instagram'}/>
+                        placeholder={hobby.contacts ? hobby.contacts.instagram : 'Instagram'}/>
                     <input className={style.input} name='facebook' onChange={onFbChange} value={facebook}
-                        placeholder={'Facebook'}/>
+                        placeholder={hobby.contacts ? hobby.contacts.facebook : 'Facebook'}/>
                 </span>
             </div>
 
@@ -363,20 +453,15 @@ const EditHobbyForm = (props) => {
             </div>
 
             <div style={{ display: 'block', width: '768px' }}>
-                <button className={style.deleteButton} onClick={resetForm}>
-                    <Link to='/provider/cabinet/own' className={style.deleteLink}
-                        style={{ color: '#034488' }}>Удалить хобби</Link>
-                    <DeleteIcon className={style.trashIcon}/>
-                </button>
-                <button className={style.button} onSubmit={onSubmit}>Сохранить</button>
+                <button className={style.button} onClick={onSubmit}>Сохранить</button>
                 <button className={style.button} onClick={resetForm}>Отмена</button>
             </div>
         </div>
     );
 };
 
-const mapStateToProps = (state) => ({
-    id: state.providerCabinet.id,
+const mapStateToProps = state => ({
+    hobbyForEditing: state.providerCabinet.hobbyForEditing
 });
 
-export default connect(mapStateToProps, { addNewHobby })(EditHobbyForm);
+export default compose(connect(mapStateToProps, { initializeEditHobbyPage }), withRouter)(AddHobbyForm);

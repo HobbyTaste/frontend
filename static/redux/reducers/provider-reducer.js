@@ -69,6 +69,10 @@ const ProviderCabinetReducer = (state = initialState, action) => {
             return {
               ...state, ownHobbies: action.providerHobbies
             };
+        case actionTypes.SET_EDITING_HOBBY:
+            return {
+                ...state, hobbyForEditing: action.hobby
+            };
         default:
             return state;
     }

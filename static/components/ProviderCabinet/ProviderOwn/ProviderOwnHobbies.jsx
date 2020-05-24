@@ -18,7 +18,14 @@ function firstLettersToUpperCase(text) {
 }
 
 function checkTariffType(hobby, type) {
-    return hobby.monetization.some(tariff => tariff.tariff === type);
+    let days = 0;
+    hobby.monetization.forEach(tariff => {
+        if (tariff.tariff === type)
+            // должно быть что-то типа (new Date(tariff.expirationDate) - new Date()) / (1000 * 60 * 60 * 24), 
+            // только ещё бы expirationDate приходила в нужном формате
+            days = 5; 
+    });
+    return days;
 }
 
 const ProviderOwnHobbies = (props) => {

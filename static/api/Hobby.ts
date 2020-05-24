@@ -84,17 +84,25 @@ class Hobby extends BaseFetchClass{
     }
 
     /**
-     * Редактирование пользователя
-     * @param id - пользователя
+     * Редактирование хобби
+     * @param id
      * @param updatedProperties - параметры обновления
      */
     public async edit(id: string, updatedProperties: Partial<IHobby>): Promise<Response> {
         // @ts-ignore
-        const response = await this.post('/edit', updatedProperties);
-        if (!response.ok) {
-            console.error(response);
-        }
-        return response;
+        return this.post(`/edit?id=${id}`, updatedProperties);
+    }
+
+    /**
+     * Загружает фото для хобби.
+     * В случае успеха Response будет содержать ссылку на фото.
+     * @param id
+     * @param file
+     */
+    public async uploadAvatar(id: string, file: File): Promise<Response> {
+        const formData = new FormData();
+        formData.append('avatar', file);
+        return this.post(`/upload?id=${id}`, formData, {isFormData: true});
     }
 
     /**

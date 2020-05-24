@@ -16,6 +16,16 @@ const helpText = ['',
     'Это пояснение, располагающееся под основной надписью. Здесь можно указать, например, что основная надпись означает. Пример: "за занятие", "за неделю".'
 ];
 
+const initialWorkTime = {
+    "пн": {0: "", 1: ""},
+    "вт": {0: "", 1: ""},
+    "ср": {0: "", 1: ""},
+    "чт": {0: "", 1: ""},
+    "пт": {0: "", 1: ""},
+    "сб": {0: "", 1: ""},
+    "вс": {0: "", 1: ""},
+}
+
 const AddHobbyForm = (props) => {
     const [state, setState] = useState({
         showHelp: 0,
@@ -44,6 +54,7 @@ const AddHobbyForm = (props) => {
     const [exactDates, setExactDates] = useState('');
     const [price, setPrice] = useState({title: '', priceList: ''});
     const [category, setCategory] = useState('');
+    const [workTime, setWorkTime] = useState(initialWorkTime)
 
     const [parking, setParking] = useState(null);
     const [beginner, setBeginner] = useState(null);
@@ -102,15 +113,14 @@ const AddHobbyForm = (props) => {
     const onCategoryChange = (e) => {
         setCategory(e.target.value);
     };
-    // const onDaysChange = (e) => {
-    //     let [day, number] = e.target.id.split('+');
-    //     console.log(day, number);
-    //     number = Number(number);
-    //     console.log(workTime);
-    //     setWorkTime(workTime => {
-    //         return {...workTime, [day]: {[number]: e.target.value, [1 - number]: workTime[day][1 - number]}};
-    //     });
-    // }
+    const onDaysChange = (e) => {
+        e.persist();
+        let [day, number] = e.target.id.split('+');
+        number = Number(number);
+        setWorkTime(workTime => {
+            return {...workTime, [day]: {[number]: e.target.value, [1 - number]: workTime[day][1 - number]}};
+        });
+    }
 
 
     const onParkingChange = (val) => {
@@ -172,16 +182,16 @@ const AddHobbyForm = (props) => {
     };
 
     const onSubmit = async () => {
-        // const prettyWorkTime = [];
-        // for (day in workTime) {
-        //     prettyWorkTime.push(`${day} ${workTime[day][0]} — ${workTime[day][1]} \n`);
-        // }
-        // console.log(prettyWorkTime);
+        const prettyWorkTime = [];
+        for (let day in workTime) {
+            if (workTime[day][0] || workTime[day][1])
+            prettyWorkTime.push(`${day} ${workTime[day][0]} — ${workTime[day][1]} \n`);
+        }
         const newHobby = {label, metroStation: metro,
             address, location, category,
             description, facilities, special,
             phone, email, website, contacts: JSON.stringify({vk, instagram, facebook}),
-            workTime: JSON.stringify([exactDates]), price: JSON.stringify({title: price.title, priceList: price.priceList}),
+            workTime: JSON.stringify(prettyWorkTime.concat([exactDates])), price: JSON.stringify({title: price.title, priceList: price.priceList}),
             parking: Boolean(parking), novice: Boolean(beginner), children: Boolean(kids), equipment: Boolean(equipment), avatar: file
         }
         const requestResult = await props.addNewHobby(newHobby);
@@ -231,14 +241,14 @@ const AddHobbyForm = (props) => {
 
     if (submitted) return <Redirect to="/provider/cabinet/own"/>
 
-    const help = (helpSection) => (<div style={{ display: 'block' }}>
+    const help = (helpSection) => (<div style={{ display: 'block', position: 'relative' }}>
         <div className={style.helpIcon} onMouseOver={() => Help(helpSection)} onMouseOut={() => Help(0)}>
             <HelpOutlineOutlinedIcon/>
         </div>
         <div className={style.help}
             style={{
                 display: `${(state.showHelp === helpSection) ? 'block' : 'none'}`,
-                margin: `${(helpSection % 2 === 0) ? '58px 100px 0 25px' : '3px 100px 0 25px'}`,
+                margin: `${(helpSection % 2 === 0) ? '53px 100px 0 25px' : '3px 100px 0 25px'}`,
             }}>
             {helpText[helpSection]}
         </div>
@@ -249,10 +259,10 @@ const AddHobbyForm = (props) => {
         <div className={style.weekDayContainer}>
             {day}:
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+0`}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+0`} onChange={onDaysChange} value={workTime[day][0]}/>
             </span>
             <span className={style.weekTimeContainer}>
-                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+1`}/>
+                <input className={style.smallInput} disabled={state.Disabled} id={`${day}+1`} onChange={onDaysChange} value={workTime[day][1]}/>
             </span>
         </div>
     );
@@ -293,7 +303,7 @@ const AddHobbyForm = (props) => {
                         <input style={{ margin: '10px 0' }} type="file" name="file" id="file" onChange={uploadImage}
                             placeholder={'Фото'}/>
                         <select required style={{ marginBottom: "4px"}} onChange={onCategoryChange}>
-                            <option disable defaultValue value="other">Категория</option>
+                            <option defaultValue value="other">Категория</option>
                             <option value="sport">Спорт</option>
                             <option value="music">Музыка</option>
                             <option value="creativity">Творчество</option>

@@ -52,7 +52,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderCabinetNavigation isActive={2}/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderCabinetNavigation isActive={3}/>}/>
                             <Route exact path="/provider/cabinet/add_hobby" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
-                            <Route exact path="/provider/cabinet/edit_hobby" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
+                            <Route exact path="/provider/cabinet/edit_hobby/:id" render={() => <ProviderCabinetNavigation isActive={4}/>}/>
                         </div>
                     </div>
                     <div className={style.appLayout}>
@@ -69,7 +69,7 @@ class App extends React.Component {
                             <Route exact path="/provider/cabinet/monetization" render={() => <ProviderMonetization/>}/>
                             <Route exact path="/provider/cabinet/hobbies" render={() => <ProviderHobby/>}/>
                             <Route exact path="/provider/cabinet/add_hobby" render={() => <AddHobby/>}/>
-                            <Route exact path="/provider/cabinet/edit_hobby" render={() => <EditHobby/>}/>
+                            <Route exact path="/provider/cabinet/edit_hobby/:id" render={() => <EditHobby/>}/>
                             <Route exact path="/search/:category?" render={(category) => <SearchPage category={category}/>}/>
                         </div>
                     </div>
