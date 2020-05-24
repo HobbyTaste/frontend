@@ -45,7 +45,7 @@ const Slot = (props) => {
             </span>}
             {(props.isProviderAuth || props.isUserAuth) ? (props.isOwner ? (props.isOwn ?
                     <div className={style.icon}>
-                        <Link to='/provider/cabinet/edit_hobby'><EditIcon style={{ color: 'black' }}/></Link>
+                        <Link to={`/provider/cabinet/edit_hobby/${props.id}`}><EditIcon style={{ color: 'black' }}/></Link>
                     </div>
                     : <Link to="/provider/cabinet" style={{
                         color: 'black',

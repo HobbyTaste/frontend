@@ -17,6 +17,7 @@ export const setProviderComments = (providerComments) => ({ type: actionTypes.SE
 export const setIsProviderInCabinet = (status) => ({ type: actionTypes.SET_IS_PROVIDER_IN_CABINET, status});
 const setFetchingOwnHobbies = (status) => ({ type: actionTypes.SET_FETCHING_OWN_HOBBIES, status});
 const setFetchingFollowedHobbies = (status) => ({ type: actionTypes.SET_FETCHING_FOLLOWED_HOBBIES, status});
+const setHobbyForEditing = (hobby) => ({ type: actionTypes.SET_EDITING_HOBBY, hobby });
 
 export const subscribeForHobby = (hobbyId) => async (dispatch) => {
     await providerApi.subscribe(hobbyId);
@@ -79,6 +80,14 @@ export const initializeFollowedHobbies = () => async dispatch => {
     dispatch(setFetchingFollowedHobbies("success"));
 };
 
+export const initializeEditHobbyPage = (hobbyId) => async dispatch => {
+    const response = await hobbyApi.getInfo(hobbyId);
+    if (response.ok) {
+        const body = await response.json();
+        dispatch(setHobbyForEditing(body));
+    }
+}
+
 export const createNewProvider = (name, password, email) => (dispatch) => {
     const providerData = {
         name, password, email
@@ -133,6 +142,19 @@ export const providerEdit = (editData) => async (dispatch) => {
     }
     if (response.status === HTTP_STATUS.BAD_REQUEST) {
         return "non-unique data";
+    }
+    return "uncaught server error";
+};
+
+export const hobbyEdit = async (hobbyId, editData) => {
+    const {avatar, ...otherEditData} = editData;
+    const response = await hobbyApi.edit(hobbyId, otherEditData);
+    if (response.ok) {
+        const avatarResponse = await hobbyApi.uploadAvatar(hobbyId, avatar);
+        if (avatarResponse.ok) {
+            return "ok";
+        }
+        return "error with file loading";
     }
     return "uncaught server error";
 };
