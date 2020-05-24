@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import CommentInput from "./CommentInput";
 import { addProviderResponse, addUserFeedback } from "../../../redux/actions/hobbyActions";
-import { comments } from '../../../utils/constant';
+import { getProviderComments } from "../../../redux/actions/providerActions";
 
 const useStyles = (theme) => ({
     root: {
@@ -23,6 +23,10 @@ const useStyles = (theme) => ({
     },
 });
 
+function format(number) {
+    return number < 10 ? "0" + number : number;
+}
+
 class CommentText extends React.Component {
     constructor(props) {
         super(props);
@@ -37,13 +41,23 @@ class CommentText extends React.Component {
     }
 
     handleSubmit = (values) => {
-        let today = new Date(), dataNow = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + ' ' + today.getHours() + ' ' + today.getMinutes();
+        let today = new Date(), dataNow = 
+            today.getDate() + '.' +
+            format(today.getMonth() + 1) + '.' + 
+            today.getFullYear() + ' ' + 
+            format(today.getHours()) + ':' + 
+            format(today.getMinutes());
         const body={
             text: values.TextFeedback,
             datetime: dataNow,
         }
-        this.props.onProviderResponse(this.props.hobbyId, body, this.props.comment.id);
-        this.setState({ isAnswered: false });
+        let responsePromise = this.props.onProviderResponse(this.props.hobbyId, body, this.props.comment.id);
+        responsePromise.then(() => {
+            if (this.props.isProviderInCabinet) {
+                this.props.getProviderComments();
+            }
+            this.setState({ isAnswered: false });
+        });
     };
 
     render() {
@@ -94,14 +108,13 @@ class CommentText extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    commentsId: state.providerCabinet.isProviderInCabinet ? 
-                state.providerCabinet.comments.commentsIds : 
-                state.hobbyPage.commentsId,
-    name: state.providerCabinet.name || state.userCabinet.name
+    name: state.providerCabinet.name || state.userCabinet.name,
+    isProviderInCabinet: state.providerCabinet.isProviderInCabinet
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId))
+    onProviderResponse: (hobbyId,body, relatedId) => dispatch(addProviderResponse(hobbyId,body, relatedId)),
+    getProviderComments: () => dispatch(getProviderComments())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentText);

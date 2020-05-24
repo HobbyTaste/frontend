@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HalfRating(props) {
     const classes = useStyles();
-    const rating = props.rating;
+    const rating = props.rating ? props.rating.toFixed(2) : 0;
     return (
         <div className={classes.root}>
                 <Rating className={classes.stars} size='small' name="half-rating-read" defaultValue={rating} precision={0.5}
