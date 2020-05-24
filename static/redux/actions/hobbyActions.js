@@ -69,7 +69,7 @@ export const addProviderResponse = (hobbyId, body, relatedId) => (dispatch) => {
         text: body.text,
         datetime: body.datetime
     };
-    commentApi.providerAddAnswer(obj, hobbyId, relatedId)
+    return commentApi.providerAddAnswer(obj, hobbyId, relatedId)
         .then(res =>{
             if(res.ok){
                 axios.get(`/restapi/hobby/comments?id=${hobbyId}`)

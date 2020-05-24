@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import style from "./ProviderCabinet.module.css";
-import { DialogAddHobbyForm } from "./DialogAddHobbyForm/DialogAddHobbyForm";
 import { initializeProviderCabinet, setIsProviderInCabinet } from "../../redux/actions/providerActions";
 import Preloader from "../Common/Preloader/Preloader";
-import { AddHobbyCard } from "./AddHobbyCard/AddHobbyCard";
-import UserAvatar from "../UserCabinet/UserInfoCard/UserAvatar/UserAvatar";
 import ProviderInfo from "./ProviderInfo/ProviderInfo";
-import UserInfoCard from "../UserCabinet/UserInfoCard/UserInfoCard";
-import Feedback from "../HobbyCard/Feedback/Feedback";
-import CommentsList from "../HobbyCard/Feedback/CommentsList";
+import ProviderCommentsList from "./ProviderCommentsList";
+
+
+function getHobbyIds(relatedIds) {
+    return relatedIds ? relatedIds.map(ids => ids.hobbyId) : [];
+}
+
 
 class ProviderCabinet extends React.Component {
     componentDidMount() {
@@ -34,7 +35,7 @@ class ProviderCabinet extends React.Component {
                     <ProviderInfo avatar={this.props.avatar} name={this.props.name} email={this.props.email} phone={this.props.phone}/>
                 </div>
                 <div className={style.feedbackHeader}>Отзывы на ваши хобби и ваши ответы на них:</div>
-                <CommentsList comments={this.props.comments.commentsInfo || []} isProvider={true} isOwner={true}/>
+                <ProviderCommentsList comments={this.props.comments.commentsInfo || []} hobbyIds={getHobbyIds(this.props.comments.commentsIds)}/>
             </div>
         );
     }
