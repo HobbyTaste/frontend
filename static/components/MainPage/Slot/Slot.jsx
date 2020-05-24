@@ -15,10 +15,14 @@ import { isInArray } from '../../../utils/functions';
 
 const imageMissing = 'https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg';
 
+function handleAvatarString(avatarString) {
+    return avatarString ? avatarString.split(" ")[0] : null;
+}
+
 const Slot = (props) => {
     return (<div className={style.slot}>
         <div className={style.leftContainer}>
-            {props.pic ? <img className={style.slotPic} src={props.pic}/> :
+            {props.pic ? <img className={style.slotPic} src={handleAvatarString(props.pic)}/> :
                 <img className={style.slotPic} src={imageMissing}/>}
             <span className={style.slotDescription}>
             <div className={style.slotHeader}>

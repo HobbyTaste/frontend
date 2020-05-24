@@ -17,6 +17,11 @@ import Preloader from '../Common/Preloader/Preloader';
 import { compose } from 'redux';
 
 
+function avatarStringToArray(avatarString) {
+    return avatarString ? avatarString.split(" ") : null;
+}
+
+
 class HobbyCard extends React.Component {
     constructor(props) {
         super(props);
@@ -45,7 +50,7 @@ class HobbyCard extends React.Component {
                 <div className={style.infoContainer}>
                     <div className={style.mainContainer}>
                         <div className={style.mainBlock}>
-                            <div className={style.imageContainer}><Slider images ={this.props.hobbyInfo.avatar}/></div>
+                            <div className={style.imageContainer}><Slider images ={avatarStringToArray(this.props.hobbyInfo.avatar)}/></div>
                             <div className={style.textContainer}>
                                 <InformationBlock hobbyInfo={this.props.hobbyInfo}/>
                                 <div className={style.buttonContainer}>
@@ -92,7 +97,7 @@ const mapStateToProps = (state) => ({
         rating: state.hobbyPage.rating,
         label: state.hobbyPage.label,
         metro: state.hobbyPage.metro,
-        avatar: [state.hobbyPage.avatar],
+        avatar: state.hobbyPage.avatar,
         timeTable: state.hobbyPage.timeTable,
         facilities: state.hobbyPage.facilities,
         address: state.hobbyPage.address,
