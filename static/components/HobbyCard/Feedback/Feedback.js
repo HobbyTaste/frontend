@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CommentInput from './CommentInput';
 import {addUserFeedback } from '../../../redux/actions/hobbyActions';
 import CommentsList from './CommentsList';
+import { format } from "../../../utils/functions";
 
 class Feedback extends React.Component {
     constructor(props) {
@@ -12,7 +13,13 @@ class Feedback extends React.Component {
     }
 
     handleSubmit = (values) => {
-        let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+        let today = new Date(), dataNow = 
+            today.getDate() + '.' +
+            format(today.getMonth() + 1) + '.' + 
+            today.getFullYear() + ' ' + 
+            format(today.getHours()) + ':' + 
+            format(today.getMinutes());
+        
         const body={
             evaluation:  Number.parseInt(values.StarsRating),
             text: values.TextFeedback,

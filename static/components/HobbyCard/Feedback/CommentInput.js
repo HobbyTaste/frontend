@@ -1,14 +1,9 @@
 import  React, {Component} from 'react'
 import style from './Feedback.css';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ButtonSend from '../Button/ButtonsSend';
-import ButtonCancel from '../Button/ButtonCancel';
-import { connect } from 'react-redux';
-import {reset, Field, reduxForm } from 'redux-form'
-import handleSubmit from 'redux-form/lib/handleSubmit';
-import StarsRating from './StarsRating';
-import MyTextArea from './MyTextArea';
+import {reset, reduxForm } from 'redux-form';
 import FormInput from './FormInput';
+import { format } from '../../../utils/functions';
 
 class CommentInput extends React.Component {
     constructor(props) {
@@ -25,7 +20,12 @@ class CommentInput extends React.Component {
 
         const {handleSubmit, reset} = this.props;
 
-       let today = new Date(), dataNow = today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear();
+        let today = new Date(), dataNow = 
+            today.getDate() + '.' +
+            format(today.getMonth() + 1) + '.' + 
+            today.getFullYear() + ' ' + 
+            format(today.getHours()) + ':' + 
+            format(today.getMinutes());
 
         let classContainer = style.container +' '+ style.containerComment;
         if (this.state.isAnswer) {
