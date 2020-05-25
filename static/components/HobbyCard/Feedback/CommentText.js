@@ -8,6 +8,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import CommentInput from "./CommentInput";
 import { addProviderResponse, addUserFeedback } from "../../../redux/actions/hobbyActions";
 import { getProviderComments } from "../../../redux/actions/providerActions";
+import { format } from "../../../utils/functions";
 
 const useStyles = (theme) => ({
     root: {
@@ -22,10 +23,6 @@ const useStyles = (theme) => ({
         margin: "0px 5px",
     },
 });
-
-function format(number) {
-    return number < 10 ? "0" + number : number;
-}
 
 class CommentText extends React.Component {
     constructor(props) {

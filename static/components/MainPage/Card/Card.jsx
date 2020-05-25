@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HalfRating(props) {
     const classes = useStyles();
-    const rating = props.rating;
+    const rating = props.rating.toFixed(2);
     return (
         <div className={classes.root}>
             <Rating className={classes.stars} size={'small'} name="half-rating-read"
@@ -49,7 +49,7 @@ const Card = (props) => {
    const missingImage ="https://kravmaganewcastle.com.au/wp-content/uploads/2017/04/default-image-800x600.jpg";
    let image = (props.pic ? props.pic : missingImage);
     return (<div>
-            <div className={style.card} style={{ backgroundImage: `url(${image})`}}>
+            <div className={style.card} style={{ backgroundImage: `url(${image})`, backgroundColor: "#178fd642"}}>
             <span className={style.cardDescription}>
                 <div className={style.cardHeader}>
                     <span className={`${style.name} ${style.colorWhiteCard}`}>{props.name}</span>
